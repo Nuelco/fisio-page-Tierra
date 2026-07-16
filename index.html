@@ -17,7 +17,7 @@
   <meta property="og:image" content="img/logo-tierra.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <meta name="theme-color" content="#55633e" />
+  <meta name="theme-color" content="#f4ede0" />
   <link rel="icon" href="favicon.svg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -75,15 +75,20 @@
       </a>
 
       <button class="header__toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
-        <span></span><span></span><span></span>
+        <span></span><span></span>
       </button>
 
       <nav class="nav" id="nav-menu" aria-label="Navegación principal">
-        <a href="index.html" class="is-active">Inicio</a>
-        <a href="sobre-mi.html">Sobre mí</a>
-        <a href="servicios.html">Servicios</a>
-        <a href="contacto.html">Contacto</a>
-        <a href="contacto.html" class="btn btn--primary btn--sm">Pedir cita</a>
+        <div class="nav__links">
+          <a href="index.html" class="is-active">Inicio</a>
+          <a href="sobre-mi.html">Sobre mí</a>
+          <a href="servicios.html">Servicios</a>
+          <a href="contacto.html">Contacto</a>
+        </div>
+        <a href="contacto.html" class="btn btn--solid">Pedir cita
+          <span class="btn__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+        <p class="nav__extra">Lunes a viernes, 9:00 – 20:30 · <a href="tel:+34600000000">+34 600 00 00 00</a></p>
       </nav>
     </div>
   </header>
@@ -92,26 +97,43 @@
     <!-- ================= HERO ================= -->
     <section class="hero kenburns">
       <div class="hero__media" data-parallax="0.12">
-        <img src="img/hero-encinas.png" alt="Paisaje de encinas de Zamora al amanecer, entorno de Tierra" width="1600" height="1000" fetchpriority="high" />
+        <img src="img/hero-encinas.png" alt="Paisaje de encinas de Zamora al atardecer junto a la sala de tratamiento de Tierra" width="1600" height="1000" fetchpriority="high" />
       </div>
       <div class="hero__scrim"></div>
       <div class="hero__content" data-reveal>
-        <h1 class="hero__title">Vuelve al origen de tu bienestar</h1>
-        <p class="hero__lead">Donde tu cuerpo recupera la estabilidad</p>
+        <p class="eyebrow eyebrow--light">Fisioterapia · Osteopatía · Zamora</p>
+        <h1 class="hero__title">Vuelve al <em>origen</em> de tu bienestar</h1>
+        <p class="hero__lead">Terapia manual y tratamiento personalizado, donde tu cuerpo recupera la estabilidad.</p>
         <div class="hero__actions">
-          <a href="contacto.html" class="btn btn--primary">Pedir cita</a>
-          <a href="sobre-mi.html" class="btn btn--ghost" style="border-color: rgba(255,255,255,.5); color: #fff;">Conóceme</a>
+          <a href="contacto.html" class="btn btn--cream">Pedir cita
+            <span class="btn__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+          </a>
+          <a href="sobre-mi.html" class="link-arrow">Conóceme</a>
         </div>
+      </div>
+      <div class="hero__footline">
+        <span>Andrea Legido Andrés</span>
+        <span>Consulta en Zamora</span>
       </div>
     </section>
 
-    <!-- ================= FILOSOFIA ================= -->
-    <section class="philosophy">
-      <div class="philosophy__inner" data-reveal>
-        <p>En Tierra entiendo el cuerpo como un todo. No trato solo el dolor: busco su origen para ayudarte a recuperar el equilibrio, el movimiento y la confianza en tu propio cuerpo.</p>
-        <p>A través de la fisioterapia y la osteopatía te acompaño en un proceso cercano y personalizado, respetando tus tiempos y tus necesidades.</p>
-        <p class="philosophy__emphasis">Porque sanar no es solo aliviar. Es volver a ti. Es volver a casa.</p>
-        <p class="philosophy__closing">Empieza hoy tu camino hacia el bienestar.</p>
+    <!-- ================= MARQUESINA ================= -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Terapia manual</span><span>Osteopatía</span><span>Fisioterapia deportiva</span><span>Ejercicio terapéutico</span><span>Pilates terapéutico</span><span>Ecografía</span><span>Diatermia</span>
+        <span>Terapia manual</span><span>Osteopatía</span><span>Fisioterapia deportiva</span><span>Ejercicio terapéutico</span><span>Pilates terapéutico</span><span>Ecografía</span><span>Diatermia</span>
+      </div>
+    </div>
+
+    <!-- ================= DECLARACIÓN ================= -->
+    <section class="statement">
+      <div class="container statement__grid">
+        <p class="statement__text" data-reveal>No trato solo el dolor: busco su <em>origen</em> para devolverte el equilibrio, el movimiento y la confianza en tu propio cuerpo.</p>
+        <div class="statement__aside" data-reveal>
+          <p class="eyebrow">La filosofía</p>
+          <p>En Tierra entiendo el cuerpo como un todo. A través de la fisioterapia y la osteopatía te acompaño en un proceso cercano y personalizado, respetando tus tiempos y tus necesidades.</p>
+          <p>Porque sanar no es solo aliviar. Es volver a ti. Es volver a casa.</p>
+        </div>
       </div>
     </section>
 
@@ -133,83 +155,165 @@
       </svg></span>
     </div>
 
-    <!-- ================= TEASER SERVICIOS ================= -->
-    <section class="teaser-services">
+    <!-- ================= ÍNDICE DE SERVICIOS ================= -->
+    <section class="services-index">
       <div class="container">
-        <div class="teaser-services__head" data-reveal>
+        <div class="services-index__head" data-reveal>
           <h2>Servicios</h2>
           <p>De la fisioterapia general a las técnicas más avanzadas, con un mismo enfoque cercano.</p>
         </div>
-        <div class="teaser-grid">
-          <a class="teaser-card" href="servicios.html#fisioterapia-deportiva" data-reveal data-reveal-group>
-            <span class="teaser-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l5-5 3 3 7-8"/><path d="M15 7h4v4"/></svg></span>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Dr._Jesus_Olmo_Isokinetic_ACL_Injury.jpg" alt="Fisioterapeuta valorando la rodilla de un deportista tras una lesión" loading="lazy" />
-            <div class="teaser-card__body"><h3>Fisioterapia deportiva</h3><span>Ver más</span></div>
-          </a>
-          <a class="teaser-card" href="servicios.html#osteopatia" data-reveal data-reveal-group>
-            <span class="teaser-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="12" y1="3" x2="12" y2="21"/><circle cx="12" cy="5" r="1.6" fill="currentColor" stroke="none"/><circle cx="12" cy="10" r="2" fill="currentColor" stroke="none"/><circle cx="12" cy="15" r="1.7" fill="currentColor" stroke="none"/><circle cx="12" cy="19.5" r="1.3" fill="currentColor" stroke="none"/></svg></span>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Osteopathic_Manipulation.JPG" alt="Técnica de manipulación osteopática" loading="lazy" />
-            <div class="teaser-card__body"><h3>Osteopatía</h3><span>Ver más</span></div>
-          </a>
-          <a class="teaser-card" href="servicios.html#ejercicio-terapeutico" data-reveal data-reveal-group>
-            <span class="teaser-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="9" width="3" height="6" rx="1"/><rect x="18.5" y="9" width="3" height="6" rx="1"/><line x1="5.5" y1="12" x2="18.5" y2="12"/></svg></span>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Physiotherapist_Saimonah_Mokupe_assisting_clients_using_AusAID_donated_equipment_%2810713127346%29.jpg" alt="Fisioterapeuta guiando un ejercicio de rehabilitación" loading="lazy" />
-            <div class="teaser-card__body"><h3>Ejercicio terapéutico</h3><span>Ver más</span></div>
-          </a>
-          <a class="teaser-card" href="servicios.html#pilates-terapeutico" data-reveal data-reveal-group>
-            <span class="teaser-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="7"/></svg></span>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Pilates_reformer.jpg" alt="Sesión de pilates con máquina reformer" loading="lazy" />
-            <div class="teaser-card__body"><h3>Pilates terapéutico</h3><span>Ver más</span></div>
-          </a>
+
+        <a class="service-row" href="servicios.html#fisioterapia" data-reveal data-reveal-group>
+          <span class="service-row__num">01</span>
+          <div class="service-row__body">
+            <h3>Fisioterapia</h3>
+            <p>Terapia manual para lesiones musculares, articulares y posturales.</p>
+          </div>
+          <span class="service-row__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+        <a class="service-row" href="servicios.html#osteopatia" data-reveal data-reveal-group>
+          <span class="service-row__num">02</span>
+          <div class="service-row__body">
+            <h3>Osteopatía</h3>
+            <p>El origen del dolor, no solo el punto donde se siente.</p>
+          </div>
+          <span class="service-row__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+        <a class="service-row" href="servicios.html#fisioterapia-deportiva" data-reveal data-reveal-group>
+          <span class="service-row__num">03</span>
+          <div class="service-row__body">
+            <h3>Fisioterapia deportiva</h3>
+            <p>Prevención, recuperación y vuelta al juego, también a pie de campo.</p>
+          </div>
+          <span class="service-row__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+        <a class="service-row" href="servicios.html#ejercicio-terapeutico" data-reveal data-reveal-group>
+          <span class="service-row__num">04</span>
+          <div class="service-row__body">
+            <h3>Ejercicio terapéutico</h3>
+            <p>Programas activos y progresivos: el motor de una recuperación duradera.</p>
+          </div>
+          <span class="service-row__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+        <a class="service-row" href="servicios.html#pilates-terapeutico" data-reveal data-reveal-group>
+          <span class="service-row__num">05</span>
+          <div class="service-row__body">
+            <h3>Pilates terapéutico</h3>
+            <p>Control postural y trabajo de core, adaptado a cada cuerpo.</p>
+          </div>
+          <span class="service-row__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+        <a class="service-row" href="servicios.html#ecografia" data-reveal data-reveal-group>
+          <span class="service-row__num">06</span>
+          <div class="service-row__body">
+            <h3>Ecografía y diatermia</h3>
+            <p>Diagnóstico preciso y tecnología que acelera la recuperación de los tejidos.</p>
+          </div>
+          <span class="service-row__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+
+        <div class="services-index__foot" data-reveal>
+          <a href="servicios.html" class="link-arrow">Ver todos los servicios</a>
         </div>
       </div>
     </section>
 
-    <!-- ================= TEASER SOBRE MI ================= -->
-    <section class="teaser-about">
-      <div class="teaser-about__inner">
-        <div class="teaser-about__media kenburns" data-reveal>
-          <img src="img/about-manos.jpg" alt="Manos en una sesión de terapia manual en Tierra" width="1920" height="1275" loading="lazy" />
+    <!-- ================= MÉTODO ================= -->
+    <section class="method">
+      <div class="container">
+        <div class="method__head" data-reveal>
+          <p class="eyebrow">El método</p>
+          <h2>Cada sesión, en <em>tres</em> tiempos</h2>
         </div>
-        <div class="teaser-about__content" data-reveal>
-          <h2>Detrás de Tierra hay una persona, no una franquicia</h2>
-          <p>Llevo más de diez años tratando cuerpos en Zamora. Cada sesión empieza escuchando, no rellenando una ficha.</p>
-          <a href="sobre-mi.html" class="btn btn--ghost">Conóceme</a>
+        <div class="method__grid">
+          <div class="method__step" data-reveal data-reveal-group>
+            <strong>01</strong>
+            <h3>Escucha real</h3>
+            <p>Antes de tratar, escucho. Cada cuerpo cuenta una historia distinta, y el tratamiento parte de ahí.</p>
+          </div>
+          <div class="method__step" data-reveal data-reveal-group>
+            <strong>02</strong>
+            <h3>Manos, no máquinas</h3>
+            <p>Trabajo con terapia manual: mis manos son la herramienta principal, no un aparato entre nosotros.</p>
+          </div>
+          <div class="method__step" data-reveal data-reveal-group>
+            <strong>03</strong>
+            <h3>Raíz, no síntoma</h3>
+            <p>Busco el origen del dolor, no solo calmarlo un rato. Por eso los planes de tratamiento son a medida.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SOBRE MÍ (TEASER) ================= -->
+    <section class="about-split">
+      <div class="container about-split__inner">
+        <div class="about-split__media" data-reveal>
+          <figure class="frame frame--portrait">
+            <div class="frame__media kenburns">
+              <img src="img/andrea-retrato.jpg" alt="Andrea Legido Andrés, fisioterapeuta de Tierra, en su consulta" width="1254" height="1254" loading="lazy" />
+            </div>
+            <figcaption class="frame__caption"><span>Andrea Legido</span><span>Fisioterapeuta</span></figcaption>
+          </figure>
+        </div>
+        <div class="about-split__content" data-reveal>
+          <p class="eyebrow">Sobre mí</p>
+          <h2>Detrás de Tierra hay una <em>persona</em>, no una franquicia</h2>
+          <p>Llevo 7 años tratando cuerpos: en varios centros, por cuenta propia y a pie de campo con el fútbol. Cada sesión empieza escuchando, no rellenando una ficha.</p>
+          <a href="sobre-mi.html" class="btn btn--line">Conóceme
+            <span class="btn__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+          </a>
         </div>
       </div>
     </section>
 
     <!-- ================= CTA FINAL ================= -->
     <section class="cta-band">
-      <div class="cta-band__inner" data-reveal>
-        <h2>¿Empezamos?</h2>
+      <div class="container cta-band__inner" data-reveal>
+        <p class="eyebrow eyebrow--center eyebrow--light">Primera visita</p>
+        <h2>¿<em>Empezamos</em>?</h2>
         <p>Cuéntame qué te ocurre y te propongo el mejor camino de tratamiento.</p>
         <div class="cta-band__actions">
-          <a href="contacto.html" class="btn btn--light">Pedir cita</a>
+          <a href="contacto.html" class="btn btn--cream">Pedir cita
+            <span class="btn__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+          </a>
         </div>
+        <p class="cta-band__note">Respuesta en el mismo día, de lunes a viernes.</p>
       </div>
     </section>
   </main>
 
   <!-- ================= FOOTER ================= -->
   <footer class="footer">
-    <div class="footer__inner">
+    <div class="container footer__inner">
       <div class="footer__brand">
-        <span class="brand__word brand__word--footer">Tierra</span>
-        <p>Fisioterapia y osteopatía en Zamora.</p>
+        <span class="brand__word">Tierra<small>Fisioterapia</small></span>
+        <p>Fisioterapia y osteopatía en Zamora. Terapia manual, recuperación deportiva y tratamiento personalizado.</p>
       </div>
-      <nav class="footer__nav" aria-label="Navegación del pie">
-        <a href="index.html">Inicio</a>
-        <a href="sobre-mi.html">Sobre mí</a>
-        <a href="servicios.html">Servicios</a>
-        <a href="contacto.html">Contacto</a>
+      <nav class="footer__col" aria-label="Navegación del pie">
+        <h4>Páginas</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="sobre-mi.html">Sobre mí</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
       </nav>
-      <p class="footer__copy">© <span data-year></span> Tierra. Todos los derechos reservados.</p>
+      <div class="footer__col">
+        <h4>Consulta</h4>
+        <ul>
+          <li><a href="tel:+34600000000">+34 600 00 00 00</a></li>
+          <li><a href="mailto:hola@tierrafisio.es">hola@tierrafisio.es</a></li>
+          <li>Calle Ejemplo 12, bajo · Zamora</li>
+          <li>L–V, 9:00 – 20:30</li>
+        </ul>
+      </div>
+      <p class="footer__copy"><span>© <span data-year></span> Tierra. Todos los derechos reservados.</span><span>Zamora, Castilla y León</span></p>
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" defer></script>
   <script src="script.js" defer></script>
 </body>
 </html>

@@ -7,36 +7,40 @@
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ===========================================================
-     1. NAV MOVIL
+     1. NAV MÓVIL (overlay a pantalla completa)
+        La clase "nav-open" vive en <body>: controla el overlay,
+        la metamorfosis del botón (2 líneas -> X) y el scroll.
      =========================================================== */
   const toggle = $(".header__toggle");
   const nav = $("#nav-menu");
   if (toggle && nav) {
     const closeNav = () => {
-      nav.classList.remove("is-open");
+      document.body.classList.remove("nav-open");
       toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Abrir menú");
     };
     toggle.addEventListener("click", () => {
-      const open = nav.classList.toggle("is-open");
+      const open = document.body.classList.toggle("nav-open");
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
     });
     $$("a", nav).forEach((a) => a.addEventListener("click", closeNav));
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && nav.classList.contains("is-open")) closeNav();
+      if (e.key === "Escape" && document.body.classList.contains("nav-open")) closeNav();
     });
   }
 
   /* ===========================================================
-     2. LOGO: apertura del simbolo (columna)
+     2. LOGO: apertura del símbolo (columna)
         Se anima moviendo el atributo SVG "transform" (no CSS),
         para que funcione en cualquier dispositivo (Safari iOS no
         anima "transform" CSS sobre SVG de forma fiable). Es
         independiente de GSAP: siempre funciona.
 
-        Las posiciones de salida y el escalonado NO estan escritas a
-        mano: se calculan leyendo la geometria real de cada bola
-        (getBBox) respecto al centro del viewBox. Asi el mismo
-        simbolo, a cualquier tamano (header o divisor), se abre
+        Las posiciones de salida y el escalonado NO están escritas a
+        mano: se calculan leyendo la geometría real de cada bola
+        (getBBox) respecto al centro del viewBox. Así el mismo
+        símbolo, a cualquier tamaño (header o divisor), se abre
         siempre de forma correcta sin mantener valores por bola.
      =========================================================== */
   function openSpine(spine) {
@@ -54,8 +58,8 @@
     dots.forEach((d) => {
       const box = d.getBBox();
       const cx = box.x + box.width / 2;
-      d._from = centerX - cx; // distancia real desde el centro hasta su posicion final
-      d._delay = Math.abs(d._from) * STAGGER; // mas lejos del centro, sale mas tarde
+      d._from = centerX - cx; // distancia real desde el centro hasta su posición final
+      d._delay = Math.abs(d._from) * STAGGER; // más lejos del centro, sale más tarde
       d.setAttribute("transform", "translate(" + d._from.toFixed(2) + " 0)");
       d.style.opacity = "0";
     });
@@ -102,11 +106,11 @@
   /* ===========================================================
      3. MOTION SYSTEM (GSAP, progressive enhancement)
         Todo el contenido es visible por defecto en el CSS. Solo si
-        GSAP + ScrollTrigger cargaron Y el usuario no pidio menos
-        movimiento, anadimos "js-motion" al <html> (el CSS oculta
+        GSAP + ScrollTrigger cargaron Y el usuario no pidió menos
+        movimiento, añadimos "js-motion" al <html> (el CSS oculta
         el estado inicial bajo ese selector) y GSAP se encarga de
         revelarlo. Si algo falla, el sitio se queda simplemente
-        estatico y legible: nunca invisible.
+        estático y legible: nunca invisible.
      =========================================================== */
   const gsapReady = window.gsap && window.ScrollTrigger && !prefersReducedMotion;
 
@@ -115,36 +119,51 @@
       gsap.registerPlugin(ScrollTrigger);
       document.documentElement.classList.add("js-motion");
 
-      // Revelado por scroll (reemplaza el fade plano por un stagger real)
+      // Revelado por scroll, con escalonado dentro de los grupos
       $$("[data-reveal]").forEach((el, i) => {
         const group = el.closest("[data-reveal-group]");
         gsap.fromTo(
           el,
-          { opacity: 0, y: 28 },
+          { opacity: 0, y: 34 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.9,
-            ease: "power3.out",
-            delay: group ? (i % 4) * 0.08 : 0,
+            duration: 1.1,
+            ease: "power4.out",
+            delay: group ? (i % 4) * 0.09 : 0,
             scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" },
           }
         );
       });
 
-      // Parallax suave en imagenes marcadas con data-parallax="0.15"
+      // Parallax suave en los medios marcados con data-parallax="0.12".
+      // fromTo simétrico: en el punto medio del recorrido el offset es 0,
+      // así la imagen cubre siempre su hueco (el contenedor tiene margen).
       $$("[data-parallax]").forEach((el) => {
-        const speed = parseFloat(el.getAttribute("data-parallax")) || 0.15;
-        gsap.to(el, {
-          yPercent: speed * 100,
+        const speed = parseFloat(el.getAttribute("data-parallax")) || 0.12;
+        gsap.fromTo(el, { yPercent: speed * -33 }, {
+          yPercent: speed * 33,
           ease: "none",
           scrollTrigger: {
-            trigger: el.closest(".hero, .service-block, .story__media, .teaser-about__media, section") || el,
+            trigger: el.closest(".hero, .photo-band, section") || el,
             start: "top bottom",
             end: "bottom top",
             scrub: true,
           },
         });
+      });
+
+      // Las bandas fotográficas también se desplazan sutilmente
+      $$(".photo-band img").forEach((img) => {
+        gsap.fromTo(
+          img,
+          { yPercent: -8 },
+          {
+            yPercent: 4,
+            ease: "none",
+            scrollTrigger: { trigger: img.closest(".photo-band"), start: "top bottom", end: "bottom top", scrub: true },
+          }
+        );
       });
 
     } catch (err) {
@@ -155,7 +174,7 @@
 
   /* ===========================================================
      4. FORMULARIO DE CONTACTO
-        Validacion en cliente. No hay backend conectado todavia:
+        Validación en cliente. No hay backend conectado todavía:
         sustituir el TODO por una llamada real antes de publicar.
      =========================================================== */
   const form = $(".contact__form");
@@ -176,16 +195,15 @@
         status.classList.remove("is-ok");
         return;
       }
-      // TODO: sustituir por el envio real (fetch a un endpoint de contacto).
-      status.textContent = "Gracias, hemos recibido tu solicitud. Te contactaremos en breve.";
+      // TODO: sustituir por el envío real (fetch a un endpoint de contacto).
+      status.textContent = "Gracias, he recibido tu solicitud. Te contactaré en breve.";
       status.classList.add("is-ok");
       form.reset();
     });
   }
 
   /* ===========================================================
-     5. ANO EN EL FOOTER
+     5. AÑO EN EL FOOTER
      =========================================================== */
-  const yearEl = $("[data-year]");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  $$("[data-year]").forEach((el) => { el.textContent = new Date().getFullYear(); });
 })();

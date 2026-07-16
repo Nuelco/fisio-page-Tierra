@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Sobre mí | Tierra Fisioterapia y Osteopatía en Zamora</title>
-  <meta name="description" content="Conoce a la persona detrás de Tierra: más de diez años de fisioterapia y osteopatía en Zamora, con un enfoque manual, cercano y personalizado." />
+  <meta name="description" content="Conoce a Andrea Legido Andrés, fisioterapeuta en Zamora: 7 años de experiencia en varios centros y por cuenta propia, fisioterapeuta del equipo de fútbol de Villaralbo y un enfoque muy orientado al deporte." />
   <meta name="robots" content="index, follow" />
 
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="es_ES" />
   <meta property="og:site_name" content="Tierra" />
   <meta property="og:title" content="Sobre mí | Tierra Fisioterapia y Osteopatía en Zamora" />
-  <meta property="og:description" content="La historia detrás de Tierra: fisioterapia y osteopatía en Zamora." />
+  <meta property="og:description" content="Andrea Legido Andrés, la fisioterapeuta detrás de Tierra: 7 años de experiencia y un enfoque muy ligado al deporte." />
   <meta property="og:image" content="img/logo-tierra.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <meta name="theme-color" content="#55633e" />
+  <meta name="theme-color" content="#f4ede0" />
   <link rel="icon" href="favicon.svg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -51,65 +51,87 @@
       </a>
 
       <button class="header__toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
-        <span></span><span></span><span></span>
+        <span></span><span></span>
       </button>
 
       <nav class="nav" id="nav-menu" aria-label="Navegación principal">
-        <a href="index.html">Inicio</a>
-        <a href="sobre-mi.html" class="is-active">Sobre mí</a>
-        <a href="servicios.html">Servicios</a>
-        <a href="contacto.html">Contacto</a>
-        <a href="contacto.html" class="btn btn--primary btn--sm">Pedir cita</a>
+        <div class="nav__links">
+          <a href="index.html">Inicio</a>
+          <a href="sobre-mi.html" class="is-active">Sobre mí</a>
+          <a href="servicios.html">Servicios</a>
+          <a href="contacto.html">Contacto</a>
+        </div>
+        <a href="contacto.html" class="btn btn--solid">Pedir cita
+          <span class="btn__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+        <p class="nav__extra">Lunes a viernes, 9:00 – 20:30 · <a href="tel:+34600000000">+34 600 00 00 00</a></p>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <!-- ================= PAGE HERO ================= -->
-    <section class="hero page-hero kenburns">
-      <div class="hero__media" data-parallax="0.1">
-        <img src="https://picsum.photos/seed/tierra-consulta-raiz/1600/1000" alt="Sala de tratamiento de Tierra con luz natural" width="1600" height="1000" />
-      </div>
-      <div class="hero__scrim"></div>
-      <div class="hero__content" data-reveal>
-        <h1 class="hero__title">Sobre mí</h1>
-        <p class="hero__lead">La historia y el enfoque detrás de Tierra.</p>
+    <!-- ================= CABECERA ================= -->
+    <section class="page-head">
+      <div class="container page-head__inner" data-reveal>
+        <p class="eyebrow">La persona detrás de Tierra</p>
+        <h1>Andrea Legido <em>Andrés</em></h1>
+        <p>Fisioterapeuta en Zamora. Siete años de camino, muy ligado al deporte, hasta abrir mi propia consulta.</p>
       </div>
     </section>
 
-    <!-- ================= HISTORIA ================= -->
-    <section class="story">
-      <div class="story__intro">
-        <div class="story__media kenburns" data-reveal data-parallax="0.08">
-          <img src="https://picsum.photos/seed/tierra-retrato-fisio-2/700/900" alt="Retrato del profesional de Tierra" width="700" height="900" loading="lazy" />
+    <!-- ================= BIO ================= -->
+    <section class="bio-split">
+      <div class="container bio-split__inner">
+        <div class="bio-split__media" data-reveal>
+          <figure class="frame frame--portrait">
+            <div class="frame__media kenburns">
+              <img src="img/andrea-retrato.jpg" alt="Andrea Legido Andrés, fisioterapeuta de Tierra, en su consulta" width="1254" height="1254" loading="lazy" />
+            </div>
+            <figcaption class="frame__caption"><span>Consulta Tierra</span><span>Zamora</span></figcaption>
+          </figure>
         </div>
-        <div data-reveal>
-          <span class="eyebrow">Mi historia</span>
-          <p class="story__lead">Me llamo Marta Herrero y soy fisioterapeuta y osteópata. Empecé tratando a deportistas amateurs en Zamora y, con los años, mi enfoque manual y personalizado se convirtió en Tierra: una consulta pensada para escuchar antes de tratar.</p>
-          <p>Creo en el trabajo con las manos, en entender de dónde viene el dolor y en acompañar el proceso de recuperación con calma, no con prisa.</p>
+        <div class="bio-split__text" data-reveal>
+          <p class="statement__text">Una consulta pensada para <em>escuchar</em> antes de tratar.</p>
+          <p>Llevo 7 años tratando pacientes en varios centros y por cuenta propia, y soy la fisioterapeuta del equipo de fútbol de Villaralbo. Ese camino, muy ligado al deporte, es el que ha dado forma a Tierra.</p>
+          <p>Creo en el trabajo con las manos, en entender de dónde viene el dolor y en acompañar cada recuperación —también la vuelta al deporte— con calma, no con prisa.</p>
         </div>
       </div>
+    </section>
 
-      <div class="timeline">
-        <div class="timeline__item" data-reveal>
-          <span class="timeline__year">2012</span>
-          <h3>Primeros pasos</h3>
-          <p>Graduada en Fisioterapia. Empiezo a tratar a deportistas amateurs y corredores populares en Zamora.</p>
+    <!-- ================= CRONOLOGÍA ================= -->
+    <section class="timeline">
+      <div class="container">
+        <div class="timeline__head" data-reveal>
+          <p class="eyebrow">El camino</p>
+          <h2>De los primeros pasos a <em>Tierra</em></h2>
         </div>
         <div class="timeline__item" data-reveal>
-          <span class="timeline__year">2015</span>
-          <h3>Osteopatía</h3>
-          <p>Formación en osteopatía estructural y visceral: un enfoque más global del cuerpo.</p>
+          <span class="timeline__year">2019</span>
+          <div>
+            <h3>Primeros pasos</h3>
+            <p>Graduada en Fisioterapia. Empiezo a tratar pacientes en distintos centros, con especial atención al mundo deportivo.</p>
+          </div>
         </div>
         <div class="timeline__item" data-reveal>
-          <span class="timeline__year">2018</span>
-          <h3>Especialización deportiva</h3>
-          <p>Curso de readaptación al esfuerzo, para acompañar la vuelta al deporte tras una lesión.</p>
+          <span class="timeline__year">2021</span>
+          <div>
+            <h3>Por cuenta propia</h3>
+            <p>Compagino el trabajo en varios centros con mis propios pacientes, con un enfoque cada vez más personalizado.</p>
+          </div>
         </div>
         <div class="timeline__item" data-reveal>
           <span class="timeline__year">2023</span>
-          <h3>Nace Tierra</h3>
-          <p>Abro mi propia consulta en Zamora, con sesiones individuales y sin salas compartidas.</p>
+          <div>
+            <h3>Fisio a pie de campo</h3>
+            <p>Me incorporo como fisioterapeuta del equipo de fútbol de Villaralbo: lesiones deportivas, recuperación y vuelta al juego.</p>
+          </div>
+        </div>
+        <div class="timeline__item" data-reveal>
+          <span class="timeline__year">Hoy</span>
+          <div>
+            <h3>Nace Tierra</h3>
+            <p>Abro mi propia consulta en Zamora, con sesiones individuales y un enfoque muy orientado al deporte.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -132,25 +154,28 @@
       </svg></span>
     </div>
 
-    <!-- ================= VALORES ================= -->
-    <section class="values">
-      <div class="values__inner">
-        <div class="values__head" data-reveal>
-          <h2>Cómo trabajo</h2>
-          <p>Tres ideas que guían cada sesión.</p>
+    <!-- ================= CÓMO TRABAJO ================= -->
+    <section class="method">
+      <div class="container">
+        <div class="method__head" data-reveal>
+          <p class="eyebrow">Cómo trabajo</p>
+          <h2>Tres ideas que guían <em>cada</em> sesión</h2>
         </div>
-        <div class="values__list">
-          <div class="value-row" data-reveal data-reveal-group>
-            <span class="value-row__num">01</span>
-            <div><h3>Escucha real</h3><p>Antes de tratar, escucho. Cada cuerpo cuenta una historia distinta, y el tratamiento parte de ahí.</p></div>
+        <div class="method__grid">
+          <div class="method__step" data-reveal data-reveal-group>
+            <strong>01</strong>
+            <h3>Escucha real</h3>
+            <p>Antes de tratar, escucho. Cada cuerpo cuenta una historia distinta, y el tratamiento parte de ahí.</p>
           </div>
-          <div class="value-row" data-reveal data-reveal-group>
-            <span class="value-row__num">02</span>
-            <div><h3>Manos, no máquinas</h3><p>Trabajo con terapia manual: mis manos son la herramienta principal, no un aparato entre nosotros.</p></div>
+          <div class="method__step" data-reveal data-reveal-group>
+            <strong>02</strong>
+            <h3>Manos, no máquinas</h3>
+            <p>Trabajo con terapia manual: mis manos son la herramienta principal, no un aparato entre nosotros.</p>
           </div>
-          <div class="value-row" data-reveal data-reveal-group>
-            <span class="value-row__num">03</span>
-            <div><h3>Raíz, no síntoma</h3><p>Busco el origen del dolor, no solo calmarlo un rato. Por eso los planes de tratamiento son a medida.</p></div>
+          <div class="method__step" data-reveal data-reveal-group>
+            <strong>03</strong>
+            <h3>Raíz, no síntoma</h3>
+            <p>Busco el origen del dolor, no solo calmarlo un rato. Por eso los planes de tratamiento son a medida.</p>
           </div>
         </div>
       </div>
@@ -158,35 +183,51 @@
 
     <!-- ================= CTA FINAL ================= -->
     <section class="cta-band">
-      <div class="cta-band__inner" data-reveal>
-        <h2>¿Hablamos?</h2>
+      <div class="container cta-band__inner" data-reveal>
+        <p class="eyebrow eyebrow--center eyebrow--light">Primera visita</p>
+        <h2>¿<em>Hablamos</em>?</h2>
         <p>Cuéntame qué te ocurre y buscamos juntos el mejor camino.</p>
         <div class="cta-band__actions">
-          <a href="contacto.html" class="btn btn--light">Pedir cita</a>
+          <a href="contacto.html" class="btn btn--cream">Pedir cita
+            <span class="btn__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+          </a>
         </div>
+        <p class="cta-band__note">Respuesta en el mismo día, de lunes a viernes.</p>
       </div>
     </section>
   </main>
 
   <!-- ================= FOOTER ================= -->
   <footer class="footer">
-    <div class="footer__inner">
+    <div class="container footer__inner">
       <div class="footer__brand">
-        <span class="brand__word brand__word--footer">Tierra</span>
-        <p>Fisioterapia y osteopatía en Zamora.</p>
+        <span class="brand__word">Tierra<small>Fisioterapia</small></span>
+        <p>Fisioterapia y osteopatía en Zamora. Terapia manual, recuperación deportiva y tratamiento personalizado.</p>
       </div>
-      <nav class="footer__nav" aria-label="Navegación del pie">
-        <a href="index.html">Inicio</a>
-        <a href="sobre-mi.html">Sobre mí</a>
-        <a href="servicios.html">Servicios</a>
-        <a href="contacto.html">Contacto</a>
+      <nav class="footer__col" aria-label="Navegación del pie">
+        <h4>Páginas</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="sobre-mi.html">Sobre mí</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
       </nav>
-      <p class="footer__copy">© <span data-year></span> Tierra. Todos los derechos reservados.</p>
+      <div class="footer__col">
+        <h4>Consulta</h4>
+        <ul>
+          <li><a href="tel:+34600000000">+34 600 00 00 00</a></li>
+          <li><a href="mailto:hola@tierrafisio.es">hola@tierrafisio.es</a></li>
+          <li>Calle Ejemplo 12, bajo · Zamora</li>
+          <li>L–V, 9:00 – 20:30</li>
+        </ul>
+      </div>
+      <p class="footer__copy"><span>© <span data-year></span> Tierra. Todos los derechos reservados.</span><span>Zamora, Castilla y León</span></p>
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" defer></script>
   <script src="script.js" defer></script>
 </body>
 </html>

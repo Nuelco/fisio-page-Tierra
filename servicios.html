@@ -16,7 +16,7 @@
   <meta property="og:image" content="img/logo-tierra.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <meta name="theme-color" content="#55633e" />
+  <meta name="theme-color" content="#f4ede0" />
   <link rel="icon" href="favicon.svg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -51,173 +51,228 @@
       </a>
 
       <button class="header__toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
-        <span></span><span></span><span></span>
+        <span></span><span></span>
       </button>
 
       <nav class="nav" id="nav-menu" aria-label="Navegación principal">
-        <a href="index.html">Inicio</a>
-        <a href="sobre-mi.html">Sobre mí</a>
-        <a href="servicios.html" class="is-active">Servicios</a>
-        <a href="contacto.html">Contacto</a>
-        <a href="contacto.html" class="btn btn--primary btn--sm">Pedir cita</a>
+        <div class="nav__links">
+          <a href="index.html">Inicio</a>
+          <a href="sobre-mi.html">Sobre mí</a>
+          <a href="servicios.html" class="is-active">Servicios</a>
+          <a href="contacto.html">Contacto</a>
+        </div>
+        <a href="contacto.html" class="btn btn--solid">Pedir cita
+          <span class="btn__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+        <p class="nav__extra">Lunes a viernes, 9:00 – 20:30 · <a href="tel:+34600000000">+34 600 00 00 00</a></p>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <!-- ================= PAGE HERO ================= -->
-    <section class="hero page-hero kenburns">
-      <div class="hero__media" data-parallax="0.1">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Physiotherapist_working_examining_treating_injured_leg_of_male_patient.jpg" alt="Fisioterapeuta tratando la pierna de un paciente en camilla" width="1600" height="1000" />
-      </div>
-      <div class="hero__scrim"></div>
-      <div class="hero__content" data-reveal>
-        <h1 class="hero__title">Servicios</h1>
-        <p class="hero__lead">Trato el cuerpo como un todo: de la fisioterapia general a las técnicas más avanzadas.</p>
+    <!-- ================= CABECERA ================= -->
+    <section class="page-head">
+      <div class="container page-head__inner" data-reveal>
+        <p class="eyebrow">Nueve áreas de trabajo</p>
+        <h1>Servicios</h1>
+        <p>Trato el cuerpo como un todo: de la fisioterapia general a las técnicas más avanzadas, con un mismo enfoque cercano.</p>
       </div>
     </section>
 
-    <!-- ================= CLUSTER A: TRATAMIENTO MANUAL ================= -->
-    <section class="services-detail">
-      <div class="service-block" id="fisioterapia" data-reveal>
-        <div class="service-block__media kenburns" data-parallax="0.06">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Physiotherapist_working_examining_treating_injured_leg_of_male_patient.jpg" alt="Fisioterapeuta examinando y tratando la pierna lesionada de un paciente" loading="lazy" />
-        </div>
-        <div>
-          <span class="service-block__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="12" width="14" height="7" rx="3"/><line x1="8" y1="12" x2="8" y2="6"/><line x1="12" y1="12" x2="12" y2="5"/><line x1="16" y1="12" x2="16" y2="6"/></svg></span>
-          <h2>Fisioterapia</h2>
-          <p>Tratamiento de lesiones musculares, articulares y posturales mediante terapia manual, movilización y ejercicio dirigido.</p>
-          <ul class="service-block__list">
-            <li>Valoración individualizada de cada lesión</li>
-            <li>Movilización articular y de tejidos blandos</li>
-            <li>Plan de ejercicios para la recuperación</li>
-          </ul>
-        </div>
-      </div>
+    <!-- ================= TRATAMIENTO MANUAL ================= -->
+    <section class="service-detail">
+      <div class="container">
+        <article class="service-article" id="fisioterapia" data-reveal>
+          <span class="service-article__num" aria-hidden="true">01</span>
+          <div>
+            <h2>Fisioterapia</h2>
+            <p>Tratamiento de lesiones musculares, articulares y posturales mediante terapia manual, movilización y ejercicio dirigido.</p>
+            <ul class="service-article__list">
+              <li>Valoración individualizada de cada lesión</li>
+              <li>Movilización articular y de tejidos blandos</li>
+              <li>Plan de ejercicios para la recuperación</li>
+            </ul>
+          </div>
+        </article>
 
-      <div class="service-block service-block--reverse" id="osteopatia" data-reveal>
-        <div class="service-block__media kenburns" data-parallax="0.06">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Osteopathic_Manipulation.JPG" alt="Técnica de manipulación osteopática" loading="lazy" />
-        </div>
-        <div>
-          <span class="service-block__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="12" y1="3" x2="12" y2="21"/><circle cx="12" cy="5" r="1.6" fill="currentColor" stroke="none"/><circle cx="12" cy="10" r="2" fill="currentColor" stroke="none"/><circle cx="12" cy="15" r="1.7" fill="currentColor" stroke="none"/><circle cx="12" cy="19.5" r="1.3" fill="currentColor" stroke="none"/></svg></span>
-          <h2>Osteopatía</h2>
-          <p>Un enfoque manual global del cuerpo que busca el origen del dolor, no solo el punto donde se siente.</p>
-          <ul class="service-block__list">
-            <li>Valoración estructural completa</li>
-            <li>Técnicas viscerales y craneales</li>
-            <li>Trabajo conjunto con fisioterapia cuando es necesario</li>
-          </ul>
-        </div>
-      </div>
+        <article class="service-article service-article--flip" id="osteopatia" data-reveal>
+          <span class="service-article__num" aria-hidden="true">02</span>
+          <div>
+            <h2>Osteopatía</h2>
+            <p>Un enfoque manual global del cuerpo que busca el origen del dolor, no solo el punto donde se siente.</p>
+            <ul class="service-article__list">
+              <li>Valoración estructural completa</li>
+              <li>Técnicas viscerales y craneales</li>
+              <li>Trabajo conjunto con fisioterapia cuando es necesario</li>
+            </ul>
+          </div>
+        </article>
 
-      <div class="service-quote" data-reveal>
+        <article class="service-article" id="fisioterapia-deportiva" data-reveal>
+          <span class="service-article__num" aria-hidden="true">03</span>
+          <div>
+            <h2>Fisioterapia deportiva</h2>
+            <p>Prevención y recuperación de lesiones para corredores, ciclistas y deportistas de cualquier nivel.</p>
+            <ul class="service-article__list">
+              <li>Readaptación al esfuerzo tras una lesión</li>
+              <li>Valoración biomecánica de la carrera</li>
+              <li>Trabajo de prevención en pretemporada</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= BANDA FOTOGRÁFICA ================= -->
+    <div class="photo-band" data-reveal>
+      <img src="img/about-manos.jpg" alt="Manos en una sesión de terapia manual en Tierra" width="1920" height="1275" loading="lazy" />
+      <div class="photo-band__scrim"></div>
+      <p class="photo-band__label">Las manos son la herramienta principal.</p>
+    </div>
+
+    <!-- ================= MOVIMIENTO Y EJERCICIO ================= -->
+    <section class="service-detail">
+      <div class="container">
+        <article class="service-article service-article--flip" id="ejercicio-terapeutico" data-reveal>
+          <span class="service-article__num" aria-hidden="true">04</span>
+          <div>
+            <h2>Ejercicio terapéutico</h2>
+            <p>El ejercicio activo, bien dosificado, es el motor de cualquier recuperación duradera.</p>
+            <ul class="service-article__list">
+              <li>Programas activos y progresivos</li>
+              <li>Dosificación adaptada a cada fase de la lesión</li>
+              <li>Pautas claras para seguir en casa</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="service-article" id="rehabilitacion-funcional" data-reveal>
+          <span class="service-article__num" aria-hidden="true">05</span>
+          <div>
+            <h2>Rehabilitación funcional</h2>
+            <p>Recuperar la movilidad y la autonomía en los gestos que importan: caminar, cargar, agacharse, volver a tu rutina.</p>
+            <ul class="service-article__list">
+              <li>Trabajo de equilibrio y coordinación</li>
+              <li>Recuperación de la movilidad tras cirugía o inmovilización</li>
+              <li>Objetivos funcionales medibles</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="service-article service-article--flip" id="pilates-terapeutico" data-reveal>
+          <span class="service-article__num" aria-hidden="true">06</span>
+          <div>
+            <h2>Pilates terapéutico</h2>
+            <p>Control postural y trabajo de core con criterio clínico, adaptado a cada cuerpo y a cada lesión.</p>
+            <ul class="service-article__list">
+              <li>Sesiones individuales o en grupos reducidos</li>
+              <li>Progresiones seguras tras una lesión</li>
+              <li>Conciencia corporal y respiración</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="service-article" id="fisioterapia-invasiva" data-reveal>
+          <span class="service-article__num" aria-hidden="true">07</span>
+          <div>
+            <h2>Fisioterapia invasiva</h2>
+            <p>EPI y punción seca para tendinopatías y puntos gatillo que no responden al tratamiento conservador.</p>
+            <ul class="service-article__list">
+              <li>Electrólisis percutánea intratisular (EPI)</li>
+              <li>Punción seca de puntos gatillo</li>
+              <li>Siempre combinada con ejercicio y terapia manual</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= CITA ================= -->
+    <section class="pullquote">
+      <div class="container" data-reveal>
         <blockquote>
           Después de una lesión de rodilla pensé que no volvería a correr. Con un plan claro y sesiones semanales, volví a mis carreras en dos meses.
-          <cite>Diego Miranda, corredor popular en Zamora</cite>
+          <cite>Diego Miranda · corredor popular en Zamora</cite>
         </blockquote>
       </div>
-
-      <div class="service-block" id="fisioterapia-deportiva" data-reveal>
-        <div class="service-block__media kenburns" data-parallax="0.06">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Dr._Jesus_Olmo_Isokinetic_ACL_Injury.jpg" alt="Fisioterapeuta valorando la rodilla de un deportista tras una lesión de ligamento" loading="lazy" />
-        </div>
-        <div>
-          <span class="service-block__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l5-5 3 3 7-8"/><path d="M15 7h4v4"/></svg></span>
-          <h2>Fisioterapia deportiva</h2>
-          <p>Prevención y recuperación de lesiones para corredores, ciclistas y deportistas de cualquier nivel.</p>
-          <ul class="service-block__list">
-            <li>Readaptación al esfuerzo tras una lesión</li>
-            <li>Valoración biomecánica de la carrera</li>
-            <li>Trabajo de prevención en pretemporada</li>
-          </ul>
-        </div>
-      </div>
     </section>
 
-    <!-- ================= CLUSTER B: MOVIMIENTO Y EJERCICIO ================= -->
-    <section class="teaser-services">
+    <!-- ================= DIAGNÓSTICO Y TECNOLOGÍA ================= -->
+    <section class="service-detail">
       <div class="container">
-        <div class="teaser-services__head" data-reveal>
-          <h2>Movimiento y ejercicio</h2>
-          <p>El ejercicio activo, bien dosificado, es el motor de cualquier recuperación duradera.</p>
-        </div>
-        <div class="teaser-grid">
-          <article class="teaser-card" id="ejercicio-terapeutico" data-reveal data-reveal-group>
-            <span class="teaser-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="9" width="3" height="6" rx="1"/><rect x="18.5" y="9" width="3" height="6" rx="1"/><line x1="5.5" y1="12" x2="18.5" y2="12"/></svg></span>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Physiotherapist_Saimonah_Mokupe_assisting_clients_using_AusAID_donated_equipment_%2810713127346%29.jpg" alt="Fisioterapeuta guiando un ejercicio de rehabilitación con equipo" loading="lazy" />
-            <div class="teaser-card__body"><h3>Ejercicio terapéutico</h3><span>Programas activos y progresivos</span></div>
-          </article>
-          <article class="teaser-card" id="rehabilitacion-funcional" data-reveal data-reveal-group>
-            <span class="teaser-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17V9"/><path d="M8.5 9h7l1.5 4h-10z"/><path d="M9 21h6"/></svg></span>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Patient_on_balance_board_for_rehabilitation.jpg" alt="Paciente trabajando el equilibrio sobre una plataforma de rehabilitación" loading="lazy" />
-            <div class="teaser-card__body"><h3>Rehabilitación funcional</h3><span>Movilidad y autonomía</span></div>
-          </article>
-          <article class="teaser-card" id="pilates-terapeutico" data-reveal data-reveal-group>
-            <span class="teaser-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="7"/></svg></span>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Pilates_reformer.jpg" alt="Sesión de pilates con máquina reformer" loading="lazy" />
-            <div class="teaser-card__body"><h3>Pilates terapéutico</h3><span>Control postural y core</span></div>
-          </article>
-          <article class="teaser-card" id="fisioterapia-invasiva" data-reveal data-reveal-group>
-            <span class="teaser-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="19" y1="5" x2="8" y2="16"/><line x1="16" y1="8" x2="18" y2="10"/><line x1="13" y1="11" x2="15" y2="13"/><path d="M8 16l-3 5"/><path d="M4 19l1.5 1.5"/></svg></span>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Dry_needling_on_forearm_1.jpg" alt="Aguja de punción seca insertada en el antebrazo" loading="lazy" />
-            <div class="teaser-card__body"><h3>Fisioterapia invasiva</h3><span>EPI y punción seca</span></div>
-          </article>
-        </div>
-      </div>
-    </section>
+        <article class="service-article" id="ecografia" data-reveal>
+          <span class="service-article__num" aria-hidden="true">08</span>
+          <div>
+            <h2>Ecografía musculoesquelética</h2>
+            <p>Uso el ecógrafo para localizar con precisión lesiones de músculo, tendón y ligamento, y guiar el tratamiento con datos, no solo con las manos.</p>
+            <ul class="service-article__list">
+              <li>Diagnóstico por imagen en la propia consulta</li>
+              <li>Seguimiento objetivo de la evolución</li>
+            </ul>
+          </div>
+        </article>
 
-    <!-- ================= CLUSTER C: DIAGNOSTICO Y TECNOLOGIA ================= -->
-    <section class="values">
-      <div class="values__inner">
-        <div class="values__head" data-reveal>
-          <h2>Diagnóstico y tecnología</h2>
-          <p>Dos herramientas que sumo a la terapia manual cuando el caso lo pide.</p>
-        </div>
-        <div class="values__list">
-          <div class="value-row" id="ecografia" data-reveal data-reveal-group>
-            <span class="value-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="19" r="1.4" fill="currentColor" stroke="none"/><path d="M8 15a5.7 5.7 0 0 1 8 0"/><path d="M5.5 12a9.2 9.2 0 0 1 13 0"/></svg></span>
-            <div><h3>Ecografía musculoesquelética</h3><p>Uso el ecógrafo para localizar con precisión lesiones de músculo, tendón y ligamento, y guiar el tratamiento con datos, no solo con las manos.</p></div>
+        <article class="service-article service-article--flip" id="diatermia" data-reveal>
+          <span class="service-article__num" aria-hidden="true">09</span>
+          <div>
+            <h2>Diatermia</h2>
+            <p>Tecarterapia con equipo Helios Medical: calor endógeno que acelera la recuperación de los tejidos y reduce el dolor durante la propia sesión.</p>
+            <ul class="service-article__list">
+              <li>Alivio del dolor desde la primera sesión</li>
+              <li>Regeneración de tejidos más rápida</li>
+            </ul>
           </div>
-          <div class="value-row" id="diatermia" data-reveal data-reveal-group>
-            <span class="value-row__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="15" width="10" height="5" rx="1.5"/><path d="M9 12c.8-1 .8-2-.3-3"/><path d="M12 12c.8-1 .8-2-.3-3"/><path d="M15 12c.8-1 .8-2-.3-3"/></svg></span>
-            <div><h3>Diatermia</h3><p>Tecarterapia con equipo Helios Medical: calor endógeno que acelera la recuperación de los tejidos y reduce el dolor durante la propia sesión.</p></div>
-          </div>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- ================= CTA FINAL ================= -->
     <section class="cta-band">
-      <div class="cta-band__inner" data-reveal>
-        <h2>¿Cuál es tu caso?</h2>
+      <div class="container cta-band__inner" data-reveal>
+        <p class="eyebrow eyebrow--center eyebrow--light">Primera visita</p>
+        <h2>¿Cuál es <em>tu</em> caso?</h2>
         <p>Cuéntame qué te ocurre y te digo qué servicio encaja mejor.</p>
         <div class="cta-band__actions">
-          <a href="contacto.html" class="btn btn--light">Pedir cita</a>
+          <a href="contacto.html" class="btn btn--cream">Pedir cita
+            <span class="btn__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+          </a>
         </div>
+        <p class="cta-band__note">Respuesta en el mismo día, de lunes a viernes.</p>
       </div>
     </section>
   </main>
 
   <!-- ================= FOOTER ================= -->
   <footer class="footer">
-    <div class="footer__inner">
+    <div class="container footer__inner">
       <div class="footer__brand">
-        <span class="brand__word brand__word--footer">Tierra</span>
-        <p>Fisioterapia y osteopatía en Zamora.</p>
+        <span class="brand__word">Tierra<small>Fisioterapia</small></span>
+        <p>Fisioterapia y osteopatía en Zamora. Terapia manual, recuperación deportiva y tratamiento personalizado.</p>
       </div>
-      <nav class="footer__nav" aria-label="Navegación del pie">
-        <a href="index.html">Inicio</a>
-        <a href="sobre-mi.html">Sobre mí</a>
-        <a href="servicios.html">Servicios</a>
-        <a href="contacto.html">Contacto</a>
+      <nav class="footer__col" aria-label="Navegación del pie">
+        <h4>Páginas</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="sobre-mi.html">Sobre mí</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
       </nav>
-      <p class="footer__copy">© <span data-year></span> Tierra. Todos los derechos reservados.</p>
+      <div class="footer__col">
+        <h4>Consulta</h4>
+        <ul>
+          <li><a href="tel:+34600000000">+34 600 00 00 00</a></li>
+          <li><a href="mailto:hola@tierrafisio.es">hola@tierrafisio.es</a></li>
+          <li>Calle Ejemplo 12, bajo · Zamora</li>
+          <li>L–V, 9:00 – 20:30</li>
+        </ul>
+      </div>
+      <p class="footer__copy"><span>© <span data-year></span> Tierra. Todos los derechos reservados.</span><span>Zamora, Castilla y León</span></p>
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" defer></script>
   <script src="script.js" defer></script>
 </body>
 </html>

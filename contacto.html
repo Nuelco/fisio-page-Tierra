@@ -16,7 +16,7 @@
   <meta property="og:image" content="img/logo-tierra.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <meta name="theme-color" content="#55633e" />
+  <meta name="theme-color" content="#f4ede0" />
   <link rel="icon" href="favicon.svg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -51,74 +51,83 @@
       </a>
 
       <button class="header__toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
-        <span></span><span></span><span></span>
+        <span></span><span></span>
       </button>
 
       <nav class="nav" id="nav-menu" aria-label="Navegación principal">
-        <a href="index.html">Inicio</a>
-        <a href="sobre-mi.html">Sobre mí</a>
-        <a href="servicios.html">Servicios</a>
-        <a href="contacto.html" class="is-active">Contacto</a>
-        <a href="contacto.html" class="btn btn--primary btn--sm">Pedir cita</a>
+        <div class="nav__links">
+          <a href="index.html">Inicio</a>
+          <a href="sobre-mi.html">Sobre mí</a>
+          <a href="servicios.html">Servicios</a>
+          <a href="contacto.html" class="is-active">Contacto</a>
+        </div>
+        <a href="contacto.html" class="btn btn--solid">Pedir cita
+          <span class="btn__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+        </a>
+        <p class="nav__extra">Lunes a viernes, 9:00 – 20:30 · <a href="tel:+34600000000">+34 600 00 00 00</a></p>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <!-- ================= PAGE HERO ================= -->
-    <section class="contact-hero">
-      <div class="contact-hero__inner" data-reveal>
-        <h1>Contacto</h1>
+    <!-- ================= CABECERA ================= -->
+    <section class="page-head">
+      <div class="container page-head__inner" data-reveal>
+        <p class="eyebrow">Contacto</p>
+        <h1>¿<em>Hablamos</em>?</h1>
         <p>Escríbeme o llámame y te confirmo cita en el mismo día.</p>
       </div>
     </section>
 
     <!-- ================= CONTACTO ================= -->
     <section class="contact">
-      <div class="contact__inner">
+      <div class="container contact__inner">
         <div data-reveal>
-          <span class="eyebrow">Datos de contacto</span>
+          <p class="eyebrow">La consulta</p>
           <ul class="contact__list">
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h3l2 5-2 1a11 11 0 0 0 5 5l1-2 5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5Z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h3l2 5-2 1a11 11 0 0 0 5 5l1-2 5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5Z"/></svg>
               <a href="tel:+34600000000">+34 600 00 00 00</a>
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
               <a href="mailto:hola@tierrafisio.es">hola@tierrafisio.es</a>
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.3"/></svg>
               <span>Calle Ejemplo 12, bajo, 49001 Zamora</span>
             </li>
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
               <span>Lunes a viernes, 9:00 a 20:30</span>
             </li>
           </ul>
+          <p class="contact__note">Si no puedo cogerte el teléfono, estaré en sesión: déjame un mensaje y te devuelvo la llamada en cuanto termine.</p>
         </div>
 
         <form class="contact__form" data-reveal novalidate>
           <div class="field">
             <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" autocomplete="name" required />
+            <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="¿Cómo te llamas?" required />
             <p class="field__error" data-error-for="nombre">Escribe tu nombre.</p>
           </div>
           <div class="field">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" autocomplete="email" required />
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="tu@email.com" required />
             <p class="field__error" data-error-for="email">Escribe un email válido.</p>
           </div>
           <div class="field">
-            <label for="telefono">Teléfono</label>
-            <input type="tel" id="telefono" name="telefono" autocomplete="tel" />
+            <label for="telefono">Teléfono <span aria-hidden="true">·</span> opcional</label>
+            <input type="tel" id="telefono" name="telefono" autocomplete="tel" placeholder="Si prefieres que te llame" />
           </div>
           <div class="field">
             <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+            <textarea id="mensaje" name="mensaje" rows="4" placeholder="Cuéntame qué te ocurre" required></textarea>
             <p class="field__error" data-error-for="mensaje">Cuéntame brevemente qué te ocurre.</p>
           </div>
-          <button type="submit" class="btn btn--primary btn--block">Enviar solicitud</button>
+          <button type="submit" class="btn btn--solid">Enviar solicitud
+            <span class="btn__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+          </button>
           <p class="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -127,23 +136,35 @@
 
   <!-- ================= FOOTER ================= -->
   <footer class="footer">
-    <div class="footer__inner">
+    <div class="container footer__inner">
       <div class="footer__brand">
-        <span class="brand__word brand__word--footer">Tierra</span>
-        <p>Fisioterapia y osteopatía en Zamora.</p>
+        <span class="brand__word">Tierra<small>Fisioterapia</small></span>
+        <p>Fisioterapia y osteopatía en Zamora. Terapia manual, recuperación deportiva y tratamiento personalizado.</p>
       </div>
-      <nav class="footer__nav" aria-label="Navegación del pie">
-        <a href="index.html">Inicio</a>
-        <a href="sobre-mi.html">Sobre mí</a>
-        <a href="servicios.html">Servicios</a>
-        <a href="contacto.html">Contacto</a>
+      <nav class="footer__col" aria-label="Navegación del pie">
+        <h4>Páginas</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="sobre-mi.html">Sobre mí</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
       </nav>
-      <p class="footer__copy">© <span data-year></span> Tierra. Todos los derechos reservados.</p>
+      <div class="footer__col">
+        <h4>Consulta</h4>
+        <ul>
+          <li><a href="tel:+34600000000">+34 600 00 00 00</a></li>
+          <li><a href="mailto:hola@tierrafisio.es">hola@tierrafisio.es</a></li>
+          <li>Calle Ejemplo 12, bajo · Zamora</li>
+          <li>L–V, 9:00 – 20:30</li>
+        </ul>
+      </div>
+      <p class="footer__copy"><span>© <span data-year></span> Tierra. Todos los derechos reservados.</span><span>Zamora, Castilla y León</span></p>
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" defer></script>
   <script src="script.js" defer></script>
 </body>
 </html>
