@@ -24,7 +24,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <link rel="preload" as="image" href="img/hero-encinas.png" fetchpriority="high" />
+  <link rel="preload" as="image" href="img/hero-horizontal.jpg" media="(orientation: landscape)" fetchpriority="high" />
+  <link rel="preload" as="image" href="img/hero-vertical.jpg" media="(orientation: portrait)" fetchpriority="high" />
   <link rel="stylesheet" href="styles.css" />
 
   <script type="application/ld+json">
@@ -97,7 +98,10 @@
     <!-- ================= HERO ================= -->
     <section class="hero kenburns">
       <div class="hero__media" data-parallax="0.12">
-        <img src="img/hero-encinas.png" alt="Paisaje de encinas de Zamora al atardecer junto a la sala de tratamiento de Tierra" width="1600" height="1000" fetchpriority="high" />
+        <picture>
+          <source media="(orientation: portrait)" srcset="img/hero-vertical.jpg" width="768" height="1376" />
+          <img src="img/hero-horizontal.jpg" alt="Campos y encinas de Zamora junto a la sala de tratamiento de Tierra" width="1380" height="752" fetchpriority="high" />
+        </picture>
       </div>
       <div class="hero__scrim"></div>
       <div class="hero__content" data-reveal>

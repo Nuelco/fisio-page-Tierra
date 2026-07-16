@@ -316,11 +316,13 @@ button { font: inherit; }
 /* El contenedor sobresale un 6% por arriba y por abajo: margen para
    el parallax (±4%) sin que asome nunca el fondo. */
 .hero__media { position: absolute; left: 0; right: 0; top: -6%; bottom: -6%; z-index: 0; overflow: hidden; }
+.hero__media picture { display: block; width: 100%; height: 100%; }
 .hero__media img { width: 100%; height: 100%; object-fit: cover; }
 .hero__scrim {
   position: absolute; inset: 0; z-index: 1;
   background:
-    linear-gradient(180deg, rgba(38, 32, 25, .42) 0%, rgba(38, 32, 25, .05) 32%, rgba(38, 32, 25, .12) 55%, rgba(29, 24, 17, .88) 100%);
+    linear-gradient(75deg, rgba(38, 32, 25, .52) 0%, rgba(38, 32, 25, .22) 42%, rgba(38, 32, 25, 0) 68%),
+    linear-gradient(180deg, rgba(38, 32, 25, .42) 0%, rgba(38, 32, 25, .06) 30%, rgba(38, 32, 25, .3) 56%, rgba(29, 24, 17, .94) 100%);
 }
 .hero__content {
   position: relative; z-index: 2;
@@ -332,12 +334,14 @@ button { font: inherit; }
   font-weight: 500; line-height: .98; letter-spacing: -.015em;
   max-width: 14ch; color: #fdfaf3;
   margin-bottom: .35em;
+  text-shadow: 0 2px 30px rgba(29, 24, 17, .55), 0 1px 4px rgba(29, 24, 17, .3);
 }
 .hero__title em { color: #d8bd8e; }
 .hero__lead {
   font-size: clamp(1rem, .9rem + .5vw, 1.2rem);
-  max-width: 40ch; color: rgba(247, 241, 230, .82);
+  max-width: 40ch; color: rgba(250, 245, 236, .92);
   margin-bottom: 2.2rem;
+  text-shadow: 0 1px 14px rgba(29, 24, 17, .5);
 }
 .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.4rem; }
 .hero__actions .link-arrow { color: rgba(247, 241, 230, .9); }
