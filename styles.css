@@ -581,6 +581,11 @@ button { font: inherit; }
   padding-block: clamp(3rem, 6vw, 4.5rem) 1.8rem;
 }
 .footer__inner { display: grid; gap: 2.4rem; }
+/* Lockup completo del logo en el footer: símbolo sobre TIERRA sobre
+   FISIOTERAPIA, como en la marca original (SVG, sin fondo). */
+.footer__logo { display: inline-flex; flex-direction: column; align-items: center; gap: .55rem; }
+.footer__logo .spine { width: 175px; display: block; }
+.footer__logo .spine svg { width: 100%; height: auto; overflow: visible; display: block; }
 .footer__brand .brand__word { color: #e6d8bf; font-size: 1.7rem; }
 .footer__brand .brand__word small { color: var(--gold); }
 .footer__brand p { color: rgba(239, 230, 214, .5); margin: .9rem 0 0; font-size: .92rem; }
