@@ -40,13 +40,9 @@
     .mark path { fill: none; stroke: var(--ink); stroke-width: 24; stroke-linecap: butt; }
     .mark path.is-fill { fill: var(--ink); stroke: none; }
 
-    .word { font-size: clamp(1.9rem, 6vw, 2.8rem); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin: 0; }
-    .word small {
-      display: flex; align-items: center; justify-content: center; gap: .7em;
-      font-size: .8rem; font-weight: 500; letter-spacing: .32em; text-transform: uppercase;
-      margin-top: .7rem; opacity: .8;
-    }
-    .word small::before, .word small::after { content: ""; height: 1px; width: 1.6em; background: currentColor; opacity: .6; }
+    .word { display: flex; flex-direction: column; align-items: center; gap: .5rem; margin: 0; text-transform: uppercase; }
+    .word .eyebrow { font-size: clamp(.85rem, 2vw, 1.1rem); font-weight: 500; letter-spacing: .38em; text-indent: .38em; opacity: .85; }
+    .word .brand { font-size: clamp(1.9rem, 6vw, 2.8rem); font-weight: 700; letter-spacing: .12em; text-indent: .12em; }
 
     .msg { margin: 2.4rem 0 0; font-size: .95rem; line-height: 1.7; opacity: .85; }
     .msg strong { font-weight: 600; }
@@ -54,10 +50,6 @@
     .contact { margin-top: 1.8rem; display: flex; flex-wrap: wrap; gap: 1.4rem; justify-content: center; font-size: .85rem; }
     .contact a { color: var(--ink); text-decoration: none; border-bottom: 1px solid rgba(158,101,84,.4); padding-bottom: .15rem; transition: border-color .2s ease; }
     .contact a:hover { border-color: var(--ink); }
-
-    @media (prefers-reduced-motion: no-preference) {
-      .mark path { opacity: 0; }
-    }
   </style>
 </head>
 <body>
@@ -71,13 +63,12 @@
       <path d="M804,338 H716 A36,36 0 0 0 680,374 V691" />
     </svg></span>
 
-    <h1 class="word">Tierra<small>Fisioterapia</small></h1>
+    <h1 class="word"><span class="eyebrow">Fisioterapia</span><span class="brand">Tierra</span></h1>
 
     <p class="msg">Estamos preparando <strong>algo nuevo</strong>.<br />Fisioterapia y osteopatía en Zamora — muy pronto, aquí.</p>
 
     <p class="contact">
-      <a href="tel:+34600000000">+34 600 00 00 00</a>
-      <a href="mailto:hola@tierrafisio.es">hola@tierrafisio.es</a>
+      <a href="mailto:info@fisioterapiatierra.es">info@fisioterapiatierra.es</a>
     </p>
   </main>
 
