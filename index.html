@@ -28,7 +28,7 @@
     }
     body {
       position: relative; overflow: hidden;
-      min-height: 100dvh;
+      min-height: 100dvh; min-height: calc(var(--vh, 1dvh) * 100);
       display: flex; align-items: center; justify-content: center;
       padding: 2rem 1.5rem;
     }
@@ -38,6 +38,18 @@
       text-align: center; max-width: 32rem;
     }
 
+    /* foto de fondo, con un velo crema translúcido encima para que se note pero no compita con el texto.
+       Ojo: con z-index negativo aquí, Chrome (al menos en headless) no pintaba estas capas por
+       encima del background opaco de html/body — por eso se ordenan solo con el orden del DOM. */
+    .bg-photo {
+      position: fixed; inset: 0; pointer-events: none;
+      background: url("img/bg-contorno.png") center center / cover no-repeat;
+    }
+    .bg-veil {
+      position: fixed; inset: 0; pointer-events: none;
+      background: rgba(234, 229, 212, .88);
+    }
+
     /* franjas diagonales en degradado, esquinas opuestas, entrada en acordeón */
     .band {
       position: fixed; z-index: 0; pointer-events: none; inset: 0;
@@ -45,14 +57,10 @@
       opacity: 0; transform: scale(.82);
       animation: bandIn .7s cubic-bezier(.16,1,.3,1) var(--d) forwards;
     }
-    .band--tl {
-      transform-origin: 0 0;
-      clip-path: polygon(calc(var(--a) * 1vmin) 0, calc(var(--b) * 1vmin) 0, 0 calc(var(--b) * 1vmin), 0 calc(var(--a) * 1vmin));
-    }
-    .band--br {
-      transform-origin: 100% 100%;
-      clip-path: polygon(calc(100% - var(--a) * 1vmin) 100%, calc(100% - var(--b) * 1vmin) 100%, 100% calc(100% - var(--b) * 1vmin), 100% calc(100% - var(--a) * 1vmin));
-    }
+    .band--tl { transform-origin: 0 0; }
+    .band--br { transform-origin: 100% 100%; }
+    /* la forma real (ondulada) se calcula en JS y se aplica como clip-path: path(...),
+       porque path() necesita píxeles reales y así se recalcula bien en cualquier tamaño. */
     @keyframes bandIn { to { opacity: 1; transform: scale(1); } }
 
     .mark {
@@ -91,17 +99,19 @@
   </style>
 </head>
 <body>
-  <div class="band band--tl" style="--a:0;--b:8.8;--c:#5c352b;--d:.1s" aria-hidden="true"></div>
-  <div class="band band--tl" style="--a:8.8;--b:17.6;--c:#7a4a3a;--d:.22s" aria-hidden="true"></div>
-  <div class="band band--tl" style="--a:17.6;--b:26.4;--c:#9e6554;--d:.34s" aria-hidden="true"></div>
-  <div class="band band--tl" style="--a:26.4;--b:35.2;--c:#bd8267;--d:.46s" aria-hidden="true"></div>
-  <div class="band band--tl" style="--a:35.2;--b:44;--c:#ddab8c;--d:.58s" aria-hidden="true"></div>
+  <div class="bg-photo" aria-hidden="true"></div>
+  <div class="bg-veil" aria-hidden="true"></div>
+  <div class="band band--tl" style="--a:0;--b:13;--c:rgba(158,101,84,1);--d:.1s" aria-hidden="true"></div>
+  <div class="band band--tl" style="--a:13;--b:26;--c:rgba(158,101,84,.78);--d:.22s" aria-hidden="true"></div>
+  <div class="band band--tl" style="--a:26;--b:39;--c:rgba(158,101,84,.58);--d:.34s" aria-hidden="true"></div>
+  <div class="band band--tl" style="--a:39;--b:52;--c:rgba(158,101,84,.4);--d:.46s" aria-hidden="true"></div>
+  <div class="band band--tl" style="--a:52;--b:65;--c:rgba(158,101,84,.24);--d:.58s" aria-hidden="true"></div>
 
-  <div class="band band--br" style="--a:0;--b:8.8;--c:#5c352b;--d:.25s" aria-hidden="true"></div>
-  <div class="band band--br" style="--a:8.8;--b:17.6;--c:#7a4a3a;--d:.37s" aria-hidden="true"></div>
-  <div class="band band--br" style="--a:17.6;--b:26.4;--c:#9e6554;--d:.49s" aria-hidden="true"></div>
-  <div class="band band--br" style="--a:26.4;--b:35.2;--c:#bd8267;--d:.61s" aria-hidden="true"></div>
-  <div class="band band--br" style="--a:35.2;--b:44;--c:#ddab8c;--d:.73s" aria-hidden="true"></div>
+  <div class="band band--br" style="--a:0;--b:13;--c:rgba(158,101,84,1);--d:.25s" aria-hidden="true"></div>
+  <div class="band band--br" style="--a:13;--b:26;--c:rgba(158,101,84,.78);--d:.37s" aria-hidden="true"></div>
+  <div class="band band--br" style="--a:26;--b:39;--c:rgba(158,101,84,.58);--d:.49s" aria-hidden="true"></div>
+  <div class="band band--br" style="--a:39;--b:52;--c:rgba(158,101,84,.4);--d:.61s" aria-hidden="true"></div>
+  <div class="band band--br" style="--a:52;--b:65;--c:rgba(158,101,84,.24);--d:.73s" aria-hidden="true"></div>
   <main>
     <span class="mark" data-spine aria-hidden="true"><svg viewBox="300 195 525 595" width="525" height="595" xmlns="http://www.w3.org/2000/svg">
       <path class="is-fill" d="M318,206 L318,230 L461,232 L470,234 L477,236 L482,238 L487,240 L491,242 L494,244 L498,246 L501,248 L504,250 L507,252 L509,254 L511,256 L514,258 L516,260 L518,262 L520,264 L522,266 L524,268 L525,270 L527,272 L528,274 L530,276 L531,278 L532,280 L534,282 L535,284 L536,286 L537,288 L538,290 L539,291 L540,290 L541,288 L541,286 L542,284 L543,282 L544,280 L545,278 L546,276 L547,274 L548,272 L549,270 L550,268 L551,266 L550,264 L549,262 L547,260 L546,258 L544,256 L543,254 L541,252 L539,250 L537,248 L536,246 L534,244 L531,242 L529,240 L527,238 L525,236 L522,234 L520,232 L517,230 L514,228 L511,226 L507,224 L504,222 L500,220 L496,218 L491,216 L486,214 L480,212 L473,210 L463,208 Z" />
@@ -123,6 +133,54 @@
 
   <script>
     (function () {
+      // Franjas de las esquinas: borde ondulado (curva) en vez de diagonal recta.
+      // Se calcula en JS porque clip-path: path() necesita coordenadas en píxeles
+      // reales, no vmin/%; así se recalcula bien al cargar y al cambiar de tamaño.
+      function bandPath(a, b, W, H, mirror) {
+        var V = Math.min(W, H) / 100;
+        var AMP = 1.15 * V, CYCLES = 2, STEPS = 40;
+        function wave(dist) {
+          var Vd = dist * V;
+          var pts = [];
+          for (var i = 0; i <= STEPS; i++) {
+            var t = i / STEPS;
+            var x = Vd * (1 - t), y = Vd * t;
+            var off = AMP * Math.sin(2 * Math.PI * CYCLES * t);
+            pts.push([x + off * 0.70710678, y + off * 0.70710678]);
+          }
+          return pts;
+        }
+        var outer = wave(b);
+        var inner = wave(a).reverse();
+        var pts = [[a * V, 0], [b * V, 0]].concat(outer.slice(1)).concat([[0, a * V]]).concat(inner.slice(1));
+        if (mirror) pts = pts.map(function (p) { return [W - p[0], H - p[1]]; });
+        return "M " + pts.map(function (p) { return p[0].toFixed(2) + "," + p[1].toFixed(2); }).join(" L ") + " Z";
+      }
+      // Medimos el alto UNA vez con JS y lo usamos tanto para centrar el body
+      // (--vh, sustituye a 100dvh) como para calcular las ondas: así los dos
+      // sistemas siempre coinciden exactamente, en vez de depender de que
+      // 100dvh y window.innerHeight resuelvan lo mismo en cada móvil (no
+      // siempre es así, y eso era lo que descuadraba el texto y las esquinas).
+      function setViewportVars() {
+        var W = (window.visualViewport && window.visualViewport.width) || window.innerWidth;
+        var H = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
+        document.documentElement.style.setProperty("--vh", (H / 100) + "px");
+        applyBands(W, H);
+      }
+      function applyBands(W, H) {
+        Array.prototype.slice.call(document.querySelectorAll(".band")).forEach(function (el) {
+          var a = parseFloat(el.style.getPropertyValue("--a"));
+          var b = parseFloat(el.style.getPropertyValue("--b"));
+          var mirror = el.classList.contains("band--br");
+          el.style.clipPath = "path('" + bandPath(a, b, W, H, mirror) + "')";
+        });
+      }
+      setViewportVars();
+      window.addEventListener("resize", setViewportVars);
+      window.addEventListener("orientationchange", setViewportVars);
+      if (window.visualViewport) window.visualViewport.addEventListener("resize", setViewportVars);
+      setTimeout(setViewportVars, 300);
+
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       var svg = document.querySelector(".mark svg");
       var marks = Array.prototype.slice.call(document.querySelectorAll(".mark path"));
