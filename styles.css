@@ -165,9 +165,11 @@ button { font: inherit; }
 [data-reveal] { opacity: 1; transform: none; }
 .js-motion [data-reveal] { opacity: 0; transform: translateY(34px); }
 
-/* Símbolo del logo (columna): visible por defecto */
-.spine-dot, .spine-lines { opacity: 1; fill: var(--gold); }
-.js-spine .spine-dot, .js-spine .spine-lines { opacity: 0; }
+/* Símbolo del logo: visible por defecto */
+.spine-mark { opacity: 1; }
+.spine-mark.is-fill { fill: var(--gold); }
+.spine-mark.is-stroke { fill: none; stroke: var(--gold); stroke-width: 24; stroke-linecap: butt; }
+.js-spine .spine-mark { opacity: 0; }
 
 @keyframes kenburns {
   0%   { transform: scale(1) translate(0, 0); }
@@ -213,7 +215,7 @@ button { font: inherit; }
   box-shadow: 0 22px 44px -26px rgba(47, 40, 32, .45), inset 0 1px 0 rgba(255, 255, 255, .5);
 }
 .brand { display: inline-flex; align-items: center; gap: .7rem; text-decoration: none; color: var(--ink); }
-.brand__symbol.spine { width: 76px; flex: 0 0 auto; }
+.brand__symbol.spine { width: 37px; flex: 0 0 auto; }
 .brand__symbol.spine svg { width: 100%; height: auto; overflow: visible; display: block; }
 .brand__word {
   font-family: var(--font-display); font-weight: 600; font-size: 1.22rem;
@@ -423,7 +425,7 @@ button { font: inherit; }
    DIVISOR — el símbolo de la columna, desnudo sobre el papel
    ============================================================ */
 .spine-band { display: grid; place-items: center; padding-block: clamp(3rem, 7vw, 5.5rem); }
-.spine-band .spine { width: min(300px, 62vw); }
+.spine-band .spine { width: min(150px, 30vw); }
 .spine-band .spine svg { width: 100%; height: auto; overflow: visible; display: block; }
 
 /* ============================================================
@@ -584,7 +586,7 @@ button { font: inherit; }
 /* Lockup completo del logo en el footer: símbolo sobre TIERRA sobre
    FISIOTERAPIA, como en la marca original (SVG, sin fondo). */
 .footer__logo { display: inline-flex; flex-direction: column; align-items: center; gap: .55rem; }
-.footer__logo .spine { width: 175px; display: block; }
+.footer__logo .spine { width: 78px; display: block; }
 .footer__logo .spine svg { width: 100%; height: auto; overflow: visible; display: block; }
 .footer__brand .brand__word { color: #e6d8bf; font-size: 1.7rem; }
 .footer__brand .brand__word small { color: var(--gold); }

@@ -31,57 +31,56 @@
   }
 
   /* ===========================================================
-     2. LOGO: apertura del símbolo (columna)
+     2. LOGO: apertura del símbolo
         Se anima moviendo el atributo SVG "transform" (no CSS),
         para que funcione en cualquier dispositivo (Safari iOS no
         anima "transform" CSS sobre SVG de forma fiable). Es
         independiente de GSAP: siempre funciona.
 
-        Las posiciones de salida y el escalonado NO están escritas a
-        mano: se calculan leyendo la geometría real de cada bola
-        (getBBox) respecto al centro del viewBox. Así el mismo
-        símbolo, a cualquier tamaño (header o divisor), se abre
-        siempre de forma correcta sin mantener valores por bola.
+        Cada trazo (.spine-mark) sale desde su lateral (izquierda
+        o derecha según en qué mitad del viewBox esté su bbox) y
+        se desliza hasta su posición final, formando el símbolo en
+        el centro. El punto de salida y el escalonado NO están
+        escritos a mano: se calculan leyendo la geometría real de
+        cada trazo (getBBox) respecto al centro del viewBox, así
+        el mismo símbolo se abre igual a cualquier tamaño (header,
+        divisor o footer) sin mantener valores por trazo.
      =========================================================== */
   function openSpine(spine) {
     if (spine.__opened) return;
     spine.__opened = true;
     const svg = spine.querySelector("svg");
-    const dots = $$(".spine-dot", spine);
-    const lines = $$(".spine-lines", spine);
-    const DUR = 800, LINE_DELAY = 320, LINE_DUR = 650, STAGGER = 3.7;
+    const marks = $$(".spine-mark", spine);
+    const DUR = 700, STAGGER = 0.9, REACH = 90;
     const easeOut = (t) => 1 - Math.pow(1 - t, 3);
 
     const vb = svg && svg.viewBox && svg.viewBox.baseVal;
-    const centerX = vb && vb.width ? vb.x + vb.width / 2 : 110;
+    const centerX = vb && vb.width ? vb.x + vb.width / 2 : 0;
 
-    dots.forEach((d) => {
-      const box = d.getBBox();
+    marks.forEach((m) => {
+      const box = m.getBBox();
       const cx = box.x + box.width / 2;
-      d._from = centerX - cx; // distancia real desde el centro hasta su posición final
-      d._delay = Math.abs(d._from) * STAGGER; // más lejos del centro, sale más tarde
-      d.setAttribute("transform", "translate(" + d._from.toFixed(2) + " 0)");
-      d.style.opacity = "0";
+      const side = cx < centerX ? -1 : 1; // -1 = mitad izquierda, entra desde la izquierda
+      const dist = Math.abs(cx - centerX);
+      m._from = side * (REACH + dist * 0.35); // cuanto más lejos del centro, más lejos empieza
+      m._delay = dist * STAGGER;
+      m.setAttribute("transform", "translate(" + m._from.toFixed(2) + " 0)");
+      m.style.opacity = "0";
     });
-    lines.forEach((l) => { l.style.opacity = "0"; });
     const t0 = (window.performance && performance.now) ? performance.now() : Date.now();
     function frame(now) {
       const el = now - t0;
       let done = true;
-      dots.forEach((d) => {
-        let t = (el - d._delay) / DUR;
+      marks.forEach((m) => {
+        let t = (el - m._delay) / DUR;
         t = t < 0 ? 0 : t > 1 ? 1 : t;
         if (t < 1) done = false;
-        const x = d._from * (1 - easeOut(t));
-        d.setAttribute("transform", "translate(" + x.toFixed(2) + " 0)");
-        d.style.opacity = Math.min(1, t * 3).toFixed(3);
+        const x = m._from * (1 - easeOut(t));
+        m.setAttribute("transform", "translate(" + x.toFixed(2) + " 0)");
+        m.style.opacity = Math.min(1, t * 2.5).toFixed(3);
       });
-      let lt = (el - LINE_DELAY) / LINE_DUR;
-      lt = lt < 0 ? 0 : lt > 1 ? 1 : lt;
-      if (lt < 1) done = false;
-      lines.forEach((l) => { l.style.opacity = lt.toFixed(3); });
       if (!done) requestAnimationFrame(frame);
-      else dots.forEach((d) => d.removeAttribute("transform"));
+      else marks.forEach((m) => m.removeAttribute("transform"));
     }
     requestAnimationFrame(frame);
   }
