@@ -50,17 +50,21 @@
       background: rgba(234, 229, 212, .88);
     }
 
-    /* franjas diagonales en degradado, esquinas opuestas, entrada en acordeón */
+    /* franjas diagonales en degradado, esquinas opuestas, entrada en acordeón.
+       Ojo: el ancho/alto NO se pone por CSS (inset:0) a propósito — se fija por
+       JS a la vez que el clip-path, en la misma operación, para que el tamaño
+       del elemento y la forma ondulada nunca puedan quedar desincronizados
+       (si CSS reajustara el tamaño solo, en el zoom había un instante en que
+       el recorte ya era del nuevo tamaño pero la curva era la vieja, y se veía
+       un corte recto feo en medio de la onda). */
     .band {
-      position: fixed; z-index: 0; pointer-events: none; inset: 0;
+      position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none;
       background: var(--c);
       opacity: 0; transform: scale(.82);
       animation: bandIn .7s cubic-bezier(.16,1,.3,1) var(--d) forwards;
     }
     .band--tl { transform-origin: 0 0; }
     .band--br { transform-origin: 100% 100%; }
-    /* la forma real (ondulada) se calcula en JS y se aplica como clip-path: path(...),
-       porque path() necesita píxeles reales y así se recalcula bien en cualquier tamaño. */
     @keyframes bandIn { to { opacity: 1; transform: scale(1); } }
 
     .mark {
@@ -172,14 +176,17 @@
           var a = parseFloat(el.style.getPropertyValue("--a"));
           var b = parseFloat(el.style.getPropertyValue("--b"));
           var mirror = el.classList.contains("band--br");
+          el.style.width = W + "px";
+          el.style.height = H + "px";
           el.style.clipPath = "path('" + bandPath(a, b, W, H, mirror) + "')";
         });
       }
+      // Se calcula UNA sola vez al cargar y ya no se vuelve a tocar: si se
+      // recalculaba con cada "resize" (rueda del ratón, pellizco, barra del
+      // móvil...), las franjas se reajustaban al hacer zoom y se veían
+      // moverse. Así se quedan fijas en su posición/forma original siempre.
       setViewportVars();
-      window.addEventListener("resize", setViewportVars);
-      window.addEventListener("orientationchange", setViewportVars);
-      if (window.visualViewport) window.visualViewport.addEventListener("resize", setViewportVars);
-      setTimeout(setViewportVars, 300);
+      setTimeout(setViewportVars, 300); // por si el móvil ajusta la barra justo al entrar
 
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       var svg = document.querySelector(".mark svg");
