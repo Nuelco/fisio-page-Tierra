@@ -1,316 +1,885 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Tierra | Fisioterapia y Osteopatía en Zamora</title>
-  <meta name="description" content="Tierra: fisioterapia y osteopatía general y deportiva en Zamora. Terapia manual, recuperación deportiva y tratamiento personalizado. Pide tu cita." />
-  <meta name="keywords" content="fisioterapia Zamora, osteopatía Zamora, fisioterapia deportiva, terapia manual, osteopatía general" />
-  <meta name="robots" content="index, follow" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="es_ES" />
-  <meta property="og:site_name" content="Tierra" />
-  <meta property="og:title" content="Tierra | Fisioterapia y Osteopatía en Zamora" />
-  <meta property="og:description" content="Fisioterapia y osteopatía general y deportiva en Zamora. Tratamiento personalizado, terapia manual y recuperación deportiva." />
-  <meta property="og:image" content="img/logo-tierra.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <meta name="theme-color" content="#f4ede0" />
-  <link rel="icon" href="favicon.svg" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <link rel="preload" as="image" href="img/hero-horizontal.jpg" media="(orientation: landscape)" fetchpriority="high" />
-  <link rel="preload" as="image" href="img/hero-vertical.jpg" media="(orientation: portrait)" fetchpriority="high" />
-  <link rel="stylesheet" href="styles.css" />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Physiotherapy",
-    "name": "Tierra",
-    "image": "img/logo-tierra.jpg",
-    "priceRange": "€€",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Calle Ejemplo 12, bajo",
-      "addressLocality": "Zamora",
-      "postalCode": "49001",
-      "addressCountry": "ES"
-    },
-    "telephone": "+34600000000",
-    "email": "hola@tierrafisio.es",
-    "medicalSpecialty": ["Physiotherapy", "Osteopathic"],
-    "areaServed": "Zamora"
-  }
-  </script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
-<body data-page="inicio">
-  <a href="#main" class="skip-link">Saltar al contenido</a>
-  <div class="grain" aria-hidden="true"></div>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:'Rethink Sans';src:url('assets/fonts/RethinkSans-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Rethink Sans';src:url('assets/fonts/RethinkSans-Medium.ttf') format('truetype');font-weight:500;font-display:swap}
+@font-face{font-family:'Rethink Sans';src:url('assets/fonts/RethinkSans-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:'Space Mono';src:url('assets/fonts/SpaceMono-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Space Mono';src:url('assets/fonts/SpaceMono-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+html{scroll-behavior:smooth}
+body{margin:0;background:#ede7da;color:#412f2b;font-family:'Rethink Sans',system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+*,*::before,*::after{box-sizing:border-box}
+img{display:block;max-width:100%}
+h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.02em;line-height:1.05;text-wrap:pretty}
+p{margin:0}
+a{color:#a56853;text-decoration:none}
+a:hover{color:#412f2b}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+input,textarea{font:inherit;color:inherit}
+::selection{background:#a56853;color:#ede7da}
+:focus-visible{outline:2px solid #a56853;outline-offset:3px}
+@keyframes ft-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
 
-  <!-- ================= HEADER ================= -->
-  <header class="header">
-    <div class="header__inner">
-      <a href="index.html" class="brand" aria-label="Tierra, inicio">
-        <span class="brand__symbol spine" data-spine aria-hidden="true"><svg viewBox="300 195 525 595" width="525" height="595" xmlns="http://www.w3.org/2000/svg">
-          <path class="spine-mark is-fill" d="M318,206 L318,230 L461,232 L470,234 L477,236 L482,238 L487,240 L491,242 L494,244 L498,246 L501,248 L504,250 L507,252 L509,254 L511,256 L514,258 L516,260 L518,262 L520,264 L522,266 L524,268 L525,270 L527,272 L528,274 L530,276 L531,278 L532,280 L534,282 L535,284 L536,286 L537,288 L538,290 L539,291 L540,290 L541,288 L541,286 L542,284 L543,282 L544,280 L545,278 L546,276 L547,274 L548,272 L549,270 L550,268 L551,266 L550,264 L549,262 L547,260 L546,258 L544,256 L543,254 L541,252 L539,250 L537,248 L536,246 L534,244 L531,242 L529,240 L527,238 L525,236 L522,234 L520,232 L517,230 L514,228 L511,226 L507,224 L504,222 L500,220 L496,218 L491,216 L486,214 L480,212 L473,210 L463,208 Z" />
-          <path class="spine-mark is-stroke" d="M318,278 H445 A56,56 0 0 1 501,334 V691" />
-          <path class="spine-mark is-stroke" d="M318,338 H405 A36,36 0 0 1 441,374 V730" />
-          <path class="spine-mark is-stroke" d="M804,218 H661 A100,100 0 0 0 561,318 V768" />
-          <path class="spine-mark is-stroke" d="M804,278 H676 A56,56 0 0 0 620,334 V711" />
-          <path class="spine-mark is-stroke" d="M804,338 H716 A36,36 0 0 0 680,374 V691" />
-        </svg></span>
-        <span class="brand__word">Tierra<small>Fisioterapia</small></span>
-      </a>
+<div style="min-height:100vh;background:#ede7da">
 
-      <button class="header__toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
-        <span></span><span></span>
+<header style="position:sticky;top:0;z-index:50;background:#412f2b;color:#ede7da;border-bottom:1px solid rgba(237,231,218,.18)">
+  <div aria-hidden="true" style="position:absolute;inset:0;overflow:hidden;background-image:url('assets/ondas-1.png');background-size:cover;background-position:center;opacity:.14;filter:invert(1);pointer-events:none"></div>
+  <div style="position:relative;max-width:1240px;margin:0 auto;padding:14px clamp(20px,4vw,48px);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+    <button type="button" onClick="{{ goInicio }}" aria-label="Fisioterapia Tierra, inicio" style="padding:0;display:flex;align-items:center;gap:12px">
+      <span data-ft-logo="true" style="width:40px;flex:0 0 auto;color:#ede7da;display:block">
+        <svg viewBox="-40 -40 560 640" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Símbolo Fisioterapia Tierra" style="width:100%;height:auto;display:block;overflow:hidden">
+          <defs data-ft-defs="true"></defs>
+          <g data-ft-marks="true" fill="currentColor"></g>
+        </svg>
+      </span>
+      <span style="display:flex;flex-direction:column;gap:5px;font-family:'Space Mono',monospace;text-transform:uppercase;color:#ede7da;text-align:left">
+        <span style="font-size:14px;font-weight:400;line-height:1;letter-spacing:.28em">Fisioterapia</span>
+        <span style="font-size:20px;font-weight:700;line-height:1;letter-spacing:.5em">Tierra</span>
+      </span>
+    </button>
+    <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+    <nav aria-label="Navegación principal" style="display:flex;align-items:center;gap:clamp(14px,2vw,28px);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase">
+      <button type="button" onClick="{{ goInicio }}" style="padding:6px 0" style-hover="color:#ffffff">Inicio<sc-if value="{{ isInicio }}" hint-placeholder-val="{{ true }}"><span style="display:block;height:2px;background:#ede7da;margin-top:4px"></span></sc-if></button>
+      <div style="position:relative" onMouseEnter="{{ openSub }}" onMouseLeave="{{ closeSub }}">
+        <button type="button" onClick="{{ toggleSub }}" aria-haspopup="true" aria-expanded="{{ subOpen }}" style="padding:6px 0;display:flex;align-items:center;gap:8px" style-hover="color:#ffffff">Servicios<span aria-hidden="true" style="font-size:9px">▾</span><sc-if value="{{ isServiciosNav }}"><span style="position:absolute;left:0;right:18px;bottom:0;height:2px;background:#ede7da"></span></sc-if></button>
+        <sc-if value="{{ subOpen }}">
+          <div style="position:absolute;top:100%;left:-16px;min-width:280px;background:#412f2b;border:1px solid rgba(237,231,218,.22);border-radius:4px;padding:8px 0;display:flex;flex-direction:column;z-index:60">
+            <sc-for list="{{ servicios }}" as="srv" hint-placeholder-count="9">
+              <button type="button" onClick="{{ srv.go }}" style="width:100%;text-align:left;padding:9px 18px;letter-spacing:.12em" style-hover="background:rgba(237,231,218,.08);color:#ffffff"><span>{{ srv.name }}</span></button>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <button type="button" onClick="{{ goSobre }}" style="padding:6px 0" style-hover="color:#ffffff">Sobre mí<sc-if value="{{ isSobre }}"><span style="display:block;height:2px;background:#ede7da;margin-top:4px"></span></sc-if></button>
+      <button type="button" onClick="{{ goInstalaciones }}" style="padding:6px 0" style-hover="color:#ffffff">Instalaciones<sc-if value="{{ isInstalaciones }}"><span style="display:block;height:2px;background:#ede7da;margin-top:4px"></span></sc-if></button>
+      <button type="button" onClick="{{ goPrecios }}" style="padding:6px 0" style-hover="color:#ffffff">Tarifas<sc-if value="{{ isPrecios }}"><span style="display:block;height:2px;background:#ede7da;margin-top:4px"></span></sc-if></button>
+      <button type="button" onClick="{{ goFaq }}" style="padding:6px 0" style-hover="color:#ffffff">FAQ<sc-if value="{{ isFaq }}"><span style="display:block;height:2px;background:#ede7da;margin-top:4px"></span></sc-if></button>
+      <button type="button" onClick="{{ goContacto }}" style="padding:12px 20px;background:#a56853;color:#ede7da;border:1px solid #a56853;border-radius:4px" style-hover="background:#8c5643;border-color:#8c5643;color:#ffffff">Pedir cita</button>
+    </nav>
+    </sc-if>
+    <sc-if value="{{ narrow }}">
+    <button type="button" onClick="{{ toggleMenu }}" aria-label="Abrir menú" aria-expanded="{{ menuOpen }}" style="padding:10px 14px;border:1px solid rgba(237,231,218,.4);border-radius:4px;color:#ede7da;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;display:flex;align-items:center;gap:10px" style-hover="background:rgba(237,231,218,.1)">
+      Menú<span aria-hidden="true" style="display:flex;flex-direction:column;gap:3px"><span style="display:block;width:16px;height:1.5px;background:#ede7da"></span><span style="display:block;width:16px;height:1.5px;background:#ede7da"></span><span style="display:block;width:16px;height:1.5px;background:#ede7da"></span></span>
+    </button>
+    </sc-if>  </div>
+  <sc-if value="{{ mobileMenu }}">
+    <nav aria-label="Navegación principal" style="position:relative;border-top:1px solid rgba(237,231,218,.18);padding:8px clamp(20px,4vw,48px) 20px;display:flex;flex-direction:column;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#ede7da">
+      <button type="button" onClick="{{ goInicio }}" style="text-align:left;padding:14px 0;border-bottom:1px solid rgba(237,231,218,.14)">Inicio</button>
+      <button type="button" onClick="{{ toggleSub }}" aria-expanded="{{ subOpen }}" style="text-align:left;padding:14px 0;border-bottom:1px solid rgba(237,231,218,.14);display:flex;justify-content:space-between;gap:12px">Servicios<span aria-hidden="true" style="font-size:10px;color:#bbcccf">▾</span></button>
+      <sc-if value="{{ subOpen }}">
+        <div style="display:flex;flex-direction:column;padding:6px 0 10px 14px;border-bottom:1px solid rgba(237,231,218,.14)">
+          <sc-for list="{{ servicios }}" as="srv" hint-placeholder-count="9">
+            <button type="button" onClick="{{ srv.go }}" style="text-align:left;padding:10px 0;font-size:12px;letter-spacing:.12em"><span>{{ srv.name }}</span></button>
+          </sc-for>
+        </div>
+      </sc-if>
+      <button type="button" onClick="{{ goSobre }}" style="text-align:left;padding:14px 0;border-bottom:1px solid rgba(237,231,218,.14)">Sobre mí</button>
+      <button type="button" onClick="{{ goInstalaciones }}" style="text-align:left;padding:14px 0;border-bottom:1px solid rgba(237,231,218,.14)">Instalaciones</button>
+      <button type="button" onClick="{{ goPrecios }}" style="text-align:left;padding:14px 0;border-bottom:1px solid rgba(237,231,218,.14)">Tarifas</button>
+      <button type="button" onClick="{{ goFaq }}" style="text-align:left;padding:14px 0;border-bottom:1px solid rgba(237,231,218,.14)">FAQ</button>
+      <button type="button" onClick="{{ goContacto }}" style="margin-top:18px;padding:15px 20px;background:#a56853;color:#ede7da;border:1px solid #a56853;border-radius:4px">Pedir cita</button>
+    </nav>
+  </sc-if>
+</header>
+
+<sc-if value="{{ isInicio }}" hint-placeholder-val="{{ true }}">
+<main>
+  <section style="position:relative;overflow:hidden;border-bottom:1px solid rgba(65,47,43,.16)">
+    <sc-if value="{{ ondas }}" hint-placeholder-val="{{ true }}"><div aria-hidden="true" style="position:absolute;inset:0;background-image:url('assets/ondas-1.png');background-size:cover;background-position:center;opacity:.85;pointer-events:none"></div></sc-if>
+    <div style="position:relative;max-width:1240px;margin:0 auto;padding:clamp(40px,5vw,72px) clamp(20px,4vw,48px) clamp(40px,5vw,72px);display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:clamp(32px,5vw,72px);align-items:center">
+      <div style="min-width:0">
+        <h1 style="font-family:'Space Mono',monospace;font-weight:700;font-size:clamp(34px,4.6vw,62px);line-height:1.04;letter-spacing:-.02em;max-width:15ch;margin-bottom:24px;color:#412f2b;text-wrap:balance">Vuelve al <em style="font-style:normal;color:#a56853">origen</em> de tu bienestar</h1><p style="font-size:clamp(17px,1.4vw,20px);max-width:44ch;color:#6b544c;margin-bottom:36px">Terapia manual y tratamiento personalizado en una consulta pensada para escuchar antes de tratar.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+          <sc-if value="{{ ctaWhatsapp }}" hint-placeholder-val="{{ true }}"><a href="https://wa.me/34676767676" style="padding:16px 28px;background:#a56853;color:#ede7da;border:1px solid #a56853;border-radius:4px;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase" style-hover="background:#8c5643;border-color:#8c5643;color:#ffffff">Pedir cita por WhatsApp</a></sc-if>
+          <a href="tel:+34676767676" style="padding:16px 28px;border:1px solid #a56853;border-radius:4px;color:#a56853;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase" style-hover="border-color:#a56853;color:#a56853">676 767 676</a>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden;height:clamp(360px,52vw,620px)">
+        
+      <img src="assets/rrss-1.jpg" alt="Sesión de fisioterapia en la consulta Tierra" style="width: 526px; height: 698px; object-fit: cover; object-position: center top"></div>
+    </div>
+    <div style="position:relative;max-width:1240px;margin:0 auto;padding:18px clamp(20px,4vw,48px);border-top:1px solid rgba(65,47,43,.16);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#8a6f66">
+      <span>Andrea Legido Andrés</span>
+      <span>C. Miguel de Unamuno, 2 · Zamora</span>
+    </div>
+  </section>
+
+  <div style="overflow:hidden;white-space:nowrap;background:#412f2b;color:#ede7da;padding:18px 0">
+    <div style="display:inline-flex;animation:ft-marquee 40s linear infinite">
+      <span style="font-family:'Space Mono',monospace;font-size:14px;letter-spacing:.24em;text-transform:uppercase;display:inline-flex;align-items:center">Terapia manual<span style="width:6px;height:6px;background:#a56853;margin:0 32px;display:inline-block"></span>Osteopatía<span style="width:6px;height:6px;background:#a56853;margin:0 32px;display:inline-block"></span>Fisioterapia deportiva<span style="width:6px;height:6px;background:#a56853;margin:0 32px;display:inline-block"></span>Ejercicio terapéutico<span style="width:6px;height:6px;background:#a56853;margin:0 32px;display:inline-block"></span>Pilates terapéutico<span style="width:6px;height:6px;background:#a56853;margin:0 32px;display:inline-block"></span>Ecografía<span style="width:6px;height:6px;background:#a56853;margin:0 32px;display:inline-block"></span>Diatermia<span style="width:6px;height:6px;background:#a56853;margin:0 32px;display:inline-block"></span></span>
+      <span style="font-family:'Space Mono',monospace;font-size:14px;letter-spacing:.24em;text-transform:uppercase;display:inline-flex;align-items:center">Terapia manual<span style="width:6px;height:6px;background:#a56853;margin:0 32px;display:inline-block"></span>Osteopatía<span style="width:6px;height:6px;background:#a56853;margin:0 32px;display:inline-block"></span>Fisioterapia deportiva<span style="width:6px;height:6px;background:#a56853;margin:0 32px;display:inline-block"></span>Ejercicio terapéutico<span style="width:6px;height:6px;background:#a56853;margin:0 32px;display:inline-block"></span>Pilates terapéutico<span style="width:6px;height:6px;background:#a56853;margin:0 32px;display:inline-block"></span>Ecografía<span style="width:6px;height:6px;background:#a56853;margin:0 32px;display:inline-block"></span>Diatermia<span style="width:6px;height:6px;background:#a56853;margin:0 32px;display:inline-block"></span></span>
+    </div>
+  </div>
+
+  <section style="padding:clamp(64px,9vw,120px) 0">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(32px,5vw,72px);align-items:end">
+      <p style="font-size:clamp(26px,3.2vw,44px);font-weight:700;letter-spacing:-.02em;line-height:1.15;max-width:26ch">No trato solo el dolor: busco su origen para devolverte el movimiento y la confianza en tu propio cuerpo.</p>
+      <div style="max-width:42ch;display:flex;flex-direction:column;gap:16px">
+        <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#a56853">La filosofía</p>
+        <p style="color:#6b544c">En Tierra entiendo el cuerpo como un todo. A través de la fisioterapia y la osteopatía te acompaño en un proceso cercano y personalizado, respetando tus tiempos y tus necesidades.</p>
+        <p style="color:#6b544c">Porque sanar no es solo aliviar. Es volver a ti.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:0 0 clamp(64px,9vw,120px)">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)">
+      <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:end;justify-content:space-between;margin-bottom:48px">
+        <h2 style="font-size:clamp(32px,4.4vw,60px)">Servicios</h2>
+        
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(16px,2vw,24px)">
+        <button type="button" onClick="{{ srv1 }}" style="text-align:left;display:flex;flex-direction:column;gap:12px;padding:clamp(24px,2.4vw,32px);background:#ede7da;border:1px solid rgba(65,47,43,.2);border-radius:4px" style-hover="border-color:#a56853;background:rgba(165,104,83,.06)">
+          <span style="display:block;font-size:clamp(20px,1.9vw,25px);font-weight:700;letter-spacing:-.02em;line-height:1.15;text-wrap:pretty">Fisioterapia</span>
+          <span style="display:block;color:#6b544c;font-size:15px;line-height:1.55">Terapia manual, movilización y ejercicio dirigido para lesiones musculares, articulares y posturales.</span>
+        </button>
+        <button type="button" onClick="{{ srv2 }}" style="text-align:left;display:flex;flex-direction:column;gap:12px;padding:clamp(24px,2.4vw,32px);background:#ede7da;border:1px solid rgba(65,47,43,.2);border-radius:4px" style-hover="border-color:#a56853;background:rgba(165,104,83,.06)">
+          <span style="display:block;font-size:clamp(20px,1.9vw,25px);font-weight:700;letter-spacing:-.02em;line-height:1.15;text-wrap:pretty">Osteopatía</span>
+          <span style="display:block;color:#6b544c;font-size:15px;line-height:1.55">Un enfoque manual global que busca el origen del dolor, no solo el punto donde se siente.</span>
+        </button>
+        <button type="button" onClick="{{ srv3 }}" style="text-align:left;display:flex;flex-direction:column;gap:12px;padding:clamp(24px,2.4vw,32px);background:#ede7da;border:1px solid rgba(65,47,43,.2);border-radius:4px" style-hover="border-color:#a56853;background:rgba(165,104,83,.06)">
+          <span style="display:block;font-size:clamp(20px,1.9vw,25px);font-weight:700;letter-spacing:-.02em;line-height:1.15;text-wrap:pretty">Fisioterapia deportiva</span>
+          <span style="display:block;color:#6b544c;font-size:15px;line-height:1.55">Prevención, recuperación y vuelta a la competición, también a pie de campo.</span>
+        </button>
+        <button type="button" onClick="{{ srv4 }}" style="text-align:left;display:flex;flex-direction:column;gap:12px;padding:clamp(24px,2.4vw,32px);background:#ede7da;border:1px solid rgba(65,47,43,.2);border-radius:4px" style-hover="border-color:#a56853;background:rgba(165,104,83,.06)">
+          <span style="display:block;font-size:clamp(20px,1.9vw,25px);font-weight:700;letter-spacing:-.02em;line-height:1.15;text-wrap:pretty">Ejercicio terapéutico</span>
+          <span style="display:block;color:#6b544c;font-size:15px;line-height:1.55">Programas activos y progresivos, dosificados sesión a sesión con seguimiento real.</span>
+        </button>
+        <button type="button" onClick="{{ srv5 }}" style="text-align:left;display:flex;flex-direction:column;gap:12px;padding:clamp(24px,2.4vw,32px);background:#ede7da;border:1px solid rgba(65,47,43,.2);border-radius:4px" style-hover="border-color:#a56853;background:rgba(165,104,83,.06)">
+          <span style="display:block;font-size:clamp(20px,1.9vw,25px);font-weight:700;letter-spacing:-.02em;line-height:1.15;text-wrap:pretty">Ecografía musculoesquelética</span>
+          <span style="display:block;color:#6b544c;font-size:15px;line-height:1.55">Valoración con ecógrafo para localizar la lesión y guiar el tratamiento con datos.</span>
+        </button>
+        <button type="button" onClick="{{ srv6 }}" style="text-align:left;display:flex;flex-direction:column;gap:12px;padding:clamp(24px,2.4vw,32px);background:#ede7da;border:1px solid rgba(65,47,43,.2);border-radius:4px" style-hover="border-color:#a56853;background:rgba(165,104,83,.06)">
+          <span style="display:block;font-size:clamp(20px,1.9vw,25px);font-weight:700;letter-spacing:-.02em;line-height:1.15;text-wrap:pretty">Diatermia y fisioterapia invasiva</span>
+          <span style="display:block;color:#6b544c;font-size:15px;line-height:1.55">Tecarterapia, EPI y punción seca, aplicadas solo cuando el caso lo justifica.</span>
+        </button>
+      </div>
+      <div style="margin-top:32px">
+        <button type="button" onClick="{{ goServicios }}" style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#a56853;border-bottom:1px solid #a56853;padding-bottom:4px">Ver todos los servicios</button>
+      </div>
+    </div>
+  </section>
+
+  <section style="position:relative;overflow:hidden;background:#412f2b;color:#ede7da;padding:clamp(64px,9vw,120px) 0">
+    <sc-if value="{{ ondas }}"><div aria-hidden="true" style="position:absolute;inset:0;background-image:url('assets/ondas-2.png');background-size:cover;background-position:center;opacity:.16;filter:invert(1);pointer-events:none"></div></sc-if>
+    <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)">
+      <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#bbcccf;margin-bottom:20px">El método</p>
+      <h2 style="font-size:clamp(30px,4vw,52px);max-width:24ch;margin-bottom:clamp(40px,6vw,64px)">Cada sesión, en tres tiempos</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(28px,4vw,48px)">
+        <div style="border-top:2px solid #bbcccf;padding-top:20px">
+          <p style="font-family:'Space Mono',monospace;font-size:40px;line-height:1;color:#bbcccf;margin-bottom:16px">01</p>
+          <h3 style="font-size:24px;margin-bottom:10px">Escucha real</h3>
+          <p style="color:rgba(237,231,218,.78)">Antes de tratar, escucho. Cada cuerpo cuenta una historia distinta, y el tratamiento parte de ahí.</p>
+        </div>
+        <div style="border-top:2px solid #bbcccf;padding-top:20px">
+          <p style="font-family:'Space Mono',monospace;font-size:40px;line-height:1;color:#bbcccf;margin-bottom:16px">02</p>
+          <h3 style="font-size:24px;margin-bottom:10px">Manos, no máquinas</h3>
+          <p style="color:rgba(237,231,218,.78)">Trabajo con terapia manual: mis manos son la herramienta principal.</p>
+        </div>
+        <div style="border-top:2px solid #bbcccf;padding-top:20px">
+          <p style="font-family:'Space Mono',monospace;font-size:40px;line-height:1;color:#bbcccf;margin-bottom:16px">03</p>
+          <h3 style="font-size:24px;margin-bottom:10px">Raíz, no síntoma</h3>
+          <p style="color:rgba(237,231,218,.78)">Busco el origen del dolor, no solo calmarlo un rato. Por eso los planes de tratamiento son a medida.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:clamp(64px,9vw,120px) 0">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(32px,5vw,72px);align-items:center">
+      <div style="position:relative;overflow:hidden;height:clamp(360px,42vw,560px)">
+        <img src="assets/rrss-2.jpg" alt="Andrea Legido Andrés durante una valoración" style="width:100%;height:118%;object-fit:cover;object-position:center top">
+      </div>
+      <div>
+        <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#a56853;margin-bottom:20px">Sobre mí</p>
+        <h2 style="font-size:clamp(30px,4vw,52px);max-width:18ch;margin-bottom:24px">Tierra nace de la pasión por una fisioterapia cercana y personalizada</h2>
+        <p style="color:#6b544c;max-width:44ch;margin-bottom:32px">Aporto la experiencia de siete años de trabajo en clínicas y a pie de campo en el fútbol para ofrecer un trato cercano y honesto. Para mí, cada sesión empieza escuchando tu historia, no solo evaluando un síntoma.</p>
+        <button type="button" onClick="{{ goSobre }}" style="padding:16px 28px;border:1px solid #a56853;border-radius:4px;color:#a56853;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase" style-hover="border-color:#a56853;color:#a56853">Conóceme</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+</sc-if>
+
+<sc-if value="{{ isServicios }}">
+<main>
+  <section style="position:relative;overflow:hidden;padding:clamp(56px,8vw,110px) 0 clamp(40px,5vw,64px);border-bottom:1px solid rgba(65,47,43,.16)">
+    <sc-if value="{{ ondas }}"><div aria-hidden="true" style="position:absolute;inset:0;background-image:url('assets/ondas-2.png');background-size:cover;opacity:.8;pointer-events:none"></div></sc-if>
+    <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)">
+      <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#a56853;margin-bottom:20px">ÁREAS DE TRABAJO</p>
+      <h1 style="font-size:clamp(44px,7vw,92px);margin-bottom:24px">Servicios</h1>
+      <p style="max-width:46ch;color:#6b544c">Trato el cuerpo como un todo: de la fisioterapia general a las técnicas más avanzadas, con un mismo enfoque cercano. Cada servicio tiene su propia página con el detalle del trabajo.</p>
+    </div>
+  </section>
+
+  <section style="padding:clamp(48px,6vw,88px) 0">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(16px,2vw,24px)">
+      <sc-for list="{{ servicios }}" as="srv" hint-placeholder-count="9">
+        <button type="button" onClick="{{ srv.go }}" style="text-align:left;display:flex;flex-direction:column;gap:12px;padding:clamp(24px,2.4vw,32px);background:#ede7da;border:1px solid rgba(65,47,43,.2);border-radius:4px" style-hover="border-color:#a56853;background:rgba(165,104,83,.06)">
+          <span style="display:block;font-size:clamp(20px,1.9vw,25px);font-weight:700;letter-spacing:-.02em;line-height:1.15;text-wrap:pretty">{{ srv.name }}</span>
+          <span style="display:block;color:#6b544c;font-size:15px;line-height:1.55">{{ srv.intro }}</span>
+          <span style="display:block;margin-top:4px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#a56853">Ver servicio</span>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
+  <div style="position:relative;overflow:hidden;height:clamp(280px,45vw,480px)">
+    <img src="https://images.unsplash.com/photo-1757689314932-bec6e9c39e51?fm=jpg&amp;q=80&amp;w=2400&amp;auto=format&amp;fit=crop" alt="Manos aplicando presión suave en el antebrazo durante una sesión de terapia manual" style="width:100%;height:100%;object-fit:cover;object-position:center">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(65,47,43,0) 40%,rgba(65,47,43,.55) 100%);pointer-events:none"></div>
+    <p style="position:absolute;left:0;right:0;bottom:clamp(20px,4vw,40px);max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px);color:#ede7da;font-size:clamp(20px,2.6vw,34px);font-weight:700;letter-spacing:-.02em;pointer-events:none">Las manos son la herramienta principal.</p>
+  </div>
+</main>
+</sc-if>
+
+<sc-if value="{{ isServicio }}">
+<main>
+  <section style="position:relative;overflow:hidden;padding:clamp(48px,7vw,96px) 0 clamp(36px,5vw,56px);border-bottom:1px solid rgba(65,47,43,.16)">
+    <sc-if value="{{ ondas }}"><div aria-hidden="true" style="position:absolute;inset:0;background-image:url('assets/ondas-2.png');background-size:cover;opacity:.8;pointer-events:none"></div></sc-if>
+    <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)">
+      <button type="button" onClick="{{ goServicios }}" style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#a56853;margin-bottom:24px" style-hover="color:#8c5643">← Todos los servicios</button>
+      <h1 style="font-size:clamp(38px,6vw,80px);max-width:20ch;margin-bottom:24px;text-wrap:balance">{{ detalle.name }}</h1>
+      <p style="max-width:52ch;color:#6b544c;font-size:clamp(17px,1.4vw,20px)">{{ detalle.intro }}</p>
+    </div>
+  </section>
+
+  <section style="padding:clamp(48px,7vw,96px) 0">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(32px,5vw,72px);align-items:start">
+      <div style="min-width:0;display:flex;flex-direction:column;gap:20px">
+        <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#a56853">Cómo lo trabajo</p>
+        <sc-for list="{{ detalle.cuerpo }}" as="parrafo" hint-placeholder-count="3">
+          <p style="color:#4d3a35;max-width:56ch;line-height:1.65">{{ parrafo }}</p>
+        </sc-for>
+      </div>
+      <aside style="min-width:0;display:flex;flex-direction:column;gap:28px;border:1px solid rgba(65,47,43,.2);border-radius:4px;padding:clamp(24px,2.6vw,36px)">
+        <div>
+          <p style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#a56853;margin-bottom:14px">Qué incluye</p>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ detalle.bullets }}" as="punto" hint-placeholder-count="3">
+              <li style="border-bottom:1px solid rgba(65,47,43,.12);padding-bottom:10px;line-height:1.5">{{ punto }}</li>
+            </sc-for>
+          </ul>
+        </div>
+        <div>
+          <p style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#a56853;margin-bottom:10px">Para quién es</p>
+          <p style="color:#6b544c;line-height:1.6">{{ detalle.para }}</p>
+        </div>
+        <div>
+          <p style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#a56853;margin-bottom:10px">Sesión</p>
+          <p style="color:#6b544c;line-height:1.6">{{ detalle.duracion }}</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <sc-if value="{{ ctaWhatsapp }}"><a href="https://wa.me/34676767676" style="text-align:center;padding:15px 24px;background:#a56853;color:#ede7da;border:1px solid #a56853;border-radius:4px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase" style-hover="background:#8c5643;border-color:#8c5643;color:#ffffff">Pedir cita por WhatsApp</a></sc-if>
+          <button type="button" onClick="{{ goPrecios }}" style="padding:15px 24px;border:1px solid #a56853;border-radius:4px;color:#a56853;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase" style-hover="background:rgba(165,104,83,.08)">Ver tarifas</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section style="padding:0 0 clamp(56px,8vw,110px)">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)">
+      <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#a56853;margin-bottom:24px">Otros servicios</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+        <sc-for list="{{ otros }}" as="otro" hint-placeholder-count="8">
+          <button type="button" onClick="{{ otro.go }}" style="text-align:left;padding:18px 20px;border:1px solid rgba(65,47,43,.2);border-radius:4px;font-size:16px;font-weight:700;letter-spacing:-.01em;line-height:1.3" style-hover="border-color:#a56853;color:#a56853">{{ otro.name }}</button>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ isSobre }}">
+<main>
+  <section style="position:relative;overflow:hidden;padding:clamp(56px,8vw,110px) 0 clamp(40px,5vw,64px);border-bottom:1px solid rgba(65,47,43,.16)">
+    <sc-if value="{{ ondas }}"><div aria-hidden="true" style="position:absolute;inset:0;background-image:url('assets/ondas-1.png');background-size:cover;opacity:.8;pointer-events:none"></div></sc-if>
+    <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)">
+      <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#a56853;margin-bottom:20px">La persona detrás de Tierra</p>
+      <h1 style="font-size:clamp(40px,6.4vw,84px);margin-bottom:24px">Andrea Legido Andrés</h1>
+      <p style="max-width:46ch;color:#6b544c">Fisioterapeuta en Zamora. Siete años de camino, muy ligado al deporte, hasta abrir mi propia consulta.</p>
+    </div>
+  </section>
+
+  <section style="padding:clamp(56px,8vw,110px) 0">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(32px,5vw,72px);align-items:start">
+      <div style="position:relative;overflow:hidden;height:clamp(380px,48vw,600px)">
+        <img src="./andrea-retrato-mtlttzxg-96j1.jpg" alt="Andrea Legido Andrés en su consulta" style="width:100%;height:118%;object-fit:cover;object-position:center top">
+      </div>
+      <div>
+        <p style="font-size:clamp(24px,3vw,38px);font-weight:700;letter-spacing:-.02em;line-height:1.15;max-width:24ch;margin-bottom:28px">Una consulta pensada para escuchar antes de tratar.</p>
+        <p style="color:#6b544c;max-width:48ch;margin-bottom:18px">Llevo siete años tratando pacientes en varios centros y por cuenta propia, y soy la fisioterapeuta del equipo de fútbol de Villaralbo. Ese camino, muy ligado al deporte, es el que ha dado forma a Tierra.</p>
+        <p style="color:#6b544c;max-width:48ch">Creo en el trabajo con las manos, en entender de dónde viene el dolor y en acompañar cada recuperación —también la vuelta al deporte— con calma, no con prisa.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:0 0 clamp(56px,8vw,110px)">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)">
+      <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#a56853;margin-bottom:20px">El camino</p>
+      <h2 style="font-size:clamp(30px,4vw,52px);margin-bottom:clamp(32px,5vw,56px)">De los primeros pasos a Tierra</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:clamp(16px,3vw,40px);padding:28px 0;border-top:1px solid rgba(65,47,43,.16)">
+        <p style="font-family:'Space Mono',monospace;font-size:clamp(32px,4vw,56px);line-height:1;color:#a56853;opacity:.55">2019</p>
+        <div style="grid-column:span 2;min-width:260px"><h3 style="font-size:22px;margin-bottom:8px">Primeros pasos</h3><p style="color:#6b544c;max-width:56ch">Graduada en Fisioterapia. Empiezo a tratar pacientes en distintos centros, con especial atención al mundo deportivo.</p></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:clamp(16px,3vw,40px);padding:28px 0;border-top:1px solid rgba(65,47,43,.16)">
+        <p style="font-family:'Space Mono',monospace;font-size:clamp(32px,4vw,56px);line-height:1;color:#a56853;opacity:.55">2021</p>
+        <div style="grid-column:span 2;min-width:260px"><h3 style="font-size:22px;margin-bottom:8px">Por cuenta propia</h3><p style="color:#6b544c;max-width:56ch">Compagino el trabajo en varios centros con mis propios pacientes, con un enfoque cada vez más personalizado.</p></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:clamp(16px,3vw,40px);padding:28px 0;border-top:1px solid rgba(65,47,43,.16)">
+        <p style="font-family:'Space Mono',monospace;font-size:clamp(32px,4vw,56px);line-height:1;color:#a56853;opacity:.55">2023</p>
+        <div style="grid-column:span 2;min-width:260px"><h3 style="font-size:22px;margin-bottom:8px">Fisio a pie de campo</h3><p style="color:#6b544c;max-width:56ch">Me incorporo como fisioterapeuta del equipo de fútbol de Villaralbo: lesiones deportivas, recuperación y vuelta al juego.</p></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:clamp(16px,3vw,40px);padding:28px 0;border-top:1px solid rgba(65,47,43,.16);border-bottom:1px solid rgba(65,47,43,.16)">
+        <p style="font-family:'Space Mono',monospace;font-size:clamp(32px,4vw,56px);line-height:1;color:#a56853;opacity:.55">2026</p>
+        <div style="grid-column:span 2;min-width:260px"><h3 style="font-size:22px;margin-bottom:8px">Nace Tierra</h3><p style="color:#6b544c;max-width:56ch">Abro mi propia consulta en Zamora, con sesiones individuales y un enfoque muy orientado al deporte.</p></div>
+      </div>
+    </div>
+  </section>
+
+  
+</main>
+</sc-if>
+
+<sc-if value="{{ isInstalaciones }}">
+<main>
+  <section style="position:relative;overflow:hidden;padding:clamp(56px,8vw,110px) 0 clamp(40px,5vw,64px);border-bottom:1px solid rgba(65,47,43,.16)">
+    <sc-if value="{{ ondas }}"><div aria-hidden="true" style="position:absolute;inset:0;background-image:url('assets/ondas-2.png');background-size:cover;opacity:.8;pointer-events:none"></div></sc-if>
+    <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)">
+      <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#a56853;margin-bottom:20px">La consulta</p>
+      <h1 style="font-size:clamp(44px,7vw,92px);margin-bottom:24px">Instalaciones</h1>
+      <p style="max-width:46ch;color:#6b544c">Un espacio propio en el centro de Zamora: una sala de tratamiento, zona de ejercicio y recepción. Sin salas compartidas ni prisas entre pacientes.</p>
+    </div>
+  </section>
+
+  <section style="padding:clamp(48px,7vw,96px) 0">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(16px,2.5vw,28px)">
+      <div style="grid-column:1 / -1;min-width:0">
+        <div style="min-width:0;aspect-ratio:4 / 3"><image-slot id="tierra-inst-1" shape="rect" radius="0" placeholder="Sala de tratamiento — foto horizontal" src="./pasted-1788460567628-0-mtlv8tw0-7rhc.png"></image-slot></div>
+        <p style="margin-top:12px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8a6f66">01 · Sala de tratamiento</p>
+      </div>
+      <div>
+        <div style="min-width:0;aspect-ratio:4 / 3"><image-slot id="tierra-inst-2" shape="rect" radius="0" placeholder="Zona de ejercicio terapéutico" src="./pasted-1788460601435-0-mtlv9jz1-z138.png"></image-slot></div>
+        <p style="margin-top:12px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8a6f66">02 · Zona de ejercicio</p>
+      </div>
+      <div>
+        <div style="min-width:0;aspect-ratio:4 / 3"><image-slot id="tierra-inst-3" shape="rect" radius="0" placeholder="Recepción y entrada" src="./pasted-1788460641530-0-mtlvaews-53g8.png"></image-slot></div>
+        <p style="margin-top:12px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8a6f66">03 · Recepción</p>
+      </div>
+      <div>
+        <div style="min-width:0;aspect-ratio:4 / 3"><image-slot id="tierra-inst-4" shape="rect" radius="0" placeholder="Equipo de diatermia y ecógrafo" src="./pasted-1788460661471-0-mtlvauap-630n.png"></image-slot></div>
+        <p style="margin-top:12px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8a6f66">04 · Equipamiento</p>
+      </div>
+      <div>
+        <div style="min-width:0;aspect-ratio:4 / 3"><image-slot id="tierra-inst-5" shape="rect" radius="0" placeholder="Detalle del espacio" src="./pasted-1788460685847-0-mtlvbd3t-k1e4.png"></image-slot></div>
+        <p style="margin-top:12px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8a6f66">05 · Detalle</p>
+      </div>
+    </div>
+    <div style="max-width:1240px;margin:clamp(32px,5vw,56px) auto 0;padding:0 clamp(20px,4vw,48px)">
+      
+    </div>
+  </section>
+
+  
+</main>
+</sc-if>
+
+<sc-if value="{{ isPrecios }}">
+<main>
+  <section style="position:relative;overflow:hidden;padding:clamp(56px,8vw,110px) 0 clamp(40px,5vw,64px);border-bottom:1px solid rgba(65,47,43,.16)">
+    <sc-if value="{{ ondas }}"><div aria-hidden="true" style="position:absolute;inset:0;background-image:url('assets/ondas-1.png');background-size:cover;opacity:.8;pointer-events:none"></div></sc-if>
+    <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)">
+      <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#a56853;margin-bottom:20px">Sin sorpresas</p>
+      <h1 style="font-size:clamp(44px,7vw,92px);margin-bottom:24px">Tarifas</h1>
+      <p style="max-width:46ch;color:#6b544c">Cada sesión es individual y dura el tiempo que necesita. Estas tarifas son orientativas: en la primera visita te confirmo el plan y su coste.</p>
+    </div>
+  </section>
+
+  <section style="padding:clamp(48px,7vw,96px) 0">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)">
+      <div style="display:grid;grid-template-columns:1fr auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:24px 0;border-top:2px solid #412f2b">
+        <div><h3 style="font-size:clamp(20px,2.2vw,28px);margin-bottom:6px">Primera valoración + tratamiento</h3><p style="color:#6b544c">60 minutos. Historia, valoración y primera sesión de tratamiento.</p></div>
+        <p style="font-family:'Space Mono',monospace;font-size:clamp(20px,2.4vw,30px);color:#a56853;white-space:nowrap">45 €</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:24px 0;border-top:1px solid rgba(65,47,43,.16)">
+        <div><h3 style="font-size:clamp(20px,2.2vw,28px);margin-bottom:6px">Sesión de fisioterapia</h3><p style="color:#6b544c">45 minutos de terapia manual y ejercicio dirigido.</p></div>
+        <p style="font-family:'Space Mono',monospace;font-size:clamp(20px,2.4vw,30px);color:#a56853;white-space:nowrap">38 €</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:24px 0;border-top:1px solid rgba(65,47,43,.16)">
+        <div><h3 style="font-size:clamp(20px,2.2vw,28px);margin-bottom:6px">Sesión de osteopatía</h3><p style="color:#6b544c">50 minutos. Valoración global y técnicas manuales.</p></div>
+        <p style="font-family:'Space Mono',monospace;font-size:clamp(20px,2.4vw,30px);color:#a56853;white-space:nowrap">45 €</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:24px 0;border-top:1px solid rgba(65,47,43,.16)">
+        <div><h3 style="font-size:clamp(20px,2.2vw,28px);margin-bottom:6px">Fisioterapia invasiva (EPI · punción seca)</h3><p style="color:#6b544c">Sesión combinada con terapia manual y ejercicio.</p></div>
+        <p style="font-family:'Space Mono',monospace;font-size:clamp(20px,2.4vw,30px);color:#a56853;white-space:nowrap">50 €</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:24px 0;border-top:1px solid rgba(65,47,43,.16)">
+        <div><h3 style="font-size:clamp(20px,2.2vw,28px);margin-bottom:6px">Pilates terapéutico</h3><p style="color:#6b544c">Grupos reducidos, una sesión por semana.</p></div>
+        <p style="font-family:'Space Mono',monospace;font-size:clamp(20px,2.4vw,30px);color:#a56853;white-space:nowrap">15 €</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto;gap:clamp(16px,3vw,40px);align-items:baseline;padding:24px 0;border-top:1px solid rgba(65,47,43,.16);border-bottom:2px solid #412f2b">
+        <div><h3 style="font-size:clamp(20px,2.2vw,28px);margin-bottom:6px">Bono de 5 sesiones</h3><p style="color:#6b544c">Válido seis meses. Para procesos de varias semanas.</p></div>
+        <p style="font-family:'Space Mono',monospace;font-size:clamp(20px,2.4vw,30px);color:#a56853;white-space:nowrap">170 €</p>
+      </div>
+      <div style="margin-top:clamp(32px,5vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(20px,4vw,40px)">
+        <div style="position:relative;overflow:hidden;background:#ede7da;border:1px solid rgba(65,47,43,.2);padding:28px"><div aria-hidden="true" style="position:absolute;inset:0;background-image:url('assets/ondas-1.png');background-size:cover;background-position:center;opacity:.5;pointer-events:none"></div><div style="position:relative"><p style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:10px">Deportistas</p><p style="color:#3c2f2b">Convenio con clubes y equipos de la provincia. Escríbeme y lo vemos.</p></div></div>
+        <div style="position:relative;overflow:hidden;background:#ede7da;border:1px solid rgba(65,47,43,.2);padding:28px"><div aria-hidden="true" style="position:absolute;inset:0;background-image:url('assets/ondas-1.png');background-size:cover;background-position:center;opacity:.5;pointer-events:none"></div><div style="position:relative"><p style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:10px">Domicilio</p><p style="color:#3c2f2b">Sesiones a domicilio en Zamora capital con suplemento de desplazamiento.</p></div></div>
+        <div style="position:relative;overflow:hidden;background:#ede7da;border:1px solid rgba(65,47,43,.2);padding:28px"><div aria-hidden="true" style="position:absolute;inset:0;background-image:url('assets/ondas-1.png');background-size:cover;background-position:center;opacity:.5;pointer-events:none"></div><div style="position:relative"><p style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:10px">Cancelaciones</p><p style="color:#3c2f2b">Avisa con 24 horas para poder ofrecer el hueco a otro paciente.</p></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ isFaq }}">
+<main>
+  <section style="position:relative;overflow:hidden;padding:clamp(56px,8vw,110px) 0 clamp(40px,5vw,64px);border-bottom:1px solid rgba(65,47,43,.16)">
+    <sc-if value="{{ ondas }}"><div aria-hidden="true" style="position:absolute;inset:0;background-image:url('assets/ondas-2.png');background-size:cover;opacity:.8;pointer-events:none"></div></sc-if>
+    <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)">
+      <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#a56853;margin-bottom:20px">Antes de venir</p>
+      <h1 style="font-size:clamp(40px,6vw,80px);margin-bottom:24px">Preguntas frecuentes</h1>
+      <p style="max-width:46ch;color:#6b544c">Y si te queda alguna duda, escríbeme: contesto yo, no un contestador.</p>
+    </div>
+  </section>
+
+  <section style="padding:clamp(48px,7vw,96px) 0">
+    <div style="max-width:900px;margin:0 auto;padding:0 clamp(20px,4vw,48px)">
+      <button type="button" onClick="{{ toggleFaq1 }}" style="width:100%;text-align:left;padding:26px 0;border-top:1px solid rgba(65,47,43,.16);display:flex;gap:20px;justify-content:space-between;align-items:baseline" style-hover="color:#a56853">
+        <span style="font-size:clamp(19px,2vw,24px);font-weight:700;letter-spacing:-.01em">¿Necesito derivación médica?</span>
+        <span style="font-family:'Space Mono',monospace;color:#a56853;flex:0 0 auto">+</span>
       </button>
-
-      <nav class="nav" id="nav-menu" aria-label="Navegación principal">
-        <div class="nav__links">
-          <a href="index.html" class="is-active">Inicio</a>
-          <a href="sobre-mi.html">Sobre mí</a>
-          <a href="servicios.html">Servicios</a>
-          <a href="contacto.html">Contacto</a>
-        </div>
-        <a href="contacto.html" class="btn btn--solid">Pedir cita
-          <span class="btn__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
-        </a>
-        <p class="nav__extra">Lunes a viernes, 9:00 – 20:30 · <a href="tel:+34600000000">+34 600 00 00 00</a></p>
-      </nav>
+      <sc-if value="{{ faq1 }}"><p style="color:#6b544c;max-width:60ch;padding-bottom:26px">No. Puedes pedir cita directamente. Si traes un informe o una prueba de imagen, mejor: ayuda a afinar la valoración.</p></sc-if>
+      <button type="button" onClick="{{ toggleFaq2 }}" style="width:100%;text-align:left;padding:26px 0;border-top:1px solid rgba(65,47,43,.16);display:flex;gap:20px;justify-content:space-between;align-items:baseline" style-hover="color:#a56853">
+        <span style="font-size:clamp(19px,2vw,24px);font-weight:700;letter-spacing:-.01em">¿Cuánto dura una sesión?</span>
+        <span style="font-family:'Space Mono',monospace;color:#a56853;flex:0 0 auto">+</span>
+      </button>
+      <sc-if value="{{ faq2 }}"><p style="color:#6b544c;max-width:60ch;padding-bottom:26px">La primera visita, unos 60 minutos entre valoración y tratamiento. Las siguientes, entre 45 y 50 minutos.</p></sc-if>
+      <button type="button" onClick="{{ toggleFaq3 }}" style="width:100%;text-align:left;padding:26px 0;border-top:1px solid rgba(65,47,43,.16);display:flex;gap:20px;justify-content:space-between;align-items:baseline" style-hover="color:#a56853">
+        <span style="font-size:clamp(19px,2vw,24px);font-weight:700;letter-spacing:-.01em">¿Cuántas sesiones voy a necesitar?</span>
+        <span style="font-family:'Space Mono',monospace;color:#a56853;flex:0 0 auto">+</span>
+      </button>
+      <sc-if value="{{ faq3 }}"><p style="color:#6b544c;max-width:60ch;padding-bottom:26px">Depende de la lesión y de cuánto tiempo lleve contigo. En la primera visita te doy una previsión realista y la vamos revisando.</p></sc-if>
+      <button type="button" onClick="{{ toggleFaq4 }}" style="width:100%;text-align:left;padding:26px 0;border-top:1px solid rgba(65,47,43,.16);display:flex;gap:20px;justify-content:space-between;align-items:baseline" style-hover="color:#a56853">
+        <span style="font-size:clamp(19px,2vw,24px);font-weight:700;letter-spacing:-.01em">¿Qué ropa llevo?</span>
+        <span style="font-family:'Space Mono',monospace;color:#a56853;flex:0 0 auto">+</span>
+      </button>
+      <sc-if value="{{ faq4 }}"><p style="color:#6b544c;max-width:60ch;padding-bottom:26px">Ropa cómoda con la que puedas moverte. En la consulta hay espacio para cambiarte.</p></sc-if>
+      <button type="button" onClick="{{ toggleFaq5 }}" style="width:100%;text-align:left;padding:26px 0;border-top:1px solid rgba(65,47,43,.16);display:flex;gap:20px;justify-content:space-between;align-items:baseline" style-hover="color:#a56853">
+        <span style="font-size:clamp(19px,2vw,24px);font-weight:700;letter-spacing:-.01em">¿Duele el tratamiento?</span>
+        <span style="font-family:'Space Mono',monospace;color:#a56853;flex:0 0 auto">+</span>
+      </button>
+      <sc-if value="{{ faq5 }}"><p style="color:#6b544c;max-width:60ch;padding-bottom:26px">Algunas técnicas son molestas, pero siempre trabajamos dentro de tu tolerancia. Lo hablamos durante la sesión.</p></sc-if>
+      <button type="button" onClick="{{ toggleFaq6 }}" style="width:100%;text-align:left;padding:26px 0;border-top:1px solid rgba(65,47,43,.16);border-bottom:1px solid rgba(65,47,43,.16);display:flex;gap:20px;justify-content:space-between;align-items:baseline" style-hover="color:#a56853">
+        <span style="font-size:clamp(19px,2vw,24px);font-weight:700;letter-spacing:-.01em">¿Puedo entrenar mientras me trato?</span>
+        <span style="font-family:'Space Mono',monospace;color:#a56853;flex:0 0 auto">+</span>
+      </button>
+      <sc-if value="{{ faq6 }}"><p style="color:#6b544c;max-width:60ch;padding:26px 0 0">Casi siempre sí, adaptando la carga. Se trata de seguir moviéndote, no de parar del todo.</p></sc-if>
     </div>
-  </header>
+  </section>
+</main>
+</sc-if>
 
-  <main id="main">
-    <!-- ================= HERO ================= -->
-    <section class="hero kenburns">
-      <div class="hero__media" data-parallax="0.12">
-        <picture>
-          <source media="(orientation: portrait)" srcset="img/hero-vertical.jpg" width="768" height="1376" />
-          <img src="img/hero-horizontal.jpg" alt="Campos y encinas de Zamora junto a la sala de tratamiento de Tierra" width="1380" height="752" fetchpriority="high" />
-        </picture>
-      </div>
-      <div class="hero__scrim"></div>
-      <div class="hero__content" data-reveal>
-        <p class="eyebrow eyebrow--light">Fisioterapia · Osteopatía · Zamora</p>
-        <h1 class="hero__title">Vuelve al <em>origen</em> de tu bienestar</h1>
-        <p class="hero__lead">Terapia manual y tratamiento personalizado, donde tu cuerpo recupera la estabilidad.</p>
-        <div class="hero__actions">
-          <a href="contacto.html" class="btn btn--cream">Pedir cita
-            <span class="btn__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
-          </a>
-          <a href="sobre-mi.html" class="link-arrow">Conóceme</a>
-        </div>
-      </div>
-      <div class="hero__footline">
-        <span>Andrea Legido Andrés</span>
-        <span>Consulta en Zamora</span>
-      </div>
-    </section>
-
-    <!-- ================= MARQUESINA ================= -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee__track">
-        <span>Terapia manual</span><span>Osteopatía</span><span>Fisioterapia deportiva</span><span>Ejercicio terapéutico</span><span>Pilates terapéutico</span><span>Ecografía</span><span>Diatermia</span>
-        <span>Terapia manual</span><span>Osteopatía</span><span>Fisioterapia deportiva</span><span>Ejercicio terapéutico</span><span>Pilates terapéutico</span><span>Ecografía</span><span>Diatermia</span>
-      </div>
+<sc-if value="{{ isContacto }}">
+<main>
+  <section style="position:relative;overflow:hidden;padding:clamp(56px,8vw,110px) 0 clamp(40px,5vw,64px);border-bottom:1px solid rgba(65,47,43,.16)">
+    <sc-if value="{{ ondas }}"><div aria-hidden="true" style="position:absolute;inset:0;background-image:url('assets/ondas-1.png');background-size:cover;opacity:.8;pointer-events:none"></div></sc-if>
+    <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)">
+      <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#a56853;margin-bottom:20px">Contacto</p>
+      <h1 style="font-size:clamp(44px,7vw,92px);margin-bottom:24px">¿Hablamos?</h1>
+      <p style="max-width:46ch;color:#6b544c">Escríbeme o llámame y te confirmo cita, normalmente el mismo día.</p>
     </div>
+  </section>
 
-    <!-- ================= DECLARACIÓN ================= -->
-    <section class="statement">
-      <div class="container statement__grid">
-        <p class="statement__text" data-reveal>No trato solo el dolor: busco su <em>origen</em> para devolverte el equilibrio, el movimiento y la confianza en tu propio cuerpo.</p>
-        <div class="statement__aside" data-reveal>
-          <p class="eyebrow">La filosofía</p>
-          <p>En Tierra entiendo el cuerpo como un todo. A través de la fisioterapia y la osteopatía te acompaño en un proceso cercano y personalizado, respetando tus tiempos y tus necesidades.</p>
-          <p>Porque sanar no es solo aliviar. Es volver a ti. Es volver a casa.</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="spine-band">
-      <span class="spine" data-spine aria-hidden="true"><svg viewBox="300 195 525 595" width="525" height="595" xmlns="http://www.w3.org/2000/svg">
-        <path class="spine-mark is-fill" d="M318,206 L318,230 L461,232 L470,234 L477,236 L482,238 L487,240 L491,242 L494,244 L498,246 L501,248 L504,250 L507,252 L509,254 L511,256 L514,258 L516,260 L518,262 L520,264 L522,266 L524,268 L525,270 L527,272 L528,274 L530,276 L531,278 L532,280 L534,282 L535,284 L536,286 L537,288 L538,290 L539,291 L540,290 L541,288 L541,286 L542,284 L543,282 L544,280 L545,278 L546,276 L547,274 L548,272 L549,270 L550,268 L551,266 L550,264 L549,262 L547,260 L546,258 L544,256 L543,254 L541,252 L539,250 L537,248 L536,246 L534,244 L531,242 L529,240 L527,238 L525,236 L522,234 L520,232 L517,230 L514,228 L511,226 L507,224 L504,222 L500,220 L496,218 L491,216 L486,214 L480,212 L473,210 L463,208 Z" />
-        <path class="spine-mark is-stroke" d="M318,278 H445 A56,56 0 0 1 501,334 V691" />
-        <path class="spine-mark is-stroke" d="M318,338 H405 A36,36 0 0 1 441,374 V730" />
-        <path class="spine-mark is-stroke" d="M804,218 H661 A100,100 0 0 0 561,318 V768" />
-        <path class="spine-mark is-stroke" d="M804,278 H676 A56,56 0 0 0 620,334 V711" />
-        <path class="spine-mark is-stroke" d="M804,338 H716 A36,36 0 0 0 680,374 V691" />
-      </svg></span>
-    </div>
-
-    <!-- ================= ÍNDICE DE SERVICIOS ================= -->
-    <section class="services-index">
-      <div class="container">
-        <div class="services-index__head" data-reveal>
-          <h2>Servicios</h2>
-          <p>De la fisioterapia general a las técnicas más avanzadas, con un mismo enfoque cercano.</p>
-        </div>
-
-        <a class="service-row" href="servicios.html#fisioterapia" data-reveal data-reveal-group>
-          <span class="service-row__num">01</span>
-          <div class="service-row__body">
-            <h3>Fisioterapia</h3>
-            <p>Terapia manual para lesiones musculares, articulares y posturales.</p>
-          </div>
-          <span class="service-row__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
-        </a>
-        <a class="service-row" href="servicios.html#osteopatia" data-reveal data-reveal-group>
-          <span class="service-row__num">02</span>
-          <div class="service-row__body">
-            <h3>Osteopatía</h3>
-            <p>El origen del dolor, no solo el punto donde se siente.</p>
-          </div>
-          <span class="service-row__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
-        </a>
-        <a class="service-row" href="servicios.html#fisioterapia-deportiva" data-reveal data-reveal-group>
-          <span class="service-row__num">03</span>
-          <div class="service-row__body">
-            <h3>Fisioterapia deportiva</h3>
-            <p>Prevención, recuperación y vuelta al juego, también a pie de campo.</p>
-          </div>
-          <span class="service-row__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
-        </a>
-        <a class="service-row" href="servicios.html#ejercicio-terapeutico" data-reveal data-reveal-group>
-          <span class="service-row__num">04</span>
-          <div class="service-row__body">
-            <h3>Ejercicio terapéutico</h3>
-            <p>Programas activos y progresivos: el motor de una recuperación duradera.</p>
-          </div>
-          <span class="service-row__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
-        </a>
-        <a class="service-row" href="servicios.html#pilates-terapeutico" data-reveal data-reveal-group>
-          <span class="service-row__num">05</span>
-          <div class="service-row__body">
-            <h3>Pilates terapéutico</h3>
-            <p>Control postural y trabajo de core, adaptado a cada cuerpo.</p>
-          </div>
-          <span class="service-row__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
-        </a>
-        <a class="service-row" href="servicios.html#ecografia" data-reveal data-reveal-group>
-          <span class="service-row__num">06</span>
-          <div class="service-row__body">
-            <h3>Ecografía y diatermia</h3>
-            <p>Diagnóstico preciso y tecnología que acelera la recuperación de los tejidos.</p>
-          </div>
-          <span class="service-row__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
-        </a>
-
-        <div class="services-index__foot" data-reveal>
-          <a href="servicios.html" class="link-arrow">Ver todos los servicios</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= MÉTODO ================= -->
-    <section class="method">
-      <div class="container">
-        <div class="method__head" data-reveal>
-          <p class="eyebrow">El método</p>
-          <h2>Cada sesión, en <em>tres</em> tiempos</h2>
-        </div>
-        <div class="method__grid">
-          <div class="method__step" data-reveal data-reveal-group>
-            <strong>01</strong>
-            <h3>Escucha real</h3>
-            <p>Antes de tratar, escucho. Cada cuerpo cuenta una historia distinta, y el tratamiento parte de ahí.</p>
-          </div>
-          <div class="method__step" data-reveal data-reveal-group>
-            <strong>02</strong>
-            <h3>Manos, no máquinas</h3>
-            <p>Trabajo con terapia manual: mis manos son la herramienta principal, no un aparato entre nosotros.</p>
-          </div>
-          <div class="method__step" data-reveal data-reveal-group>
-            <strong>03</strong>
-            <h3>Raíz, no síntoma</h3>
-            <p>Busco el origen del dolor, no solo calmarlo un rato. Por eso los planes de tratamiento son a medida.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= SOBRE MÍ (TEASER) ================= -->
-    <section class="about-split">
-      <div class="container about-split__inner">
-        <div class="about-split__media" data-reveal>
-          <figure class="frame frame--portrait">
-            <div class="frame__media kenburns">
-              <img src="img/andrea-index.jpg" alt="Andrea Legido Andrés tratando la espalda de una paciente en la consulta de Tierra" width="1024" height="1024" loading="lazy" />
-            </div>
-            <figcaption class="frame__caption"><span>Andrea Legido</span><span>Fisioterapeuta</span></figcaption>
-          </figure>
-        </div>
-        <div class="about-split__content" data-reveal>
-          <p class="eyebrow">Sobre mí</p>
-          <h2>Detrás de Tierra hay una <em>persona</em>, no una franquicia</h2>
-          <p>Llevo 7 años tratando cuerpos: en varios centros, por cuenta propia y a pie de campo con el fútbol. Cada sesión empieza escuchando, no rellenando una ficha.</p>
-          <a href="sobre-mi.html" class="btn btn--line">Conóceme
-            <span class="btn__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= CTA FINAL ================= -->
-    <section class="cta-band">
-      <div class="container cta-band__inner" data-reveal>
-        <p class="eyebrow eyebrow--center eyebrow--light">Primera visita</p>
-        <h2>¿<em>Empezamos</em>?</h2>
-        <p>Cuéntame qué te ocurre y te propongo el mejor camino de tratamiento.</p>
-        <div class="cta-band__actions">
-          <a href="contacto.html" class="btn btn--cream">Pedir cita
-            <span class="btn__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
-          </a>
-        </div>
-        <p class="cta-band__note">Respuesta en el mismo día, de lunes a viernes.</p>
-      </div>
-    </section>
-  </main>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="footer">
-    <div class="container footer__inner">
-      <div class="footer__brand">
-        <span class="footer__logo"><span class="spine" data-spine aria-hidden="true"><svg viewBox="300 195 525 595" width="525" height="595" xmlns="http://www.w3.org/2000/svg">
-          <path class="spine-mark is-fill" d="M318,206 L318,230 L461,232 L470,234 L477,236 L482,238 L487,240 L491,242 L494,244 L498,246 L501,248 L504,250 L507,252 L509,254 L511,256 L514,258 L516,260 L518,262 L520,264 L522,266 L524,268 L525,270 L527,272 L528,274 L530,276 L531,278 L532,280 L534,282 L535,284 L536,286 L537,288 L538,290 L539,291 L540,290 L541,288 L541,286 L542,284 L543,282 L544,280 L545,278 L546,276 L547,274 L548,272 L549,270 L550,268 L551,266 L550,264 L549,262 L547,260 L546,258 L544,256 L543,254 L541,252 L539,250 L537,248 L536,246 L534,244 L531,242 L529,240 L527,238 L525,236 L522,234 L520,232 L517,230 L514,228 L511,226 L507,224 L504,222 L500,220 L496,218 L491,216 L486,214 L480,212 L473,210 L463,208 Z" />
-          <path class="spine-mark is-stroke" d="M318,278 H445 A56,56 0 0 1 501,334 V691" />
-          <path class="spine-mark is-stroke" d="M318,338 H405 A36,36 0 0 1 441,374 V730" />
-          <path class="spine-mark is-stroke" d="M804,218 H661 A100,100 0 0 0 561,318 V768" />
-          <path class="spine-mark is-stroke" d="M804,278 H676 A56,56 0 0 0 620,334 V711" />
-          <path class="spine-mark is-stroke" d="M804,338 H716 A36,36 0 0 0 680,374 V691" />
-        </svg></span><span class="brand__word">Tierra<small>Fisioterapia</small></span></span>
-        <p>Fisioterapia y osteopatía en Zamora. Terapia manual, recuperación deportiva y tratamiento personalizado.</p>
-      </div>
-      <nav class="footer__col" aria-label="Navegación del pie">
-        <h4>Páginas</h4>
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="sobre-mi.html">Sobre mí</a></li>
-          <li><a href="servicios.html">Servicios</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
+  <section style="padding:clamp(48px,7vw,96px) 0">
+    <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(32px,5vw,72px);align-items:start">
+      <div>
+        <p style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#a56853;margin-bottom:24px">La consulta</p>
+        <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column">
+          <li style="padding:18px 0;border-top:1px solid rgba(65,47,43,.16)"><a href="tel:+34676767676" style="font-size:clamp(20px,2.4vw,28px);font-weight:700;color:#412f2b;letter-spacing:-.01em" style-hover="color:#a56853">676 767 676</a></li>
+          <li style="padding:18px 0;border-top:1px solid rgba(65,47,43,.16)"><a href="mailto:info@fisioterapiatierra.es" style="color:#412f2b" style-hover="color:#a56853">info@fisioterapiatierra.es</a></li>
+          <li style="padding:18px 0;border-top:1px solid rgba(65,47,43,.16);color:#6b544c">C. Miguel de Unamuno, 2 · Zamora</li>
+          <li style="padding:18px 0;border-top:1px solid rgba(65,47,43,.16);border-bottom:1px solid rgba(65,47,43,.16);color:#6b544c">Lunes a viernes, Mañanas&nbsp; &nbsp;9:00 – 14:30&nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Tardes&nbsp; &nbsp; &nbsp;16:00 - 20:00</li>
         </ul>
-      </nav>
-      <div class="footer__col">
-        <h4>Consulta</h4>
-        <ul>
-          <li><a href="tel:+34600000000">+34 600 00 00 00</a></li>
-          <li><a href="mailto:hola@tierrafisio.es">hola@tierrafisio.es</a></li>
-          <li>Calle Ejemplo 12, bajo · Zamora</li>
-          <li>L–V, 9:00 – 20:30</li>
-        </ul>
+        <sc-if value="{{ ctaWhatsapp }}"><a href="https://wa.me/34676767676" style="display:inline-block;margin-top:28px;padding:16px 28px;background:#a56853;color:#ede7da;border:1px solid #a56853;border-radius:4px;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase" style-hover="background:#8c5643;border-color:#8c5643;color:#ffffff">Escribir por WhatsApp</a></sc-if>
+        <p style="margin-top:28px;color:#6b544c;max-width:40ch">Si no cojo el teléfono estaré en sesión: déjame un mensaje y te devuelvo la llamada al terminar.</p>
       </div>
-      <p class="footer__copy"><span>© <span data-year></span> Tierra. Todos los derechos reservados.</span><span>Zamora, Castilla y León</span></p>
+      <form onSubmit="{{ onSubmit }}" style="display:flex;flex-direction:column;gap:28px">
+        <label style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#a56853">Nombre</span>
+          <input type="text" name="nombre" placeholder="¿Cómo te llamas?" required="required" style="border:0;border-bottom:1px solid rgba(65,47,43,.3);background:transparent;padding:10px 0;font-size:18px">
+        </label>
+        <label style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#a56853">Email</span>
+          <input type="email" name="email" placeholder="tu@email.com" required="required" style="border:0;border-bottom:1px solid rgba(65,47,43,.3);background:transparent;padding:10px 0;font-size:18px">
+        </label>
+        <label style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#a56853">Teléfono · opcional</span>
+          <input type="tel" name="telefono" placeholder="Si prefieres que te llame" style="border:0;border-bottom:1px solid rgba(65,47,43,.3);background:transparent;padding:10px 0;font-size:18px">
+        </label>
+        <label style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#a56853">Mensaje</span>
+          <textarea name="mensaje" rows="4" placeholder="Cuéntame qué te ocurre" required="required" style="border:0;border-bottom:1px solid rgba(65,47,43,.3);background:transparent;padding:10px 0;font-size:18px;resize:vertical"></textarea>
+        </label>
+        <button type="submit" style="align-self:start;padding:16px 28px;background:#412f2b;color:#ede7da;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase" style-hover="background:#a56853">Enviar solicitud</button>
+        <sc-if value="{{ enviado }}"><p style="color:#a56853;font-weight:700">Gracias, he recibido tu solicitud. Te contesto en breve.</p></sc-if>
+      </form>
     </div>
-  </footer>
+  </section>
+</main>
+</sc-if>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" defer></script>
-  <script src="script.js" defer></script>
+<footer style="position:relative;overflow:hidden;background:#412f2b;color:rgba(237,231,218,.72);padding:clamp(48px,7vw,80px) 0 28px">
+  <sc-if value="{{ ondas }}" hint-placeholder-val="{{ true }}"><div aria-hidden="true" style="position:absolute;inset:0;background-image:url('assets/ondas-1.png');background-size:cover;background-position:center;opacity:.14;filter:invert(1);pointer-events:none"></div></sc-if>
+  <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:clamp(28px,4vw,56px)">
+    <div style="min-width:260px">
+      <img src="assets/logo-h-beige.svg" alt="Fisioterapia Tierra" style="height:24px;width:auto;margin-bottom:20px">
+      <p style="max-width:34ch">Fisioterapia y osteopatía en Zamora. Terapia manual, recuperación deportiva y tratamiento personalizado.</p>
+    </div>
+    <div>
+      <p style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#bbcccf;margin-bottom:16px">Páginas</p>
+      <div style="display:flex;flex-direction:column;gap:10px;align-items:start">
+        <button type="button" onClick="{{ goInicio }}" style="color:rgba(237,231,218,.8)" style-hover="color:#ede7da">Inicio</button>
+        <button type="button" onClick="{{ goServicios }}" style="color:rgba(237,231,218,.8)" style-hover="color:#ede7da">Servicios</button>
+        <button type="button" onClick="{{ goSobre }}" style="color:rgba(237,231,218,.8)" style-hover="color:#ede7da">Sobre mí</button>
+        <button type="button" onClick="{{ goInstalaciones }}" style="color:rgba(237,231,218,.8)" style-hover="color:#ede7da">Instalaciones</button>
+        <button type="button" onClick="{{ goPrecios }}" style="color:rgba(237,231,218,.8)" style-hover="color:#ede7da">Tarifas</button>
+        <button type="button" onClick="{{ goFaq }}" style="color:rgba(237,231,218,.8)" style-hover="color:#ede7da">Preguntas frecuentes</button>
+        <button type="button" onClick="{{ goContacto }}" style="color:rgba(237,231,218,.8)" style-hover="color:#ede7da">Contacto</button>
+      </div>
+    </div>
+    <div>
+      <p style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#bbcccf;margin-bottom:16px">Consulta</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <a href="tel:+34676767676" style="color:rgba(237,231,218,.8)" style-hover="color:#ede7da">676 767 676</a>
+        <a href="mailto:info@fisioterapiatierra.es" style="color:rgba(237,231,218,.8)" style-hover="color:#ede7da">info@fisioterapiatierra.es</a>
+        <span>C. Miguel de Unamuno, 2 · Zamora</span>
+        <span>L–V, 9:00 – 20:30</span>
+      </div>
+    </div>
+  </div>
+  <div style="position:relative;max-width:1240px;margin:clamp(32px,5vw,56px) auto 0;padding:20px clamp(20px,4vw,48px) 0;border-top:1px solid rgba(237,231,218,.16);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,231,218,.45)">
+    <span>© 2026 Fisioterapia Tierra</span>
+    <span>Andrea Legido Andrés · Zamora</span>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;ondas&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Marca&quot;},&quot;logoAnimado&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Marca&quot;},&quot;ctaWhatsapp&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Contacto&quot;}}">
+class Component extends DCLogic {
+  state = { page: 'inicio', faq: 0, enviado: false, menu: false, sub: false, narrow: false, srv: 0 };
+
+  SERVICIOS = [
+    {
+      name: 'Fisioterapia',
+      intro: 'Terapia manual, movilización y ejercicio dirigido para lesiones musculares, articulares y posturales.',
+      cuerpo: [
+        'En la primera sesión dedico el tiempo necesario a la historia clínica y a la exploración: qué te limita, desde cuándo y qué has probado ya. De ahí sale un plan con un objetivo concreto, no una lista de técnicas.',
+        'El tratamiento combina terapia manual —movilización articular, trabajo de tejidos blandos— con ejercicio dirigido, porque lo que se gana en la camilla se consolida moviéndose.',
+        'Reviso el plan cada pocas sesiones para ajustar la carga: si algo no avanza como esperábamos, cambiamos el enfoque en vez de repetir lo mismo.'
+      ],
+      bullets: ['Valoración individualizada de cada lesión', 'Movilización articular y de tejidos blandos', 'Plan de ejercicios para la recuperación'],
+      para: 'Dolor de espalda o cuello, lesiones musculares, molestias que aparecen con la postura de trabajo o tras un esfuerzo.',
+      duracion: 'Sesión individual de 45–60 minutos. La primera visita incluye valoración completa.'
+    },
+    {
+      name: 'Osteopatía',
+      intro: 'Un enfoque manual global del cuerpo que busca el origen del dolor, no solo el punto donde se siente.',
+      cuerpo: [
+        'Valoro cómo se relacionan pelvis, columna y caja torácica antes de tratar la zona que duele, porque muchas veces el punto sintomático solo está compensando otro problema.',
+        'El tratamiento es suave y siempre explicado: sabrás qué estoy haciendo y por qué, y qué esperamos que cambie en los días siguientes.',
+        'Cuando el caso lo pide, la osteopatía se combina con fisioterapia y ejercicio en el mismo plan, sin tratarlas como servicios separados.'
+      ],
+      bullets: ['Valoración estructural completa', 'Técnicas viscerales y craneales', 'Trabajo conjunto con fisioterapia cuando es necesario'],
+      para: 'Dolores recurrentes que vuelven al poco de tratarlos, molestias difusas o cuadros en los que no está claro de dónde viene el problema.',
+      duracion: 'Sesión individual de 50 minutos, con revaloración a las dos o tres sesiones.'
+    },
+    {
+      name: 'Fisioterapia deportiva',
+      intro: 'Prevención, recuperación y vuelta a la competición, también a pie de campo.',
+      cuerpo: [
+        'Trabajo con criterios de retorno al deporte, no con plazos genéricos: fuerza, control y tolerancia a la carga se miden antes de darte el alta.',
+        'Si compites, coordino el plan con tus entrenamientos para no interferir en la temporada: sé lo que supone una lesión a mitad de campeonato porque acompaño a un equipo cada semana.',
+        'La prevención es parte del servicio: valoración en pretemporada, control de cargas y trabajo de los puntos débiles antes de que se conviertan en lesión.'
+      ],
+      bullets: ['Readaptación al esfuerzo tras una lesión', 'Valoración biomecánica de la carrera', 'Trabajo de prevención en pretemporada'],
+      para: 'Corredores, ciclistas, deportistas de equipo y cualquier persona que quiera volver a su deporte con garantías.',
+      duracion: 'Sesión de 45–60 minutos. Los planes de readaptación se plantean por bloques de varias semanas.'
+    },
+    {
+      name: 'Ejercicio terapéutico',
+      intro: 'Programas activos y progresivos, dosificados sesión a sesión con seguimiento real.',
+      cuerpo: [
+        'El ejercicio se prescribe como un tratamiento más: series, cargas y progresión por escrito, con vídeo cuando hace falta para que no haya dudas en casa.',
+        'Empezamos con lo mínimo que produce mejora y subimos solo cuando el cuerpo responde. Es más lento sobre el papel y más rápido en la práctica.',
+        'El seguimiento es la clave: revisamos qué has podido hacer, qué ha molestado y ajustamos, en vez de entregar una tabla y olvidarnos.'
+      ],
+      bullets: ['Programas activos y progresivos', 'Dosificación adaptada a cada fase de la lesión', 'Pautas claras para seguir en casa'],
+      para: 'Quien arrastra una lesión de meses, sale de una fase aguda o necesita recuperar fuerza y tolerancia al esfuerzo.',
+      duracion: 'Sesión dirigida de 45 minutos, combinable con el tratamiento manual.'
+    },
+    {
+      name: 'Rehabilitación funcional',
+      intro: 'Recuperar la movilidad y la autonomía en los gestos que importan: caminar, cargar, agacharse.',
+      cuerpo: [
+        'Partimos de los gestos que necesitas recuperar —levantarte, cargar la compra, subir escaleras— y los descomponemos en objetivos medibles.',
+        'Así ves el avance sesión a sesión, más allá de si ese día duele más o menos: el criterio es qué puedes hacer hoy que no podías hace dos semanas.',
+        'Es el trabajo habitual tras una cirugía o una inmovilización, y también cuando el dolor ha ido reduciendo poco a poco lo que te atreves a hacer.'
+      ],
+      bullets: ['Trabajo de equilibrio y coordinación', 'Recuperación de la movilidad tras cirugía o inmovilización', 'Objetivos funcionales medibles'],
+      para: 'Postoperatorios, personas mayores que han perdido autonomía y recuperaciones que se han quedado a medias.',
+      duracion: 'Sesión de 45–60 minutos, normalmente en series de varias semanas.'
+    },
+    {
+      name: 'Pilates terapéutico',
+      intro: 'Control postural y trabajo de core con criterio clínico, adaptado a cada cuerpo y a cada lesión.',
+      cuerpo: [
+        'No es una clase estándar: los ejercicios se eligen según tu valoración y cambian a medida que mejoras.',
+        'Sesiones individuales o en grupo muy reducido, con adaptaciones para cada lesión, para poder corregir de verdad la ejecución.',
+        'Trabajamos respiración, control del centro y conciencia corporal, que es lo que sostiene los resultados del tratamiento manual.'
+      ],
+      bullets: ['Sesiones individuales o en grupos reducidos', 'Progresiones seguras tras una lesión', 'Conciencia corporal y respiración'],
+      para: 'Dolor lumbar o cervical recurrente, suelo pélvico, embarazo y posparto, y quien quiere moverse mejor sin riesgo.',
+      duracion: 'Sesiones de 50 minutos, individuales o en grupo de hasta cuatro personas.'
+    },
+    {
+      name: 'Fisioterapia invasiva',
+      intro: 'EPI y punción seca para tendinopatías y puntos gatillo que no responden al tratamiento conservador.',
+      cuerpo: [
+        'Solo la propongo cuando el tratamiento conservador se ha estancado y la indicación es clara, siempre con consentimiento informado y control ecográfico.',
+        'La técnica no es el tratamiento completo: va acompañada de ejercicio, que es lo que consolida el resultado y evita la recaída.',
+        'Te explico antes qué vas a notar durante y después de la sesión, y cuántas aplicaciones son razonables antes de replantear el enfoque.'
+      ],
+      bullets: ['Electrólisis percutánea intratisular (EPI)', 'Punción seca de puntos gatillo', 'Siempre combinada con ejercicio y terapia manual'],
+      para: 'Tendinopatías crónicas, puntos gatillo persistentes y lesiones que llevan meses sin responder.',
+      duracion: 'Sesión de 30–45 minutos, con control ecográfico incluido.'
+    },
+    {
+      name: 'Ecografía musculoesquelética',
+      intro: 'Valoración con ecógrafo para localizar la lesión y guiar el tratamiento con datos.',
+      cuerpo: [
+        'La ecografía no sustituye a la exploración: la confirma. Ver el tejido en la propia consulta permite ajustar el tratamiento el mismo día.',
+        'Sirve también para el seguimiento: comparar cómo estaba el tendón o el músculo al empezar y cómo está semanas después, de forma objetiva.',
+        'Cuando la imagen sugiere que el problema no es de mi ámbito, te lo digo y te derivo. Es parte de trabajar con datos.'
+      ],
+      bullets: ['Diagnóstico por imagen en la propia consulta', 'Seguimiento objetivo de la evolución'],
+      para: 'Lesiones musculares y tendinosas, dudas sobre el diagnóstico y control de la evolución de una lesión conocida.',
+      duracion: 'Incluida en la valoración cuando es necesaria; también como sesión de control de 30 minutos.'
+    },
+    {
+      name: 'Diatermia',
+      intro: 'Tecarterapia con equipo Helios Medical: calor endógeno que reduce el dolor y acelera la recuperación.',
+      cuerpo: [
+        'La uso como apoyo dentro del plan, no como tratamiento único: bien indicada reduce el dolor y permite trabajar la movilidad desde la primera sesión.',
+        'Es especialmente útil en fases en las que el dolor limita tanto que no se puede empezar el ejercicio: baja el nivel de molestia y abre la puerta al trabajo activo.',
+        'Si tras unas sesiones no aporta nada al caso, la retiro. Ninguna tecnología justifica alargar un tratamiento por sí sola.'
+      ],
+      bullets: ['Alivio del dolor desde la primera sesión', 'Regeneración de tejidos más rápida'],
+      para: 'Lesiones agudas muy dolorosas, contracturas y procesos en los que interesa acelerar la recuperación del tejido.',
+      duracion: 'Aplicación de 15–20 minutos integrada en la sesión de tratamiento.'
+    }
+  ];
+
+  componentDidMount() {
+    this.initLogos();
+    this.onResize = () => {
+      var n = window.innerWidth < 960;
+      if (n !== this.state.narrow) this.setState({ narrow: n, menu: false, sub: false });
+    };
+    this.onResize();
+    window.addEventListener('resize', this.onResize);
+  }
+
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); }
+
+  goServicio(n) {
+    return () => {
+      this.setState({ page: 'servicio', srv: n - 1, enviado: false, menu: false, sub: false });
+      if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'auto' });
+    };
+  }
+  componentDidUpdate() { this.initLogos(); }
+
+  go(page) {
+    return () => {
+      this.setState({ page: page, enviado: false, menu: false, sub: false });
+      if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'auto' });
+    };
+  }
+
+  toggle(n) {
+    return () => this.setState(s => ({ faq: s.faq === n ? 0 : n }));
+  }
+
+  initLogos() {
+    var hosts = document.querySelectorAll('[data-ft-logo]');
+    for (var i = 0; i < hosts.length; i++) this.ftInit(hosts[i], i);
+  }
+
+  // Animación oficial del símbolo (INFORMACION_TIERRA/logo-animacion_tierra.html)
+  ftInit(host, uid) {
+    if (host.__ftDone) return;
+    var defs = host.querySelector('[data-ft-defs]');
+    var marks = host.querySelector('[data-ft-marks]');
+    if (!defs || !marks) return;
+    host.__ftDone = true;
+    defs.textContent = '';
+    marks.textContent = '';
+
+    var VB = { w: 473.89, h: 547 }, EXT = 520, SWEEP = 2.2, TIER_DELAY = 0.11, MAXD = 1200;
+    var PATHS = [
+      'M91.62,116.31H0v22.66h91.62c9.8,0,17.77,7.97,17.77,17.76v352.77h22.66V156.73c0-22.29-18.13-40.42-40.43-40.42Z',
+      'M110.81,58.02H0v22.66h110.81c31.34,0,56.83,25.5,56.83,56.84v334.42h22.66V137.52c0-43.83-35.66-79.5-79.49-79.5Z',
+      'M121.68,0H0v22.66h121.67c41.46,0,77.26,24.47,93.92,59.7,2.95-9.06,6.69-17.79,11.33-25.94C204.26,22.43,165.52,0,121.68,0Z',
+      'M341.85,156.73v315.21h22.66V156.73c0-9.8,7.97-17.76,17.76-17.76h91.62v-22.66h-91.62c-22.28,0-40.41,18.13-40.41,40.42Z',
+      'M283.58,137.52v353.2h22.66V137.52c0-31.34,25.5-56.84,56.84-56.84h110.8v-22.66h-110.8c-43.83,0-79.5,35.66-79.5,79.5Z',
+      'M352.22,0c-51.09,0-95.39,30.59-115.33,74.32-7.25,15.97-11.33,33.65-11.33,52.34v420.34h22.66V126.66c0-57.32,46.67-104,104-104h121.67V0h-121.67Z'
+    ];
+    var STROKES = [
+      { i: 2, side: 'L', tier: 0, by: 0, hy: -4, hh: 95, hEnd: 240, vx: null, vw: 0, vBottom: 0, thick: 22.66 },
+      { i: 5, side: 'R', tier: 0, by: 0, hy: -4, hh: 135, hEnd: 221.5, vx: 221.5, vw: 30.7, vBottom: 551, thick: 22.66 },
+      { i: 1, side: 'L', tier: 1, by: 58.02, hy: 54, hh: 30.7, hEnd: 194.3, vx: 163.6, vw: 30.7, vBottom: 475.9, thick: 22.66 },
+      { i: 4, side: 'R', tier: 1, by: 58.02, hy: 54, hh: 30.7, hEnd: 279.6, vx: 279.6, vw: 30.7, vBottom: 494.7, thick: 22.66 },
+      { i: 0, side: 'L', tier: 2, by: 116.31, hy: 112.3, hh: 30.7, hEnd: 136, vx: 105.4, vw: 30.7, vBottom: 513.5, thick: 22.66 },
+      { i: 3, side: 'R', tier: 2, by: 116.31, hy: 112.3, hh: 30.7, hEnd: 337.85, vx: 337.85, vw: 30.7, vBottom: 475.9, thick: 22.66 }
+    ];
+    var NS = 'http://www.w3.org/2000/svg';
+    var clamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
+    // arranca de inmediato y desacelera al final, para que el trazo se vea desde el primer instante
+    var ease = function (t) { return 1 - Math.pow(1 - t, 2.4); };
+
+    var items = STROKES.map(function (s, k) {
+      var id = 'ft-clip-' + uid + '-' + k;
+      var hLen = s.side === 'L' ? s.hEnd : VB.w - s.hEnd;
+      var vLen = s.vx == null ? 0 : s.vBottom - (s.hy + s.hh);
+      var clip = document.createElementNS(NS, 'clipPath');
+      clip.setAttribute('id', id);
+      var poly = document.createElementNS(NS, 'polygon');
+      clip.appendChild(poly);
+      defs.appendChild(clip);
+      var path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', PATHS[s.i]);
+      path.setAttribute('clip-path', 'url(#' + id + ')');
+      marks.appendChild(path);
+      var ext = document.createElementNS(NS, 'rect');
+      ext.setAttribute('y', s.by);
+      ext.setAttribute('height', s.thick);
+      marks.appendChild(ext);
+      return { s: s, hLen: hLen, vLen: vLen, total: EXT + hLen + vLen, poly: poly, ext: ext };
+    });
+    var END = 2 * TIER_DELAY + SWEEP;
+
+    function frame(t) {
+      items.forEach(function (it) {
+        var s = it.s;
+        var start = s.tier * TIER_DELAY;
+        var prog = t <= start ? 0 : t >= start + SWEEP ? 1 : ease((t - start) / SWEEP);
+        var h = Math.min(prog * MAXD, it.total);
+        var e = clamp(h / EXT, 0, 1);
+        var r = clamp(it.hLen ? (h - EXT) / it.hLen : 1, 0, 1);
+        var vP = clamp(it.vLen ? (h - EXT - it.hLen) / it.vLen : 0, 0, 1);
+        it.ext.setAttribute('width', EXT * Math.max(0, e - r));
+        it.ext.setAttribute('x', s.side === 'L' ? -EXT * (1 - r) : VB.w + EXT * (1 - e));
+        var hw = r * (s.side === 'L' ? s.hEnd + 4 : VB.w - s.hEnd + 4);
+        var bandBottom = s.hy + s.hh;
+        var legBottom = s.vx != null ? bandBottom + vP * (s.vBottom - bandBottom) : bandBottom;
+        var pts;
+        if (s.side === 'L') {
+          var head = -4 + hw;
+          var edge = vP > 0 ? Math.max(s.vx + s.vw, head) : head;
+          pts = [[-4, s.hy], [head, s.hy], [head, bandBottom], [edge, bandBottom], [edge, legBottom], [-4, legBottom]];
+        } else {
+          var headR = VB.w + 4 - hw;
+          var edgeR = vP > 0 ? Math.min(s.vx, headR) : headR;
+          pts = [[VB.w + 4, s.hy], [headR, s.hy], [headR, bandBottom], [edgeR, bandBottom], [edgeR, legBottom], [VB.w + 4, legBottom]];
+        }
+        it.poly.setAttribute('points', pts.map(function (p) { return p[0].toFixed(2) + ',' + p[1].toFixed(2); }).join(' '));
+      });
+    }
+
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (this.props.logoAnimado === false || reduced) { frame(END); return; }
+    frame(END);
+    var t0 = Date.now();
+    var last = END;
+    var step = function () {
+      var t = (Date.now() - t0) / 1000;
+      last = Math.min(t, END);
+      frame(last);
+      if (t < END) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+    // red de seguridad: si el bucle no avanza, deja el símbolo completo
+    setTimeout(function () { if (last < END) frame(END); }, END * 1000 + 600);
+  }
+
+  renderVals() {
+    var p = this.state.page;
+    return {
+      isInicio: p === 'inicio',
+      isServicios: p === 'servicios',
+      isServicio: p === 'servicio',
+      isServiciosNav: p === 'servicios' || p === 'servicio',
+      detalle: this.SERVICIOS[this.state.srv] || this.SERVICIOS[0],
+      otros: this.SERVICIOS.map((it, i) => ({ name: it.name, go: this.goServicio(i + 1), i: i })).filter((it) => it.i !== this.state.srv),
+      isSobre: p === 'sobre',
+      isInstalaciones: p === 'instalaciones',
+      isPrecios: p === 'precios',
+      isFaq: p === 'faq',
+      isContacto: p === 'contacto',
+      goInicio: this.go('inicio'),
+      goServicios: this.go('servicios'),
+      goSobre: this.go('sobre'),
+      goInstalaciones: this.go('instalaciones'),
+      goPrecios: this.go('precios'),
+      goFaq: this.go('faq'),
+      goContacto: this.go('contacto'),
+      wide: !this.state.narrow,
+      narrow: this.state.narrow,
+      menuOpen: this.state.menu,
+      mobileMenu: this.state.narrow && this.state.menu,
+      subOpen: this.state.sub,
+      toggleMenu: () => this.setState(st => ({ menu: !st.menu, sub: false })),
+      toggleSub: () => this.setState(st => ({ sub: !st.sub })),
+      openSub: () => { if (!this.state.narrow) this.setState({ sub: true }); },
+      closeSub: () => { if (!this.state.narrow) this.setState({ sub: false }); },
+      servicios: this.SERVICIOS.map((it, i) => ({ name: it.name, intro: it.intro, go: this.goServicio(i + 1) })),
+      srv1: this.goServicio(1),
+      srv2: this.goServicio(2),
+      srv3: this.goServicio(3),
+      srv4: this.goServicio(4),
+      srv5: this.goServicio(8),
+      srv6: this.goServicio(9),
+      ondas: this.props.ondas !== false,
+      ctaWhatsapp: this.props.ctaWhatsapp !== false,
+      faq1: this.state.faq === 1,
+      faq2: this.state.faq === 2,
+      faq3: this.state.faq === 3,
+      faq4: this.state.faq === 4,
+      faq5: this.state.faq === 5,
+      faq6: this.state.faq === 6,
+      toggleFaq1: this.toggle(1),
+      toggleFaq2: this.toggle(2),
+      toggleFaq3: this.toggle(3),
+      toggleFaq4: this.toggle(4),
+      toggleFaq5: this.toggle(5),
+      toggleFaq6: this.toggle(6),
+      enviado: this.state.enviado,
+      onSubmit: (e) => { e.preventDefault(); this.setState({ enviado: true }); }
+    };
+  }
+}
+</script>
 </body>
 </html>
