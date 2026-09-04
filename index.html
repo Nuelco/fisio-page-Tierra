@@ -74,7 +74,7 @@ input,textarea{font:inherit;color:inherit}
     </button>
     </sc-if>  </div>
   <sc-if value="{{ mobileMenu }}">
-    <nav aria-label="Navegación principal" style="position:relative;border-top:1px solid rgba(237,231,218,.18);padding:8px clamp(20px,4vw,48px) 20px;display:flex;flex-direction:column;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#ede7da">
+    <nav aria-label="Navegación principal" style="position:absolute;top:calc(100% + 8px);right:clamp(20px,4vw,48px);z-index:55;width:min(320px,calc(100vw - 40px));max-height:80vh;overflow-y:auto;background:#412f2b;border-radius:8px;border:1px solid rgba(237,231,218,.18);box-shadow:0 16px 32px rgba(0,0,0,.3);padding:10px 22px 16px;display:flex;flex-direction:column;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#ede7da">
       <button type="button" onClick="{{ goInicio }}" style="text-align:left;padding:14px 0;border-bottom:1px solid rgba(237,231,218,.14)">Inicio</button>
       <button type="button" onClick="{{ toggleSub }}" aria-expanded="{{ subOpen }}" style="text-align:left;padding:14px 0;border-bottom:1px solid rgba(237,231,218,.14);display:flex;justify-content:space-between;gap:12px">Servicios<span aria-hidden="true" style="font-size:10px;color:#bbcccf">▾</span></button>
       <sc-if value="{{ subOpen }}">
@@ -365,33 +365,47 @@ input,textarea{font:inherit;color:inherit}
 
   <section style="padding:clamp(48px,7vw,96px) 0">
     <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(16px,2.5vw,28px)">
-      <div style="grid-column:1 / -1;min-width:0">
-        <div style="min-width:0;aspect-ratio:4 / 3"><image-slot id="tierra-inst-1" shape="rect" radius="0" placeholder="Sala de tratamiento — foto horizontal" src="./pasted-1788460567628-0-mtlv8tw0-7rhc.png"></image-slot></div>
+      <div>
+        <button type="button" onClick="{{ openFoto1 }}" aria-label="Ampliar foto: Sala de tratamiento" style="display:block;width:100%;padding:0;min-width:0;aspect-ratio:4 / 3;cursor:zoom-in;transition:opacity .15s" style-hover="opacity:.85"><image-slot id="tierra-inst-1" shape="rect" radius="0" placeholder="Sala de tratamiento — foto horizontal" src="./pasted-1788460567628-0-mtlv8tw0-7rhc.png"></image-slot></button>
         <p style="margin-top:12px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8a6f66">01 · Sala de tratamiento</p>
       </div>
       <div>
-        <div style="min-width:0;aspect-ratio:4 / 3"><image-slot id="tierra-inst-2" shape="rect" radius="0" placeholder="Zona de ejercicio terapéutico" src="./pasted-1788460601435-0-mtlv9jz1-z138.png"></image-slot></div>
+        <button type="button" onClick="{{ openFoto2 }}" aria-label="Ampliar foto: Zona de ejercicio" style="display:block;width:100%;padding:0;min-width:0;aspect-ratio:4 / 3;cursor:zoom-in;transition:opacity .15s" style-hover="opacity:.85"><image-slot id="tierra-inst-2" shape="rect" radius="0" placeholder="Zona de ejercicio terapéutico" src="./pasted-1788460601435-0-mtlv9jz1-z138.png"></image-slot></button>
         <p style="margin-top:12px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8a6f66">02 · Zona de ejercicio</p>
       </div>
       <div>
-        <div style="min-width:0;aspect-ratio:4 / 3"><image-slot id="tierra-inst-3" shape="rect" radius="0" placeholder="Recepción y entrada" src="./pasted-1788460641530-0-mtlvaews-53g8.png"></image-slot></div>
+        <button type="button" onClick="{{ openFoto3 }}" aria-label="Ampliar foto: Recepción" style="display:block;width:100%;padding:0;min-width:0;aspect-ratio:4 / 3;cursor:zoom-in;transition:opacity .15s" style-hover="opacity:.85"><image-slot id="tierra-inst-3" shape="rect" radius="0" placeholder="Recepción y entrada" src="./pasted-1788460641530-0-mtlvaews-53g8.png"></image-slot></button>
         <p style="margin-top:12px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8a6f66">03 · Recepción</p>
       </div>
       <div>
-        <div style="min-width:0;aspect-ratio:4 / 3"><image-slot id="tierra-inst-4" shape="rect" radius="0" placeholder="Equipo de diatermia y ecógrafo" src="./pasted-1788460661471-0-mtlvauap-630n.png"></image-slot></div>
+        <button type="button" onClick="{{ openFoto4 }}" aria-label="Ampliar foto: Equipamiento" style="display:block;width:100%;padding:0;min-width:0;aspect-ratio:4 / 3;cursor:zoom-in;transition:opacity .15s" style-hover="opacity:.85"><image-slot id="tierra-inst-4" shape="rect" radius="0" placeholder="Equipo de diatermia y ecógrafo" src="./pasted-1788460661471-0-mtlvauap-630n.png"></image-slot></button>
         <p style="margin-top:12px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8a6f66">04 · Equipamiento</p>
       </div>
       <div>
-        <div style="min-width:0;aspect-ratio:4 / 3"><image-slot id="tierra-inst-5" shape="rect" radius="0" placeholder="Detalle del espacio" src="./pasted-1788460685847-0-mtlvbd3t-k1e4.png"></image-slot></div>
+        <button type="button" onClick="{{ openFoto5 }}" aria-label="Ampliar foto: Detalle" style="display:block;width:100%;padding:0;min-width:0;aspect-ratio:4 / 3;cursor:zoom-in;transition:opacity .15s" style-hover="opacity:.85"><image-slot id="tierra-inst-5" shape="rect" radius="0" placeholder="Detalle del espacio" src="./pasted-1788460685847-0-mtlvbd3t-k1e4.png"></image-slot></button>
         <p style="margin-top:12px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#8a6f66">05 · Detalle</p>
       </div>
     </div>
     <div style="max-width:1240px;margin:clamp(32px,5vw,56px) auto 0;padding:0 clamp(20px,4vw,48px)">
-      
+
     </div>
   </section>
 
-  
+  <sc-if value="{{ lightboxOpen }}">
+    <div role="dialog" aria-modal="true" aria-label="Foto ampliada" onClick="{{ closeLightboxBackdrop }}" style="position:fixed;inset:0;z-index:100;background:rgba(23,16,13,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(16px,4vw,40px)">
+      <button type="button" onClick="{{ closeLightbox }}" aria-label="Cerrar" style="position:absolute;top:clamp(12px,3vw,28px);right:clamp(12px,3vw,28px);width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:#ede7da;border:1px solid rgba(237,231,218,.35);border-radius:50%" style-hover="background:rgba(237,231,218,.12)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <button type="button" onClick="{{ prevLightbox }}" aria-label="Foto anterior" style="position:absolute;left:clamp(8px,2.5vw,24px);top:50%;transform:translateY(-50%);width:48px;height:48px;display:flex;align-items:center;justify-content:center;color:#ede7da;border:1px solid rgba(237,231,218,.35);border-radius:50%" style-hover="background:rgba(237,231,218,.12)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button type="button" onClick="{{ nextLightbox }}" aria-label="Foto siguiente" style="position:absolute;right:clamp(8px,2.5vw,24px);top:50%;transform:translateY(-50%);width:48px;height:48px;display:flex;align-items:center;justify-content:center;color:#ede7da;border:1px solid rgba(237,231,218,.35);border-radius:50%" style-hover="background:rgba(237,231,218,.12)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <img src="{{ lightboxFoto.src }}" alt="{{ lightboxFoto.caption }}" style="max-width:100%;max-height:78vh;width:auto;height:auto;object-fit:contain;box-shadow:0 24px 64px rgba(0,0,0,.5)">
+      <p style="margin-top:20px;color:#ede7da;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;text-align:center">{{ lightboxFoto.caption }} · {{ lightboxCounter }}</p>
+    </div>
+  </sc-if>
 </main>
 </sc-if>
 
@@ -578,7 +592,15 @@ input,textarea{font:inherit;color:inherit}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;ondas&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Marca&quot;},&quot;logoAnimado&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Marca&quot;},&quot;ctaWhatsapp&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Contacto&quot;}}">
 class Component extends DCLogic {
-  state = { page: 'inicio', faq: 0, enviado: false, menu: false, sub: false, narrow: false, srv: 0 };
+  state = { page: 'inicio', faq: 0, enviado: false, menu: false, sub: false, narrow: false, srv: 0, lightbox: null };
+
+  FOTOS_INSTALACIONES = [
+    { src: './pasted-1788460567628-0-mtlv8tw0-7rhc.png', caption: 'Sala de tratamiento' },
+    { src: './pasted-1788460601435-0-mtlv9jz1-z138.png', caption: 'Zona de ejercicio' },
+    { src: './pasted-1788460641530-0-mtlvaews-53g8.png', caption: 'Recepción' },
+    { src: './pasted-1788460661471-0-mtlvauap-630n.png', caption: 'Equipamiento' },
+    { src: './pasted-1788460685847-0-mtlvbd3t-k1e4.png', caption: 'Detalle' }
+  ];
 
   SERVICIOS = [
     {
@@ -699,9 +721,20 @@ class Component extends DCLogic {
     };
     this.onResize();
     window.addEventListener('resize', this.onResize);
+    this.onKeydown = (e) => {
+      if (this.state.lightbox === null) return;
+      var n = this.FOTOS_INSTALACIONES.length;
+      if (e.key === 'Escape') this.setState({ lightbox: null });
+      else if (e.key === 'ArrowLeft') this.setState(s => ({ lightbox: (s.lightbox + n - 1) % n }));
+      else if (e.key === 'ArrowRight') this.setState(s => ({ lightbox: (s.lightbox + 1) % n }));
+    };
+    window.addEventListener('keydown', this.onKeydown);
   }
 
-  componentWillUnmount() { window.removeEventListener('resize', this.onResize); }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('keydown', this.onKeydown);
+  }
 
   goServicio(n) {
     return () => {
@@ -876,7 +909,19 @@ class Component extends DCLogic {
       toggleFaq5: this.toggle(5),
       toggleFaq6: this.toggle(6),
       enviado: this.state.enviado,
-      onSubmit: (e) => { e.preventDefault(); this.setState({ enviado: true }); }
+      onSubmit: (e) => { e.preventDefault(); this.setState({ enviado: true }); },
+      openFoto1: () => this.setState({ lightbox: 0 }),
+      openFoto2: () => this.setState({ lightbox: 1 }),
+      openFoto3: () => this.setState({ lightbox: 2 }),
+      openFoto4: () => this.setState({ lightbox: 3 }),
+      openFoto5: () => this.setState({ lightbox: 4 }),
+      lightboxOpen: this.state.lightbox !== null,
+      lightboxFoto: this.FOTOS_INSTALACIONES[this.state.lightbox] || this.FOTOS_INSTALACIONES[0],
+      lightboxCounter: this.state.lightbox !== null ? (this.state.lightbox + 1) + ' / ' + this.FOTOS_INSTALACIONES.length : '',
+      closeLightbox: () => this.setState({ lightbox: null }),
+      closeLightboxBackdrop: (e) => { if (e.target === e.currentTarget) this.setState({ lightbox: null }); },
+      prevLightbox: () => this.setState(s => ({ lightbox: (s.lightbox + this.FOTOS_INSTALACIONES.length - 1) % this.FOTOS_INSTALACIONES.length })),
+      nextLightbox: () => this.setState(s => ({ lightbox: (s.lightbox + 1) % this.FOTOS_INSTALACIONES.length }))
     };
   }
 }
