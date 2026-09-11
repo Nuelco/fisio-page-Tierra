@@ -8,23 +8,26 @@
   <meta name="description" content="La nueva web de Tierra Fisioterapia y Osteopatía en Zamora está en camino. Muy pronto, aquí." />
   <meta name="robots" content="noindex, follow" />
 
-  <meta name="theme-color" content="#eae5d4" />
+  <meta name="theme-color" content="#ede7da" />
   <link rel="icon" href="favicon.svg" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
   <style>
+    @font-face{font-family:'Rethink Sans';src:url('fonts/RethinkSans-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+    @font-face{font-family:'Rethink Sans';src:url('fonts/RethinkSans-Medium.ttf') format('truetype');font-weight:500;font-display:swap}
+    @font-face{font-family:'Rethink Sans';src:url('fonts/RethinkSans-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+    @font-face{font-family:'Space Mono';src:url('fonts/SpaceMono-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+    @font-face{font-family:'Space Mono';src:url('fonts/SpaceMono-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+
     :root {
-      --bg: #eae5d4;
-      --ink: #9e6554;
+      --bg: #ede7da;
+      --ink: #412f2b;
+      --accent: #a56853;
     }
     * { box-sizing: border-box; }
     html, body {
       margin: 0; min-height: 100%;
       background: var(--bg); color: var(--ink);
-      font-family: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-family: 'Rethink Sans', system-ui, -apple-system, sans-serif;
     }
     body {
       position: relative; overflow: hidden;
@@ -38,54 +41,111 @@
       text-align: center; max-width: 32rem;
     }
 
-    /* foto de fondo, con un velo crema translúcido encima para que se note pero no compita con el texto.
-       Ojo: con z-index negativo aquí, Chrome (al menos en headless) no pintaba estas capas por
-       encima del background opaco de html/body — por eso se ordenan solo con el orden del DOM. */
-    .bg-photo {
-      position: fixed; inset: 0; pointer-events: none;
-      background: url("img/bg-contorno.png") center center / cover no-repeat;
-    }
-    .bg-veil {
-      position: fixed; inset: 0; pointer-events: none;
-      background: rgba(234, 229, 212, .88);
+    /* Grano fotográfico muy sutil sobre TODO (incluso el texto), para que la
+       página no se vea tan plana. Ruido generado con un filtro SVG inline
+       (feTurbulence) en vez de un archivo de imagen — no pesa nada y no
+       depende de ningún asset. mix-blend-mode:multiply solo oscurece
+       (nunca aclara), así que a esta opacidad tan baja se nota como textura
+       de papel, no como manchas. */
+    .grain {
+      position: fixed; inset: 0; z-index: 2; pointer-events: none;
+      opacity: .05; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
     }
 
-    /* franjas diagonales en degradado, esquinas opuestas, entrada en acordeón.
-       Ojo: el ancho/alto NO se pone por CSS (inset:0) a propósito — se fija por
-       JS a la vez que el clip-path, en la misma operación, para que el tamaño
-       del elemento y la forma ondulada nunca puedan quedar desincronizados
-       (si CSS reajustara el tamaño solo, en el zoom había un instante en que
-       el recorte ya era del nuevo tamaño pero la curva era la vieja, y se veía
-       un corte recto feo en medio de la onda). */
-    .band {
+    /* Ondas tipo curvas de nivel topográficas: se disparan UNA SOLA VEZ,
+       cuando el símbolo (ver .mark) toca el punto más bajo de su primer
+       balanceo — como una piedra que cae una única vez — y a partir de ahí
+       se QUEDAN quietas, rodeando el símbolo y el texto (no se desvanecen
+       ni se repiten en cada balanceo posterior). Las 6 curvas de nivel
+       paralelas (mismo contorno irregular, mismo seed, a 6 radios
+       distintos) crecen juntas desde el centro hasta un tamaño final
+       (--ripple-settle-scale) calculado en JS a partir del bloque de
+       contenido (símbolo + texto) + un margen — igual que el velo central,
+       así el marco de líneas se ajusta si cambia el contenido o el tamaño
+       de ventana.
+       Importante por rendimiento: las 6 líneas van en UN SOLO <path> (6
+       subtrazados "M...Z" dentro del mismo `d`), NO en 6 elementos
+       separados: medido con varias ondas independientes en pantalla, 6
+       elementos <path> sueltos (con vector-effect:non-scaling-stroke
+       animado) cuestan ~4-5x más por frame que 1 solo elemento con 6
+       subtrazados — el coste dominante es por ELEMENTO, no por la cantidad
+       de puntos del trazado. */
+    .ripples {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    }
+    /* El <svg> exterior NO se mueve ni se escala — se queda fijo en 40px con
+       overflow visible — y es el <g> de DENTRO el que crece con
+       transform:scale(). Así vector-effect:non-scaling-stroke sí puede
+       mantener el trazo fino a cualquier tamaño: ese efecto solo cancela
+       transformaciones aplicadas DENTRO del propio SVG (a un <g>, por
+       ejemplo), no una transformación CSS sobre el elemento <svg> en sí —
+       probado en un intento anterior: escalando el <svg> directamente, el
+       trazo se engordaba igual que el resto de la caja, como una franja
+       ancha en vez de una línea fina. */
+    .ripple { position: absolute; top: 50%; left: 50%; width: 40px; height: 40px; margin: -20px 0 0 -20px; overflow: visible; pointer-events: none; }
+    .ripple-g {
+      transform-box: view-box; transform-origin: 0px 0px;
+      transform: scale(0);
+      animation: rippleSettle 3.6s cubic-bezier(.16,.6,.32,1) forwards;
+    }
+    .ripple path {
+      fill: none;
+      stroke: var(--accent);
+      vector-effect: non-scaling-stroke;
+      animation: rippleStrokeSettle 3.6s cubic-bezier(.16,.6,.32,1) forwards;
+    }
+    @keyframes rippleSettle {
+      0% { transform: scale(0); opacity: 0; }
+      12% { opacity: .5; }
+      100% { transform: scale(var(--ripple-settle-scale, 6)); opacity: .5; }
+    }
+    @keyframes rippleStrokeSettle {
+      0% { stroke-width: 2.5px; }
+      100% { stroke-width: 1px; }
+    }
+
+    /* Tapa las ondas justo detrás del símbolo y el texto: un degradado
+       radial del color de fondo, del mismo tono que la página. Se recalcula
+       en cada resize con el resto del layout. */
+    .safe-veil {
       position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none;
-      background: var(--c);
-      opacity: 0; transform: scale(.82);
-      animation: bandIn .7s cubic-bezier(.16,1,.3,1) var(--d) forwards;
+      background: var(--bg);
     }
-    .band--tl { transform-origin: 0 0; }
-    .band--br { transform-origin: 100% 100%; }
-    @keyframes bandIn { to { opacity: 1; transform: scale(1); } }
 
+    /* El símbolo "flota en suspensión": un balanceo vertical suave y lento,
+       con easing simétrico en los dos extremos para que no tenga ni
+       arranque ni frenada brusca (ingravidez). 0%/100% = reposo (coincide
+       con el estado del símbolo justo antes de que arranque la animación,
+       para que no haya un salto al empezar); 50% = punto más bajo, hacia
+       ABAJO desde el reposo (translateY positivo) — así el primer
+       movimiento nada más arrancar es un descenso, no una subida.
+       Sin animation-delay: arranca en el mismo instante que el dibujado del
+       símbolo (ftInit, ~2.4s), no después — el símbolo ya está descendiendo
+       mientras se dibuja, y las ondas (disparadas a mitad del primer ciclo,
+       ver el JS) aparecen lo antes posible. */
     .mark {
-      display: block; width: clamp(64px, 14vw, 96px); margin-bottom: 1.6rem;
-      animation: breathe 6s ease-in-out 2.6s infinite alternate;
+      display: block; width: clamp(96px, 20vw, 148px); margin-bottom: 1.6rem;
+      color: var(--accent);
+      animation: suspend 4.4s ease-in-out infinite;
     }
-    @keyframes breathe { to { transform: scale(1.05); } }
-    .mark svg { width: 100%; height: auto; display: block; overflow: visible; }
-    .mark path { fill: none; stroke: var(--ink); stroke-width: 24; stroke-linecap: butt; }
-    .mark path.is-fill { fill: var(--ink); stroke: none; }
+    @keyframes suspend {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(14px); }
+    }
+    .mark svg { width: 100%; height: auto; display: block; overflow: hidden; }
 
-    .word { display: flex; flex-direction: column; align-items: center; gap: .5rem; margin: 0; text-transform: uppercase; }
-    .word .eyebrow { font-size: clamp(.85rem, 2vw, 1.1rem); font-weight: 500; letter-spacing: .38em; text-indent: .38em; opacity: .85; }
-    .word .brand { font-size: clamp(1.9rem, 6vw, 2.8rem); font-weight: 700; letter-spacing: .12em; text-indent: .12em; }
+    .word { display: flex; flex-direction: column; align-items: center; gap: .5rem; margin: 0; text-transform: uppercase; font-family: 'Space Mono', monospace; }
+    .word .eyebrow { font-size: clamp(.85rem, 2vw, 1.1rem); font-weight: 400; letter-spacing: .38em; text-indent: .38em; color: var(--accent); }
+    .word .brand { font-size: clamp(1.9rem, 6vw, 2.8rem); font-weight: 700; letter-spacing: .12em; text-indent: .12em; color: var(--accent); }
 
-    .msg { margin: 2.4rem 0 0; font-size: .95rem; line-height: 1.7; opacity: .85; }
-    .msg strong { font-weight: 600; }
+    .msg { margin: 2.4rem 0 0; font-size: .95rem; line-height: 1.7; color: #6b544c; }
+    .msg strong { font-weight: 700; color: var(--ink); }
 
     .contact { margin-top: 1.8rem; display: flex; flex-wrap: wrap; gap: 1.4rem; justify-content: center; font-size: .85rem; }
-    .contact a { color: var(--ink); text-decoration: none; border-bottom: 1px solid rgba(158,101,84,.4); padding-bottom: .15rem; transition: border-color .2s ease; }
-    .contact a:hover { border-color: var(--ink); }
+    .contact a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(165,104,83,.4); padding-bottom: .15rem; transition: color .2s ease, border-color .2s ease; }
+    .contact a:hover { color: var(--ink); border-color: var(--ink); }
 
     /* entrada escalonada del texto, en cascada tras el símbolo */
     .reveal { opacity: 0; transform: translateY(14px); animation: fadeUp .8s cubic-bezier(.16,1,.3,1) forwards; }
@@ -96,34 +156,22 @@
     .contact.reveal { animation-delay: .96s; }
 
     @media (prefers-reduced-motion: reduce) {
-      .band, .mark, .reveal { animation: none !important; }
-      .band { opacity: 1 !important; transform: none !important; }
+      /* Símbolo quieto y ondas ya asentadas de entrada, sin animación. */
+      .mark, .reveal { animation: none !important; }
+      .ripple-g { animation: none !important; transform: scale(var(--ripple-settle-scale, 6)) !important; opacity: .5 !important; }
+      .ripple path { animation: none !important; stroke-width: 1px !important; }
       .reveal { opacity: 1 !important; transform: none !important; }
     }
   </style>
 </head>
 <body>
-  <div class="bg-photo" aria-hidden="true"></div>
-  <div class="bg-veil" aria-hidden="true"></div>
-  <div class="band band--tl" style="--a:0;--b:13;--c:rgba(158,101,84,1);--d:.1s" aria-hidden="true"></div>
-  <div class="band band--tl" style="--a:13;--b:26;--c:rgba(158,101,84,.78);--d:.22s" aria-hidden="true"></div>
-  <div class="band band--tl" style="--a:26;--b:39;--c:rgba(158,101,84,.58);--d:.34s" aria-hidden="true"></div>
-  <div class="band band--tl" style="--a:39;--b:52;--c:rgba(158,101,84,.4);--d:.46s" aria-hidden="true"></div>
-  <div class="band band--tl" style="--a:52;--b:65;--c:rgba(158,101,84,.24);--d:.58s" aria-hidden="true"></div>
-
-  <div class="band band--br" style="--a:0;--b:13;--c:rgba(158,101,84,1);--d:.25s" aria-hidden="true"></div>
-  <div class="band band--br" style="--a:13;--b:26;--c:rgba(158,101,84,.78);--d:.37s" aria-hidden="true"></div>
-  <div class="band band--br" style="--a:26;--b:39;--c:rgba(158,101,84,.58);--d:.49s" aria-hidden="true"></div>
-  <div class="band band--br" style="--a:39;--b:52;--c:rgba(158,101,84,.4);--d:.61s" aria-hidden="true"></div>
-  <div class="band band--br" style="--a:52;--b:65;--c:rgba(158,101,84,.24);--d:.73s" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="ripples" aria-hidden="true"></div>
+  <div class="safe-veil" aria-hidden="true"></div>
   <main>
-    <span class="mark" data-spine aria-hidden="true"><svg viewBox="300 195 525 595" width="525" height="595" xmlns="http://www.w3.org/2000/svg">
-      <path class="is-fill" d="M318,206 L318,230 L461,232 L470,234 L477,236 L482,238 L487,240 L491,242 L494,244 L498,246 L501,248 L504,250 L507,252 L509,254 L511,256 L514,258 L516,260 L518,262 L520,264 L522,266 L524,268 L525,270 L527,272 L528,274 L530,276 L531,278 L532,280 L534,282 L535,284 L536,286 L537,288 L538,290 L539,291 L540,290 L541,288 L541,286 L542,284 L543,282 L544,280 L545,278 L546,276 L547,274 L548,272 L549,270 L550,268 L551,266 L550,264 L549,262 L547,260 L546,258 L544,256 L543,254 L541,252 L539,250 L537,248 L536,246 L534,244 L531,242 L529,240 L527,238 L525,236 L522,234 L520,232 L517,230 L514,228 L511,226 L507,224 L504,222 L500,220 L496,218 L491,216 L486,214 L480,212 L473,210 L463,208 Z" />
-      <path d="M318,278 H445 A56,56 0 0 1 501,334 V691" />
-      <path d="M318,338 H405 A36,36 0 0 1 441,374 V730" />
-      <path d="M804,218 H661 A100,100 0 0 0 561,318 V768" />
-      <path d="M804,278 H676 A56,56 0 0 0 620,334 V711" />
-      <path d="M804,338 H716 A36,36 0 0 0 680,374 V691" />
+    <span class="mark" data-ft-logo="true" aria-hidden="true"><svg viewBox="-40 -40 560 640" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Símbolo Fisioterapia Tierra" style="width:100%;height:auto;display:block;overflow:hidden">
+      <defs data-ft-defs="true"></defs>
+      <g data-ft-marks="true" fill="currentColor"></g>
     </svg></span>
 
     <h1 class="word"><span class="eyebrow reveal">Fisioterapia</span><span class="brand reveal">Tierra</span></h1>
@@ -137,92 +185,249 @@
 
   <script>
     (function () {
-      // Franjas de las esquinas: borde ondulado (curva) en vez de diagonal recta.
-      // Se calcula en JS porque clip-path: path() necesita coordenadas en píxeles
-      // reales, no vmin/%; así se recalcula bien al cargar y al cambiar de tamaño.
-      function bandPath(a, b, W, H, mirror) {
-        var V = Math.min(W, H) / 100;
-        var AMP = 1.15 * V, CYCLES = 2, STEPS = 40;
-        function wave(dist) {
-          var Vd = dist * V;
-          var pts = [];
-          for (var i = 0; i <= STEPS; i++) {
-            var t = i / STEPS;
-            var x = Vd * (1 - t), y = Vd * t;
-            var off = AMP * Math.sin(2 * Math.PI * CYCLES * t);
-            pts.push([x + off * 0.70710678, y + off * 0.70710678]);
-          }
-          return pts;
-        }
-        var outer = wave(b);
-        var inner = wave(a).reverse();
-        var pts = [[a * V, 0], [b * V, 0]].concat(outer.slice(1)).concat([[0, a * V]]).concat(inner.slice(1));
-        if (mirror) pts = pts.map(function (p) { return [W - p[0], H - p[1]]; });
-        return "M " + pts.map(function (p) { return p[0].toFixed(2) + "," + p[1].toFixed(2); }).join(" L ") + " Z";
-      }
-      // Medimos el alto UNA vez con JS y lo usamos tanto para centrar el body
-      // (--vh, sustituye a 100dvh) como para calcular las ondas: así los dos
-      // sistemas siempre coinciden exactamente, en vez de depender de que
-      // 100dvh y window.innerHeight resuelvan lo mismo en cada móvil (no
-      // siempre es así, y eso era lo que descuadraba el texto y las esquinas).
+      // Medimos el alto con JS y lo usamos tanto para centrar el body (--vh,
+      // sustituye a 100dvh) como para calcular las ondas: así los dos sistemas
+      // siempre coinciden exactamente, en vez de depender de que 100dvh y
+      // window.innerHeight resuelvan lo mismo en cada móvil.
       function setViewportVars() {
         var W = (window.visualViewport && window.visualViewport.width) || window.innerWidth;
         var H = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
         document.documentElement.style.setProperty("--vh", (H / 100) + "px");
-        applyBands(W, H);
+        applyRippleSettleScale();
+        applySafeVeil(W, H);
       }
-      function applyBands(W, H) {
-        Array.prototype.slice.call(document.querySelectorAll(".band")).forEach(function (el) {
-          var a = parseFloat(el.style.getPropertyValue("--a"));
-          var b = parseFloat(el.style.getPropertyValue("--b"));
-          var mirror = el.classList.contains("band--br");
-          el.style.width = W + "px";
-          el.style.height = H + "px";
-          el.style.clipPath = "path('" + bandPath(a, b, W, H, mirror) + "')";
-        });
+      // Radio (en px) del bloque de contenido (símbolo + texto) más un
+      // margen — lo comparten el velo central y el tamaño final de las
+      // ondas, así que va en una sola función.
+      function contentRadius(pad) {
+        var main = document.querySelector("main");
+        if (!main) return 0;
+        var r = main.getBoundingClientRect();
+        return Math.max(r.width / 2, r.height / 2) + pad;
       }
-      // Se calcula UNA sola vez al cargar y ya no se vuelve a tocar: si se
-      // recalculaba con cada "resize" (rueda del ratón, pellizco, barra del
-      // móvil...), las franjas se reajustaban al hacer zoom y se veían
-      // moverse. Así se quedan fijas en su posición/forma original siempre.
+      // Contorno de las ondas: curvas de nivel concéntricas (mismos 3
+      // armónicos que las franjas originales, mismo seed) a varios radios
+      // base, TODAS dentro de un único string "d" (un subtrazado "M...Z"
+      // por radio) — un solo <path> pinta todas las líneas a la vez. Los 6
+      // primeros radios (82-114) quedan pegados enmarcando el contenido,
+      // igual que antes; el resto se abre hacia fuera con el hueco cada vez
+      // mayor (como un mapa topográfico real, más apretado cerca del
+      // "pico" y más separado en la pendiente) hasta cubrir toda la
+      // pantalla. Es la FORMA, no el tamaño — no depende de la ventana, así
+      // que se calcula una sola vez, nunca en el resize; el tamaño lo pone
+      // --ripple-settle-scale (ver applyRippleSettleScale), pensado para
+      // que el radio 100 coincida con el borde del contenido — así estos
+      // radios mayores se reparten hacia las esquinas sin necesidad de
+      // recalcular nada más.
+      var RING_RADII = [
+        82, 88.4, 94.8, 101.2, 107.6, 114,
+        135, 160, 190, 225, 265, 310, 360, 415, 475
+      ];
+      function ripplePath(seed) {
+        var STEPS = 140;
+        function ring(R0) {
+          var pts = [];
+          for (var i = 0; i <= STEPS; i++) {
+            var a = (i / STEPS) * Math.PI * 2;
+            var wobble =
+              0.11 * Math.sin(3 * a + seed) +
+              0.065 * Math.sin(5 * a + seed * 1.7 + 1.1) +
+              0.035 * Math.sin(8 * a + seed * 2.3 + 2.4);
+            var r = R0 * (1 + wobble);
+            pts.push((r * Math.cos(a)).toFixed(2) + "," + (r * Math.sin(a)).toFixed(2));
+          }
+          return "M " + pts.join(" L ") + " Z";
+        }
+        return RING_RADII.map(ring).join(" ");
+      }
+      var SVG_NS = "http://www.w3.org/2000/svg";
+      var ripplesEl = document.querySelector(".ripples");
+      // Crea el único <path> con las 6 curvas de nivel (ver ripplePath) que
+      // va a crecer y quedarse quieto rodeando el contenido — se llama UNA
+      // sola vez en toda la vida de la página.
+      function spawnSettleRipple() {
+        var svg = document.createElementNS(SVG_NS, "svg");
+        svg.setAttribute("class", "ripple");
+        svg.setAttribute("viewBox", "-140 -140 280 280");
+        var g = document.createElementNS(SVG_NS, "g");
+        g.setAttribute("class", "ripple-g");
+        var path = document.createElementNS(SVG_NS, "path");
+        path.setAttribute("d", ripplePath(Math.random() * Math.PI * 2));
+        g.appendChild(path);
+        svg.appendChild(g);
+        ripplesEl.appendChild(svg);
+      }
+      var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reducedMotion) {
+        // Sin balanceo no hay nada que la dispare — se crea directamente;
+        // el CSS de prefers-reduced-motion la deja ya asentada, sin animar.
+        spawnSettleRipple();
+      } else {
+        // Se dispara la PRIMERA vez que el símbolo toca el punto más bajo
+        // de su balanceo (como una piedra que cae una sola vez). Ese punto
+        // ya no coincide con el cierre de ciclo (0%/100%, ver @keyframes
+        // suspend) sino con la MITAD del primer ciclo — así el símbolo baja
+        // nada más arrancar y las ondas aparecen lo antes posible, en vez de
+        // esperar a que complete toda una vuelta. Por eso el disparo va por
+        // temporizador (retraso + mitad de la duración, leídos del propio
+        // CSS para no duplicar los números) y no por "animationiteration",
+        // que solo puede engancharse al cierre de ciclo. Al ser un solo
+        // setTimeout, ya es de una sola vez por construcción: no hace falta
+        // ningún "once" ni desengancharlo después.
+        var markEl = document.querySelector(".mark");
+        var markStyle = getComputedStyle(markEl);
+        var bobDelay = parseFloat(markStyle.animationDelay) || 0;
+        var bobDuration = parseFloat(markStyle.animationDuration) || 0;
+        setTimeout(spawnSettleRipple, (bobDelay + bobDuration / 2) * 1000);
+      }
+      // Tamaño final de las ondas: el factor de escala necesario para que
+      // su radio en pantalla llegue justo al radio del contenido (mismo
+      // cálculo que el velo central) — así las líneas se quedan enmarcando
+      // el símbolo y el texto, no perdidas por la pantalla. baseRadiusPx es
+      // el radio (en px reales) que tiene el contorno R0=100 al nacer, con
+      // el svg a 40px y viewBox de 280 unidades (100 * 40/280).
+      function applyRippleSettleScale() {
+        var radius = contentRadius(64);
+        var baseRadiusPx = 100 * (40 / 280);
+        document.documentElement.style.setProperty("--ripple-settle-scale", (radius / baseRadiusPx).toFixed(2));
+      }
+      // Velo central: un degradado radial del color de fondo, del tamaño del
+      // bloque de contenido (símbolo + texto) más un margen, con un borde
+      // difuminado para que las ondas se desvanezcan de forma orgánica en
+      // vez de cortarse en seco. Siempre CÍRCULO (mismo radio en ambos ejes),
+      // no elipse: los anillos también son circulares y concéntricos al
+      // mismo punto, así que un radio uniforme es el único que los tapa
+      // por completo a cualquier tamaño — una elipse deja asomar el anillo
+      // por arriba/abajo o por los lados según el radio en que se cruce.
+      function applySafeVeil(W, H) {
+        var veil = document.querySelector(".safe-veil");
+        var main = document.querySelector("main");
+        if (!veil || !main) return;
+        var r = main.getBoundingClientRect();
+        var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+        var radius = contentRadius(64);
+        veil.style.width = W + "px";
+        veil.style.height = H + "px";
+        veil.style.background =
+          "radial-gradient(" + radius.toFixed(1) + "px " + radius.toFixed(1) + "px at " +
+          cx.toFixed(1) + "px " + cy.toFixed(1) + "px, var(--bg) 58%, transparent 100%)";
+      }
+      // Se recalcula al cargar y también en cada resize real (redimensionar
+      // la ventana, girar el móvil, cambiar de zoom): así el tamaño de las
+      // ondas y el hueco central siempre se ajustan al tamaño y posición
+      // actuales.
+      // Limitado a un solo recálculo por frame con requestAnimationFrame
+      // para no recargar el hilo principal mientras se arrastra el borde
+      // de la ventana.
+      var resizePending = false;
+      function onViewportResize() {
+        if (resizePending) return;
+        resizePending = true;
+        requestAnimationFrame(function () { resizePending = false; setViewportVars(); });
+      }
       setViewportVars();
       setTimeout(setViewportVars, 300); // por si el móvil ajusta la barra justo al entrar
+      window.addEventListener("resize", onViewportResize);
+      if (window.visualViewport) window.visualViewport.addEventListener("resize", onViewportResize);
 
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      var svg = document.querySelector(".mark svg");
-      var marks = Array.prototype.slice.call(document.querySelectorAll(".mark path"));
-      var vb = svg.viewBox.baseVal;
-      var centerX = vb.x + vb.width / 2;
-      var DUR = 700, STAGGER = 0.9, REACH = 90;
-      var easeOut = function (t) { return 1 - Math.pow(1 - t, 3); };
+      // Animación oficial del símbolo (idéntica a la del sitio principal,
+      // INFORMACION_TIERRA/logo-animacion_tierra.html): cada trazo entra
+      // dibujándose desde el lateral correspondiente hacia el centro.
+      function ftInit(host, uid) {
+        if (host.__ftDone) return;
+        var defs = host.querySelector('[data-ft-defs]');
+        var marks = host.querySelector('[data-ft-marks]');
+        if (!defs || !marks) return;
+        host.__ftDone = true;
+        defs.textContent = '';
+        marks.textContent = '';
 
-      marks.forEach(function (m) {
-        var box = m.getBBox();
-        var cx = box.x + box.width / 2;
-        var side = cx < centerX ? -1 : 1;
-        var dist = Math.abs(cx - centerX);
-        m._from = side * (REACH + dist * 0.35);
-        m._delay = dist * STAGGER;
-        m.setAttribute("transform", "translate(" + m._from.toFixed(2) + " 0)");
-        m.style.opacity = "0";
-      });
+        var VB = { w: 473.89, h: 547 }, EXT = 520, SWEEP = 2.2, TIER_DELAY = 0.11, MAXD = 1200;
+        var PATHS = [
+          'M91.62,116.31H0v22.66h91.62c9.8,0,17.77,7.97,17.77,17.76v352.77h22.66V156.73c0-22.29-18.13-40.42-40.43-40.42Z',
+          'M110.81,58.02H0v22.66h110.81c31.34,0,56.83,25.5,56.83,56.84v334.42h22.66V137.52c0-43.83-35.66-79.5-79.49-79.5Z',
+          'M121.68,0H0v22.66h121.67c41.46,0,77.26,24.47,93.92,59.7,2.95-9.06,6.69-17.79,11.33-25.94C204.26,22.43,165.52,0,121.68,0Z',
+          'M341.85,156.73v315.21h22.66V156.73c0-9.8,7.97-17.76,17.76-17.76h91.62v-22.66h-91.62c-22.28,0-40.41,18.13-40.41,40.42Z',
+          'M283.58,137.52v353.2h22.66V137.52c0-31.34,25.5-56.84,56.84-56.84h110.8v-22.66h-110.8c-43.83,0-79.5,35.66-79.5,79.5Z',
+          'M352.22,0c-51.09,0-95.39,30.59-115.33,74.32-7.25,15.97-11.33,33.65-11.33,52.34v420.34h22.66V126.66c0-57.32,46.67-104,104-104h121.67V0h-121.67Z'
+        ];
+        var STROKES = [
+          { i: 2, side: 'L', tier: 0, by: 0, hy: -4, hh: 95, hEnd: 240, vx: null, vw: 0, vBottom: 0, thick: 22.66 },
+          { i: 5, side: 'R', tier: 0, by: 0, hy: -4, hh: 135, hEnd: 221.5, vx: 221.5, vw: 30.7, vBottom: 551, thick: 22.66 },
+          { i: 1, side: 'L', tier: 1, by: 58.02, hy: 54, hh: 30.7, hEnd: 194.3, vx: 163.6, vw: 30.7, vBottom: 475.9, thick: 22.66 },
+          { i: 4, side: 'R', tier: 1, by: 58.02, hy: 54, hh: 30.7, hEnd: 279.6, vx: 279.6, vw: 30.7, vBottom: 494.7, thick: 22.66 },
+          { i: 0, side: 'L', tier: 2, by: 116.31, hy: 112.3, hh: 30.7, hEnd: 136, vx: 105.4, vw: 30.7, vBottom: 513.5, thick: 22.66 },
+          { i: 3, side: 'R', tier: 2, by: 116.31, hy: 112.3, hh: 30.7, hEnd: 337.85, vx: 337.85, vw: 30.7, vBottom: 475.9, thick: 22.66 }
+        ];
+        var NS = 'http://www.w3.org/2000/svg';
+        var clamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
+        var ease = function (t) { return 1 - Math.pow(1 - t, 2.4); };
 
-      var t0 = performance.now();
-      function frame(now) {
-        var el = now - t0;
-        var done = true;
-        marks.forEach(function (m) {
-          var t = (el - m._delay) / DUR;
-          t = t < 0 ? 0 : t > 1 ? 1 : t;
-          if (t < 1) done = false;
-          var x = m._from * (1 - easeOut(t));
-          m.setAttribute("transform", "translate(" + x.toFixed(2) + " 0)");
-          m.style.opacity = Math.min(1, t * 2.5).toFixed(3);
+        var items = STROKES.map(function (s, k) {
+          var id = 'ft-clip-' + uid + '-' + k;
+          var hLen = s.side === 'L' ? s.hEnd : VB.w - s.hEnd;
+          var vLen = s.vx == null ? 0 : s.vBottom - (s.hy + s.hh);
+          var clip = document.createElementNS(NS, 'clipPath');
+          clip.setAttribute('id', id);
+          var poly = document.createElementNS(NS, 'polygon');
+          clip.appendChild(poly);
+          defs.appendChild(clip);
+          var path = document.createElementNS(NS, 'path');
+          path.setAttribute('d', PATHS[s.i]);
+          path.setAttribute('clip-path', 'url(#' + id + ')');
+          marks.appendChild(path);
+          var ext = document.createElementNS(NS, 'rect');
+          ext.setAttribute('y', s.by);
+          ext.setAttribute('height', s.thick);
+          marks.appendChild(ext);
+          return { s: s, hLen: hLen, vLen: vLen, total: EXT + hLen + vLen, poly: poly, ext: ext };
         });
-        if (!done) requestAnimationFrame(frame);
-        else marks.forEach(function (m) { m.removeAttribute("transform"); });
+        var END = 2 * TIER_DELAY + SWEEP;
+
+        function frame(t) {
+          items.forEach(function (it) {
+            var s = it.s;
+            var start = s.tier * TIER_DELAY;
+            var prog = t <= start ? 0 : t >= start + SWEEP ? 1 : ease((t - start) / SWEEP);
+            var h = Math.min(prog * MAXD, it.total);
+            var e = clamp(h / EXT, 0, 1);
+            var r = clamp(it.hLen ? (h - EXT) / it.hLen : 1, 0, 1);
+            var vP = clamp(it.vLen ? (h - EXT - it.hLen) / it.vLen : 0, 0, 1);
+            it.ext.setAttribute('width', EXT * Math.max(0, e - r));
+            it.ext.setAttribute('x', s.side === 'L' ? -EXT * (1 - r) : VB.w + EXT * (1 - e));
+            var hw = r * (s.side === 'L' ? s.hEnd + 4 : VB.w - s.hEnd + 4);
+            var bandBottom = s.hy + s.hh;
+            var legBottom = s.vx != null ? bandBottom + vP * (s.vBottom - bandBottom) : bandBottom;
+            var pts;
+            if (s.side === 'L') {
+              var head = -4 + hw;
+              var edge = vP > 0 ? Math.max(s.vx + s.vw, head) : head;
+              pts = [[-4, s.hy], [head, s.hy], [head, bandBottom], [edge, bandBottom], [edge, legBottom], [-4, legBottom]];
+            } else {
+              var headR = VB.w + 4 - hw;
+              var edgeR = vP > 0 ? Math.min(s.vx, headR) : headR;
+              pts = [[VB.w + 4, s.hy], [headR, s.hy], [headR, bandBottom], [edgeR, bandBottom], [edgeR, legBottom], [VB.w + 4, legBottom]];
+            }
+            it.poly.setAttribute('points', pts.map(function (p) { return p[0].toFixed(2) + ',' + p[1].toFixed(2); }).join(' '));
+          });
+        }
+
+        var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduced) { frame(END); return; }
+        frame(END);
+        var t0 = Date.now();
+        var last = END;
+        var step = function () {
+          var t = (Date.now() - t0) / 1000;
+          last = Math.min(t, END);
+          frame(last);
+          if (t < END) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+        // red de seguridad: si el bucle no avanza, deja el símbolo completo
+        setTimeout(function () { if (last < END) frame(END); }, END * 1000 + 600);
       }
-      requestAnimationFrame(frame);
+      ftInit(document.querySelector('[data-ft-logo]'), 0);
     })();
   </script>
 </body>
