@@ -58,20 +58,21 @@
        cuando el símbolo (ver .mark) toca el punto más bajo de su primer
        balanceo — como una piedra que cae una única vez — y a partir de ahí
        se QUEDAN quietas, rodeando el símbolo y el texto (no se desvanecen
-       ni se repiten en cada balanceo posterior). Las 6 curvas de nivel
-       paralelas (mismo contorno irregular, mismo seed, a 6 radios
-       distintos) crecen juntas desde el centro hasta un tamaño final
+       ni se repiten en cada balanceo posterior). Las curvas de nivel
+       paralelas (mismo contorno irregular, mismo seed, a distintos radios)
+       crecen juntas desde el centro hasta un tamaño final
        (--ripple-settle-scale) calculado en JS a partir del bloque de
        contenido (símbolo + texto) + un margen — igual que el velo central,
        así el marco de líneas se ajusta si cambia el contenido o el tamaño
-       de ventana.
-       Importante por rendimiento: las 6 líneas van en UN SOLO <path> (6
-       subtrazados "M...Z" dentro del mismo `d`), NO en 6 elementos
-       separados: medido con varias ondas independientes en pantalla, 6
-       elementos <path> sueltos (con vector-effect:non-scaling-stroke
-       animado) cuestan ~4-5x más por frame que 1 solo elemento con 6
-       subtrazados — el coste dominante es por ELEMENTO, no por la cantidad
-       de puntos del trazado. */
+       de ventana. Las líneas de más adentro son más finas y las de más
+       afuera más gruesas (ver RING_GROUPS en el JS).
+       Importante por rendimiento: los radios van agrupados en solo 4
+       <path> (uno por grupo de grosor), NO uno por radio — medido con
+       varias ondas independientes en pantalla, cada elemento <path> suelto
+       (con vector-effect:non-scaling-stroke animado) cuesta ~4-5x más por
+       frame que uno con varios subtrazados — el coste dominante es por
+       ELEMENTO, no por la cantidad de puntos del trazado ni de
+       subtrazados dentro de un mismo elemento. */
     .ripples {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
     }
@@ -90,6 +91,10 @@
       transform: scale(0);
       animation: rippleSettle 3.6s cubic-bezier(.16,.6,.32,1) forwards;
     }
+    /* Cada <path> lleva su propio --stroke-final (ver JS: RING_GROUPS) —
+       las líneas de más adentro nacen finas y las de más afuera más
+       gruesas, aunque todas comparten el mismo <g> y por tanto la misma
+       animación de crecimiento (--ripple-settle-scale). */
     .ripple path {
       fill: none;
       stroke: var(--accent);
@@ -102,8 +107,8 @@
       100% { transform: scale(var(--ripple-settle-scale, 6)); opacity: .5; }
     }
     @keyframes rippleStrokeSettle {
-      0% { stroke-width: 2.5px; }
-      100% { stroke-width: 1px; }
+      0% { stroke-width: calc(var(--stroke-final, 1px) * 2.2); }
+      100% { stroke-width: var(--stroke-final, 1px); }
     }
 
     /* Tapa las ondas justo detrás del símbolo y el texto: un degradado
@@ -159,7 +164,7 @@
       /* Símbolo quieto y ondas ya asentadas de entrada, sin animación. */
       .mark, .reveal { animation: none !important; }
       .ripple-g { animation: none !important; transform: scale(var(--ripple-settle-scale, 6)) !important; opacity: .5 !important; }
-      .ripple path { animation: none !important; stroke-width: 1px !important; }
+      .ripple path { animation: none !important; stroke-width: var(--stroke-final, 1px) !important; }
       .reveal { opacity: 1 !important; transform: none !important; }
     }
   </style>
@@ -206,24 +211,30 @@
         return Math.max(r.width / 2, r.height / 2) + pad;
       }
       // Contorno de las ondas: curvas de nivel concéntricas (mismos 3
-      // armónicos que las franjas originales, mismo seed) a varios radios
-      // base, TODAS dentro de un único string "d" (un subtrazado "M...Z"
-      // por radio) — un solo <path> pinta todas las líneas a la vez. Los 6
-      // primeros radios (82-114) quedan pegados enmarcando el contenido,
-      // igual que antes; el resto se abre hacia fuera con el hueco cada vez
-      // mayor (como un mapa topográfico real, más apretado cerca del
-      // "pico" y más separado en la pendiente) hasta cubrir toda la
-      // pantalla. Es la FORMA, no el tamaño — no depende de la ventana, así
-      // que se calcula una sola vez, nunca en el resize; el tamaño lo pone
+      // armónicos que las franjas originales, mismo seed) repartidas en 4
+      // grupos por grosor — cada grupo es un único <path> con un subtrazado
+      // "M...Z" por radio (varios radios por elemento, no uno por
+      // elemento — ver la nota de rendimiento más arriba). El primer grupo
+      // (82-114) queda pegado enmarcando el contenido, igual que antes; el
+      // resto se abre hacia fuera con el hueco cada vez mayor (como un mapa
+      // topográfico real, más apretado cerca del "pico" y más separado en
+      // la pendiente) hasta cubrir toda la pantalla, y cada grupo más
+      // alejado del centro lleva un --stroke-final mayor (ver
+      // @keyframes rippleStrokeSettle): las líneas de más adentro son más
+      // finas y las de más afuera más gruesas.
+      // Es la FORMA, no el tamaño — no depende de la ventana, así que se
+      // calcula una sola vez, nunca en el resize; el tamaño lo pone
       // --ripple-settle-scale (ver applyRippleSettleScale), pensado para
-      // que el radio 100 coincida con el borde del contenido — así estos
+      // que el radio 100 coincida con el borde del contenido — así los
       // radios mayores se reparten hacia las esquinas sin necesidad de
       // recalcular nada más.
-      var RING_RADII = [
-        82, 88.4, 94.8, 101.2, 107.6, 114,
-        135, 160, 190, 225, 265, 310, 360, 415, 475
+      var RING_GROUPS = [
+        { radii: [82, 88.4, 94.8, 101.2, 107.6, 114], strokeFinal: .7 },
+        { radii: [135, 160, 190], strokeFinal: 1.1 },
+        { radii: [225, 265, 310], strokeFinal: 1.6 },
+        { radii: [360, 415, 475], strokeFinal: 2.2 }
       ];
-      function ripplePath(seed) {
+      function ringsPath(radii, seed) {
         var STEPS = 140;
         function ring(R0) {
           var pts = [];
@@ -238,22 +249,28 @@
           }
           return "M " + pts.join(" L ") + " Z";
         }
-        return RING_RADII.map(ring).join(" ");
+        return radii.map(ring).join(" ");
       }
       var SVG_NS = "http://www.w3.org/2000/svg";
       var ripplesEl = document.querySelector(".ripples");
-      // Crea el único <path> con las 6 curvas de nivel (ver ripplePath) que
-      // va a crecer y quedarse quieto rodeando el contenido — se llama UNA
-      // sola vez en toda la vida de la página.
+      // Crea el <svg> con un <path> por grupo de grosor (ver RING_GROUPS),
+      // todos dentro del mismo <g> — así comparten una sola animación de
+      // crecimiento aunque cada uno tenga su propio grosor — que va a
+      // crecer y quedarse quieto rodeando el contenido. Se llama UNA sola
+      // vez en toda la vida de la página.
       function spawnSettleRipple() {
+        var seed = Math.random() * Math.PI * 2;
         var svg = document.createElementNS(SVG_NS, "svg");
         svg.setAttribute("class", "ripple");
         svg.setAttribute("viewBox", "-140 -140 280 280");
         var g = document.createElementNS(SVG_NS, "g");
         g.setAttribute("class", "ripple-g");
-        var path = document.createElementNS(SVG_NS, "path");
-        path.setAttribute("d", ripplePath(Math.random() * Math.PI * 2));
-        g.appendChild(path);
+        RING_GROUPS.forEach(function (group) {
+          var path = document.createElementNS(SVG_NS, "path");
+          path.setAttribute("d", ringsPath(group.radii, seed));
+          path.style.setProperty("--stroke-final", group.strokeFinal + "px");
+          g.appendChild(path);
+        });
         svg.appendChild(g);
         ripplesEl.appendChild(svg);
       }
