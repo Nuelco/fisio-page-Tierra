@@ -119,3 +119,12 @@ input,textarea,select{font:inherit;color:inherit}
 .filosofia__lead{font-size:clamp(26px,3.2vw,44px);font-weight:700;line-height:1.15;max-width:26ch}
 .filosofia__body{max-width:42ch;display:flex;flex-direction:column;gap:16px;color:var(--tinta-suave)}
 .filosofia__closing{color:var(--marron) !important;font-weight:700}
+
+/* ===== Marquee ===== */
+.marquee{overflow:hidden;white-space:nowrap;background:var(--marron);color:var(--crema);padding:20px 0;border-top:1px solid rgba(237,231,218,.14);border-bottom:1px solid rgba(237,231,218,.14)}
+.marquee__track{display:inline-flex;animation:marquee-scroll 42s linear infinite}
+.marquee:hover .marquee__track{animation-play-state:paused}
+.marquee__group{display:inline-flex;align-items:center;font-family:var(--font-display);font-size:clamp(14px,1.6vw,18px);letter-spacing:.2em;text-transform:uppercase}
+.marquee__sep{width:6px;height:6px;background:var(--terracota);margin:0 clamp(20px,2.5vw,32px);display:inline-block;border-radius:50%}
+@keyframes marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){.marquee__track{animation:none}}
