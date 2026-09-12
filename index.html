@@ -58,7 +58,7 @@
 <header id="site-header" class="site-header">
   <div class="site-header__inner">
     <a href="index.html" class="brand" aria-label="Fisioterapia Tierra, inicio">
-      <img src="assets/logos/logo-h-beige.svg" alt="Fisioterapia Tierra" width="160" height="40">
+      <img src="assets/logos/logo-h-beige.svg" alt="Fisioterapia Tierra" width="200" height="22">
     </a>
     <nav class="nav" aria-label="Navegación principal">
       <a href="index.html" class="is-active">Inicio</a>
@@ -81,25 +81,33 @@
 </header>
 <main id="main">
   <section class="hero" id="hero" data-topo="hero" data-topo-color="azul">
-    <div class="hero__inner" data-reveal>
-      <p class="eyebrow">Fisioterapia · Zamora</p>
-      <h1>Vuelve al origen de tu bienestar</h1>
-      <p class="hero__lead">Volver al origen, conectar con el cuerpo y recuperar el equilibrio en Zamora.</p>
-      <!-- FOTO PENDIENTE: fotografía editorial del hero descrita en el prompt (11.1) — retrato o gesto corporal con líneas topográficas superpuestas, formato apaisado grande. Alt sugerido: "Fotografía editorial de Fisioterapia Tierra con líneas topográficas superpuestas" -->
-      <div class="hero__actions">
-        <a href="contacto.html" class="btn btn--primary">Pedir cita</a>
-        <a href="#presentacion" class="btn btn--ghost">Conócenos</a>
+    <div class="hero__grid">
+      <div class="hero__inner">
+        <p class="eyebrow">Fisioterapia · Zamora</p>
+        <h1>Vuelve al origen de tu bienestar</h1>
+        <p class="hero__lead">Volver al origen, conectar con el cuerpo y recuperar el equilibrio en Zamora.</p>
+        <!-- FOTO PENDIENTE: fotografía editorial del hero descrita en el prompt (11.1) — retrato o gesto corporal con líneas topográficas superpuestas, formato apaisado grande. Alt sugerido: "Fotografía editorial de Fisioterapia Tierra con líneas topográficas superpuestas" -->
+        <div class="hero__actions">
+          <a href="contacto.html" class="btn btn--primary">Pedir cita</a>
+          <a href="#presentacion" class="btn btn--ghost">Conócenos</a>
+        </div>
+      </div>
+      <div class="hero__symbol" id="hero-symbol" aria-hidden="true">
+        <svg viewBox="-512.95 -148.35 1499.79 843.7" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Símbolo Fisioterapia Tierra">
+          <defs data-ft-clips></defs>
+          <g data-ft-marks fill="currentColor"></g>
+        </svg>
       </div>
     </div>
   </section>
 
-  <section class="phrases" id="frases">
-    <div class="phrases__inner">
-      <p data-reveal>Entender tu cuerpo.</p>
-      <p data-reveal>Escucharlo.</p>
-      <p data-reveal>Acompañarlo en el proceso.</p>
+  <div class="marquee" id="tratamientos" aria-label="Tratamientos de Fisioterapia Tierra">
+    <div class="marquee__track">
+      <span class="marquee__group">FISIOTERAPIA<span class="marquee__sep"></span>OSTEOPATÍA<span class="marquee__sep"></span>FISIOTERAPIA DEPORTIVA<span class="marquee__sep"></span>FISIOTERAPIA INVASIVA<span class="marquee__sep"></span>PUNCIÓN SECA<span class="marquee__sep"></span>ELECTRÓLISIS PERCUTÁNEA<span class="marquee__sep"></span>ECOGRAFÍA<span class="marquee__sep"></span>REHABILITACIÓN FUNCIONAL<span class="marquee__sep"></span>PILATES TERAPÉUTICO<span class="marquee__sep"></span>DIATERMIA<span class="marquee__sep"></span></span>
+      <span class="marquee__group" aria-hidden="true">FISIOTERAPIA<span class="marquee__sep"></span>OSTEOPATÍA<span class="marquee__sep"></span>FISIOTERAPIA DEPORTIVA<span class="marquee__sep"></span>FISIOTERAPIA INVASIVA<span class="marquee__sep"></span>PUNCIÓN SECA<span class="marquee__sep"></span>ELECTRÓLISIS PERCUTÁNEA<span class="marquee__sep"></span>ECOGRAFÍA<span class="marquee__sep"></span>REHABILITACIÓN FUNCIONAL<span class="marquee__sep"></span>PILATES TERAPÉUTICO<span class="marquee__sep"></span>DIATERMIA<span class="marquee__sep"></span></span>
     </div>
-  </section>
+  </div>
+
 <section class="presentacion" id="presentacion">
   <div class="presentacion__inner">
     <div data-reveal>
@@ -115,6 +123,14 @@
   </div>
 </section>
 
+  <section class="phrases" id="frases">
+    <div class="phrases__inner">
+      <p data-reveal>Entender tu cuerpo.</p>
+      <p data-reveal>Escucharlo.</p>
+      <p data-reveal>Acompañarlo en el proceso.</p>
+    </div>
+  </section>
+
 <section class="filosofia" id="filosofia" data-topo="divider">
   <div class="filosofia__inner">
     <p class="filosofia__lead" data-reveal>No trato solo el dolor: busco su origen para devolverte el movimiento y la confianza en tu propio cuerpo.</p>
@@ -126,13 +142,6 @@
   </div>
 </section>
 
-  <div class="marquee" id="tratamientos" aria-label="Tratamientos de Fisioterapia Tierra">
-    <div class="marquee__track">
-      <span class="marquee__group">FISIOTERAPIA<span class="marquee__sep"></span>OSTEOPATÍA<span class="marquee__sep"></span>FISIOTERAPIA DEPORTIVA<span class="marquee__sep"></span>FISIOTERAPIA INVASIVA<span class="marquee__sep"></span>PUNCIÓN SECA<span class="marquee__sep"></span>ELECTRÓLISIS PERCUTÁNEA<span class="marquee__sep"></span>ECOGRAFÍA<span class="marquee__sep"></span>REHABILITACIÓN FUNCIONAL<span class="marquee__sep"></span>PILATES TERAPÉUTICO<span class="marquee__sep"></span>DIATERMIA<span class="marquee__sep"></span></span>
-      <span class="marquee__group" aria-hidden="true">FISIOTERAPIA<span class="marquee__sep"></span>OSTEOPATÍA<span class="marquee__sep"></span>FISIOTERAPIA DEPORTIVA<span class="marquee__sep"></span>FISIOTERAPIA INVASIVA<span class="marquee__sep"></span>PUNCIÓN SECA<span class="marquee__sep"></span>ELECTRÓLISIS PERCUTÁNEA<span class="marquee__sep"></span>ECOGRAFÍA<span class="marquee__sep"></span>REHABILITACIÓN FUNCIONAL<span class="marquee__sep"></span>PILATES TERAPÉUTICO<span class="marquee__sep"></span>DIATERMIA<span class="marquee__sep"></span></span>
-    </div>
-  </div>
-
   <section class="metodo" id="metodo" data-topo="metodo">
     <div class="metodo__inner">
       <h2 data-reveal>Método</h2>
@@ -140,10 +149,12 @@
         <div class="metodo__step" data-reveal>
           <span class="metodo__num">01</span>
           <h3>Escucha real</h3>
+          <p>Antes de tratar, escucho. Cada cuerpo cuenta una historia distinta, y el tratamiento parte de ahí.</p>
         </div>
         <div class="metodo__step" data-reveal>
           <span class="metodo__num">02</span>
           <h3>Raíz, no síntoma</h3>
+          <p>Busco el origen del dolor, no solo calmarlo un rato. Por eso los planes de tratamiento son a medida.</p>
         </div>
         <div class="metodo__step" data-reveal>
           <span class="metodo__num">03</span>
@@ -156,7 +167,7 @@
 
   <section class="cta-final" data-topo="divider" data-topo-color="crema">
     <div class="cta-final__inner" data-reveal>
-      <h2>Vuelve al origen de tu bienestar.</h2>
+      <h2>Tu bienestar no espera. Empecemos hoy.</h2>
       <a href="contacto.html" class="btn btn--dark">Pedir cita</a>
     </div>
   </section>
@@ -164,8 +175,7 @@
 <footer id="site-footer" class="site-footer">
   <div class="site-footer__inner">
     <div class="site-footer__brand">
-      <img src="assets/logos/logo-h-beige.svg" alt="Fisioterapia Tierra" width="140" height="35">
-      <p class="eyebrow" style="color:var(--azul)">FISIOTERAPIA TIERRA</p>
+      <img src="assets/logos/logo-h-beige.svg" alt="Fisioterapia Tierra" width="220" height="25">
     </div>
     <nav aria-label="Navegación del pie">
       <a href="index.html">Inicio</a>

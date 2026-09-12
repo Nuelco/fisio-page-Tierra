@@ -6,11 +6,11 @@
   // paralelas onduladas + un núcleo concéntrico, nunca geometría perfecta.
   var VARIANTS = {
     hero: [
-      'M -20,120 C 120,60 260,180 400,110 C 540,40 680,150 820,90',
-      'M -20,180 C 120,120 260,240 400,170 C 540,100 680,210 820,150',
-      'M -20,240 C 120,180 260,300 400,230 C 540,160 680,270 820,210',
-      'M -20,300 C 120,240 260,360 400,290 C 540,220 680,330 820,270',
-      'M 300,60 C 340,140 260,200 300,280 C 330,340 380,360 420,420'
+      'M -60,150 C 260,80 440,230 720,170 C 1000,110 1180,250 1660,180',
+      'M -60,240 C 260,170 440,320 720,260 C 1000,200 1180,340 1660,270',
+      'M -60,330 C 260,260 440,410 720,350 C 1000,290 1180,430 1660,360',
+      'M -60,420 C 260,350 440,500 720,440 C 1000,380 1180,520 1660,450',
+      'M -60,510 C 260,440 440,590 720,530 C 1000,470 1180,610 1660,540'
     ],
     divider: [
       'M -20,40 C 200,0 400,80 600,30 C 800,-20 1000,60 1220,20',
@@ -33,7 +33,7 @@
     if(!paths || !container) return null;
     var svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
     svg.setAttribute('class','topo-lines' + (extraClass ? ' ' + extraClass : ''));
-    svg.setAttribute('viewBox', variant === 'metodo' ? '0 0 980 400' : (variant === 'corner' ? '0 0 140 400' : '0 0 800 400'));
+    svg.setAttribute('viewBox', variant === 'metodo' ? '0 0 980 400' : (variant === 'corner' ? '0 0 140 400' : (variant === 'hero' ? '0 0 1600 640' : '0 0 800 400')));
     svg.setAttribute('preserveAspectRatio','none');
     svg.setAttribute('aria-hidden','true');
     paths.forEach(function(d){
@@ -166,4 +166,135 @@
     }
   }
   document.addEventListener('DOMContentLoaded', initContactForm);
+})();
+
+(function(){
+  'use strict';
+  // Símbolo de marca (torso, 6 trazos) dibujándose desde fuera del encuadre,
+  // igual que la animación de apertura del header en la rama desarrollo.
+  // En el hero de Inicio: aparece grande y centrado; al terminar de dibujarse
+  // se desliza a su columna final (derecha) mientras el texto del hero aparece.
+  function initHeroIntro(){
+    var hero = document.getElementById('hero');
+    var wrap = document.getElementById('hero-symbol');
+    var textEl = hero ? hero.querySelector('.hero__inner') : null;
+    if(!hero || !wrap) return;
+    var svg = wrap.querySelector('svg');
+    var defs = svg && svg.querySelector('[data-ft-clips]');
+    var marks = svg && svg.querySelector('[data-ft-marks]');
+    if(!defs || !marks) return;
+
+    var VB = { w: 473.89, h: 547 };
+    var EXT = 520, SWEEP = 2.6, TIER_DELAY = 0.16, MAXD = 1200;
+
+    var PATHS = [
+      'M91.62,116.31H0v22.66h91.62c9.8,0,17.77,7.97,17.77,17.76v352.77h22.66V156.73c0-22.29-18.13-40.42-40.43-40.42Z',
+      'M110.81,58.02H0v22.66h110.81c31.34,0,56.83,25.5,56.83,56.84v334.42h22.66V137.52c0-43.83-35.66-79.5-79.49-79.5Z',
+      'M121.68,0H0v22.66h121.67c41.46,0,77.26,24.47,93.92,59.7,2.95-9.06,6.69-17.79,11.33-25.94C204.26,22.43,165.52,0,121.68,0Z',
+      'M341.85,156.73v315.21h22.66V156.73c0-9.8,7.97-17.76,17.76-17.76h91.62v-22.66h-91.62c-22.28,0-40.41,18.13-40.41,40.42Z',
+      'M283.58,137.52v353.2h22.66V137.52c0-31.34,25.5-56.84,56.84-56.84h110.8v-22.66h-110.8c-43.83,0-79.5,35.66-79.5,79.5Z',
+      'M352.22,0c-51.09,0-95.39,30.59-115.33,74.32-7.25,15.97-11.33,33.65-11.33,52.34v420.34h22.66V126.66c0-57.32,46.67-104,104-104h121.67V0h-121.67Z'
+    ];
+
+    var STROKES = [
+      { i: 2, side: 'L', tier: 0, by: 0,      hy: -4,    hh: 95,   hEnd: 240,    vx: null,   vw: 0,    vBottom: 0,     thick: 22.66 },
+      { i: 5, side: 'R', tier: 0, by: 0,      hy: -4,    hh: 135,  hEnd: 221.5,  vx: 221.5,  vw: 30.7, vBottom: 551,   thick: 22.66 },
+      { i: 1, side: 'L', tier: 1, by: 58.02,  hy: 54,    hh: 30.7, hEnd: 194.3,  vx: 163.6,  vw: 30.7, vBottom: 475.9, thick: 22.66 },
+      { i: 4, side: 'R', tier: 1, by: 58.02,  hy: 54,    hh: 30.7, hEnd: 279.6,  vx: 279.6,  vw: 30.7, vBottom: 494.7, thick: 22.66 },
+      { i: 0, side: 'L', tier: 2, by: 116.31, hy: 112.3, hh: 30.7, hEnd: 136,    vx: 105.4,  vw: 30.7, vBottom: 513.5, thick: 22.66 },
+      { i: 3, side: 'R', tier: 2, by: 116.31, hy: 112.3, hh: 30.7, hEnd: 337.85, vx: 337.85, vw: 30.7, vBottom: 475.9, thick: 22.66 }
+    ];
+
+    var NS = 'http://www.w3.org/2000/svg';
+    var clamp = function(v, a, b){ return Math.max(a, Math.min(b, v)); };
+    var ease = function(t){ return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+
+    var items = STROKES.map(function(s, k){
+      var hLen = s.side === 'L' ? s.hEnd : VB.w - s.hEnd;
+      var vLen = s.vx == null ? 0 : s.vBottom - (s.hy + s.hh);
+
+      var clip = document.createElementNS(NS, 'clipPath');
+      clip.setAttribute('id', 'hero-ft-clip-' + k);
+      var poly = document.createElementNS(NS, 'polygon');
+      clip.appendChild(poly);
+      defs.appendChild(clip);
+
+      var path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', PATHS[s.i]);
+      path.setAttribute('clip-path', 'url(#hero-ft-clip-' + k + ')');
+      marks.appendChild(path);
+
+      var ext = document.createElementNS(NS, 'rect');
+      ext.setAttribute('y', s.by);
+      ext.setAttribute('height', s.thick);
+      marks.appendChild(ext);
+
+      return { s: s, hLen: hLen, vLen: vLen, total: EXT + hLen + vLen, poly: poly, ext: ext };
+    });
+
+    var END = (STROKES.length ? 2 * TIER_DELAY : 0) + SWEEP;
+
+    function frame(t){
+      items.forEach(function(it){
+        var s = it.s;
+        var start = s.tier * TIER_DELAY;
+        var prog = t <= start ? 0 : t >= start + SWEEP ? 1 : ease((t - start) / SWEEP);
+        var h = Math.min(prog * MAXD, it.total);
+        var e = clamp(h / EXT, 0, 1);
+        var r = clamp(it.hLen ? (h - EXT) / it.hLen : 1, 0, 1);
+        var vP = clamp(it.vLen ? (h - EXT - it.hLen) / it.vLen : 0, 0, 1);
+
+        var extW = EXT * Math.max(0, e - r);
+        it.ext.setAttribute('width', extW);
+        it.ext.setAttribute('x', s.side === 'L' ? -EXT * (1 - r) : VB.w + EXT * (1 - e));
+
+        var hw = r * (s.side === 'L' ? s.hEnd + 4 : VB.w - s.hEnd + 4);
+        var bandBottom = s.hy + s.hh;
+        var legBottom = s.vx != null ? bandBottom + vP * (s.vBottom - bandBottom) : bandBottom;
+        var pts;
+        if(s.side === 'L'){
+          var head = -4 + hw;
+          var edge = vP > 0 ? Math.max(s.vx + s.vw, head) : head;
+          pts = [[-4, s.hy], [head, s.hy], [head, bandBottom], [edge, bandBottom], [edge, legBottom], [-4, legBottom]];
+        } else {
+          var headR = VB.w + 4 - hw;
+          var edgeR = vP > 0 ? Math.min(s.vx, headR) : headR;
+          pts = [[VB.w + 4, s.hy], [headR, s.hy], [headR, bandBottom], [edgeR, bandBottom], [edgeR, legBottom], [VB.w + 4, legBottom]];
+        }
+        it.poly.setAttribute('points', pts.map(function(p){ return p[0].toFixed(2) + ',' + p[1].toFixed(2); }).join(' '));
+      });
+    }
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var narrow = window.innerWidth < 900;
+
+    if(reduce || narrow || !window.gsap){
+      frame(END);
+      if(textEl) textEl.style.opacity = 1;
+      return;
+    }
+
+    frame(0);
+    gsap.set(textEl, {opacity: 0, y: 16});
+
+    var heroRect = hero.getBoundingClientRect();
+    var wrapRect = wrap.getBoundingClientRect();
+    var offsetX = (heroRect.width / 2) - ((wrapRect.left - heroRect.left) + wrapRect.width / 2);
+    gsap.set(wrap, {x: offsetX, scale: 1.35});
+
+    var t0 = null;
+    function tick(ts){
+      if(t0 === null) t0 = ts;
+      var t = (ts - t0) / 1000;
+      frame(Math.min(t, END));
+      if(t < END){
+        requestAnimationFrame(tick);
+      } else {
+        gsap.to(wrap, {x: 0, scale: 1, duration: 1.1, ease: 'power3.inOut'});
+        gsap.to(textEl, {opacity: 1, y: 0, duration: 0.9, ease: 'power2.out', delay: 0.15});
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  document.addEventListener('DOMContentLoaded', initHeroIntro);
 })();
