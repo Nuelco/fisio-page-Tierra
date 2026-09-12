@@ -94,3 +94,76 @@
   }
   document.addEventListener('DOMContentLoaded', initHeader);
 })();
+
+(function(){
+  'use strict';
+  function initReveals(){
+    if(!window.gsap || !window.ScrollTrigger) return;
+    gsap.registerPlugin(ScrollTrigger);
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var items = document.querySelectorAll('[data-reveal]');
+    if(reduce){
+      items.forEach(function(el){ el.style.opacity = 1; });
+      return;
+    }
+    items.forEach(function(el){
+      gsap.set(el, {opacity:0, y:24});
+      gsap.to(el, {
+        opacity:1, y:0, duration:0.9, ease:'power2.out',
+        scrollTrigger:{ trigger: el, start:'top 88%', once:true }
+      });
+    });
+  }
+  document.addEventListener('DOMContentLoaded', initReveals);
+})();
+
+(function(){
+  'use strict';
+  function initContactForm(){
+    var form = document.getElementById('contact-form');
+    var status = document.getElementById('form-status');
+    if(!form || !status) return;
+
+    form.addEventListener('submit', function(evt){
+      evt.preventDefault();
+      status.className = 'form-status';
+      status.textContent = '';
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      if(submitBtn) submitBtn.disabled = true;
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+      })
+      .then(function(res){ return res.json(); })
+      .then(function(data){
+        if(data.ok){
+          status.textContent = 'Mensaje enviado. Te responderemos lo antes posible.';
+          status.className = 'form-status is-visible form-status--ok';
+          form.reset();
+        } else {
+          status.textContent = 'No se ha podido enviar: ' + (data.error || 'inténtalo de nuevo.');
+          status.className = 'form-status is-visible form-status--error';
+        }
+      })
+      .catch(function(){
+        // Sin backend disponible (ej. probando en GitHub Pages/local): caemos
+        // a un envío de formulario normal, que en un host con PHP sí funciona.
+        form.submit();
+      })
+      .finally(function(){
+        if(submitBtn) submitBtn.disabled = false;
+      });
+    });
+
+    var params = new URLSearchParams(window.location.search);
+    if(params.has('enviado')){
+      var ok = params.get('enviado') === '1';
+      status.textContent = ok ? 'Mensaje enviado. Te responderemos lo antes posible.' : 'No se ha podido enviar el mensaje.';
+      status.className = 'form-status is-visible ' + (ok ? 'form-status--ok' : 'form-status--error');
+    }
+  }
+  document.addEventListener('DOMContentLoaded', initContactForm);
+})();
