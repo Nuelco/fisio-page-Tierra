@@ -18,3 +18,10 @@ enviar a info@fisioterapiatierra.es — no funciona en GitHub Pages ni en local.
 Marca segun "Fisioterapia Tierra - manual de identidad" (docs/brief/):
 crema #ede7da, terracota #a56853, azul grisaceo #bbcccf, marron oscuro #412f2b.
 Tipografias: Space Mono (principal) y Rethink Sans (secundaria).
+
+## Probar el formulario tras subir a Hostinger
+1. Abrir contacto.html en el dominio real y enviar un mensaje de prueba.
+2. Confirmar que llega a info@fisioterapiatierra.es (revisar tambien Spam).
+3. Si no llega: comprobar en el panel de Hostinger que mail() esta habilitado
+   para el dominio y que el registro SPF permite el envio desde el propio
+   hosting (Hostinger -> Emails -> Autenticacion).
