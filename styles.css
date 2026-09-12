@@ -168,3 +168,15 @@ input,textarea,select{font:inherit;color:inherit}
 @media (max-width:700px){
   .servicio__inner{grid-template-columns:1fr;gap:12px}
 }
+
+/* ===== Instalaciones ===== */
+.instalaciones-hero{padding:var(--space-section) 0;text-align:center}
+.instalaciones-hero h1{font-size:clamp(36px,6vw,80px)}
+.instalaciones-block{padding:clamp(40px,6vw,80px) 0;border-top:1px solid rgba(65,47,43,.16)}
+.instalaciones-block--dark{background:var(--marron);color:var(--crema)}
+.instalaciones-block__inner{max-width:var(--container);margin:0 auto;padding:0 var(--space-inline);display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(28px,4vw,56px)}
+.instalaciones-block h2{font-size:clamp(26px,3vw,40px);margin-bottom:16px}
+.instalaciones-block p{color:var(--tinta-suave)}
+.instalaciones-block--dark p{color:rgba(237,231,218,.8)}
+.instalaciones-photo-slot{position:relative;min-height:280px;border:1px dashed rgba(65,47,43,.3);border-radius:var(--radius);display:flex;align-items:center;justify-content:center}
+.instalaciones-photo-slot span{font-family:var(--font-display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-suave);opacity:.6}
