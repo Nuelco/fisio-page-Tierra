@@ -67,7 +67,7 @@ input,textarea,select{font:inherit;color:inherit}
 .site-header{position:sticky;top:0;z-index:50;background:var(--marron);color:var(--crema);border-bottom:1px solid rgba(237,231,218,.18)}
 .site-header__inner{max-width:var(--container);margin:0 auto;padding:14px var(--space-inline);display:flex;align-items:center;justify-content:space-between;gap:24px}
 .brand{display:flex;align-items:center;gap:12px}
-.brand img{width:clamp(150px,26vw,210px);height:auto}
+.brand img{width:clamp(130px,20vw,180px);height:auto}
 .nav{display:none;align-items:center;gap:clamp(14px,2vw,28px);font-family:var(--font-display);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
 .nav a{color:var(--crema);padding:6px 0;position:relative}
 .nav a:hover,.nav a.is-active{color:#fff}
@@ -90,7 +90,7 @@ input,textarea,select{font:inherit;color:inherit}
 .site-footer nav{display:flex;flex-wrap:wrap;gap:20px;font-family:var(--font-display);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
 .site-footer nav a{color:var(--crema)}
 .site-footer nav a:hover{color:var(--azul)}
-.site-footer__brand img{width:clamp(180px,30vw,250px);height:auto}
+.site-footer__brand img{width:clamp(120px,20vw,170px);height:auto}
 .site-footer__copy{width:100%;margin-top:32px;padding-top:20px;border-top:1px solid rgba(237,231,218,.14);font-size:12px;color:rgba(237,231,218,.7)}
 
 /* ===== Hero ===== */
@@ -100,14 +100,14 @@ input,textarea,select{font:inherit;color:inherit}
 .hero h1{font-size:clamp(34px,6vw,64px);max-width:16ch;margin:0 auto 20px}
 .hero__lead{font-family:var(--font-body);font-size:clamp(17px,1.6vw,22px);color:var(--tinta-suave);max-width:44ch;margin:0 auto 36px}
 .hero__actions{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
-.hero__symbol{width:min(280px,60%);color:var(--terracota-dark)}
+.hero__symbol{width:min(380px,78%);color:var(--terracota-dark)}
 .hero__symbol svg{width:100%;height:auto;display:block;overflow:visible}
 @media (min-width:900px){
-  .hero__grid{flex-direction:row;gap:64px}
-  .hero__inner{text-align:left;flex:1.15;min-width:0}
+  .hero__grid{flex-direction:row;gap:56px}
+  .hero__inner{text-align:left;flex:1;min-width:0}
   .hero h1,.hero__lead{margin-left:0;margin-right:0}
   .hero__actions{justify-content:flex-start}
-  .hero__symbol{flex:1;width:100%;max-width:400px}
+  .hero__symbol{flex:1;width:100%;max-width:540px}
 }
 
 /* ===== Bloque de frases ===== */

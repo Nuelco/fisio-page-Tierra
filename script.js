@@ -266,21 +266,30 @@
     }
 
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var narrow = window.innerWidth < 900;
 
-    if(reduce || narrow || !window.gsap){
+    if(reduce || !window.gsap){
       frame(END);
       if(textEl) textEl.style.opacity = 1;
       return;
     }
 
+    // Por debajo de 900px el hero apila texto/símbolo en columna (ver CSS),
+    // así que el símbolo se desliza hacia abajo (eje Y) en vez de hacia la
+    // derecha (eje X); el texto queda arriba en ambos casos.
+    var narrow = window.innerWidth < 900;
+
     frame(0);
-    gsap.set(textEl, {opacity: 0, y: 16});
+    gsap.set(textEl, {opacity: 0, y: narrow ? -16 : 16});
 
     var heroRect = hero.getBoundingClientRect();
     var wrapRect = wrap.getBoundingClientRect();
-    var offsetX = (heroRect.width / 2) - ((wrapRect.left - heroRect.left) + wrapRect.width / 2);
-    gsap.set(wrap, {x: offsetX, scale: 1.35});
+    var axisProp = narrow ? 'y' : 'x';
+    var offset = narrow
+      ? (heroRect.height / 2) - ((wrapRect.top - heroRect.top) + wrapRect.height / 2)
+      : (heroRect.width / 2) - ((wrapRect.left - heroRect.left) + wrapRect.width / 2);
+    var setVars = {scale: 1.3};
+    setVars[axisProp] = offset;
+    gsap.set(wrap, setVars);
 
     var t0 = null;
     function tick(ts){
@@ -290,7 +299,9 @@
       if(t < END){
         requestAnimationFrame(tick);
       } else {
-        gsap.to(wrap, {x: 0, scale: 1, duration: 1.1, ease: 'power3.inOut'});
+        var toVars = {scale: 1, duration: 1.1, ease: 'power3.inOut'};
+        toVars[axisProp] = 0;
+        gsap.to(wrap, toVars);
         gsap.to(textEl, {opacity: 1, y: 0, duration: 0.9, ease: 'power2.out', delay: 0.15});
       }
     }
