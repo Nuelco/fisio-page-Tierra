@@ -128,3 +128,25 @@ input,textarea,select{font:inherit;color:inherit}
 .marquee__sep{width:6px;height:6px;background:var(--terracota);margin:0 clamp(20px,2.5vw,32px);display:inline-block;border-radius:50%}
 @keyframes marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion: reduce){.marquee__track{animation:none}}
+
+/* ===== Método ===== */
+.metodo{position:relative;padding:var(--space-section) 0;overflow:hidden}
+.metodo__inner{max-width:var(--container);margin:0 auto;padding:0 var(--space-inline)}
+.metodo h2{font-size:clamp(32px,4.4vw,60px);margin-bottom:clamp(40px,6vw,80px)}
+.metodo__steps{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.metodo__step{display:flex;flex-direction:column;gap:12px}
+.metodo__step:nth-child(1){margin-top:0}
+.metodo__step:nth-child(2){margin-top:clamp(20px,4vw,60px)}
+.metodo__step:nth-child(3){margin-top:clamp(40px,8vw,120px)}
+.metodo__num{font-family:var(--font-display);font-size:14px;color:var(--terracota);letter-spacing:.14em}
+.metodo__step h3{font-size:clamp(20px,2vw,26px);font-family:var(--font-body);font-weight:700}
+.metodo__step p{color:var(--tinta-suave);font-size:15px}
+@media (max-width:800px){
+  .metodo__steps{grid-template-columns:1fr}
+  .metodo__step:nth-child(2),.metodo__step:nth-child(3){margin-top:32px}
+}
+
+/* ===== CTA final ===== */
+.cta-final{position:relative;overflow:hidden;background:var(--terracota);color:var(--crema);padding:var(--space-section) 0;text-align:center}
+.cta-final__inner{position:relative;z-index:1;max-width:700px;margin:0 auto;padding:0 var(--space-inline)}
+.cta-final h2{font-size:clamp(30px,4vw,52px);margin-bottom:28px}
