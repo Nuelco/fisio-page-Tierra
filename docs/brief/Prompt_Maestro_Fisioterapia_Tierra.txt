@@ -1,0 +1,1110 @@
+PROMPT MAESTRO — FISIOTERAPIA TIERRA
+
+OBJETIVO DEL PROYECTO
+
+Diseña y desarrolla una web completa, funcional y preparada para
+producción para FISIOTERAPIA TIERRA, clínica de fisioterapia situada en
+Zamora.
+
+La web debe trasladar al entorno digital la identidad visual existente
+de Fisioterapia Tierra.
+
+NO debes crear una identidad nueva.
+
+El objetivo es construir una experiencia digital que parezca diseñada
+por un estudio profesional de branding, dirección de arte y diseño web,
+utilizando el branding existente como punto de partida.
+
+La web debe sentirse: natural · humana · profesional · editorial ·
+cálida · sofisticada · contemporánea · tranquila
+
+Debe evitar completamente la estética típica de una clínica médica.
+
+1. FUENTES DE VERDAD DEL PROYECTO
+
+El proyecto dispone de tres fuentes principales.
+
+1.1 MANUAL DE IDENTIDAD VISUAL
+
+Se proporciona el siguiente PDF:
+
+C:_TIERRA\02_Manual identidadTierra-manual de identidad.pdf
+
+ANALIZA EL MANUAL COMPLETO ANTES DE COMENZAR A DISEÑAR.
+
+El manual es la fuente de verdad principal de la identidad visual.
+
+Respeta especialmente:
+
+-   logotipo
+-   símbolo
+-   versiones del logotipo
+-   versiones cromáticas
+-   proporciones
+-   tipografías
+-   colores
+-   recursos gráficos
+-   líneas topográficas
+-   formas
+-   esquinas
+-   estilo de composición
+-   aplicaciones de marca
+-   estilo fotográfico
+-   usos correctos e incorrectos
+
+El manual contiene versiones horizontal, vertical y símbolo
+independiente del logotipo. Utiliza cada versión cuando corresponda
+según el espacio disponible.
+
+NO redibujar el logotipo. NO deformarlo. NO cambiar sus proporciones. NO
+inventar versiones.
+
+Las aplicaciones del manual deben utilizarse como referencia para
+entender cómo funciona visualmente la marca, pero NO deben copiarse
+literalmente.
+
+La web debe ser una evolución digital de la identidad, no una
+reproducción del manual.
+
+1.2 ASSETS OFICIALES
+
+Los recursos oficiales del proyecto se encuentran en:
+
+C:_TIERRA\01_Materiales
+
+Esta carpeta puede contener:
+
+-   logotipos
+-   fotografías
+-   fondos
+-   recursos gráficos
+-   imágenes de la clínica
+-   elementos de marca
+
+Utiliza prioritariamente los assets proporcionados.
+
+No sustituir fotografías oficiales por fotografías de stock si existe
+una fotografía adecuada en los recursos proporcionados.
+
+No generar un logotipo mediante IA.
+
+No recrear el símbolo mediante CSS o SVG improvisado si existe el
+recurso oficial.
+
+No sustituir las fotografías de las instalaciones por imágenes
+genéricas.
+
+Si un asset concreto no existe, utiliza una alternativa coherente con la
+dirección de arte de la marca.
+
+1.3 CONTENIDO DE LA CLIENTA
+
+Los textos proporcionados en este prompt constituyen el contenido
+aprobado por la clienta.
+
+No inventar:
+
+-   nuevos servicios
+-   precios
+-   testimonios
+-   profesionales
+-   instalaciones
+-   tratamientos
+-   resultados médicos
+-   certificaciones
+-   horarios
+-   datos de contacto
+
+No añadir páginas que la clienta no ha solicitado.
+
+2. ESTRUCTURA FINAL DE LA WEB
+
+La web debe tener únicamente estas páginas principales:
+
+1.  Inicio
+2.  Servicios
+3.  Instalaciones
+4.  Contacto
+
+NO crear páginas independientes de:
+
+-   Sobre mí
+-   Tarifas
+-   FAQ
+
+La información de Andrea puede aparecer dentro de Inicio, pero no debe
+convertirse en una página “Sobre mí”.
+
+3. IDENTIDAD VISUAL
+
+La identidad visual combina:
+
+cuerpo movimiento naturaleza tierra equilibrio recuperación bienestar
+
+El concepto gráfico principal es la relación entre:
+
+CUERPO + TOPOGRAFÍA + MOVIMIENTO
+
+Las líneas topográficas son un elemento fundamental de la identidad.
+
+Trasladar esta idea a la web.
+
+Las líneas pueden representar:
+
+-   movimiento
+-   respiración
+-   recorrido
+-   recuperación
+-   equilibrio
+-   capas del cuerpo
+-   relieve
+-   trayectoria
+
+No utilizarlas únicamente como decoración.
+
+4. PALETA DE COLOR
+
+Utilizar exclusivamente la paleta oficial:
+
+CREMA #EDE7DA
+
+TERRACOTA #A56853
+
+AZUL GRISÁCEO #BBCCCF
+
+MARRÓN OSCURO #412F2B
+
+No introducir colores adicionales como parte de la identidad.
+
+Especialmente NO utilizar:
+
+-   azul médico
+-   verde sanitario
+-   blanco puro como color predominante
+-   morados
+-   naranjas
+-   colores saturados
+-   gradientes multicolor
+
+5. TIPOGRAFÍA
+
+Utilizar exclusivamente:
+
+SPACE MONO
+
+Tipografía principal.
+
+Utilizar para:
+
+-   titulares
+-   grandes frases
+-   navegación
+-   números
+-   etiquetas
+-   pequeños elementos editoriales
+-   nombres de secciones
+-   elementos de identidad
+
+RETHINK SANS
+
+Tipografía secundaria.
+
+Utilizar para:
+
+-   párrafos
+-   textos largos
+-   descripciones
+-   servicios
+-   formularios
+-   información
+-   botones cuando resulte más legible
+
+No sustituirlas por Inter, Roboto, Montserrat, Poppins u otras fuentes
+genéricas.
+
+6. DIRECCIÓN DE ARTE
+
+La web debe parecer una pieza editorial.
+
+Pensar como:
+
+BRANDING + ARQUITECTURA + NATURALEZA + FISIOTERAPIA + EDITORIAL
+
+Utilizar:
+
+-   grandes espacios negativos
+-   composiciones asimétricas
+-   tipografía de gran escala
+-   fotografías grandes
+-   bloques de color
+-   curvas topográficas
+-   elementos que atraviesan secciones
+-   composiciones de diferentes escalas
+-   ritmo visual
+-   pequeñas etiquetas editoriales
+-   números
+-   líneas
+-   fotografías integradas con gráficos
+
+No hacer que todas las secciones tengan la misma estructura.
+
+Evitar repetir: título + texto + tres tarjetas
+
+una y otra vez.
+
+Cada sección debe tener una composición diferente, pero perteneciente al
+mismo sistema visual.
+
+7. REGLA ANTI-PLANTILLA
+
+La web NO debe parecer una plantilla de WordPress, Webflow, Framer, Wix
+o una landing page generada automáticamente.
+
+Evitar:
+
+-   hero convencional 50/50
+-   tres tarjetas idénticas
+-   seis tarjetas idénticas
+-   botones genéricos
+-   iconos genéricos
+-   exceso de sombras
+-   exceso de bordes
+-   glassmorphism
+-   gradientes
+-   efectos 3D
+-   blobs genéricos
+-   ilustraciones de personas generadas por IA
+-   stock fotográfico corporativo
+-   estética SaaS
+-   estética tecnológica
+-   exceso de animaciones
+-   exceso de elementos flotantes
+
+La composición debe tener criterio editorial.
+
+8. LÍNEAS TOPOGRÁFICAS
+
+Crear un sistema de líneas basado en el lenguaje gráfico del manual.
+
+Las líneas deben ser:
+
+-   finas
+-   orgánicas
+-   fluidas
+-   irregulares
+-   elegantes
+-   concéntricas
+-   similares a curvas de nivel
+-   relacionadas con el movimiento corporal
+
+No utilizar líneas geométricas perfectas.
+
+No convertirlas en un patrón decorativo repetitivo.
+
+Las líneas deben parecer parte de la arquitectura visual de la página.
+
+Utilizarlas en:
+
+-   hero
+-   fotografías
+-   transiciones
+-   fondos
+-   sección Método
+-   servicios
+-   instalaciones
+-   CTA
+-   footer
+
+con moderación.
+
+9. ICONOGRAFÍA
+
+No utilizar iconos médicos genéricos de Font Awesome, Lucide, Material
+Icons u otras bibliotecas.
+
+Cuando sea necesario utilizar iconografía, inspirarse en el lenguaje
+lineal del propio símbolo de Tierra y los pictogramas existentes en el
+manual.
+
+La iconografía debe parecer perteneciente a la misma marca.
+
+10. NAVEGACIÓN
+
+Header minimalista.
+
+Logo oficial de Fisioterapia Tierra.
+
+Navegación:
+
+Inicio Servicios Instalaciones Contacto
+
+CTA:
+
+PEDIR CITA
+
+El botón debe destacar pero sin parecer un botón convencional de
+plantilla.
+
+En móvil:
+
+-   menú hamburguesa
+-   transición suave
+-   navegación sencilla
+-   CTA claramente visible
+
+El header puede cambiar ligeramente durante el scroll para mejorar la
+experiencia.
+
+11. PÁGINA INICIO
+
+La página de Inicio debe ser la experiencia principal de marca.
+
+Debe contar una historia visual.
+
+No convertirla simplemente en un resumen de las otras páginas.
+
+11.1 HERO
+
+Crear un hero de gran impacto.
+
+Título principal exacto:
+
+“Vuelve al origen de tu bienestar”
+
+Subtítulo exacto:
+
+“Volver al origen, conectar con el cuerpo y recuperar el equilibrio en
+Zamora”
+
+El hero debe utilizar los recursos visuales de la marca.
+
+Preferiblemente utilizar una fotografía real de los assets
+proporcionados.
+
+Integrar las líneas topográficas sobre la fotografía de forma similar a
+las aplicaciones del manual.
+
+No poner simplemente una foto rectangular al lado de un bloque de texto.
+
+Crear una composición más editorial.
+
+El logotipo debe estar perfectamente integrado.
+
+CTA principal:
+
+PEDIR CITA
+
+CTA secundario:
+
+CONÓCENOS
+
+El segundo CTA puede llevar a la sección de filosofía dentro de Inicio.
+
+11.2 BLOQUE DE FRASES
+
+Crear una sección visual con las frases:
+
+“Entender tu cuerpo.”
+
+“Escucharlo.”
+
+“Acompañarlo en el proceso.”
+
+No mostrarlas necesariamente como tres tarjetas.
+
+Crear una composición tipográfica.
+
+Puede utilizarse aparición progresiva durante el scroll.
+
+Cada frase debe tener suficiente espacio.
+
+11.3 PRESENTACIÓN DE TIERRA
+
+Utilizar el texto proporcionado por la clienta:
+
+“En Tierra trabajamos desde una fisioterapia personalizada, con criterio
+clínico basado en la evidencia científica y atención individual a cada
+persona, con el fin de ofrecer el mejor tratamiento de manera honesta y
+sensata.”
+
+Después:
+
+“Soy Andrea Legido Andrés, fisioterapeuta y estoy detrás de tierra. Nº
+Col 3186”
+
+No convertir esta sección en una página “Sobre mí”.
+
+Debe sentirse como una presentación humana de la clínica.
+
+11.4 FILOSOFÍA
+
+Título:
+
+La filosofía
+
+Texto:
+
+“No trato solo el dolor: busco su origen para devolverte el movimiento y
+la confianza en tu propio cuerpo.”
+
+“En Tierra entiendo el cuerpo como un todo. A través de la fisioterapia
+y la osteopatía te acompaño en un proceso cercano y personalizado,
+respetando tus tiempos y tus necesidades.”
+
+“Porque sanar no es solo aliviar. Es volver a ti.”
+
+Diseñar esta sección con una composición visual potente.
+
+Utilizar las curvas topográficas como metáfora de encontrar el origen.
+
+11.5 MARQUEE DE SERVICIOS
+
+Esta sección es especialmente importante.
+
+Crear un infinite horizontal marquee.
+
+El listado debe mostrar SOLO EL NOMBRE DE CADA TRATAMIENTO.
+
+Los nombres son:
+
+FISIOTERAPIA OSTEOPATÍA FISIOTERAPIA DEPORTIVA FISIOTERAPIA INVASIVA
+PUNCIÓN SECA ELECTRÓLISIS PERCUTÁNEA ECOGRAFÍA REHABILITACIÓN FUNCIONAL
+PILATES TERAPÉUTICO DIATERMIA
+
+El marquee debe desplazarse continuamente:
+
+DERECHA → IZQUIERDA
+
+Debe ser infinito y no presentar saltos.
+
+Utilizar Space Mono.
+
+Puede utilizar separadores inspirados en el símbolo de Tierra.
+
+El efecto debe sentirse editorial y sofisticado, no como un ticker
+publicitario.
+
+No mostrar las descripciones en este marquee.
+
+11.6 MÉTODO
+
+Crear una sección titulada:
+
+MÉTODO
+
+La clienta ha definido tres principios:
+
+01 — ESCUCHA REAL
+
+02 — RAÍZ, NO SÍNTOMA
+
+03 — CONECTAR PARA TRATAR
+
+Para el tercer punto utilizar exactamente:
+
+“Las manos nos ayudan a conocer el cuerpo y a entender lo que necesita.
+A partir de ahí, combinamos diferentes técnicas para adaptar cada
+tratamiento.”
+
+Diseñar los tres principios como una experiencia visual.
+
+No hacer tres tarjetas convencionales.
+
+Puede utilizarse una trayectoria topográfica que conecte los tres
+conceptos.
+
+Las líneas pueden dibujarse progresivamente durante el scroll.
+
+11.7 CTA FINAL DE INICIO
+
+Crear una llamada a la acción antes de finalizar la página.
+
+Texto:
+
+“Vuelve al origen de tu bienestar.”
+
+CTA:
+
+PEDIR CITA
+
+Utilizar terracota o marrón oscuro según contraste.
+
+Incorporar líneas topográficas.
+
+12. PÁGINA SERVICIOS
+
+Título principal:
+
+“Soluciones personalizadas: conoce nuestros tratamientos
+fisioterapéuticos”
+
+Diseñar la página como un recorrido editorial por los tratamientos.
+
+No utilizar un simple grid de tarjetas.
+
+Los tratamientos pueden tener:
+
+-   diferentes escalas
+-   diferentes fondos de marca
+-   fotografías
+-   líneas topográficas
+-   números
+-   composición editorial
+
+pero manteniendo una navegación clara.
+
+FISIOTERAPIA
+
+“Abordamos el dolor y las limitaciones de movimiento mediante técnicas
+de terapia manual y otras herramientas terapéuticas. Cada tratamiento
+parte de una valoración individual para recuperar el movimiento, mejorar
+la función y favorecer tu bienestar.”
+
+OSTEOPATÍA
+
+“Un enfoque manual que entiende el cuerpo como un todo. A través de una
+valoración global, identificamos las restricciones que pueden afectar al
+movimiento y al funcionamiento del organismo para adaptar el tratamiento
+a las necesidades de cada persona.
+
+Trabajamos sobre los diferentes planos corporales —estructural, visceral
+y craneal—, entendiendo que cada parte está relacionada con el
+conjunto.”
+
+FISIOTERAPIA DEPORTIVA
+
+“Evaluamos y tratamos las lesiones relacionadas con la práctica
+deportiva, tanto en deportistas amateurs como profesionales y en
+cualquier disciplina.
+
+Partimos de una valoración individual y un razonamiento clínico para
+diseñar un tratamiento adaptado a cada persona, combinando terapia
+manual y ejercicio terapéutico.
+
+Nuestro objetivo es recuperar la función y acompañarte de forma
+progresiva hasta volver a tu actividad deportiva con confianza y
+seguridad.”
+
+FISIOTERAPIA INVASIVA
+
+“Técnicas que utilizan agujas de punción para acceder de forma precisa a
+los tejidos y complementar el tratamiento fisioterapéutico.”
+
+PUNCIÓN SECA
+
+“Técnica dirigida principalmente al tratamiento del dolor y las
+alteraciones musculares, especialmente en presencia de puntos gatillo
+miofasciales. Mediante una aguja fina se accede de forma precisa al
+tejido muscular, permitiendo actuar sobre zonas profundas que pueden ser
+difíciles de abordar mediante técnicas manuales.”
+
+ELECTRÓLISIS PERCUTÁNEA
+
+“Técnica de fisioterapia invasiva que permite aplicar una corriente
+galvánica de forma precisa sobre el tejido lesionado, mediante una aguja
+y con control ecográfico.
+
+La aplicación de la corriente provoca una respuesta local en el tejido
+que puede ayudar a modular el dolor, favorecer la respuesta inflamatoria
+necesaria para la reparación y estimular los procesos de recuperación y
+regeneración tisular.
+
+Se utiliza principalmente en el tratamiento de lesiones
+musculoesqueléticas, especialmente en tendones, músculos y otros tejidos
+blandos.”
+
+ECOGRAFÍA
+
+“La ecografía musculoesquelética es una herramienta de valoración que
+permite observar en tiempo real diferentes estructuras del aparato
+locomotor, como músculos, tendones, ligamentos y otras partes blandas.
+
+Nos ayuda a conocer con mayor precisión el estado de los tejidos,
+orientar el diagnóstico fisioterapéutico y adaptar el tratamiento a cada
+caso.
+
+Además, permite realizar un seguimiento de la evolución durante el
+proceso de recuperación.”
+
+REHABILITACIÓN FUNCIONAL
+
+Destacar:
+
+“El movimiento como parte del tratamiento.”
+
+Texto:
+
+“Diseñamos programas de ejercicio terapéutico adaptados a cada persona y
+a cada proceso, con el objetivo de aliviar síntomas, recuperar la
+función y mejorar la capacidad física.
+
+Contamos con un espacio equipado para acompañarte durante todo el
+proceso de recuperación, desde las primeras fases hasta la vuelta a tu
+actividad habitual.”
+
+PILATES TERAPÉUTICO
+
+“Una forma de trabajar el cuerpo desde el control, la precisión y la
+conciencia del movimiento.
+
+A través de ejercicios basados en los principios del método Pilates,
+trabajamos la respiración, la estabilidad, la movilidad y el control
+corporal, adaptando cada ejercicio a las características y necesidades
+de la persona.
+
+Un trabajo consciente y progresivo que busca mejorar la relación con tu
+cuerpo y la calidad de tus movimientos.”
+
+DIATERMIA
+
+“La diatermia es una técnica que utiliza corrientes de alta frecuencia
+para generar un efecto térmico en los tejidos y favorecer determinados
+procesos fisiológicos.
+
+En Tierra contamos con Fisiowarm 7.0, que utilizamos como complemento al
+tratamiento de fisioterapia. Su aplicación puede ayudar a disminuir el
+dolor, mejorar la circulación y el aporte de oxígeno y nutrientes a los
+tejidos, favorecer la relajación muscular y acompañar los procesos de
+recuperación y reparación tisular.
+
+La intensidad y aplicación se adaptan a las necesidades de cada persona
+y al objetivo del tratamiento.”
+
+No añadir afirmaciones médicas adicionales.
+
+13. PÁGINA INSTALACIONES
+
+Crear una página específica:
+
+INSTALACIONES
+
+Esta página debe ser MUY VISUAL.
+
+Utilizar prioritariamente las fotografías reales disponibles en:
+
+C:_TIERRA\01_Materiales
+
+No inventar imágenes.
+
+No utilizar imágenes de stock para representar la clínica si existen
+fotografías reales.
+
+Crear una experiencia similar a un reportaje editorial de
+arquitectura/interiorismo, no una galería convencional.
+
+Utilizar:
+
+-   fotografías grandes
+-   fotografías pequeñas
+-   composiciones asimétricas
+-   espacios negativos
+-   líneas topográficas
+-   pequeños textos
+-   detalles de materiales
+-   zonas de tratamiento
+-   espacio de rehabilitación
+-   equipamiento cuando aparezca en las fotografías
+
+Las fotografías deben tener protagonismo.
+
+Evitar un grid rígido de 3x3 imágenes.
+
+Si las fotografías permiten identificar zonas concretas, mostrar
+pequeños indicadores editoriales.
+
+No inventar nombres de salas ni características que no puedan
+confirmarse mediante los assets proporcionados.
+
+14. PÁGINA CONTACTO
+
+Crear una página clara y elegante.
+
+Información:
+
+Fisioterapia Tierra
+
+Av. del Cardenal Cisneros 44, bajo
+
+(entrada por C. Miguel de Unamuno)
+
+49014 Zamora
+
+614 05 95 66
+
+info@fisioterapiatierra.es
+
+www.fisioterapiatierra.es
+
+Incluir:
+
+-   dirección
+-   mapa
+-   teléfono
+-   email
+-   formulario
+-   CTA de contacto/cita
+
+Formulario:
+
+Nombre Email Teléfono Motivo de consulta Mensaje
+
+Botón:
+
+ENVIAR
+
+El teléfono debe ser clickable.
+
+El email debe ser clickable.
+
+La dirección debe abrir el mapa.
+
+15. PEDIR CITA
+
+El CTA PEDIR CITA debe aparecer estratégicamente en:
+
+-   header
+-   hero
+-   final de Inicio
+-   página Servicios
+-   página Contacto
+
+Si no se proporciona una URL específica de reserva online, NO inventar
+una.
+
+En ese caso, utilizar teléfono, email o formulario como mecanismo de
+contacto.
+
+16. FOOTER
+
+Fondo:
+
+#412F2B
+
+Utilizar la versión correcta del logotipo según el manual.
+
+Enlaces:
+
+Inicio Servicios Instalaciones Contacto Aviso legal Privacidad
+
+Añadir:
+
+FISIOTERAPIA TIERRA
+
+El footer debe mantener el lenguaje visual del resto de la web.
+
+17. ANIMACIONES
+
+Todas las animaciones deben ser:
+
+lentas · orgánicas · precisas · elegantes
+
+La inspiración debe ser:
+
+RESPIRACIÓN + MOVIMIENTO + ONDAS + CUERPO
+
+Utilizar:
+
+-   reveal de textos
+-   líneas que se dibujan
+-   desplazamientos suaves
+-   parallax mínimo
+-   transiciones de fotografías
+-   hover refinado
+-   marquee infinito
+-   scroll animations
+-   pequeñas transformaciones
+
+No utilizar:
+
+-   rebotes
+-   elasticidad exagerada
+-   zoom agresivo
+-   rotaciones
+-   efectos 3D
+-   animaciones rápidas
+-   partículas
+-   efectos tecnológicos
+
+Las curvas topográficas pueden:
+
+-   dibujarse
+-   expandirse
+-   desplazarse
+-   respirar lentamente
+
+pero siempre de manera sutil.
+
+18. MARQUEE
+
+El marquee de servicios debe ser una pieza importante de identidad.
+
+Implementarlo técnicamente como un loop infinito real.
+
+Requisitos:
+
+-   movimiento constante
+-   sin saltos
+-   sin reinicio visible
+-   velocidad uniforme
+-   responsive
+-   optimizado
+-   pausa opcional al hover en desktop
+-   respetar prefers-reduced-motion
+
+No utilizar una animación que termine y vuelva bruscamente al principio.
+
+19. RESPONSIVE
+
+Crear tres experiencias diferentes.
+
+DESKTOP: Máximo desarrollo editorial.
+
+TABLET: Reorganizar las composiciones.
+
+MOBILE: No limitarse a reducir el desktop.
+
+Replantear:
+
+-   tamaños
+-   orden
+-   fotografías
+-   márgenes
+-   navegación
+-   marquee
+-   líneas
+-   CTA
+
+Las líneas topográficas deben utilizarse con más moderación en móvil.
+
+Los titulares deben seguir teniendo personalidad.
+
+Los botones deben ser cómodos de pulsar.
+
+20. ACCESIBILIDAD
+
+Implementar:
+
+-   HTML semántico
+-   contraste suficiente
+-   navegación por teclado
+-   focus states
+-   labels
+-   alt text
+-   formularios accesibles
+-   botones accesibles
+-   prefers-reduced-motion
+
+La estética nunca debe impedir la accesibilidad.
+
+21. SEO
+
+Optimizar para búsquedas relacionadas con:
+
+fisioterapia en Zamora fisioterapeuta en Zamora fisioterapia Zamora
+osteopatía Zamora rehabilitación Zamora fisioterapia deportiva Zamora
+Pilates terapéutico Zamora
+
+Utilizar SEO de forma natural.
+
+No rellenar los textos con palabras clave artificiales.
+
+Crear:
+
+-   title
+-   meta description
+-   headings correctos
+-   Open Graph
+-   datos estructurados de negocio local
+-   canonical
+-   sitemap si corresponde
+-   URLs limpias
+
+22. RENDIMIENTO
+
+Optimizar:
+
+-   imágenes
+-   fuentes
+-   lazy loading
+-   formatos modernos
+-   animaciones
+-   JavaScript
+-   vídeo si existe
+-   SVG
+
+No utilizar animaciones que provoquen un rendimiento deficiente.
+
+Especialmente en móvil.
+
+23. FOTOGRAFÍA
+
+La fotografía debe transmitir:
+
+cuerpo real movimiento real personas reales tratamiento real calma
+cercanía
+
+Evitar:
+
+-   stock médico evidente
+-   personas sonriendo artificialmente
+-   batas médicas genéricas
+-   hospitales
+-   estetoscopios
+-   poses corporativas
+-   imágenes excesivamente artificiales
+
+Cuando se utilicen fotografías de personas, integrar las curvas
+topográficas de manera similar a las aplicaciones de marca.
+
+24. SISTEMA VISUAL DE TRANSICIONES
+
+No hacer que cada sección termine abruptamente.
+
+Crear continuidad visual entre las secciones.
+
+Las líneas topográficas pueden:
+
+comenzar en una sección → atravesar una transición → continuar en la
+siguiente.
+
+Esto debe hacer que toda la página parezca un único recorrido.
+
+Conceptualmente:
+
+el usuario recorre la web como si siguiera una línea topográfica.
+
+25. EXPERIENCIA DE USUARIO
+
+La web debe conseguir dos cosas simultáneamente:
+
+IDENTIDAD: Que el usuario recuerde Fisioterapia Tierra.
+
+CONVERSIÓN: Que sea muy fácil pedir información o cita.
+
+Nunca sacrificar claridad por estética.
+
+El CTA debe ser evidente pero no agresivo.
+
+26. REGLA DE CONTENIDO
+
+No añadir:
+
+-   testimonios inventados
+-   cifras inventadas
+-   horarios inventados
+-   precios
+-   FAQ
+-   promociones
+-   descuentos
+-   tratamientos no proporcionados
+-   equipo inexistente
+-   certificaciones inexistentes
+
+Si falta información, dejar preparada la estructura para añadirla
+posteriormente, pero no inventarla.
+
+27. REGLA DE MARCA
+
+No modificar:
+
+-   logotipo
+-   símbolo
+-   colores
+-   tipografías
+-   proporciones
+-   versiones cromáticas
+
+Utilizar siempre la versión correcta del logo para cada fondo.
+
+28. REGLA ANTI-IA
+
+Antes de finalizar el diseño, realizar una revisión completa.
+
+Para cada sección preguntar:
+
+¿Podría esta sección pertenecer a cualquier clínica de fisioterapia?
+
+Si la respuesta es sí:
+
+REDISEÑARLA.
+
+Preguntar también:
+
+-   ¿La identidad de Tierra es reconocible sin leer el nombre?
+-   ¿Las curvas topográficas están integradas de forma inteligente?
+-   ¿Las fotografías parecen formar parte del mismo universo?
+-   ¿Existe ritmo entre las secciones?
+-   ¿Hay demasiado contenido dentro de tarjetas?
+-   ¿Hay demasiados grids?
+-   ¿Hay demasiados componentes repetidos?
+-   ¿Las animaciones tienen una razón?
+-   ¿El diseño aprovecha realmente el branding?
+-   ¿Parece diseñado por un estudio o generado mediante una plantilla?
+
+El resultado final debe superar esta revisión.
+
+29. NO COPIAR EL MANUAL
+
+El manual es la fuente de identidad, pero la web NO debe parecer una
+copia del manual.
+
+No colocar simplemente las composiciones del manual como fondos.
+
+No reproducir literalmente las páginas del PDF.
+
+Utilizar el sistema visual y crear una experiencia digital nueva.
+
+30. PRIORIDADES
+
+Si existe conflicto entre decisiones, utilizar este orden:
+
+1.  Identidad de marca
+2.  Contenido aprobado por la clienta
+3.  Legibilidad
+4.  Experiencia de usuario
+5.  Conversión
+6.  Accesibilidad
+7.  Rendimiento
+8.  Efectos visuales
+
+Los efectos visuales nunca deben tener prioridad sobre la identidad o la
+usabilidad.
+
+31. CHECKLIST FINAL
+
+MARCA [ ] Logo oficial [ ] Proporciones correctas [ ] Colores oficiales
+[ ] Space Mono [ ] Rethink Sans [ ] Curvas topográficas [ ] Iconografía
+coherente con la marca
+
+PÁGINAS [ ] Inicio [ ] Servicios [ ] Instalaciones [ ] Contacto
+
+CONTENIDO [ ] Textos de la clienta respetados [ ] No se ha inventado
+información [ ] No existen páginas no solicitadas
+
+EXPERIENCIA [ ] Hero memorable [ ] Marquee de servicios [ ] Método
+visual [ ] Instalaciones editorial [ ] CTA claro [ ] Contacto sencillo
+
+ANIMACIÓN [ ] Marquee infinito [ ] Líneas topográficas animadas [ ]
+Scroll reveals [ ] Hover states [ ] Animaciones suaves [ ] Reduced
+motion
+
+RESPONSIVE [ ] Desktop [ ] Tablet [ ] Mobile
+
+TÉCNICO [ ] SEO [ ] Accesibilidad [ ] Rendimiento [ ] Formularios [ ]
+Enlaces [ ] Teléfono [ ] Email [ ] Mapa
+
+RESULTADO ESPERADO
+
+El resultado final debe transmitir inmediatamente:
+
+“Fisioterapia profesional, cercana, natural y contemporánea.”
+
+Pero, sobre todo:
+
+NO diseñes una web de fisioterapia y después aplícale el branding de
+Tierra.
+
+Diseña una experiencia digital que solo pueda ser Fisioterapia Tierra.
+
+La web debe destacar por su dirección de arte, pero sin sacrificar
+claridad, funcionalidad, rendimiento o conversión.
