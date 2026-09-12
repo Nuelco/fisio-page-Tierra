@@ -12,7 +12,12 @@ La web actual en `desarrollo` (single-page, generada por un runtime de component
 
 Dos assets sí son de marca genuina y de buena calidad: `assets/rrss-1.jpg` y `assets/rrss-2.jpg` (líneas topográficas sobre foto de cuerpo real, símbolo correcto, tono editorial) — se conservan y se usan como referencia de dirección de arte.
 
-`C:\_TIERRA\...` (manual PDF y carpeta de materiales oficiales que cita el prompt) no existe en esta máquina — no se usa como fuente directa; el prompt maestro adjunto hace sus veces.
+**Actualización:** el manual y los materiales oficiales sí existen en esta máquina, en `C:\Users\djman\Downloads\INFORMACION_TIERRA\` (no en la ruta `C:\_TIERRA\...` que citaba el prompt). Ya revisado íntegro (25 páginas) — confirma exactamente la paleta, tipografías y símbolo que ya se estaban usando, y aporta dos cosas que ya se han incorporado al repo:
+- **Kit de logo oficial completo**: 6 colores (azul/beige/blanco/marrón/negro/terracota) × 4 variantes (horizontal/vertical/principal/símbolo solo) en `assets/logos/`, sustituyendo el subconjunto parcial que había en la raíz de `assets/`.
+- **Patrón de líneas topográficas de referencia** (página "Vinilos cristales" del manual): confirma que `ondas-1/2.png` ya es el recurso gráfico oficial; los SVG nuevos que se dibujen deben seguir ese mismo lenguaje de curvas orgánicas.
+- Dos imágenes rrss adicionales (`rrss-igstories1.jpg`, `rrss-igstories2.jpg`) copiadas también a `assets/`.
+
+La carpeta de materiales **no contiene fotografía real de las instalaciones ni de Andrea** (solo logo, papelería, ropa, rótulos, fuentes y piezas de rrss) — la decisión de aplazar la fotografía real (ver más abajo) se mantiene sin cambios.
 
 ## Decisiones de alcance (acordadas con el usuario)
 
@@ -35,12 +40,13 @@ script.js
 sitemap.xml
 robots.txt
 assets/
-  fonts/            (ya existen: Rethink Sans, Space Mono)
-  logo-*.svg        (ya existen — símbolo torso, versiones h/v/beige/terracota/negro)
-  ondas-1.png, ondas-2.png   (ya existen)
-  rrss-1.jpg, rrss-2.jpg     (ya existen, se reutilizan)
+  fonts/            (Rethink Sans, Space Mono)
+  logos/            (kit oficial completo: 6 colores × h/v/principal/símbolo)
+  ondas-1.png, ondas-2.png            (patrón topográfico oficial)
+  rrss-1.jpg, rrss-2.jpg, rrss-igstories1.jpg, rrss-igstories2.jpg  (piezas de marca reutilizables)
 docs/
   brief/Prompt_Maestro_Fisioterapia_Tierra.txt
+  brief/Fisioterapia Tierra-manual de identidad.pdf
   superpowers/specs/... (este documento)
 README.md          (se actualiza: ya no es single-page ni x-dc)
 ```
