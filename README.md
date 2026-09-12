@@ -3,15 +3,18 @@
 Sitio estatico. No necesita build ni dependencias: se sirve tal cual.
 
 ## Contenido
-- index.html          pagina completa (inicio, servicios + ficha por servicio, sobre mi, instalaciones, tarifas, FAQ, contacto)
-- support.js          runtime del componente (necesario)
-- image-slot.js       componente de imagenes de la galeria
-- assets/             fuentes (Rethink Sans, Space Mono), ondas, logos e imagenes
-- *.png / *.jpg       fotos de consulta y retrato
+- index.html, servicios.html, instalaciones.html, contacto.html  paginas reales
+- styles.css / script.js   sistema visual y animaciones (GSAP + ScrollTrigger por CDN)
+- enviar-contacto.php      backend del formulario de contacto (solo funciona en hosting con PHP, ej. Hostinger)
+- assets/                  fuentes, logos oficiales, recursos de marca
+- sitemap.xml / robots.txt
 
 ## Publicar
-Copiar todo el contenido de esta carpeta a la raiz del sitio (o a /public segun el hosting).
-Las rutas son relativas, asi que funciona en cualquier subcarpeta sin cambios.
+Copiar todo el contenido de esta carpeta a la raiz del hosting (Hostinger).
+Las rutas son relativas, funciona en cualquier subcarpeta sin cambios.
+El formulario de contacto necesita PHP en el servidor (Hostinger lo tiene) para
+enviar a info@fisioterapiatierra.es — no funciona en GitHub Pages ni en local.
 
-Marca segun "Fisioterapia Tierra - manual de identidad":
-beige #ede7da, terracota #a56853, azul #bbcccf, marron #412f2b.
+Marca segun "Fisioterapia Tierra - manual de identidad" (docs/brief/):
+crema #ede7da, terracota #a56853, azul grisaceo #bbcccf, marron oscuro #412f2b.
+Tipografias: Space Mono (principal) y Rethink Sans (secundaria).
