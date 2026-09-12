@@ -76,3 +76,21 @@
   window.TierraTopo = { inject: inject, drawOnScroll: drawOnScroll };
   document.addEventListener('DOMContentLoaded', initAll);
 })();
+
+(function(){
+  'use strict';
+  function initHeader(){
+    var toggle = document.getElementById('nav-toggle');
+    var menu = document.getElementById('mobile-nav');
+    if(toggle && menu){
+      toggle.addEventListener('click', function(){
+        var open = menu.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+    }
+    document.querySelectorAll('[data-year]').forEach(function(el){
+      el.textContent = new Date().getFullYear();
+    });
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+})();

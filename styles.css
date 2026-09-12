@@ -61,3 +61,33 @@ input,textarea,select{font:inherit;color:inherit}
 .topo-lines path{fill:none;stroke:currentColor;stroke-width:1;opacity:.55}
 .topo-lines--azul{color:var(--azul)}
 .topo-lines--crema{color:var(--crema)}
+
+/* ===== Header ===== */
+.site-header{position:sticky;top:0;z-index:50;background:var(--marron);color:var(--crema);border-bottom:1px solid rgba(237,231,218,.18)}
+.site-header__inner{max-width:var(--container);margin:0 auto;padding:14px var(--space-inline);display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:38px;height:auto}
+.nav{display:none;align-items:center;gap:clamp(14px,2vw,28px);font-family:var(--font-display);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+.nav a{color:var(--crema);padding:6px 0;position:relative}
+.nav a:hover,.nav a.is-active{color:#fff}
+.nav a.is-active::after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--crema)}
+.nav .btn{color:var(--crema)}
+.nav-toggle{display:inline-flex;flex-direction:column;gap:4px;padding:10px;border:1px solid rgba(237,231,218,.4);border-radius:var(--radius)}
+.nav-toggle span{display:block;width:18px;height:1.5px;background:var(--crema)}
+.mobile-nav{display:none;flex-direction:column;position:absolute;top:100%;right:var(--space-inline);left:var(--space-inline);background:var(--marron);border:1px solid rgba(237,231,218,.18);border-radius:var(--radius);padding:8px 20px;font-family:var(--font-display);font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+.mobile-nav.is-open{display:flex}
+.mobile-nav a{color:var(--crema);padding:14px 0;border-bottom:1px solid rgba(237,231,218,.14)}
+.mobile-nav .btn{margin:14px 0}
+@media (min-width:900px){
+  .nav{display:flex}
+  .nav-toggle,.mobile-nav{display:none !important}
+}
+
+/* ===== Footer ===== */
+.site-footer{background:var(--marron);color:var(--crema);padding:var(--space-section) 0 40px}
+.site-footer__inner{max-width:var(--container);margin:0 auto;padding:0 var(--space-inline);display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:flex-start}
+.site-footer nav{display:flex;flex-wrap:wrap;gap:20px;font-family:var(--font-display);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.site-footer nav a{color:var(--crema)}
+.site-footer nav a:hover{color:var(--azul)}
+.site-footer__brand img{width:120px;height:auto;margin-bottom:8px}
+.site-footer__copy{width:100%;margin-top:32px;padding-top:20px;border-top:1px solid rgba(237,231,218,.14);font-size:12px;color:rgba(237,231,218,.7)}
