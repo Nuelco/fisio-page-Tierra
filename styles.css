@@ -180,3 +180,24 @@ input,textarea,select{font:inherit;color:inherit}
 .instalaciones-block--dark p{color:rgba(237,231,218,.8)}
 .instalaciones-photo-slot{position:relative;min-height:280px;border:1px dashed rgba(65,47,43,.3);border-radius:var(--radius);display:flex;align-items:center;justify-content:center}
 .instalaciones-photo-slot span{font-family:var(--font-display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-suave);opacity:.6}
+
+/* ===== Contacto ===== */
+.contacto-hero{padding:var(--space-section) 0 clamp(32px,5vw,56px)}
+.contacto-hero__inner{max-width:var(--container);margin:0 auto;padding:0 var(--space-inline)}
+.contacto-hero h1{font-size:clamp(30px,4.2vw,56px);max-width:20ch}
+.contacto-grid{max-width:var(--container);margin:0 auto;padding:0 var(--space-inline) var(--space-section);display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:clamp(32px,5vw,64px)}
+.contacto-info{display:flex;flex-direction:column;gap:24px}
+.contacto-info dt{font-family:var(--font-display);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--terracota);margin-bottom:4px}
+.contacto-info dd{margin:0;color:var(--marron)}
+.contacto-map{border-radius:var(--radius);overflow:hidden;border:1px solid rgba(65,47,43,.16);aspect-ratio:4/3}
+.contacto-map iframe{width:100%;height:100%;border:0}
+.contacto-form{display:flex;flex-direction:column;gap:18px}
+.contacto-form label{display:flex;flex-direction:column;gap:6px;font-family:var(--font-display);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta-suave)}
+.contacto-form input,.contacto-form select,.contacto-form textarea{padding:14px 16px;border:1px solid rgba(65,47,43,.3);border-radius:var(--radius);background:#fff;font-size:16px}
+.contacto-form textarea{min-height:140px;resize:vertical}
+.contacto-form__honeypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form-status{font-family:var(--font-display);font-size:13px;padding:12px 16px;border-radius:var(--radius);display:none}
+.form-status.is-visible{display:block}
+.form-status--ok{background:rgba(165,104,83,.12);color:var(--terracota-dark)}
+.form-status--error{background:rgba(65,47,43,.1);color:var(--marron)}
+@media (max-width:800px){.contacto-grid{grid-template-columns:1fr}}

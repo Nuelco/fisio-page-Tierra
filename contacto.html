@@ -34,7 +34,70 @@
   </div>
 </header>
 <main id="main">
-  <!-- TODO Tarea 11: contacto -->
+  <section class="contacto-hero">
+    <div class="contacto-hero__inner" data-reveal>
+      <p class="eyebrow">Contacto</p>
+      <h1>Cuéntanos qué te ocurre</h1>
+    </div>
+  </section>
+
+  <section class="contacto-grid">
+    <div>
+      <dl class="contacto-info" data-reveal>
+        <div>
+          <dt>Dirección</dt>
+          <dd><a href="https://www.google.com/maps/search/?api=1&query=Av.+del+Cardenal+Cisneros+44,+49014+Zamora" target="_blank" rel="noopener">Av. del Cardenal Cisneros 44, bajo<br>(entrada por C. Miguel de Unamuno)<br>49014 Zamora</a></dd>
+        </div>
+        <div>
+          <dt>Teléfono</dt>
+          <dd><a href="tel:+34614059566">614 05 95 66</a></dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd><a href="mailto:info@fisioterapiatierra.es">info@fisioterapiatierra.es</a></dd>
+        </div>
+      </dl>
+      <div class="contacto-map" data-reveal style="margin-top:28px">
+        <iframe title="Mapa de Fisioterapia Tierra en Zamora" loading="lazy" src="https://www.google.com/maps?q=Av.+del+Cardenal+Cisneros+44,+49014+Zamora&output=embed"></iframe>
+      </div>
+    </div>
+
+    <form class="contacto-form" id="contact-form" method="POST" action="enviar-contacto.php" data-reveal>
+      <div class="form-status" id="form-status" role="status"></div>
+      <label>Nombre
+        <input type="text" name="nombre" required autocomplete="name">
+      </label>
+      <label>Email
+        <input type="email" name="email" required autocomplete="email">
+      </label>
+      <label>Teléfono
+        <input type="tel" name="telefono" autocomplete="tel">
+      </label>
+      <label>Motivo de consulta
+        <select name="motivo" required>
+          <option value="">Selecciona un motivo</option>
+          <option>Fisioterapia</option>
+          <option>Osteopatía</option>
+          <option>Fisioterapia deportiva</option>
+          <option>Fisioterapia invasiva</option>
+          <option>Punción seca</option>
+          <option>Electrólisis percutánea</option>
+          <option>Ecografía</option>
+          <option>Rehabilitación funcional</option>
+          <option>Pilates terapéutico</option>
+          <option>Diatermia</option>
+          <option>Otro</option>
+        </select>
+      </label>
+      <label>Mensaje
+        <textarea name="mensaje" required></textarea>
+      </label>
+      <label class="contacto-form__honeypot" aria-hidden="true">No rellenar
+        <input type="text" name="website" tabindex="-1" autocomplete="off">
+      </label>
+      <button type="submit" class="btn btn--primary">Enviar</button>
+    </form>
+  </section>
 </main>
 <footer id="site-footer" class="site-footer">
   <div class="site-footer__inner">
