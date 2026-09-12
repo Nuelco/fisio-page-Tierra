@@ -54,7 +54,7 @@ Fuente literal: prompt maestro secciones 11–14. Resumen de qué vive dónde (s
 - **`index.html`**: hero (título/subtítulo exactos, sin foto real — composición tipográfica + líneas topográficas, más un `<!-- FOTO PENDIENTE -->` en el punto donde iría la fotografía editorial descrita en 11.1), bloque de frases (11.2, composición tipográfica progresiva, no tarjetas), presentación de Tierra/Andrea (11.3, con `<!-- FOTO PENDIENTE: retrato Andrea -->`), filosofía (11.4), marquee de 9 tratamientos (11.5), Método (11.6, trayectoria topográfica conectando 3 puntos), CTA final (11.7).
 - **`servicios.html`**: título exacto de sección 12, recorrido editorial de los 10 tratamientos con sus textos literales, composición de escalas variables (nunca grid uniforme de 10 tarjetas iguales).
 - **`instalaciones.html`**: sin fotografía real (ver limitación arriba). Se resuelve con tipografía grande, paleta de marca, líneas topográficas y los `<!-- FOTO PENDIENTE -->` marcados en los puntos donde el prompt (sección 13) pide fotografía grande/pequeña y detalles.
-- **`contacto.html`**: dirección, mapa, teléfono/email clicables, formulario (Nombre/Email/Teléfono/Motivo/Mensaje). **Sin backend de envío definido** — se implementa como `mailto:` con los campos precompuestos en el asunto/cuerpo como solución mínima funcional; si la clienta quiere un formulario que entregue sin abrir el cliente de correo, hace falta un servicio de formularios (Formspree o similar) o backend propio — **pendiente de confirmar con el usuario en la revisión de esta spec**.
+- **`contacto.html`**: dirección, mapa, teléfono/email clicables, formulario (Nombre/Email/Teléfono/Motivo/Mensaje). El formulario hace `POST` a `enviar-contacto.php`, un endpoint PHP propio (sin dependencias) que envía el mensaje por `mail()` a **`info@fisioterapiatierra.es`** — funciona automáticamente en cuanto el sitio se sube a Hostinger (hosting con PHP), sin tocar nada más. **No funciona en GitHub Pages** (solo sirve estático, no ejecuta PHP) ni se puede probar en esta máquina (no hay PHP instalado) — la primera prueba de envío real se hace ya en Hostinger tras subir los archivos. El PHP valida y sanea los campos (evita inyección de cabeceras de correo vía `\r`/`\n` en Nombre/Email/Motivo), incluye un campo honeypot oculto anti-spam, y el JS del formulario hace el `POST` por `fetch` mostrando éxito/error en la propia página sin recargar; si JS está desactivado, el `<form>` cae a un envío normal con redirección a la propia página con un aviso de confirmación por query string.
 
 ## Sistema visual
 
@@ -86,8 +86,8 @@ Sin fotos pesadas que optimizar por ahora (ver limitación). Fuentes locales ya 
 
 Antes de dar por cerrado el rediseño, repasar sección por sección: ¿podría esta sección pertenecer a cualquier clínica de fisioterapia? ¿Es reconocible la identidad de Tierra sin leer el nombre? ¿Hay demasiadas tarjetas/grids repetidos? ¿Las animaciones tienen una razón? Más el checklist de marca/páginas/contenido/experiencia/responsive/técnico de la sección 31.
 
-## Fuera de alcance / pendiente de confirmación
+## Fuera de alcance
 
 1. **Fotografía real** de instalaciones y de Andrea — bloquea que Instalaciones y el hero alcancen el nivel que describe el prompt. Se retoma cuando el usuario la aporte.
-2. **Backend del formulario de contacto** — de momento `mailto:`, a confirmar si se quiere algo más robusto.
-3. Migrar el histórico de Tarifas/FAQ a otro canal (folleto, WhatsApp) queda fuera de esta spec — el usuario pidió eliminarlos sin más.
+2. Migrar el histórico de Tarifas/FAQ a otro canal (folleto, WhatsApp) queda fuera de esta spec — el usuario pidió eliminarlos sin más.
+3. Verificación end-to-end del envío de correo real — no se puede probar hasta que el sitio esté subido a Hostinger (sin PHP disponible en local ni en GitHub Pages).
