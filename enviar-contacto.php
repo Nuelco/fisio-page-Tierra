@@ -5,6 +5,8 @@
 
 declare(strict_types=1);
 
+ini_set('display_errors', '0');
+
 header('Content-Type: application/json; charset=utf-8');
 
 $DESTINATARIO = 'info@fisioterapiatierra.es';
@@ -53,7 +55,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     respond(false, 'Email no válido');
 }
 
-$asunto = 'Nuevo contacto web — ' . $motivo;
+$asunto = mb_encode_mimeheader('Nuevo contacto web — ' . $motivo, 'UTF-8');
 
 $cuerpo = "Nuevo mensaje desde el formulario de fisioterapiatierra.es\n\n"
     . "Nombre: {$nombre}\n"
@@ -66,7 +68,7 @@ $cuerpo = "Nuevo mensaje desde el formulario de fisioterapiatierra.es\n\n"
 // correo marque el mensaje como spam; el email de la persona que escribe va
 // en Reply-To, así "Responder" en el cliente de correo va directo a ella.
 $headers = "From: Web Fisioterapia Tierra <no-responder@fisioterapiatierra.es>\r\n"
-    . "Reply-To: {$nombre} <{$email}>\r\n"
+    . "Reply-To: " . mb_encode_mimeheader($nombre, 'UTF-8') . " <{$email}>\r\n"
     . "Content-Type: text/plain; charset=UTF-8\r\n";
 
 $enviado = mail($DESTINATARIO, $asunto, $cuerpo, $headers);

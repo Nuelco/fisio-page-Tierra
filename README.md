@@ -10,7 +10,16 @@ Sitio estatico. No necesita build ni dependencias: se sirve tal cual.
 - sitemap.xml / robots.txt
 
 ## Publicar
-Copiar todo el contenido de esta carpeta a la raiz del hosting (Hostinger).
+Subir SOLO estos archivos y carpetas a la raiz del hosting (Hostinger):
+- index.html, servicios.html, instalaciones.html, contacto.html
+- styles.css, script.js, enviar-contacto.php
+- sitemap.xml, robots.txt
+- assets/fonts/, assets/logos/
+
+NO subir docs/, .superpowers/, README.md, ni los assets/*.jpg y assets/ondas-*.png
+sin usar (rrss-1.jpg, rrss-2.jpg, rrss-igstories1.jpg, rrss-igstories2.jpg,
+ondas-1.png, ondas-2.png no estan referenciados por ninguna pagina actual).
+
 Las rutas son relativas, funciona en cualquier subcarpeta sin cambios.
 El formulario de contacto necesita PHP en el servidor (Hostinger lo tiene) para
 enviar a info@fisioterapiatierra.es — no funciona en GitHub Pages ni en local.

@@ -140,12 +140,12 @@
       .then(function(res){ return res.json(); })
       .then(function(data){
         if(data.ok){
-          status.textContent = 'Mensaje enviado. Te responderemos lo antes posible.';
           status.className = 'form-status is-visible form-status--ok';
+          status.textContent = 'Mensaje enviado. Te responderemos lo antes posible.';
           form.reset();
         } else {
-          status.textContent = 'No se ha podido enviar: ' + (data.error || 'inténtalo de nuevo.');
           status.className = 'form-status is-visible form-status--error';
+          status.textContent = 'No se ha podido enviar: ' + (data.error || 'inténtalo de nuevo.');
         }
       })
       .catch(function(){
@@ -161,8 +161,8 @@
     var params = new URLSearchParams(window.location.search);
     if(params.has('enviado')){
       var ok = params.get('enviado') === '1';
-      status.textContent = ok ? 'Mensaje enviado. Te responderemos lo antes posible.' : 'No se ha podido enviar el mensaje.';
       status.className = 'form-status is-visible ' + (ok ? 'form-status--ok' : 'form-status--error');
+      status.textContent = ok ? 'Mensaje enviado. Te responderemos lo antes posible.' : 'No se ha podido enviar el mensaje.';
     }
   }
   document.addEventListener('DOMContentLoaded', initContactForm);
