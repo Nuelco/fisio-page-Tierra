@@ -83,7 +83,10 @@
       var extraClass = el.getAttribute('data-topo-color') ? 'topo-lines--' + el.getAttribute('data-topo-color') : '';
       var svg = inject(el, variant, extraClass);
       var def = VARIANTS[variant];
-      if(svg && def) drawOnScroll(svg, def.origin);
+      // La expansión de ondas solo ocurre donde se pide explícitamente
+      // (data-topo-animate) — el resto de secciones muestra las curvas de
+      // nivel fijas desde el principio, sin animarlas cada vez.
+      if(svg && def && el.hasAttribute('data-topo-animate')) drawOnScroll(svg, def.origin);
     });
   }
 

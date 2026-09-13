@@ -59,7 +59,7 @@ input,textarea,select{font:inherit;color:inherit}
 /* ===== Líneas topográficas ===== */
 [data-topo]{position:relative;overflow:hidden}
 .topo-lines{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;pointer-events:none;color:var(--terracota)}
-.topo-lines path{fill:none;stroke:currentColor;stroke-width:1;opacity:.55}
+.topo-lines path{fill:none;stroke:currentColor;stroke-width:1;opacity:.32}
 .topo-lines--azul{color:var(--azul)}
 .topo-lines--crema{color:var(--crema)}
 
