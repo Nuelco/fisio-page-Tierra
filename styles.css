@@ -119,9 +119,6 @@ input,textarea,select{font:inherit;color:inherit}
 .phrases p:nth-of-type(1){text-align:left}
 .phrases p:nth-of-type(2){text-align:center;color:var(--azul)}
 .phrases p:nth-of-type(3){text-align:right}
-.phrases__dot{position:absolute;width:10px;height:10px;border-radius:50%;pointer-events:none}
-.phrases__dot--1{background:var(--crema);left:40%;top:34%}
-.phrases__dot--2{background:var(--azul);right:38%;top:64%}
 
 /* ===== Presentación ===== */
 .presentacion{padding:var(--space-section) 0}
