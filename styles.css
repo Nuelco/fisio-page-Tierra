@@ -183,17 +183,26 @@ input,textarea,select{font:inherit;color:inherit}
 .showcase__tagline{margin-top:26px;padding-top:20px;border-top:1px solid rgba(65,47,43,.14);font-family:var(--font-display);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--terracota-dark);line-height:1.7}
 
 .showcase__content{position:relative}
-.showcase__panels{position:relative}
-.showcase__panel{display:none}
-.showcase__panel.is-active{display:grid;grid-template-columns:1fr minmax(260px,360px);gap:clamp(28px,3.5vw,48px);align-items:center}
+/* Todos los paneles comparten la misma celda de grid (se apilan unos sobre
+   otros): así la fila siempre mide lo que el panel más alto necesita y el
+   alto del showcase no cambia al pasar de un tratamiento a otro — la foto,
+   el botón y la barra de navegación de abajo quedan fijos en su sitio. Solo
+   se distingue el activo por opacidad/visibilidad, nunca por display, para
+   que todos sigan contando a la hora de medir esa altura común. */
+.showcase__panels{position:relative;display:grid}
+.showcase__panel{grid-area:1 / 1;display:grid;grid-template-columns:1fr minmax(260px,360px);gap:clamp(28px,3.5vw,48px);align-items:start;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease}
+.showcase__panel.is-active{opacity:1;visibility:visible;pointer-events:auto}
+.showcase__panel-text{min-width:0}
 .showcase__panel-num{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-size:13px;letter-spacing:.14em;color:var(--terracota-dark);margin-bottom:16px}
 .showcase__panel-num::after{content:'';flex:0 0 56px;height:1px;background:rgba(65,47,43,.25)}
 .showcase__panel h2{font-size:clamp(28px,3.6vw,44px);margin-bottom:16px}
 .showcase__panel p{color:var(--tinta-suave);max-width:52ch;margin-bottom:14px}
 .showcase__panel .servicio__highlight{font-family:var(--font-display);font-size:clamp(17px,1.6vw,22px);color:var(--marron);margin-bottom:10px;text-transform:none}
+.showcase__subtreat{margin:18px 0}
+.showcase__subtreat h3{font-family:var(--font-body);font-size:17px;font-weight:700;color:var(--marron);margin-bottom:6px}
 .showcase__panel .btn{margin-top:8px}
 
-.showcase__panel-photo{position:relative;overflow:hidden;border-radius:160px 20px 160px 20px;aspect-ratio:4/5}
+.showcase__panel-photo{position:relative;overflow:hidden;border-radius:160px 20px 160px 20px;height:100%;min-height:340px}
 .showcase__panel-photo img{width:100%;height:100%;object-fit:cover;display:block}
 
 .showcase__nav{display:flex;align-items:center;justify-content:flex-end;gap:16px;margin-top:clamp(20px,3vw,32px);font-family:var(--font-display);font-size:12px;letter-spacing:.12em;color:var(--marron)}
@@ -205,11 +214,14 @@ input,textarea,select{font:inherit;color:inherit}
 @media (max-width:900px){
   .showcase__inner{grid-template-columns:1fr;gap:28px;min-width:0}
   .showcase__list{position:static;min-width:0}
-  .showcase__items{flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:6px;min-width:0}
-  .showcase__item{flex:0 0 auto;border-bottom:none;border:1px solid rgba(65,47,43,.14)}
   .showcase__tagline{display:none}
-  .showcase__panel.is-active{grid-template-columns:1fr}
-  .showcase__panel-photo{order:-1;max-width:320px;aspect-ratio:16/10;border-radius:24px;margin:0 auto 8px}
+  .showcase__panel{grid-template-columns:1fr;align-content:start}
+  .showcase__panel-photo{order:-1;max-width:320px;height:auto;aspect-ratio:16/10;min-height:0;border-radius:24px;margin:0 auto 8px}
+  /* En movil la foto y el texto se apilan, así que el alto compartido (el
+     panel mas largo) se nota como un hueco en blanco en los tratamientos
+     cortos. En vez de eso, se limita el alto del texto y se deja scroll
+     interno: el conjunto pie+boton queda siempre en la misma posición. */
+  .showcase__panel-text{max-height:46vh;overflow-y:auto;padding-right:6px}
 }
 
 /* ===== Instalaciones ===== */
