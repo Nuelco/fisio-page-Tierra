@@ -265,10 +265,35 @@
       });
     }
 
+    // El viewBox original deja mucho margen vacío alrededor del símbolo (lo
+    // necesitan los trazos para "crecer" desde fuera del encuadre). getBBox()
+    // mide la geometría completa de los paths sin tener en cuenta el
+    // clip-path que los revela, así que ya podemos calcular aquí mismo el
+    // encuadre ajustado al símbolo real, y usarlo al terminar el dibujo para
+    // que ocupe su contenedor de verdad en vez de verse pequeño y perdido.
+    var ORIG_VB = [-512.95, -148.35, 1499.79, 843.7];
+    var bbox = marks.getBBox();
+    var FIT_PAD = 30;
+    var FIT_VB = [bbox.x - FIT_PAD, bbox.y - FIT_PAD, bbox.width + FIT_PAD * 2, bbox.height + FIT_PAD * 2];
+
+    function animateViewBox(toVB, duration){
+      var t0 = null;
+      function step(ts){
+        if(t0 === null) t0 = ts;
+        var t = clamp((ts - t0) / 1000 / duration, 0, 1);
+        var e = ease(t);
+        var cur = ORIG_VB.map(function(v, i){ return v + (toVB[i] - v) * e; });
+        svg.setAttribute('viewBox', cur.join(' '));
+        if(t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if(reduce || !window.gsap){
       frame(END);
+      svg.setAttribute('viewBox', FIT_VB.join(' '));
       if(textEl) textEl.style.opacity = 1;
       return;
     }
@@ -299,6 +324,7 @@
       if(t < END){
         requestAnimationFrame(tick);
       } else {
+        animateViewBox(FIT_VB, 1.1);
         var toVars = {scale: 1, duration: 1.1, ease: 'power3.inOut'};
         toVars[axisProp] = 0;
         gsap.to(wrap, toVars);
