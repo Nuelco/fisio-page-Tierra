@@ -112,11 +112,14 @@ input,textarea,select{font:inherit;color:inherit}
 
 /* ===== Bloque de frases ===== */
 .phrases{padding:calc(var(--space-section) / 4) 0;background:var(--marron);color:var(--crema)}
-.phrases__inner{max-width:var(--container);margin:0 auto;padding:0 var(--space-inline);display:flex;flex-direction:column;gap:clamp(14px,2.4vw,24px)}
+.phrases__inner{position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--space-inline);display:flex;flex-direction:column;gap:clamp(14px,2.4vw,24px)}
 .phrases p{font-family:var(--font-display);font-size:clamp(17px,2.6vw,26px);line-height:1.3}
-.phrases p:nth-child(1){text-align:left}
-.phrases p:nth-child(2){text-align:center;color:var(--azul)}
-.phrases p:nth-child(3){text-align:right}
+.phrases p:nth-of-type(1){text-align:left}
+.phrases p:nth-of-type(2){text-align:center;color:var(--azul)}
+.phrases p:nth-of-type(3){text-align:right}
+.phrases__dot{position:absolute;width:10px;height:10px;border-radius:50%;pointer-events:none}
+.phrases__dot--1{background:var(--crema);left:40%;top:34%}
+.phrases__dot--2{background:var(--azul);right:38%;top:64%}
 
 /* ===== Presentación ===== */
 .presentacion{padding:var(--space-section) 0}
