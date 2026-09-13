@@ -163,9 +163,9 @@ input,textarea,select{font:inherit;color:inherit}
 .cta-final h2{font-size:clamp(30px,4vw,52px);margin-bottom:28px}
 
 /* ===== Servicios ===== */
-.servicios-hero{position:relative;overflow:hidden;padding:var(--space-section) 0 clamp(40px,6vw,72px)}
+.servicios-hero{position:relative;overflow:hidden;padding:clamp(40px,5.5vw,64px) 0 clamp(24px,3.5vw,36px)}
 .servicios-hero__inner{position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--space-inline)}
-.servicios-hero h1{font-size:clamp(30px,4.2vw,56px);max-width:22ch}
+.servicios-hero h1{font-size:clamp(24px,2.8vw,36px);max-width:32ch}
 
 .showcase{position:relative;overflow:hidden;padding:0 0 var(--space-section)}
 .showcase__inner{position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--space-inline);display:grid;grid-template-columns:minmax(220px,280px) 1fr;gap:clamp(32px,4vw,64px);align-items:start}
@@ -182,10 +182,10 @@ input,textarea,select{font:inherit;color:inherit}
 .showcase__item.is-active .showcase__item-arrow{opacity:1;transform:translateX(0)}
 .showcase__tagline{margin-top:26px;padding-top:20px;border-top:1px solid rgba(65,47,43,.14);font-family:var(--font-display);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--terracota-dark);line-height:1.7}
 
-.showcase__content{position:relative;display:grid;grid-template-columns:1fr minmax(240px,340px);gap:clamp(28px,3.5vw,48px);align-items:start}
+.showcase__content{position:relative}
 .showcase__panels{position:relative}
 .showcase__panel{display:none}
-.showcase__panel.is-active{display:block}
+.showcase__panel.is-active{display:grid;grid-template-columns:1fr minmax(260px,360px);gap:clamp(28px,3.5vw,48px);align-items:center}
 .showcase__panel-num{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-size:13px;letter-spacing:.14em;color:var(--terracota-dark);margin-bottom:16px}
 .showcase__panel-num::after{content:'';flex:0 0 56px;height:1px;background:rgba(65,47,43,.25)}
 .showcase__panel h2{font-size:clamp(28px,3.6vw,44px);margin-bottom:16px}
@@ -193,10 +193,10 @@ input,textarea,select{font:inherit;color:inherit}
 .showcase__panel .servicio__highlight{font-family:var(--font-display);font-size:clamp(17px,1.6vw,22px);color:var(--marron);margin-bottom:10px;text-transform:none}
 .showcase__panel .btn{margin-top:8px}
 
-.showcase__photo{position:relative;overflow:hidden;border-radius:160px 20px 160px 20px;aspect-ratio:4/5}
-.showcase__photo-slot{position:relative;z-index:1;width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;border:1px dashed rgba(65,47,43,.3);border-radius:inherit;color:rgba(65,47,43,.5);font-family:var(--font-display);font-size:11px;letter-spacing:.08em;background:rgba(165,104,83,.08)}
+.showcase__panel-photo{position:relative;overflow:hidden;border-radius:160px 20px 160px 20px;aspect-ratio:4/5}
+.showcase__panel-photo img{width:100%;height:100%;object-fit:cover;display:block}
 
-.showcase__nav{grid-column:1 / -1;display:flex;align-items:center;justify-content:flex-end;gap:16px;margin-top:clamp(20px,3vw,32px);font-family:var(--font-display);font-size:12px;letter-spacing:.12em;color:var(--marron)}
+.showcase__nav{display:flex;align-items:center;justify-content:flex-end;gap:16px;margin-top:clamp(20px,3vw,32px);font-family:var(--font-display);font-size:12px;letter-spacing:.12em;color:var(--marron)}
 .showcase__arrow{width:44px;height:44px;border-radius:50%;border:1px solid rgba(65,47,43,.28);display:inline-flex;align-items:center;justify-content:center;color:var(--marron);transition:background .2s ease,color .2s ease,border-color .2s ease}
 .showcase__arrow:hover{background:rgba(65,47,43,.06)}
 .showcase__arrow--next{background:var(--terracota-dark);border-color:var(--terracota-dark);color:var(--crema)}
@@ -208,8 +208,8 @@ input,textarea,select{font:inherit;color:inherit}
   .showcase__items{flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:6px;min-width:0}
   .showcase__item{flex:0 0 auto;border-bottom:none;border:1px solid rgba(65,47,43,.14)}
   .showcase__tagline{display:none}
-  .showcase__content{grid-template-columns:1fr;min-width:0}
-  .showcase__photo{order:-1;max-width:320px;aspect-ratio:16/10;border-radius:24px;margin:0 auto}
+  .showcase__panel.is-active{grid-template-columns:1fr}
+  .showcase__panel-photo{order:-1;max-width:320px;aspect-ratio:16/10;border-radius:24px;margin:0 auto 8px}
 }
 
 /* ===== Instalaciones ===== */
