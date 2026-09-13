@@ -91,6 +91,36 @@
 
 (function(){
   'use strict';
+  function initServiciosShowcase(){
+    var root = document.getElementById('servicios-showcase');
+    if(!root) return;
+    var items = root.querySelectorAll('.showcase__item');
+    var panels = root.querySelectorAll('.showcase__panel');
+    var counter = root.querySelector('[data-showcase-current]');
+    var photoLabel = root.querySelector('[data-showcase-photo-label]');
+    var prevBtn = root.querySelector('[data-showcase-prev]');
+    var nextBtn = root.querySelector('[data-showcase-next]');
+    var total = items.length;
+    var current = 0;
+
+    function show(index){
+      current = (index + total) % total;
+      items.forEach(function(it, i){ it.classList.toggle('is-active', i === current); });
+      panels.forEach(function(p, i){ p.classList.toggle('is-active', i === current); });
+      if(counter) counter.textContent = String(current + 1).padStart(2, '0');
+      if(photoLabel) photoLabel.textContent = 'Foto pendiente — ' + items[current].querySelector('.showcase__item-name').textContent;
+    }
+    items.forEach(function(it, i){
+      it.addEventListener('click', function(){ show(i); });
+    });
+    if(prevBtn) prevBtn.addEventListener('click', function(){ show(current - 1); });
+    if(nextBtn) nextBtn.addEventListener('click', function(){ show(current + 1); });
+  }
+  document.addEventListener('DOMContentLoaded', initServiciosShowcase);
+})();
+
+(function(){
+  'use strict';
   // Símbolo de marca (torso, 6 trazos) dibujándose desde fuera del encuadre,
   // igual que la animación de apertura del header en la rama desarrollo.
   // En el hero de Inicio: aparece grande y centrado; al terminar de dibujarse
