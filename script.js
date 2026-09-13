@@ -232,8 +232,12 @@
       if(t < END){
         requestAnimationFrame(tick);
       } else {
-        var toVars = {duration: 1.1, ease: 'power3.inOut', onComplete: function(){
-          gsap.to(textEl, {opacity: 1, y: 0, duration: 0.9, ease: 'power2.out'});
+        var textStarted = false;
+        var toVars = {duration: 1.1, ease: 'power3.inOut', onUpdate: function(){
+          if(!textStarted && this.progress() >= 0.65){
+            textStarted = true;
+            gsap.to(textEl, {opacity: 1, y: 0, duration: 0.9, ease: 'power2.out'});
+          }
         }};
         toVars[axisProp] = 0;
         gsap.to(wrap, toVars);
