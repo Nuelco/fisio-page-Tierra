@@ -93,24 +93,36 @@
   'use strict';
   function initServiciosShowcase(){
     var root = document.getElementById('servicios-showcase');
-    if(!root) return;
-    var items = root.querySelectorAll('.showcase__item');
-    var panels = root.querySelectorAll('.showcase__panel');
-    var counter = root.querySelector('[data-showcase-current]');
-    var prevBtn = root.querySelector('[data-showcase-prev]');
-    var nextBtn = root.querySelector('[data-showcase-next]');
-    var total = items.length;
+    var deck = document.getElementById('showcase-deck');
+    var detail = document.getElementById('showcase-detail');
+    if(!root || !deck || !detail) return;
+    var cards = deck.querySelectorAll('.deck__card-face');
+    var panels = detail.querySelectorAll('.showcase__panel');
+    var counter = detail.querySelector('[data-showcase-current]');
+    var prevBtn = detail.querySelector('[data-showcase-prev]');
+    var nextBtn = detail.querySelector('[data-showcase-next]');
+    var closeBtn = detail.querySelector('[data-showcase-close]');
+    var total = panels.length;
     var current = 0;
 
     function show(index){
       current = (index + total) % total;
-      items.forEach(function(it, i){ it.classList.toggle('is-active', i === current); });
       panels.forEach(function(p, i){ p.classList.toggle('is-active', i === current); });
       if(counter) counter.textContent = String(current + 1).padStart(2, '0');
     }
-    items.forEach(function(it, i){
-      it.addEventListener('click', function(){ show(i); });
+    function open(index){
+      show(index);
+      deck.classList.add('is-receded');
+      detail.classList.add('is-open');
+    }
+    function close(){
+      deck.classList.remove('is-receded');
+      detail.classList.remove('is-open');
+    }
+    cards.forEach(function(card, i){
+      card.addEventListener('click', function(){ open(i); });
     });
+    if(closeBtn) closeBtn.addEventListener('click', close);
     if(prevBtn) prevBtn.addEventListener('click', function(){ show(current - 1); });
     if(nextBtn) nextBtn.addEventListener('click', function(){ show(current + 1); });
   }

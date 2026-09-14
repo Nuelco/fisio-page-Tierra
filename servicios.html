@@ -54,22 +54,26 @@
   <section class="showcase" id="servicios-showcase">
     <span class="bg-ondas bg-ondas--1 bg-ondas--soft" aria-hidden="true"></span>
     <div class="showcase__inner" data-reveal>
-      <aside class="showcase__list">
-        <p class="eyebrow">— Tratamientos</p>
-        <ol class="showcase__items">
-          <li class="showcase__item is-active"><span class="showcase__item-num">01</span><span class="showcase__item-name">Fisioterapia</span><span class="showcase__item-arrow" aria-hidden="true">→</span></li>
-          <li class="showcase__item"><span class="showcase__item-num">02</span><span class="showcase__item-name">Osteopatía</span><span class="showcase__item-arrow" aria-hidden="true">→</span></li>
-          <li class="showcase__item"><span class="showcase__item-num">03</span><span class="showcase__item-name">Fisioterapia deportiva</span><span class="showcase__item-arrow" aria-hidden="true">→</span></li>
-          <li class="showcase__item"><span class="showcase__item-num">04</span><span class="showcase__item-name">Fisioterapia invasiva</span><span class="showcase__item-arrow" aria-hidden="true">→</span></li>
-          <li class="showcase__item"><span class="showcase__item-num">05</span><span class="showcase__item-name">Ecografía</span><span class="showcase__item-arrow" aria-hidden="true">→</span></li>
-          <li class="showcase__item"><span class="showcase__item-num">06</span><span class="showcase__item-name">Rehabilitación funcional</span><span class="showcase__item-arrow" aria-hidden="true">→</span></li>
-          <li class="showcase__item"><span class="showcase__item-num">07</span><span class="showcase__item-name">Pilates terapéutico</span><span class="showcase__item-arrow" aria-hidden="true">→</span></li>
-          <li class="showcase__item"><span class="showcase__item-num">08</span><span class="showcase__item-name">Diatermia</span><span class="showcase__item-arrow" aria-hidden="true">→</span></li>
-        </ol>
-        <p class="showcase__tagline">Un enfoque global<br>para tu bienestar</p>
-      </aside>
+      <p class="eyebrow">— Tratamientos</p>
+      <h2 class="showcase__heading">Un enfoque global para tu bienestar</h2>
+      <p class="showcase__hint">Desliza para ver los tratamientos y pulsa uno para abrirlo.</p>
 
-      <div class="showcase__content">
+      <div class="deck" id="showcase-deck">
+        <ol class="deck__cards">
+          <li class="deck__card"><button type="button" class="deck__card-face" data-open="0"><span class="deck__card-num">01</span><span class="deck__card-name">Fisioterapia</span><span class="deck__card-arrow" aria-hidden="true">→</span></button></li>
+          <li class="deck__card"><button type="button" class="deck__card-face" data-open="1"><span class="deck__card-num">02</span><span class="deck__card-name">Osteopatía</span><span class="deck__card-arrow" aria-hidden="true">→</span></button></li>
+          <li class="deck__card"><button type="button" class="deck__card-face" data-open="2"><span class="deck__card-num">03</span><span class="deck__card-name">Fisioterapia deportiva</span><span class="deck__card-arrow" aria-hidden="true">→</span></button></li>
+          <li class="deck__card"><button type="button" class="deck__card-face" data-open="3"><span class="deck__card-num">04</span><span class="deck__card-name">Fisioterapia invasiva</span><span class="deck__card-arrow" aria-hidden="true">→</span></button></li>
+          <li class="deck__card"><button type="button" class="deck__card-face" data-open="4"><span class="deck__card-num">05</span><span class="deck__card-name">Ecografía</span><span class="deck__card-arrow" aria-hidden="true">→</span></button></li>
+          <li class="deck__card"><button type="button" class="deck__card-face" data-open="5"><span class="deck__card-num">06</span><span class="deck__card-name">Rehabilitación funcional</span><span class="deck__card-arrow" aria-hidden="true">→</span></button></li>
+          <li class="deck__card"><button type="button" class="deck__card-face" data-open="6"><span class="deck__card-num">07</span><span class="deck__card-name">Pilates terapéutico</span><span class="deck__card-arrow" aria-hidden="true">→</span></button></li>
+          <li class="deck__card"><button type="button" class="deck__card-face" data-open="7"><span class="deck__card-num">08</span><span class="deck__card-name">Diatermia</span><span class="deck__card-arrow" aria-hidden="true">→</span></button></li>
+        </ol>
+      </div>
+
+      <div class="showcase__detail" id="showcase-detail">
+       <div class="showcase__detail-inner">
+        <button type="button" class="showcase__close" data-showcase-close><span aria-hidden="true">←</span> Volver a las tarjetas</button>
         <div class="showcase__panels">
           <article class="showcase__panel is-active" id="fisioterapia">
             <div class="showcase__panel-text">
@@ -168,6 +172,7 @@
           <span class="showcase__counter"><span data-showcase-current>01</span> / 8</span>
           <button type="button" class="showcase__arrow showcase__arrow--next" data-showcase-next aria-label="Tratamiento siguiente">→</button>
         </div>
+       </div>
       </div>
     </div>
   </section>
