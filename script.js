@@ -93,12 +93,15 @@
   'use strict';
   function initServiciosShowcase(){
     var root = document.getElementById('servicios-showcase');
-    if(!root) return;
+    var content = document.getElementById('showcase-content');
+    if(!root || !content) return;
     var items = root.querySelectorAll('.showcase__item');
     var panels = root.querySelectorAll('.showcase__panel');
     var counter = root.querySelector('[data-showcase-current]');
     var prevBtn = root.querySelector('[data-showcase-prev]');
     var nextBtn = root.querySelector('[data-showcase-next]');
+    var mobileCloseBtn = root.querySelector('[data-showcase-mobile-close]');
+    var mobileQuery = window.matchMedia('(max-width: 900px)');
     var total = items.length;
     var current = 0;
 
@@ -108,11 +111,32 @@
       panels.forEach(function(p, i){ p.classList.toggle('is-active', i === current); });
       if(counter) counter.textContent = String(current + 1).padStart(2, '0');
     }
+    var contentParent = content.parentNode;
+    var contentNextSibling = content.nextSibling;
+    function openMobile(){
+      // El contenedor vive dentro de .showcase__inner, que GSAP anima con
+      // transform (data-reveal): eso lo convierte en el "containing block"
+      // del position:fixed y el overflow:hidden de la sección lo recorta,
+      // así que la pantalla completa no llegaba a cubrir la página. Se
+      // saca temporalmente al body mientras está abierto.
+      document.body.appendChild(content);
+      content.classList.add('is-mobile-open');
+      document.body.classList.add('no-scroll');
+    }
+    function closeMobile(){
+      content.classList.remove('is-mobile-open');
+      document.body.classList.remove('no-scroll');
+      contentParent.insertBefore(content, contentNextSibling);
+    }
     items.forEach(function(it, i){
-      it.addEventListener('click', function(){ show(i); });
+      it.addEventListener('click', function(){
+        show(i);
+        if(mobileQuery.matches) openMobile();
+      });
     });
     if(prevBtn) prevBtn.addEventListener('click', function(){ show(current - 1); });
     if(nextBtn) nextBtn.addEventListener('click', function(){ show(current + 1); });
+    if(mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeMobile);
   }
   document.addEventListener('DOMContentLoaded', initServiciosShowcase);
 })();

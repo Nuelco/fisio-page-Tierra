@@ -53,6 +53,13 @@
 
   <section class="showcase" id="servicios-showcase">
     <span class="bg-ondas bg-ondas--1 bg-ondas--soft" aria-hidden="true"></span>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <clipPath id="showcase-blob" clipPathUnits="objectBoundingBox">
+          <path d="M0.15,0 C0.5,0 0.7,0.02 0.82,0.1 C0.98,0.22 1,0.38 1,0.5 C1,0.64 0.97,0.8 0.82,0.9 C0.68,1 0.45,1 0.2,0.98 C0.05,0.96 0,0.85 0,0.7 L0,0.15 C0,0.06 0.06,0 0.15,0 Z"/>
+        </clipPath>
+      </defs>
+    </svg>
     <div class="showcase__inner" data-reveal>
       <aside class="showcase__list">
         <p class="eyebrow">— Tratamientos</p>
@@ -69,7 +76,8 @@
         <p class="showcase__tagline">Un enfoque global<br>para tu bienestar</p>
       </aside>
 
-      <div class="showcase__content">
+      <div class="showcase__content" id="showcase-content">
+        <button type="button" class="showcase__mobile-close" data-showcase-mobile-close><span aria-hidden="true">←</span> Volver a tratamientos</button>
         <div class="showcase__panels">
           <article class="showcase__panel is-active" id="fisioterapia">
             <div class="showcase__panel-text">
@@ -83,7 +91,7 @@
                 <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 14c2 3 4 3 6 0s4-7 6-3 3 8 8 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Mejora de la función</span></div>
               </div>
             </div>
-            <div class="showcase__panel-photo"><img src="assets/servicios/fisioterapia.jpg" alt="Fisioterapeuta guiando un ejercicio de movilidad con pesa a un paciente" loading="lazy"><span class="showcase__photo-deco" aria-hidden="true"></span></div>
+            <div class="showcase__photo-wrap"><span class="showcase__photo-deco" aria-hidden="true"></span><div class="showcase__panel-photo"><img src="assets/servicios/fisioterapia.jpg" alt="Fisioterapeuta guiando un ejercicio de movilidad con pesa a un paciente" loading="lazy"></div></div>
           </article>
           <article class="showcase__panel" id="osteopatia">
             <div class="showcase__panel-text">
@@ -98,7 +106,7 @@
                 <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 14c2 3 4 3 6 0s4-7 6-3 3 8 8 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Planos corporales</span></div>
               </div>
             </div>
-            <div class="showcase__panel-photo"><img src="assets/servicios/osteopatia.jpg" alt="Osteópata explorando la espalda de un paciente" loading="lazy"><span class="showcase__photo-deco" aria-hidden="true"></span></div>
+            <div class="showcase__photo-wrap"><span class="showcase__photo-deco" aria-hidden="true"></span><div class="showcase__panel-photo"><img src="assets/servicios/osteopatia.jpg" alt="Osteópata explorando la espalda de un paciente" loading="lazy"></div></div>
           </article>
           <article class="showcase__panel" id="fisioterapia-deportiva">
             <div class="showcase__panel-text">
@@ -114,7 +122,7 @@
                 <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 14c2 3 4 3 6 0s4-7 6-3 3 8 8 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Ejercicio terapéutico</span></div>
               </div>
             </div>
-            <div class="showcase__panel-photo"><img src="assets/servicios/fisioterapia-deportiva.jpg" alt="Fisioterapeuta tratando una lesión de cuello relacionada con el deporte" loading="lazy"><span class="showcase__photo-deco" aria-hidden="true"></span></div>
+            <div class="showcase__photo-wrap"><span class="showcase__photo-deco" aria-hidden="true"></span><div class="showcase__panel-photo"><img src="assets/servicios/fisioterapia-deportiva.jpg" alt="Fisioterapeuta tratando una lesión de cuello relacionada con el deporte" loading="lazy"></div></div>
           </article>
           <article class="showcase__panel" id="fisioterapia-invasiva">
             <div class="showcase__panel-text">
@@ -136,7 +144,7 @@
                 <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 14c2 3 4 3 6 0s4-7 6-3 3 8 8 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Electrólisis percutánea</span></div>
               </div>
             </div>
-            <div class="showcase__panel-photo"><img src="assets/servicios/fisioterapia-invasiva.jpg" alt="Técnica de punción con aguja fina sobre la piel, con guantes clínicos" loading="lazy"><span class="showcase__photo-deco" aria-hidden="true"></span></div>
+            <div class="showcase__photo-wrap"><span class="showcase__photo-deco" aria-hidden="true"></span><div class="showcase__panel-photo"><img src="assets/servicios/fisioterapia-invasiva.jpg" alt="Técnica de punción con aguja fina sobre la piel, con guantes clínicos" loading="lazy"></div></div>
           </article>
           <article class="showcase__panel" id="ecografia">
             <div class="showcase__panel-text">
@@ -151,7 +159,7 @@
                 <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 14c2 3 4 3 6 0s4-7 6-3 3 8 8 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Seguimiento de evolución</span></div>
               </div>
             </div>
-            <div class="showcase__panel-photo"><img src="assets/servicios/ecografia.jpg" alt="Ecografía musculoesquelética del hombro con sonda y pantalla de imagen" loading="lazy"><span class="showcase__photo-deco" aria-hidden="true"></span></div>
+            <div class="showcase__photo-wrap"><span class="showcase__photo-deco" aria-hidden="true"></span><div class="showcase__panel-photo"><img src="assets/servicios/ecografia.jpg" alt="Ecografía musculoesquelética del hombro con sonda y pantalla de imagen" loading="lazy"></div></div>
           </article>
           <article class="showcase__panel" id="rehabilitacion-funcional">
             <div class="showcase__panel-text">
@@ -167,7 +175,7 @@
                 <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 14c2 3 4 3 6 0s4-7 6-3 3 8 8 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Capacidad física</span></div>
               </div>
             </div>
-            <div class="showcase__panel-photo"><img src="assets/servicios/rehabilitacion-funcional.jpg" alt="Ejercicio guiado de movilidad de hombro entre terapeuta y paciente" loading="lazy"><span class="showcase__photo-deco" aria-hidden="true"></span></div>
+            <div class="showcase__photo-wrap"><span class="showcase__photo-deco" aria-hidden="true"></span><div class="showcase__panel-photo"><img src="assets/servicios/rehabilitacion-funcional.jpg" alt="Ejercicio guiado de movilidad de hombro entre terapeuta y paciente" loading="lazy"></div></div>
           </article>
           <article class="showcase__panel" id="pilates-terapeutico">
             <div class="showcase__panel-text">
@@ -183,7 +191,7 @@
                 <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 14c2 3 4 3 6 0s4-7 6-3 3 8 8 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Estabilidad y movilidad</span></div>
               </div>
             </div>
-            <div class="showcase__panel-photo"><img src="assets/servicios/pilates-terapeutico.jpg" alt="Sesión de pilates con máquinas reformer en un estudio luminoso" loading="lazy"><span class="showcase__photo-deco" aria-hidden="true"></span></div>
+            <div class="showcase__photo-wrap"><span class="showcase__photo-deco" aria-hidden="true"></span><div class="showcase__panel-photo"><img src="assets/servicios/pilates-terapeutico.jpg" alt="Sesión de pilates con máquinas reformer en un estudio luminoso" loading="lazy"></div></div>
           </article>
           <article class="showcase__panel" id="diatermia">
             <div class="showcase__panel-text">
@@ -199,7 +207,7 @@
                 <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 14c2 3 4 3 6 0s4-7 6-3 3 8 8 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Relajación muscular</span></div>
               </div>
             </div>
-            <div class="showcase__panel-photo"><img src="assets/servicios/diatermia.jpg" alt="Aplicación de un dispositivo de diatermia sobre el tobillo de un paciente" loading="lazy"><span class="showcase__photo-deco" aria-hidden="true"></span></div>
+            <div class="showcase__photo-wrap"><span class="showcase__photo-deco" aria-hidden="true"></span><div class="showcase__panel-photo"><img src="assets/servicios/diatermia.jpg" alt="Aplicación de un dispositivo de diatermia sobre el tobillo de un paciente" loading="lazy"></div></div>
           </article>
         </div>
 

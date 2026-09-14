@@ -25,6 +25,7 @@
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--crema);color:var(--marron);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body.no-scroll{overflow:hidden}
 img,svg{display:block;max-width:100%}
 h1,h2,h3,h4{margin:0;font-family:var(--font-display);font-weight:700;letter-spacing:-.02em;line-height:1.05;text-wrap:pretty}
 p{margin:0}
@@ -207,9 +208,12 @@ input,textarea,select{font:inherit;color:inherit}
 .showcase__tag svg{flex:0 0 auto;color:var(--terracota-dark);margin-top:1px}
 .showcase__tag span{font-size:12.5px;line-height:1.35;color:var(--marron)}
 
-.showcase__panel-photo{position:relative;overflow:hidden;border-radius:200px 200px 56px 200px;height:100%;min-height:340px}
+.showcase__photo-wrap{position:relative;height:100%;min-height:340px}
+.showcase__panel-photo{position:relative;overflow:hidden;clip-path:url(#showcase-blob);height:100%}
 .showcase__panel-photo img{width:100%;height:100%;object-fit:cover;display:block}
-.showcase__photo-deco{position:absolute;top:0;right:0;width:46%;height:38%;background-image:url('assets/ondas-1.png');background-size:cover;background-position:top right;opacity:.14;filter:invert(1);pointer-events:none}
+/* La decoración vive fuera de la foto (no se recorta con ella) para poder
+   sobresalir del borde, como en la referencia. */
+.showcase__photo-deco{position:absolute;top:-8%;right:-10%;width:60%;height:50%;background-image:url('assets/ondas-1.png');background-size:180% 180%;background-position:65% 35%;opacity:.5;filter:invert(1);pointer-events:none}
 
 .showcase__nav{display:flex;align-items:center;justify-content:flex-end;gap:16px;margin-top:clamp(20px,3vw,32px);font-family:var(--font-display);font-size:12px;letter-spacing:.12em;color:var(--marron)}
 .showcase__arrow{width:44px;height:44px;border-radius:50%;border:1px solid rgba(65,47,43,.28);display:inline-flex;align-items:center;justify-content:center;color:var(--marron);transition:background .2s ease,color .2s ease,border-color .2s ease}
@@ -217,18 +221,28 @@ input,textarea,select{font:inherit;color:inherit}
 .showcase__arrow--next{background:var(--terracota-dark);border-color:var(--terracota-dark);color:var(--crema)}
 .showcase__arrow--next:hover{filter:brightness(.9)}
 
+.showcase__mobile-close{display:none}
+
 @media (max-width:900px){
   .showcase__inner{grid-template-columns:1fr;gap:28px;min-width:0}
   .showcase__list{position:static;min-width:0}
   .showcase__tagline{display:none}
   .showcase__panel{grid-template-columns:1fr;align-content:start}
-  .showcase__panel-photo{order:-1;max-width:320px;height:auto;aspect-ratio:16/10;min-height:0;border-radius:24px;margin:0 auto 8px}
+  .showcase__photo-wrap{order:-1;max-width:320px;height:auto;min-height:0;margin:0 auto 8px}
+  .showcase__panel-photo{clip-path:none;border-radius:24px;aspect-ratio:16/10;height:auto}
+  .showcase__photo-deco{display:none}
   /* En movil la foto y el texto se apilan, así que el alto compartido (el
      panel mas largo) se nota como un hueco en blanco en los tratamientos
      cortos. En vez de eso, se limita el alto del texto y se deja scroll
      interno: el conjunto pie+boton queda siempre en la misma posición. */
   .showcase__panel-text{max-height:46vh;overflow-y:auto;padding-right:6px}
   .showcase__tags{flex-wrap:wrap;row-gap:14px}
+
+  /* Al elegir un tratamiento, el panel pasa a pantalla completa en vez de
+     abrirse debajo del listado. */
+  .showcase__content.is-mobile-open{position:fixed;inset:0;z-index:200;background:var(--crema);overflow-y:auto;padding:20px var(--space-inline) 40px}
+  .showcase__content.is-mobile-open .showcase__mobile-close{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;font-family:var(--font-display);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--terracota-dark)}
+  .showcase__content.is-mobile-open .showcase__panel-text{max-height:none;overflow-y:visible;padding-right:0}
 }
 
 /* ===== Instalaciones ===== */
