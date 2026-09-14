@@ -54,26 +54,22 @@
   <section class="showcase" id="servicios-showcase">
     <span class="bg-ondas bg-ondas--1 bg-ondas--soft" aria-hidden="true"></span>
     <div class="showcase__inner" data-reveal>
-      <p class="eyebrow">— Tratamientos</p>
-      <h2 class="showcase__heading">Un enfoque global para tu bienestar</h2>
-      <p class="showcase__hint">Desliza para ver los tratamientos y pulsa uno para abrirlo.</p>
-
-      <div class="deck" id="showcase-deck">
-        <ol class="deck__cards">
-          <li class="deck__card"><button type="button" class="deck__card-face" data-open="0"><span class="deck__card-num">01</span><span class="deck__card-name">Fisioterapia</span><span class="deck__card-arrow" aria-hidden="true">→</span></button></li>
-          <li class="deck__card"><button type="button" class="deck__card-face" data-open="1"><span class="deck__card-num">02</span><span class="deck__card-name">Osteopatía</span><span class="deck__card-arrow" aria-hidden="true">→</span></button></li>
-          <li class="deck__card"><button type="button" class="deck__card-face" data-open="2"><span class="deck__card-num">03</span><span class="deck__card-name">Fisioterapia deportiva</span><span class="deck__card-arrow" aria-hidden="true">→</span></button></li>
-          <li class="deck__card"><button type="button" class="deck__card-face" data-open="3"><span class="deck__card-num">04</span><span class="deck__card-name">Fisioterapia invasiva</span><span class="deck__card-arrow" aria-hidden="true">→</span></button></li>
-          <li class="deck__card"><button type="button" class="deck__card-face" data-open="4"><span class="deck__card-num">05</span><span class="deck__card-name">Ecografía</span><span class="deck__card-arrow" aria-hidden="true">→</span></button></li>
-          <li class="deck__card"><button type="button" class="deck__card-face" data-open="5"><span class="deck__card-num">06</span><span class="deck__card-name">Rehabilitación funcional</span><span class="deck__card-arrow" aria-hidden="true">→</span></button></li>
-          <li class="deck__card"><button type="button" class="deck__card-face" data-open="6"><span class="deck__card-num">07</span><span class="deck__card-name">Pilates terapéutico</span><span class="deck__card-arrow" aria-hidden="true">→</span></button></li>
-          <li class="deck__card"><button type="button" class="deck__card-face" data-open="7"><span class="deck__card-num">08</span><span class="deck__card-name">Diatermia</span><span class="deck__card-arrow" aria-hidden="true">→</span></button></li>
+      <aside class="showcase__list">
+        <p class="eyebrow">— Tratamientos</p>
+        <ol class="showcase__items">
+          <li class="showcase__item is-active"><span class="showcase__item-num">01</span><span class="showcase__item-name">Fisioterapia</span><span class="showcase__item-arrow" aria-hidden="true">→</span></li>
+          <li class="showcase__item"><span class="showcase__item-num">02</span><span class="showcase__item-name">Osteopatía</span><span class="showcase__item-arrow" aria-hidden="true">→</span></li>
+          <li class="showcase__item"><span class="showcase__item-num">03</span><span class="showcase__item-name">Fisioterapia deportiva</span><span class="showcase__item-arrow" aria-hidden="true">→</span></li>
+          <li class="showcase__item"><span class="showcase__item-num">04</span><span class="showcase__item-name">Fisioterapia invasiva</span><span class="showcase__item-arrow" aria-hidden="true">→</span></li>
+          <li class="showcase__item"><span class="showcase__item-num">05</span><span class="showcase__item-name">Ecografía</span><span class="showcase__item-arrow" aria-hidden="true">→</span></li>
+          <li class="showcase__item"><span class="showcase__item-num">06</span><span class="showcase__item-name">Rehabilitación funcional</span><span class="showcase__item-arrow" aria-hidden="true">→</span></li>
+          <li class="showcase__item"><span class="showcase__item-num">07</span><span class="showcase__item-name">Pilates terapéutico</span><span class="showcase__item-arrow" aria-hidden="true">→</span></li>
+          <li class="showcase__item"><span class="showcase__item-num">08</span><span class="showcase__item-name">Diatermia</span><span class="showcase__item-arrow" aria-hidden="true">→</span></li>
         </ol>
-      </div>
+        <p class="showcase__tagline">Un enfoque global<br>para tu bienestar</p>
+      </aside>
 
-      <div class="showcase__detail" id="showcase-detail">
-       <div class="showcase__detail-inner">
-        <button type="button" class="showcase__close" data-showcase-close><span aria-hidden="true">←</span> Volver a las tarjetas</button>
+      <div class="showcase__content">
         <div class="showcase__panels">
           <article class="showcase__panel is-active" id="fisioterapia">
             <div class="showcase__panel-text">
@@ -81,8 +77,13 @@
               <h2>Fisioterapia</h2>
               <p>Abordamos el dolor y las limitaciones de movimiento mediante técnicas de terapia manual y otras herramientas terapéuticas. Cada tratamiento parte de una valoración individual para recuperar el movimiento, mejorar la función y favorecer tu bienestar.</p>
               <a href="contacto.html" class="btn btn--primary">Pedir cita <span aria-hidden="true">→</span></a>
+              <div class="showcase__tags">
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 16c2-4 4 4 6 0s4-4 6 0 4-4 6 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9c2-4 4 4 6 0s4-4 6 0 4-4 6 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/></svg><span>Terapia manual</span></div>
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="9" stroke="currentColor" stroke-width="1.4"/><circle cx="13" cy="13" r="4" stroke="currentColor" stroke-width="1.4"/></svg><span>Valoración individual</span></div>
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 14c2 3 4 3 6 0s4-7 6-3 3 8 8 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Mejora de la función</span></div>
+              </div>
             </div>
-            <div class="showcase__panel-photo"><img src="assets/servicios/fisioterapia.jpg" alt="Fisioterapeuta guiando un ejercicio de movilidad con pesa a un paciente" loading="lazy"></div>
+            <div class="showcase__panel-photo"><img src="assets/servicios/fisioterapia.jpg" alt="Fisioterapeuta guiando un ejercicio de movilidad con pesa a un paciente" loading="lazy"><span class="showcase__photo-deco" aria-hidden="true"></span></div>
           </article>
           <article class="showcase__panel" id="osteopatia">
             <div class="showcase__panel-text">
@@ -91,8 +92,13 @@
               <p>Un enfoque manual que entiende el cuerpo como un todo. A través de una valoración global, identificamos las restricciones que pueden afectar al movimiento y al funcionamiento del organismo para adaptar el tratamiento a las necesidades de cada persona.</p>
               <p>Trabajamos sobre los diferentes planos corporales —estructural, visceral y craneal—, entendiendo que cada parte está relacionada con el conjunto.</p>
               <a href="contacto.html" class="btn btn--primary">Pedir cita <span aria-hidden="true">→</span></a>
+              <div class="showcase__tags">
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 16c2-4 4 4 6 0s4-4 6 0 4-4 6 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9c2-4 4 4 6 0s4-4 6 0 4-4 6 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/></svg><span>Enfoque manual</span></div>
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="9" stroke="currentColor" stroke-width="1.4"/><circle cx="13" cy="13" r="4" stroke="currentColor" stroke-width="1.4"/></svg><span>Valoración global</span></div>
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 14c2 3 4 3 6 0s4-7 6-3 3 8 8 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Planos corporales</span></div>
+              </div>
             </div>
-            <div class="showcase__panel-photo"><img src="assets/servicios/osteopatia.jpg" alt="Osteópata explorando la espalda de un paciente" loading="lazy"></div>
+            <div class="showcase__panel-photo"><img src="assets/servicios/osteopatia.jpg" alt="Osteópata explorando la espalda de un paciente" loading="lazy"><span class="showcase__photo-deco" aria-hidden="true"></span></div>
           </article>
           <article class="showcase__panel" id="fisioterapia-deportiva">
             <div class="showcase__panel-text">
@@ -102,8 +108,13 @@
               <p>Partimos de una valoración individual y un razonamiento clínico para diseñar un tratamiento adaptado a cada persona, combinando terapia manual y ejercicio terapéutico.</p>
               <p>Nuestro objetivo es recuperar la función y acompañarte de forma progresiva hasta volver a tu actividad deportiva con confianza y seguridad.</p>
               <a href="contacto.html" class="btn btn--primary">Pedir cita <span aria-hidden="true">→</span></a>
+              <div class="showcase__tags">
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 16c2-4 4 4 6 0s4-4 6 0 4-4 6 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9c2-4 4 4 6 0s4-4 6 0 4-4 6 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/></svg><span>Valoración individual</span></div>
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="9" stroke="currentColor" stroke-width="1.4"/><circle cx="13" cy="13" r="4" stroke="currentColor" stroke-width="1.4"/></svg><span>Terapia manual</span></div>
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 14c2 3 4 3 6 0s4-7 6-3 3 8 8 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Ejercicio terapéutico</span></div>
+              </div>
             </div>
-            <div class="showcase__panel-photo"><img src="assets/servicios/fisioterapia-deportiva.jpg" alt="Fisioterapeuta tratando una lesión de cuello relacionada con el deporte" loading="lazy"></div>
+            <div class="showcase__panel-photo"><img src="assets/servicios/fisioterapia-deportiva.jpg" alt="Fisioterapeuta tratando una lesión de cuello relacionada con el deporte" loading="lazy"><span class="showcase__photo-deco" aria-hidden="true"></span></div>
           </article>
           <article class="showcase__panel" id="fisioterapia-invasiva">
             <div class="showcase__panel-text">
@@ -119,8 +130,13 @@
                 <p>Técnica de fisioterapia invasiva que permite aplicar una corriente galvánica de forma precisa sobre el tejido lesionado, mediante una aguja y con control ecográfico. La aplicación de la corriente provoca una respuesta local en el tejido que puede ayudar a modular el dolor, favorecer la respuesta inflamatoria necesaria para la reparación y estimular los procesos de recuperación y regeneración tisular. Se utiliza principalmente en el tratamiento de lesiones musculoesqueléticas, especialmente en tendones, músculos y otros tejidos blandos.</p>
               </div>
               <a href="contacto.html" class="btn btn--primary">Pedir cita <span aria-hidden="true">→</span></a>
+              <div class="showcase__tags">
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 16c2-4 4 4 6 0s4-4 6 0 4-4 6 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9c2-4 4 4 6 0s4-4 6 0 4-4 6 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/></svg><span>Técnica de punción</span></div>
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="9" stroke="currentColor" stroke-width="1.4"/><circle cx="13" cy="13" r="4" stroke="currentColor" stroke-width="1.4"/></svg><span>Punción seca</span></div>
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 14c2 3 4 3 6 0s4-7 6-3 3 8 8 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Electrólisis percutánea</span></div>
+              </div>
             </div>
-            <div class="showcase__panel-photo"><img src="assets/servicios/fisioterapia-invasiva.jpg" alt="Técnica de punción con aguja fina sobre la piel, con guantes clínicos" loading="lazy"></div>
+            <div class="showcase__panel-photo"><img src="assets/servicios/fisioterapia-invasiva.jpg" alt="Técnica de punción con aguja fina sobre la piel, con guantes clínicos" loading="lazy"><span class="showcase__photo-deco" aria-hidden="true"></span></div>
           </article>
           <article class="showcase__panel" id="ecografia">
             <div class="showcase__panel-text">
@@ -129,8 +145,13 @@
               <p>La ecografía musculoesquelética es una herramienta de valoración que permite observar en tiempo real diferentes estructuras del aparato locomotor, como músculos, tendones, ligamentos y otras partes blandas.</p>
               <p>Nos ayuda a conocer con mayor precisión el estado de los tejidos, orientar el diagnóstico fisioterapéutico y adaptar el tratamiento a cada caso. Además, permite realizar un seguimiento de la evolución durante el proceso de recuperación.</p>
               <a href="contacto.html" class="btn btn--primary">Pedir cita <span aria-hidden="true">→</span></a>
+              <div class="showcase__tags">
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 16c2-4 4 4 6 0s4-4 6 0 4-4 6 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9c2-4 4 4 6 0s4-4 6 0 4-4 6 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/></svg><span>Valoración en tiempo real</span></div>
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="9" stroke="currentColor" stroke-width="1.4"/><circle cx="13" cy="13" r="4" stroke="currentColor" stroke-width="1.4"/></svg><span>Diagnóstico preciso</span></div>
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 14c2 3 4 3 6 0s4-7 6-3 3 8 8 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Seguimiento de evolución</span></div>
+              </div>
             </div>
-            <div class="showcase__panel-photo"><img src="assets/servicios/ecografia.jpg" alt="Ecografía musculoesquelética del hombro con sonda y pantalla de imagen" loading="lazy"></div>
+            <div class="showcase__panel-photo"><img src="assets/servicios/ecografia.jpg" alt="Ecografía musculoesquelética del hombro con sonda y pantalla de imagen" loading="lazy"><span class="showcase__photo-deco" aria-hidden="true"></span></div>
           </article>
           <article class="showcase__panel" id="rehabilitacion-funcional">
             <div class="showcase__panel-text">
@@ -140,8 +161,13 @@
               <p>Diseñamos programas de ejercicio terapéutico adaptados a cada persona y a cada proceso, con el objetivo de aliviar síntomas, recuperar la función y mejorar la capacidad física.</p>
               <p>Contamos con un espacio equipado para acompañarte durante todo el proceso de recuperación, desde las primeras fases hasta la vuelta a tu actividad habitual.</p>
               <a href="contacto.html" class="btn btn--primary">Pedir cita <span aria-hidden="true">→</span></a>
+              <div class="showcase__tags">
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 16c2-4 4 4 6 0s4-4 6 0 4-4 6 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9c2-4 4 4 6 0s4-4 6 0 4-4 6 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/></svg><span>Ejercicio terapéutico</span></div>
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="9" stroke="currentColor" stroke-width="1.4"/><circle cx="13" cy="13" r="4" stroke="currentColor" stroke-width="1.4"/></svg><span>Recuperar la función</span></div>
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 14c2 3 4 3 6 0s4-7 6-3 3 8 8 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Capacidad física</span></div>
+              </div>
             </div>
-            <div class="showcase__panel-photo"><img src="assets/servicios/rehabilitacion-funcional.jpg" alt="Ejercicio guiado de movilidad de hombro entre terapeuta y paciente" loading="lazy"></div>
+            <div class="showcase__panel-photo"><img src="assets/servicios/rehabilitacion-funcional.jpg" alt="Ejercicio guiado de movilidad de hombro entre terapeuta y paciente" loading="lazy"><span class="showcase__photo-deco" aria-hidden="true"></span></div>
           </article>
           <article class="showcase__panel" id="pilates-terapeutico">
             <div class="showcase__panel-text">
@@ -151,8 +177,13 @@
               <p>A través de ejercicios basados en los principios del método Pilates, trabajamos la respiración, la estabilidad, la movilidad y el control corporal, adaptando cada ejercicio a las características y necesidades de la persona.</p>
               <p>Un trabajo consciente y progresivo que busca mejorar la relación con tu cuerpo y la calidad de tus movimientos.</p>
               <a href="contacto.html" class="btn btn--primary">Pedir cita <span aria-hidden="true">→</span></a>
+              <div class="showcase__tags">
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 16c2-4 4 4 6 0s4-4 6 0 4-4 6 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9c2-4 4 4 6 0s4-4 6 0 4-4 6 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/></svg><span>Control corporal</span></div>
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="9" stroke="currentColor" stroke-width="1.4"/><circle cx="13" cy="13" r="4" stroke="currentColor" stroke-width="1.4"/></svg><span>Respiración</span></div>
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 14c2 3 4 3 6 0s4-7 6-3 3 8 8 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Estabilidad y movilidad</span></div>
+              </div>
             </div>
-            <div class="showcase__panel-photo"><img src="assets/servicios/pilates-terapeutico.jpg" alt="Sesión de pilates con máquinas reformer en un estudio luminoso" loading="lazy"></div>
+            <div class="showcase__panel-photo"><img src="assets/servicios/pilates-terapeutico.jpg" alt="Sesión de pilates con máquinas reformer en un estudio luminoso" loading="lazy"><span class="showcase__photo-deco" aria-hidden="true"></span></div>
           </article>
           <article class="showcase__panel" id="diatermia">
             <div class="showcase__panel-text">
@@ -162,8 +193,13 @@
               <p>En Tierra contamos con Fisiowarm 7.0, que utilizamos como complemento al tratamiento de fisioterapia. Su aplicación puede ayudar a disminuir el dolor, mejorar la circulación y el aporte de oxígeno y nutrientes a los tejidos, favorecer la relajación muscular y acompañar los procesos de recuperación y reparación tisular.</p>
               <p>La intensidad y aplicación se adaptan a las necesidades de cada persona y al objetivo del tratamiento.</p>
               <a href="contacto.html" class="btn btn--primary">Pedir cita <span aria-hidden="true">→</span></a>
+              <div class="showcase__tags">
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 16c2-4 4 4 6 0s4-4 6 0 4-4 6 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 9c2-4 4 4 6 0s4-4 6 0 4-4 6 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/></svg><span>Efecto térmico</span></div>
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><circle cx="13" cy="13" r="9" stroke="currentColor" stroke-width="1.4"/><circle cx="13" cy="13" r="4" stroke="currentColor" stroke-width="1.4"/></svg><span>Mejora la circulación</span></div>
+                <div class="showcase__tag"><svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 14c2 3 4 3 6 0s4-7 6-3 3 8 8 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Relajación muscular</span></div>
+              </div>
             </div>
-            <div class="showcase__panel-photo"><img src="assets/servicios/diatermia.jpg" alt="Aplicación de un dispositivo de diatermia sobre el tobillo de un paciente" loading="lazy"></div>
+            <div class="showcase__panel-photo"><img src="assets/servicios/diatermia.jpg" alt="Aplicación de un dispositivo de diatermia sobre el tobillo de un paciente" loading="lazy"><span class="showcase__photo-deco" aria-hidden="true"></span></div>
           </article>
         </div>
 
@@ -172,7 +208,6 @@
           <span class="showcase__counter"><span data-showcase-current>01</span> / 8</span>
           <button type="button" class="showcase__arrow showcase__arrow--next" data-showcase-next aria-label="Tratamiento siguiente">→</button>
         </div>
-       </div>
       </div>
     </div>
   </section>

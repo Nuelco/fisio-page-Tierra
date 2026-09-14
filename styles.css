@@ -168,35 +168,24 @@ input,textarea,select{font:inherit;color:inherit}
 .servicios-hero h1{font-size:clamp(24px,2.8vw,36px);max-width:32ch}
 
 .showcase{position:relative;overflow:hidden;padding:0 0 var(--space-section)}
-.showcase__inner{position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--space-inline)}
-.showcase__heading{margin-top:10px;font-size:clamp(24px,3vw,36px);max-width:26ch}
-.showcase__hint{margin-top:8px;color:var(--tinta-suave)}
+.showcase__inner{position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--space-inline);display:grid;grid-template-columns:minmax(220px,280px) 1fr;gap:clamp(32px,4vw,64px);align-items:start}
 
-/* ===== Mazo de tarjetas ===== */
-.deck{margin-top:clamp(28px,4vw,44px);overflow-x:auto;overflow-y:visible;padding:22px 12px 30px;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;transition:opacity .35s ease,transform .35s ease,filter .35s ease}
-.deck__cards{list-style:none;margin:0;padding:0 4px;display:flex;width:max-content}
-.deck__card{scroll-snap-align:start}
-.deck__card-face{position:relative;width:150px;height:196px;margin-left:-42px;padding:20px 18px;display:flex;flex-direction:column;justify-content:space-between;border-radius:16px;background:var(--marron);color:var(--crema);border:1px solid rgba(237,231,218,.16);box-shadow:0 14px 26px rgba(65,47,43,.22);cursor:pointer;transition:transform .25s ease,box-shadow .25s ease;text-align:left}
-.deck__card:first-child .deck__card-face{margin-left:0}
-.deck__card:nth-child(odd) .deck__card-face{transform:rotate(-3deg) translateY(6px)}
-.deck__card:nth-child(even) .deck__card-face{transform:rotate(2.5deg) translateY(-4px)}
-.deck__card-face:hover,.deck__card-face:focus-visible{transform:translateY(-16px) rotate(0deg) scale(1.05);box-shadow:0 22px 36px rgba(65,47,43,.32);z-index:5}
-.deck__card-num{font-family:var(--font-display);font-size:12px;letter-spacing:.14em;opacity:.75}
-.deck__card-name{font-family:var(--font-body);font-weight:700;font-size:16px;line-height:1.25;margin-top:auto;padding-top:14px}
-.deck__card-arrow{align-self:flex-end;opacity:.75;font-family:var(--font-display)}
-.deck.is-receded{opacity:.4;transform:translateY(-16px) scale(.94);filter:saturate(.7);pointer-events:none}
+.showcase__list{position:sticky;top:calc(64px + 24px)}
+.showcase__items{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column}
+.showcase__item{display:flex;align-items:center;gap:12px;padding:13px 14px;border-bottom:1px solid rgba(65,47,43,.1);border-radius:var(--radius);cursor:pointer;color:var(--marron);transition:background .2s ease,color .2s ease}
+.showcase__item-num{font-family:var(--font-display);font-size:11px;color:var(--terracota-dark);opacity:.75;flex:0 0 auto}
+.showcase__item-name{font-family:var(--font-body);font-weight:600;flex:1;font-size:15px}
+.showcase__item-arrow{font-family:var(--font-display);opacity:0;transform:translateX(-4px);transition:opacity .2s ease,transform .2s ease}
+.showcase__item:hover{background:rgba(165,104,83,.08)}
+.showcase__item.is-active{background:var(--terracota-dark);color:var(--crema)}
+.showcase__item.is-active .showcase__item-num{color:var(--crema);opacity:.85}
+.showcase__item.is-active .showcase__item-arrow{opacity:1;transform:translateX(0)}
+.showcase__tagline{margin-top:26px;padding-top:20px;border-top:1px solid rgba(65,47,43,.14);font-family:var(--font-display);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--terracota-dark);line-height:1.7}
 
-/* ===== Detalle (se abre al pulsar una tarjeta, como al sacar un naipe) ===== */
-.showcase__detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease}
-.showcase__detail.is-open{grid-template-rows:1fr}
-.showcase__detail-inner{overflow:hidden;min-height:0;opacity:0;transform:translateY(14px);transition:opacity .35s ease .1s,transform .35s ease .1s}
-.showcase__detail.is-open .showcase__detail-inner{opacity:1;transform:translateY(0)}
-.showcase__close{display:inline-flex;align-items:center;gap:8px;margin:clamp(16px,2.5vw,28px) 0 clamp(20px,3vw,32px);font-family:var(--font-display);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--terracota-dark)}
-.showcase__close:hover{color:var(--marron)}
-
+.showcase__content{position:relative}
 /* Todos los paneles comparten la misma celda de grid (se apilan unos sobre
    otros): así la fila siempre mide lo que el panel más alto necesita y el
-   alto del detalle no cambia al pasar de un tratamiento a otro — la foto,
+   alto del showcase no cambia al pasar de un tratamiento a otro — la foto,
    el botón y la barra de navegación de abajo quedan fijos en su sitio. Solo
    se distingue el activo por opacidad/visibilidad, nunca por display, para
    que todos sigan contando a la hora de medir esa altura común. */
@@ -213,8 +202,14 @@ input,textarea,select{font:inherit;color:inherit}
 .showcase__subtreat h3{font-family:var(--font-body);font-size:17px;font-weight:700;color:var(--marron);margin-bottom:6px}
 .showcase__panel .btn{margin-top:8px}
 
-.showcase__panel-photo{position:relative;overflow:hidden;border-radius:160px 20px 160px 20px;height:100%;min-height:340px}
+.showcase__tags{display:flex;gap:clamp(18px,2.6vw,32px);margin-top:clamp(24px,3vw,34px);padding-top:20px;border-top:1px solid rgba(65,47,43,.14)}
+.showcase__tag{display:flex;align-items:flex-start;gap:9px;max-width:110px}
+.showcase__tag svg{flex:0 0 auto;color:var(--terracota-dark);margin-top:1px}
+.showcase__tag span{font-size:12.5px;line-height:1.35;color:var(--marron)}
+
+.showcase__panel-photo{position:relative;overflow:hidden;border-radius:200px 200px 56px 200px;height:100%;min-height:340px}
 .showcase__panel-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.showcase__photo-deco{position:absolute;top:0;right:0;width:46%;height:38%;background-image:url('assets/ondas-1.png');background-size:cover;background-position:top right;opacity:.14;filter:invert(1);pointer-events:none}
 
 .showcase__nav{display:flex;align-items:center;justify-content:flex-end;gap:16px;margin-top:clamp(20px,3vw,32px);font-family:var(--font-display);font-size:12px;letter-spacing:.12em;color:var(--marron)}
 .showcase__arrow{width:44px;height:44px;border-radius:50%;border:1px solid rgba(65,47,43,.28);display:inline-flex;align-items:center;justify-content:center;color:var(--marron);transition:background .2s ease,color .2s ease,border-color .2s ease}
@@ -223,6 +218,9 @@ input,textarea,select{font:inherit;color:inherit}
 .showcase__arrow--next:hover{filter:brightness(.9)}
 
 @media (max-width:900px){
+  .showcase__inner{grid-template-columns:1fr;gap:28px;min-width:0}
+  .showcase__list{position:static;min-width:0}
+  .showcase__tagline{display:none}
   .showcase__panel{grid-template-columns:1fr;align-content:start}
   .showcase__panel-photo{order:-1;max-width:320px;height:auto;aspect-ratio:16/10;min-height:0;border-radius:24px;margin:0 auto 8px}
   /* En movil la foto y el texto se apilan, así que el alto compartido (el
@@ -230,6 +228,7 @@ input,textarea,select{font:inherit;color:inherit}
      cortos. En vez de eso, se limita el alto del texto y se deja scroll
      interno: el conjunto pie+boton queda siempre en la misma posición. */
   .showcase__panel-text{max-height:46vh;overflow-y:auto;padding-right:6px}
+  .showcase__tags{flex-wrap:wrap;row-gap:14px}
 }
 
 /* ===== Instalaciones ===== */
