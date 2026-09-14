@@ -164,7 +164,7 @@ input,textarea,select{font:inherit;color:inherit}
 .cta-final h2{font-size:clamp(30px,4vw,52px);margin-bottom:28px}
 
 /* ===== Servicios ===== */
-.servicios-hero{position:relative;overflow:hidden;padding:clamp(40px,5.5vw,64px) 0 clamp(24px,3.5vw,36px)}
+.servicios-hero{position:relative;overflow:hidden;padding:clamp(28px,4vw,48px) 0 clamp(18px,2.5vw,28px)}
 .servicios-hero__inner{position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--space-inline)}
 .servicios-hero h1{font-size:clamp(24px,2.8vw,36px);max-width:32ch}
 
@@ -196,17 +196,21 @@ input,textarea,select{font:inherit;color:inherit}
 .showcase__panels{position:relative;display:grid}
 .showcase__panel{grid-area:1 / 1;display:grid;grid-template-columns:minmax(320px,460px) 1fr;gap:clamp(28px,3.5vw,48px);align-items:start;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease}
 .showcase__panel.is-active{opacity:1;visibility:visible;pointer-events:auto}
-.showcase__panel-text{min-width:0}
-.showcase__panel-num{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-size:13px;letter-spacing:.14em;color:var(--terracota-dark);margin-bottom:16px}
+/* Tope de alto en escritorio tambien (no solo en movil): el tratamiento
+   mas largo (Fisioterapia invasiva, con sus 2 subtipos) no debe estirar
+   la fila compartida mas alla de lo que cabe en una pantalla normal, o el
+   usuario tendria que hacer scroll para llegar a las flechas de abajo. */
+.showcase__panel-text{min-width:0;max-height:min(52vh,440px);overflow-y:auto;padding-right:10px}
+.showcase__panel-num{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-size:13px;letter-spacing:.14em;color:var(--terracota-dark);margin-bottom:12px}
 .showcase__panel-num::after{content:'';flex:0 0 56px;height:1px;background:rgba(65,47,43,.25)}
-.showcase__panel h2{font-size:clamp(28px,3.6vw,44px);margin-bottom:16px}
-.showcase__panel p{color:var(--tinta-suave);max-width:52ch;margin-bottom:14px}
+.showcase__panel h2{font-size:clamp(26px,3.2vw,38px);margin-bottom:12px}
+.showcase__panel p{color:var(--tinta-suave);max-width:52ch;margin-bottom:10px}
 .showcase__panel .servicio__highlight{font-family:var(--font-display);font-size:clamp(17px,1.6vw,22px);color:var(--marron);margin-bottom:10px;text-transform:none}
 .showcase__subtreat{margin:18px 0}
 .showcase__subtreat h3{font-family:var(--font-body);font-size:17px;font-weight:700;color:var(--marron);margin-bottom:6px}
 .showcase__panel .btn{margin-top:8px}
 
-.showcase__tags{display:flex;gap:clamp(18px,2.6vw,32px);margin-top:clamp(24px,3vw,34px);padding-top:20px;border-top:1px solid rgba(65,47,43,.14)}
+.showcase__tags{display:flex;gap:clamp(18px,2.6vw,32px);margin-top:clamp(14px,2vw,22px);padding-top:14px;border-top:1px solid rgba(65,47,43,.14)}
 .showcase__tag{display:flex;align-items:flex-start;gap:9px;max-width:110px}
 .showcase__tag svg{flex:0 0 auto;color:var(--terracota-dark);margin-top:1px}
 .showcase__tag span{font-size:12.5px;line-height:1.35;color:var(--marron)}
@@ -214,13 +218,13 @@ input,textarea,select{font:inherit;color:inherit}
 /* La foto se recorta recta por arriba y por la derecha (llega hasta el
    borde del hueco sin redondear) y solo curva de forma organica por la
    izquierda y por abajo, tal como marca la referencia. */
-.showcase__photo-wrap{position:relative;height:100%;min-height:340px;display:flex;justify-content:flex-end;align-items:flex-start}
-.showcase__panel-photo{position:relative;overflow:hidden;width:100%;max-width:820px;aspect-ratio:.88;max-height:100%;clip-path:url(#showcase-blob)}
+.showcase__photo-wrap{position:relative;height:100%;max-height:min(52vh,440px);min-height:280px;display:flex;justify-content:flex-end;align-items:flex-start}
+.showcase__panel-photo{position:relative;overflow:hidden;width:auto;height:100%;aspect-ratio:.88;max-width:100%;clip-path:url(#showcase-blob)}
 .showcase__panel-photo img{width:100%;height:100%;object-fit:cover;display:block}
 /* La decoración queda dentro de la foto (se recorta junto con ella). */
 .showcase__photo-deco{position:absolute;top:0;right:0;width:52%;height:42%;background-image:url('assets/ondas-1.png');background-size:180% 180%;background-position:65% 35%;opacity:.5;filter:invert(1);pointer-events:none}
 
-.showcase__nav{display:flex;align-items:center;justify-content:flex-end;gap:16px;margin-top:clamp(20px,3vw,32px);font-family:var(--font-display);font-size:12px;letter-spacing:.12em;color:var(--marron)}
+.showcase__nav{display:flex;align-items:center;justify-content:flex-end;gap:16px;margin-top:clamp(14px,2vw,20px);font-family:var(--font-display);font-size:12px;letter-spacing:.12em;color:var(--marron)}
 .showcase__arrow{width:44px;height:44px;border-radius:50%;border:1px solid rgba(65,47,43,.28);display:inline-flex;align-items:center;justify-content:center;color:var(--marron);transition:background .2s ease,color .2s ease,border-color .2s ease}
 .showcase__arrow:hover{background:rgba(65,47,43,.06)}
 .showcase__arrow--next{background:var(--terracota-dark);border-color:var(--terracota-dark);color:var(--crema)}
