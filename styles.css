@@ -169,11 +169,7 @@ input,textarea,select{font:inherit;color:inherit}
 .servicios-hero h1{font-size:clamp(24px,2.8vw,36px);max-width:32ch}
 
 .showcase{position:relative;overflow:hidden;padding:0 0 var(--space-section)}
-/* Esta sección rompe el contenedor centrado del resto de la web a
-   propósito: ocupa todo el ancho de la pantalla (solo conserva el margen
-   izquierdo habitual) para que la foto llegue hasta el borde derecho real
-   del viewport, tal como marca la referencia. */
-.showcase__inner{position:relative;z-index:1;width:100%;max-width:none;padding:0 0 0 var(--space-inline);display:grid;grid-template-columns:minmax(220px,280px) 1fr;gap:clamp(32px,4vw,64px);align-items:start}
+.showcase__inner{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 var(--space-inline);display:grid;grid-template-columns:minmax(220px,280px) 1fr;gap:clamp(32px,4vw,64px);align-items:start}
 
 .showcase__items{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column}
 .showcase__item{display:flex;align-items:center;gap:12px;padding:13px 14px;border-bottom:1px solid rgba(65,47,43,.1);border-radius:var(--radius);cursor:pointer;color:var(--marron);transition:background .2s ease,color .2s ease}
