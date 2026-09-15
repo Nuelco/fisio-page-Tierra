@@ -164,9 +164,10 @@ input,textarea,select{font:inherit;color:inherit}
 .cta-final h2{font-size:clamp(30px,4vw,52px);margin-bottom:28px}
 
 /* ===== Servicios ===== */
-.servicios-hero{position:relative;overflow:hidden;padding:clamp(28px,4vw,48px) 0 clamp(18px,2.5vw,28px)}
+.servicios-hero{position:relative;overflow:hidden;padding:clamp(28px,4vw,48px) 0 clamp(18px,2.5vw,28px);border-bottom:1px solid rgba(65,47,43,.16)}
 .servicios-hero__inner{position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--space-inline)}
 .servicios-hero h1{font-size:clamp(24px,2.8vw,36px);max-width:32ch}
+.servicios-hero__subtitle{margin-top:10px;font-family:var(--font-body);font-size:clamp(16px,1.4vw,19px);color:var(--tinta-suave);max-width:40ch}
 
 .showcase{position:relative;overflow:hidden;padding:0 0 var(--space-section)}
 .showcase__inner{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 var(--space-inline);display:grid;grid-template-columns:minmax(220px,280px) 1fr;gap:clamp(32px,4vw,64px);align-items:start}
