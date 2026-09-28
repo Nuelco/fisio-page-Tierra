@@ -51,9 +51,13 @@
 }
 </script>
 <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preload" href="assets/fonts/SpaceMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/RethinkSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body data-page="inicio">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="tierra-splash" viewBox="0 0 342 208" fill="none"><path stroke-linecap="round" stroke-width="3" d="M54.1054 99.7837C54.1054 99.7837 40.0984 90.7874 26.6893 97.6362C13.2802 104.485 1.5 97.6362 1.5 97.6362" ></path> <path stroke-linecap="round" stroke-width="3" d="M285.273 99.7841C285.273 99.7841 299.28 90.7879 312.689 97.6367C326.098 104.486 340.105 95.4893 340.105 95.4893" ></path> <path stroke-linecap="round" stroke-width="3" stroke-opacity="0.3" d="M281.133 64.9917C281.133 64.9917 287.96 49.8089 302.934 48.2295C317.908 46.6501 319.712 36.5272 319.712 36.5272" ></path> <path stroke-linecap="round" stroke-width="3" stroke-opacity="0.3" d="M281.133 138.984C281.133 138.984 287.96 154.167 302.934 155.746C317.908 157.326 319.712 167.449 319.712 167.449" ></path> <path stroke-linecap="round" stroke-width="3" d="M230.578 57.4476C230.578 57.4476 225.785 41.5051 236.061 30.4998C246.337 19.4945 244.686 12.9998 244.686 12.9998" ></path> <path stroke-linecap="round" stroke-width="3" d="M230.578 150.528C230.578 150.528 225.785 166.471 236.061 177.476C246.337 188.481 244.686 194.976 244.686 194.976" ></path> <path stroke-linecap="round" stroke-width="3" stroke-opacity="0.3" d="M170.392 57.0278C170.392 57.0278 173.89 42.1322 169.571 29.54C165.252 16.9478 168.751 2.05227 168.751 2.05227" ></path> <path stroke-linecap="round" stroke-width="3" stroke-opacity="0.3" d="M170.392 150.948C170.392 150.948 173.89 165.844 169.571 178.436C165.252 191.028 168.751 205.924 168.751 205.924" ></path> <path stroke-linecap="round" stroke-width="3" d="M112.609 57.4476C112.609 57.4476 117.401 41.5051 107.125 30.4998C96.8492 19.4945 98.5 12.9998 98.5 12.9998" ></path> <path stroke-linecap="round" stroke-width="3" d="M112.609 150.528C112.609 150.528 117.401 166.471 107.125 177.476C96.8492 188.481 98.5 194.976 98.5 194.976" ></path> <path stroke-linecap="round" stroke-width="3" stroke-opacity="0.3" d="M62.2941 64.9917C62.2941 64.9917 55.4671 49.8089 40.4932 48.2295C25.5194 46.6501 23.7159 36.5272 23.7159 36.5272" ></path> <path stroke-linecap="round" stroke-width="3" stroke-opacity="0.3" d="M62.2941 145.984C62.2941 145.984 55.4671 161.167 40.4932 162.746C25.5194 164.326 23.7159 174.449 23.7159 174.449" ></path></symbol></svg>
 <a href="#main" class="skip-link">Saltar al contenido</a>
 <header id="site-header" class="site-header">
   <span class="bg-ondas bg-ondas--1 bg-ondas--dark" aria-hidden="true"></span>
@@ -62,36 +66,47 @@
       <img src="assets/logos/logo-principal-beige.svg" alt="Fisioterapia Tierra" width="180" height="31">
     </a>
     <nav class="nav" aria-label="Navegación principal">
-      <a href="index.html" class="is-active">Inicio</a>
+      <a href="index.html" class="is-active" aria-current="page">Inicio</a>
       <a href="servicios.html">Servicios</a>
       <a href="instalaciones.html">Instalaciones</a>
       <a href="contacto.html">Contacto</a>
-      <a href="contacto.html" class="btn btn--primary">Pedir cita</a>
+      <a href="contacto.html" class="btn btn--primary btn--sm"><span class="btn__bg"></span><svg class="btn__splash" viewBox="0 0 342 208" fill="none" aria-hidden="true"><use href="#tierra-splash"/></svg><span class="btn__wrap"><span class="btn__outline"></span><span class="btn__content"><span class="btn__chars"><span data-label="P" style="--i:1">P</span><span data-label="e" style="--i:2">e</span><span data-label="d" style="--i:3">d</span><span data-label="i" style="--i:4">i</span><span data-label="r" style="--i:5">r</span><span data-label=" " style="--i:6">&nbsp;</span><span data-label="c" style="--i:7">c</span><span data-label="i" style="--i:8">i</span><span data-label="t" style="--i:9">t</span><span data-label="a" style="--i:10">a</span></span></span></span></a>
     </nav>
     <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-nav">
       <span></span><span></span><span></span>
     </button>
-    <nav class="mobile-nav" id="mobile-nav" aria-label="Navegación móvil">
-      <a href="index.html" class="is-active">Inicio</a>
-      <a href="servicios.html">Servicios</a>
-      <a href="instalaciones.html">Instalaciones</a>
-      <a href="contacto.html">Contacto</a>
-      <a href="contacto.html" class="btn btn--primary">Pedir cita</a>
-    </nav>
   </div>
+  <span class="site-header__progress" id="read-progress" aria-hidden="true"></span>
 </header>
+
+<div class="mobile-nav" id="mobile-nav" hidden>
+  <div class="mobile-nav__panel">
+    <nav aria-label="Navegación móvil">
+      <a href="index.html" class="is-active" aria-current="page"><span>Inicio</span></a>
+      <a href="servicios.html"><span>Servicios</span></a>
+      <a href="instalaciones.html"><span>Instalaciones</span></a>
+      <a href="contacto.html"><span>Contacto</span></a>
+    </nav>
+    <div class="mobile-nav__foot">
+      <a href="contacto.html" class="btn btn--primary"><span class="btn__bg"></span><svg class="btn__splash" viewBox="0 0 342 208" fill="none" aria-hidden="true"><use href="#tierra-splash"/></svg><span class="btn__wrap"><span class="btn__outline"></span><span class="btn__content"><span class="btn__chars"><span data-label="P" style="--i:1">P</span><span data-label="e" style="--i:2">e</span><span data-label="d" style="--i:3">d</span><span data-label="i" style="--i:4">i</span><span data-label="r" style="--i:5">r</span><span data-label=" " style="--i:6">&nbsp;</span><span data-label="c" style="--i:7">c</span><span data-label="i" style="--i:8">i</span><span data-label="t" style="--i:9">t</span><span data-label="a" style="--i:10">a</span></span></span></span></a>
+      <a href="tel:+34614059566" class="mobile-nav__tel">614 05 95 66</a>
+    </div>
+  </div>
+</div>
+
 <main id="main">
   <section class="hero" id="hero">
     <span class="bg-ondas bg-ondas--1 bg-ondas--light" aria-hidden="true"></span>
     <div class="hero__grid">
       <div class="hero__inner">
         <p class="eyebrow">Fisioterapia - Osteopatía · Zamora</p>
-        <h1>Vuelve al origen de tu bienestar</h1>
+        <h1 class="hero__title">
+          <span class="mask"><span>Vuelve al origen</span></span>
+          <span class="mask"><span>de tu bienestar</span></span>
+        </h1>
         <p class="hero__lead">Volver al origen, conectar con el cuerpo y recuperar el equilibrio.</p>
-        <!-- FOTO PENDIENTE: fotografía editorial del hero descrita en el prompt (11.1) — retrato o gesto corporal con líneas topográficas superpuestas, formato apaisado grande. Alt sugerido: "Fotografía editorial de Fisioterapia Tierra con líneas topográficas superpuestas" -->
         <div class="hero__actions">
-          <a href="contacto.html" class="btn btn--primary">Pedir cita</a>
-          <a href="#presentacion" class="btn btn--ghost">Conócenos</a>
+          <a href="contacto.html" class="btn btn--primary"><span class="btn__bg"></span><svg class="btn__splash" viewBox="0 0 342 208" fill="none" aria-hidden="true"><use href="#tierra-splash"/></svg><span class="btn__wrap"><span class="btn__outline"></span><span class="btn__content"><span class="btn__chars"><span data-label="P" style="--i:1">P</span><span data-label="e" style="--i:2">e</span><span data-label="d" style="--i:3">d</span><span data-label="i" style="--i:4">i</span><span data-label="r" style="--i:5">r</span><span data-label=" " style="--i:6">&nbsp;</span><span data-label="c" style="--i:7">c</span><span data-label="i" style="--i:8">i</span><span data-label="t" style="--i:9">t</span><span data-label="a" style="--i:10">a</span></span></span></span></a>
         </div>
       </div>
       <div class="hero__symbol" id="hero-symbol" aria-hidden="true">
@@ -101,96 +116,143 @@
         </svg>
       </div>
     </div>
+    <span class="hero__cue" id="hero-cue" aria-hidden="true"></span>
   </section>
 
-  <div class="marquee" id="tratamientos" aria-label="Tratamientos de Fisioterapia Tierra">
-    <div class="marquee__track">
-      <span class="marquee__group">FISIOTERAPIA<span class="marquee__sep"></span>OSTEOPATÍA<span class="marquee__sep"></span>FISIOTERAPIA DEPORTIVA<span class="marquee__sep"></span>FISIOTERAPIA INVASIVA<span class="marquee__sep"></span>PUNCIÓN SECA<span class="marquee__sep"></span>ELECTRÓLISIS PERCUTÁNEA<span class="marquee__sep"></span>ECOGRAFÍA<span class="marquee__sep"></span>REHABILITACIÓN FUNCIONAL<span class="marquee__sep"></span>PILATES TERAPÉUTICO<span class="marquee__sep"></span>DIATERMIA<span class="marquee__sep"></span></span>
-      <span class="marquee__group" aria-hidden="true">FISIOTERAPIA<span class="marquee__sep"></span>OSTEOPATÍA<span class="marquee__sep"></span>FISIOTERAPIA DEPORTIVA<span class="marquee__sep"></span>FISIOTERAPIA INVASIVA<span class="marquee__sep"></span>PUNCIÓN SECA<span class="marquee__sep"></span>ELECTRÓLISIS PERCUTÁNEA<span class="marquee__sep"></span>ECOGRAFÍA<span class="marquee__sep"></span>REHABILITACIÓN FUNCIONAL<span class="marquee__sep"></span>PILATES TERAPÉUTICO<span class="marquee__sep"></span>DIATERMIA<span class="marquee__sep"></span></span>
+  <!-- CARRUSEL DE TRATAMIENTOS - DESACTIVADO (29-sep-2026)
+       Daba tirones al pasar por encima. Se deja comentado, no borrado: el
+       CSS (.marquee*) y el JS (initMarquee en script.js) siguen en su sitio,
+       asi que para recuperarlo basta con quitar este comentario.
+       Los enlaces a cada tratamiento no se pierden: la seccion
+       "Tratamientos" de mas abajo lleva a los mismos anclajes.
+
+  <div class="marquee" id="tratamientos-marquee" aria-label="Tratamientos de Fisioterapia Tierra">
+    <div class="marquee__track" data-marquee-track>
+      <span class="marquee__group">
+        <a href="servicios.html#fisioterapia">Fisioterapia</a><span class="marquee__sep" aria-hidden="true"></span><a href="servicios.html#osteopatia">Osteopatía</a><span class="marquee__sep" aria-hidden="true"></span><a href="servicios.html#fisioterapia-deportiva">Fisioterapia deportiva</a><span class="marquee__sep" aria-hidden="true"></span><a href="servicios.html#fisioterapia-invasiva">Fisioterapia invasiva</a><span class="marquee__sep" aria-hidden="true"></span><a href="servicios.html#puncion-seca">Punción seca</a><span class="marquee__sep" aria-hidden="true"></span><a href="servicios.html#electrolisis-percutanea">Electrólisis percutánea</a><span class="marquee__sep" aria-hidden="true"></span><a href="servicios.html#ecografia">Ecografía</a><span class="marquee__sep" aria-hidden="true"></span><a href="servicios.html#rehabilitacion-funcional">Rehabilitación funcional</a><span class="marquee__sep" aria-hidden="true"></span><a href="servicios.html#pilates-terapeutico">Pilates terapéutico</a><span class="marquee__sep" aria-hidden="true"></span><a href="servicios.html#diatermia">Diatermia</a><span class="marquee__sep" aria-hidden="true"></span>
+      </span>
+      <span class="marquee__group" aria-hidden="true">
+        <span>Fisioterapia</span><span class="marquee__sep"></span><span>Osteopatía</span><span class="marquee__sep"></span><span>Fisioterapia deportiva</span><span class="marquee__sep"></span><span>Fisioterapia invasiva</span><span class="marquee__sep"></span><span>Punción seca</span><span class="marquee__sep"></span><span>Electrólisis percutánea</span><span class="marquee__sep"></span><span>Ecografía</span><span class="marquee__sep"></span><span>Rehabilitación funcional</span><span class="marquee__sep"></span><span>Pilates terapéutico</span><span class="marquee__sep"></span><span>Diatermia</span><span class="marquee__sep"></span>
+      </span>
     </div>
   </div>
+  -->
 
-<section class="presentacion" id="presentacion">
-  <div class="presentacion__inner">
-    <div data-reveal>
-      <!-- FOTO PENDIENTE: retrato de Andrea Legido Andrés, formato vertical o cuadrado. Alt sugerido: "Andrea Legido Andrés, fisioterapeuta de Fisioterapia Tierra" -->
-      <blockquote>
-        En Tierra trabajamos desde una fisioterapia personalizada, con criterio clínico basado en la evidencia científica y atención individual a cada persona, con el fin de ofrecer el mejor tratamiento de manera honesta y sensata.
-      </blockquote>
-    </div>
-    <div data-reveal>
-      <p class="eyebrow" style="margin-bottom:12px">Andrea Legido Andrés</p>
-      <cite>Fisioterapeuta — Nº Col 3186</cite>
-    </div>
-  </div>
-</section>
-
-  <section class="phrases" id="frases">
+  <section class="phrases" id="frases" aria-label="Cómo trabajamos">
     <span class="bg-ondas bg-ondas--1 bg-ondas--dark" aria-hidden="true"></span>
     <div class="phrases__inner">
-      <p data-reveal>Entender tu cuerpo.</p>
-      <p data-reveal>Escucharlo.</p>
-      <p data-reveal>Acompañarlo en el proceso.</p>
+      <p data-phrase="left"><span class="mask"><span>Entender tu cuerpo.</span></span></p>
+      <p data-phrase="center"><span class="mask"><span>Escucharlo.</span></span></p>
+      <p data-phrase="right"><span class="mask"><span>Acompañarlo en el proceso.</span></span></p>
     </div>
   </section>
 
-<section class="filosofia" id="filosofia">
-  <span class="bg-ondas bg-ondas--2 bg-ondas--light" aria-hidden="true"></span>
-  <div class="filosofia__inner">
-    <p class="filosofia__lead" data-reveal>No trato solo el dolor: busco su origen para devolverte el movimiento y la confianza en tu propio cuerpo.</p>
-    <div class="filosofia__body" data-reveal>
-      <p class="eyebrow">La filosofía</p>
-      <p>En Tierra entiendo el cuerpo como un todo. A través de la fisioterapia y la osteopatía te acompaño en un proceso cercano y personalizado, respetando tus tiempos y tus necesidades.</p>
-      <p class="filosofia__closing">Porque sanar no es solo aliviar. Es volver a ti.</p>
+  <section class="filosofia" id="filosofia">
+    <span class="bg-ondas bg-ondas--2 bg-ondas--light" aria-hidden="true"></span>
+    <div class="filosofia__inner">
+      <h2 class="filosofia__lead" data-reveal="lines">No trato solo el dolor: busco su origen para devolverte el movimiento y la confianza en tu propio cuerpo.</h2>
+      <div class="filosofia__body">
+        <p class="eyebrow" data-reveal>La filosofía</p>
+        <p data-reveal>En Tierra entiendo el cuerpo como un todo. A través de la fisioterapia y la osteopatía te acompaño en un proceso cercano y personalizado, respetando tus tiempos y tus necesidades.</p>
+        <p class="filosofia__closing" data-reveal>Porque sanar no es solo aliviar. Es volver a ti.</p>
+      </div>
     </div>
-  </div>
-</section>
+    <div class="filosofia__statement">
+      <p data-reveal="lines">Tierra nace de la pasión por una fisioterapia cercana y personalizada</p>
+    </div>
+  </section>
+
+  <section class="presentacion" id="andrea" aria-label="Andrea Legido Andrés">
+    <div class="presentacion__inner">
+      <blockquote data-reveal="lines">
+        En Tierra trabajamos desde una fisioterapia personalizada, con criterio clínico basado en la evidencia científica y atención individual a cada persona, con el fin de ofrecer el mejor tratamiento de manera honesta y sensata.
+      </blockquote>
+      <p class="presentacion__sign" data-reveal>
+        <span class="presentacion__name">Andrea Legido Andrés</span>
+        <cite>Fisioterapeuta, colegiada nº 3186</cite>
+      </p>
+    </div>
+  </section>
 
   <section class="metodo" id="metodo">
     <span class="bg-ondas bg-ondas--2 bg-ondas--dark" aria-hidden="true"></span>
     <div class="metodo__inner">
-      <h2 data-reveal>Método</h2>
-      <div class="metodo__steps">
-        <div class="metodo__step" data-reveal>
+      <h2 data-reveal="lines">Método</h2>
+      <ol class="metodo__steps" role="list">
+        <li class="metodo__step" data-reveal="rule">
           <span class="metodo__num">01</span>
           <h3>Escucha real</h3>
           <p>Antes de tratar, escucho. Cada cuerpo cuenta una historia distinta, y el tratamiento parte de ahí.</p>
-        </div>
-        <div class="metodo__step" data-reveal>
+        </li>
+        <li class="metodo__step" data-reveal="rule">
           <span class="metodo__num">02</span>
           <h3>Raíz, no síntoma</h3>
           <p>Busco el origen del dolor, no solo calmarlo un rato. Por eso los planes de tratamiento son a medida.</p>
-        </div>
-        <div class="metodo__step" data-reveal>
+        </li>
+        <li class="metodo__step" data-reveal="rule">
           <span class="metodo__num">03</span>
           <h3>Conectar para tratar</h3>
           <p>Las manos nos ayudan a conocer el cuerpo y a entender lo que necesita. A partir de ahí, combinamos diferentes técnicas para adaptar cada tratamiento.</p>
-        </div>
-      </div>
+        </li>
+      </ol>
     </div>
   </section>
 
-  <section class="statement">
-    <span class="bg-ondas bg-ondas--1 bg-ondas--light" aria-hidden="true"></span>
-    <div class="statement__inner">
-      <p data-reveal>Tierra nace de la pasión por una fisioterapia cercana y personalizada</p>
+  <section class="tratamientos" id="tratamientos">
+    <div class="tratamientos__inner">
+      <div class="tratamientos__head">
+        <h2 data-reveal="lines">Tratamientos</h2>
+        <a href="servicios.html" class="tratamientos__all" data-reveal>Ver todos los servicios</a>
+      </div>
+      <ul class="tratamientos__list" role="list">
+        <li><a href="servicios.html#fisioterapia"><span class="tratamientos__name">Fisioterapia</span><span class="tratamientos__desc">Terapia manual y ejercicio para recuperar el movimiento</span></a></li>
+        <li><a href="servicios.html#osteopatia"><span class="tratamientos__name">Osteopatía</span><span class="tratamientos__desc">El cuerpo como un todo, no como piezas sueltas</span></a></li>
+        <li><a href="servicios.html#fisioterapia-deportiva"><span class="tratamientos__name">Fisioterapia deportiva</span><span class="tratamientos__desc">Vuelta a la actividad y prevención de recaídas</span></a></li>
+        <li><a href="servicios.html#fisioterapia-invasiva"><span class="tratamientos__name">Fisioterapia invasiva</span><span class="tratamientos__desc">Punción seca y electrólisis percutánea guiadas</span></a></li>
+        <li><a href="servicios.html#ecografia"><span class="tratamientos__name">Ecografía</span><span class="tratamientos__desc">Ver el tejido antes de decidir cómo tratarlo</span></a></li>
+        <li><a href="servicios.html#rehabilitacion-funcional"><span class="tratamientos__name">Rehabilitación funcional</span><span class="tratamientos__desc">Recuperar la fuerza y el gesto de cada día</span></a></li>
+        <li><a href="servicios.html#pilates-terapeutico"><span class="tratamientos__name">Pilates terapéutico</span><span class="tratamientos__desc">Control, movilidad y continuidad tras el alta</span></a></li>
+        <li><a href="servicios.html#diatermia"><span class="tratamientos__name">Diatermia</span><span class="tratamientos__desc">Calor profundo para acelerar la recuperación</span></a></li>
+      </ul>
     </div>
   </section>
 
   <section class="cta-final">
     <span class="bg-ondas bg-ondas--1 bg-ondas--cta" aria-hidden="true"></span>
-    <div class="cta-final__inner" data-reveal>
-      <h2>Tu bienestar te espera. Empecemos hoy.</h2>
-      <a href="contacto.html" class="btn btn--dark">Pedir cita</a>
+    <div class="cta-final__inner">
+      <h2 data-reveal="lines">Tu bienestar te espera. Empecemos hoy.</h2>
+      <div class="cta-final__actions" data-reveal>
+        <div class="duo">
+          <span class="duo__tapa" aria-hidden="true"><span class="duo__tapa-cara">Contactar</span></span>
+          <a href="contacto.html" class="duo__card">
+            <svg class="duo__ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 11h18"/></svg>
+            <span>Pedir cita</span>
+          </a>
+          <a href="tel:+34614059566" class="duo__card">
+            <svg class="duo__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3h3l1.5 5-2.2 1.4a13 13 0 0 0 5.8 5.8L16 13l5 1.5v3a2.5 2.5 0 0 1-2.7 2.5C10.9 19.6 4.4 13.1 4 5.7A2.5 2.5 0 0 1 6.5 3z"/></svg>
+            <span>614 05 95 66</span>
+          </a>
+        </div>
+      </div>
+      <p class="cta-final__meta" data-reveal>
+        <span>Av. del Cardenal Cisneros 44, bajo. 49014 Zamora.</span>
+        <span>Andrea Legido Andrés, fisioterapeuta colegiada nº 3186.</span>
+      </p>
     </div>
   </section>
 </main>
+
+<div class="action-bar" id="action-bar" aria-hidden="true">
+  <a href="tel:+34614059566" class="action-bar__call">Llamar</a>
+  <a href="contacto.html" class="action-bar__book">Pedir cita</a>
+</div>
+
 <footer id="site-footer" class="site-footer">
   <span class="bg-ondas bg-ondas--1 bg-ondas--dark" aria-hidden="true"></span>
   <div class="site-footer__inner">
     <div class="site-footer__brand">
-      <img src="assets/logos/logo-v-beige.svg" alt="Fisioterapia Tierra" width="150" height="72">
-      <p class="site-footer__desc">Fisioterapia y osteopatía en Zamora. Terapia manual, fisioterapia deportiva y tratamiento personalizado.</p>
+      <img src="assets/logos/logo-v-beige.svg" alt="Fisioterapia Tierra" width="150" height="72" loading="lazy">
+      <p class="site-footer__desc">Fisioterapia y osteopatía en Zamora.</p>
     </div>
     <div class="site-footer__col">
       <p class="site-footer__heading">Páginas</p>

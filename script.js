@@ -1,41 +1,377 @@
+/* Fisioterapia Tierra — comportamiento de la web.
+ *
+ * El movimiento de toda la página habla el mismo idioma que el símbolo de la
+ * marca: los trazos entran desde fuera del encuadre y se asientan. Por eso
+ * casi nada aparece con un fade suelto — el contenido llega desde un borde a
+ * través de una ventanilla (.mask) y se detiene.
+ *
+ * Orden de carga: gsap → ScrollTrigger → este archivo (los tres con defer),
+ * así que aquí GSAP ya está disponible si el CDN respondió.
+ */
+
+/* Si GSAP no ha cargado, se retira el ocultado preventivo que hace el CSS
+   (.js [data-reveal]{opacity:0}) para que el contenido no quede invisible.
+   Esto corre antes de DOMContentLoaded, así que no hay parpadeo. */
+if(!window.gsap || !window.ScrollTrigger){
+  document.documentElement.classList.add('no-motion');
+}
+
 (function(){
   'use strict';
-  function initHeader(){
-    var toggle = document.getElementById('nav-toggle');
-    var menu = document.getElementById('mobile-nav');
-    if(toggle && menu){
-      toggle.addEventListener('click', function(){
-        var open = menu.classList.toggle('is-open');
-        toggle.setAttribute('aria-expanded', String(open));
-      });
+
+  var REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var EASE = 'power3.out';
+
+  /* ------------------------------------------------------------------ *
+   * Utilidad: partir un texto en líneas visuales dentro de ventanillas.
+   * Mide dónde rompe el navegador de verdad (offsetTop de cada palabra) en
+   * lugar de adivinar, y reconstruye el elemento como .mask > span por línea.
+   * Devuelve los spans interiores, que son los que se animan.
+   * ------------------------------------------------------------------ */
+  function splitLines(el){
+    if(el.querySelector('.mask')) {
+      // Ya viene partido a mano desde el HTML (h1 del hero, frases).
+      return Array.prototype.slice.call(el.querySelectorAll('.mask > span'));
     }
+    var text = el.textContent.replace(/\s+/g, ' ').trim();
+    if(!text) return [];
+
+    var words = text.split(' ');
+    el.textContent = '';
+    words.forEach(function(w, i){
+      var s = document.createElement('span');
+      s.className = 'sl-w';
+      s.textContent = w;
+      el.appendChild(s);
+      if(i < words.length - 1) el.appendChild(document.createTextNode(' '));
+    });
+
+    var lines = [], lastTop = null, current = null;
+    Array.prototype.forEach.call(el.querySelectorAll('.sl-w'), function(w){
+      var top = w.offsetTop;
+      if(lastTop === null || Math.abs(top - lastTop) > 2){
+        current = [];
+        lines.push(current);
+        lastTop = top;
+      }
+      current.push(w.textContent);
+    });
+
+    el.textContent = '';
+    return lines.map(function(line){
+      var mask = document.createElement('span');
+      mask.className = 'mask';
+      var inner = document.createElement('span');
+      inner.textContent = line.join(' ');
+      mask.appendChild(inner);
+      el.appendChild(mask);
+      return inner;
+    });
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Header: se compacta al bajar, se retira al seguir bajando y vuelve al
+   * subir. Mantiene --header-h al día para que las anclas no queden tapadas.
+   * ------------------------------------------------------------------ */
+  function initHeader(){
+    var header = document.getElementById('site-header');
+    var progress = document.getElementById('read-progress');
+    if(!header) return;
+
+    var lastY = window.scrollY;
+    var ticking = false;
+    var menuOpen = false;
+
+    var wasScrolled = null;
+
+    function syncHeight(){
+      document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+    }
+
+    function update(){
+      var y = window.scrollY;
+      var scrolled = y > 24;
+      header.classList.toggle('is-scrolled', scrolled);
+
+      // Solo se esconde una vez pasado el hero y nunca con el menú abierto.
+      var goingDown = y > lastY + 4;
+      var goingUp = y < lastY - 4;
+      if(!menuOpen){
+        if(goingDown && y > 320) header.classList.add('is-hidden');
+        else if(goingUp) header.classList.remove('is-hidden');
+      }
+      if(goingDown || goingUp) lastY = y;
+
+      if(progress){
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        progress.style.transform = 'scaleX(' + (max > 0 ? Math.min(y / max, 1) : 0) + ')';
+      }
+      // offsetHeight fuerza un reflow, así que solo se remide cuando el header
+      // cambia de tamaño de verdad (al compactarse), no en cada fotograma.
+      if(scrolled !== wasScrolled){
+        wasScrolled = scrolled;
+        setTimeout(syncHeight, 360);
+      }
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', function(){
+      if(!ticking){ ticking = true; requestAnimationFrame(update); }
+    }, {passive: true});
+    window.addEventListener('resize', syncHeight);
+
+    syncHeight();
+    update();
+
+    document.addEventListener('tierra:menu', function(e){
+      menuOpen = e.detail.open;
+      if(menuOpen) header.classList.remove('is-hidden');
+    });
+
     document.querySelectorAll('[data-year]').forEach(function(el){
       el.textContent = new Date().getFullYear();
     });
   }
-  document.addEventListener('DOMContentLoaded', initHeader);
-})();
 
-(function(){
-  'use strict';
-  function initReveals(){
-    if(!window.gsap || !window.ScrollTrigger) return;
-    gsap.registerPlugin(ScrollTrigger);
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var items = document.querySelectorAll('[data-reveal]');
-    if(reduce){
-      items.forEach(function(el){ el.style.opacity = 1; });
-      return;
+  /* ------------------------------------------------------------------ *
+   * Menú móvil a pantalla completa: cierra al pulsar un enlace, con Escape
+   * y al pasar a escritorio; bloquea el scroll del fondo, atrapa el foco
+   * mientras está abierto y lo devuelve al botón al cerrar.
+   * ------------------------------------------------------------------ */
+  function initMobileNav(){
+    var toggle = document.getElementById('nav-toggle');
+    var menu = document.getElementById('mobile-nav');
+    if(!toggle || !menu) return;
+
+    var links = menu.querySelectorAll('a');
+    var open = false;
+
+    function announce(){
+      document.dispatchEvent(new CustomEvent('tierra:menu', {detail: {open: open}}));
     }
+
+    function openMenu(){
+      open = true;
+      menu.hidden = false;
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Cerrar menú');
+      document.body.classList.add('no-scroll');
+      announce();
+      if(window.gsap && !REDUCE){
+        gsap.fromTo(menu, {opacity: 0}, {opacity: 1, duration: .28, ease: 'power2.out'});
+        gsap.fromTo(menu.querySelectorAll('nav a > span'),
+          {yPercent: 110},
+          {yPercent: 0, duration: .6, ease: EASE, stagger: .06, delay: .06});
+        gsap.fromTo(menu.querySelector('.mobile-nav__foot'),
+          {opacity: 0, y: 12},
+          {opacity: 1, y: 0, duration: .5, ease: EASE, delay: .3});
+      }
+      if(links[0]) links[0].focus();
+    }
+
+    function closeMenu(){
+      if(!open) return;
+      open = false;
+      menu.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Abrir menú');
+      document.body.classList.remove('no-scroll');
+      announce();
+      toggle.focus();
+    }
+
+    toggle.addEventListener('click', function(){ open ? closeMenu() : openMenu(); });
+    links.forEach(function(a){ a.addEventListener('click', closeMenu); });
+
+    document.addEventListener('keydown', function(e){
+      if(!open) return;
+      if(e.key === 'Escape'){ closeMenu(); return; }
+      if(e.key !== 'Tab') return;
+      // Foco atrapado: el menú tapa la página entera, tabular fuera de él
+      // dejaría al teclado navegando contenido que no se ve.
+      var first = links[0], last = links[links.length - 1];
+      if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    });
+
+    window.matchMedia('(min-width: 900px)').addEventListener('change', function(e){
+      if(e.matches) closeMenu();
+    });
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Barra de acción móvil: aparece al dejar atrás el hero, se esconde con
+   * el menú abierto y al llegar al pie (donde el CTA ya está en pantalla).
+   * ------------------------------------------------------------------ */
+  function initActionBar(){
+    var bar = document.getElementById('action-bar');
+    var hero = document.getElementById('hero');
+    var cta = document.querySelector('.cta-final');
+    if(!bar || !hero) return;
+
+    var hidden = false;
+    var ticking = false;
+
+    function update(){
+      var pastHero = window.scrollY > hero.offsetHeight * .7;
+      var atCta = cta && cta.getBoundingClientRect().top < window.innerHeight * .9;
+      bar.classList.toggle('is-visible', pastHero && !atCta && !hidden);
+      bar.setAttribute('aria-hidden', String(!(pastHero && !atCta && !hidden)));
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', function(){
+      if(!ticking){ ticking = true; requestAnimationFrame(update); }
+    }, {passive: true});
+    document.addEventListener('tierra:menu', function(e){ hidden = e.detail.open; update(); });
+    update();
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Revelados. Tres niveles, no uno solo para todo:
+   *   data-reveal="lines" → titulares, línea a línea desde su ventanilla
+   *   data-reveal="rule"  → pasos del método: la regla se dibuja y sigue el texto
+   *   data-reveal         → cuerpo de texto, un desplazamiento corto
+   * ------------------------------------------------------------------ */
+  function initReveals(){
+    var items = document.querySelectorAll('[data-reveal]');
+
+    function showEverything(){
+      items.forEach(function(el){ el.style.opacity = 1; });
+      document.querySelectorAll('.metodo__step').forEach(function(el){ el.classList.add('is-in'); });
+    }
+
+    if(!window.gsap || !window.ScrollTrigger){ showEverything(); return; }
+    gsap.registerPlugin(ScrollTrigger);
+    if(REDUCE){ showEverything(); return; }
+
     items.forEach(function(el){
-      gsap.set(el, {opacity:0, y:24});
-      gsap.to(el, {
-        opacity:1, y:0, duration:0.9, ease:'power2.out',
-        scrollTrigger:{ trigger: el, start:'top 88%', once:true }
+      var kind = el.getAttribute('data-reveal');
+      var trigger = {trigger: el, start: 'top 86%', once: true};
+
+      if(kind === 'lines'){
+        var lines = splitLines(el);
+        gsap.set(el, {opacity: 1});
+        gsap.from(lines, {yPercent: 115, duration: .85, ease: EASE, stagger: .08, scrollTrigger: trigger});
+        return;
+      }
+
+      if(kind === 'rule'){
+        gsap.set(el, {opacity: 1});
+        ScrollTrigger.create({
+          trigger: el, start: 'top 86%', once: true,
+          onEnter: function(){ el.classList.add('is-in'); }
+        });
+        gsap.from(el.children, {opacity: 0, y: 14, duration: .6, ease: EASE, stagger: .07, delay: .18, scrollTrigger: trigger});
+        return;
+      }
+
+      gsap.fromTo(el, {opacity: 0, y: 16}, {opacity: 1, y: 0, duration: .55, ease: EASE, scrollTrigger: trigger});
+    });
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Frases: el único sitio donde el gesto del símbolo se usa a lo grande.
+   * Cada línea llega desde el borde al que está alineada, ligada al scroll.
+   * ------------------------------------------------------------------ */
+  function initPhrases(){
+    var section = document.getElementById('frases');
+    if(!section || !window.gsap || !window.ScrollTrigger || REDUCE) return;
+
+    section.querySelectorAll('[data-phrase]').forEach(function(p){
+      var inner = p.querySelector('.mask > span');
+      if(!inner) return;
+      var side = p.getAttribute('data-phrase');
+      var from = side === 'left' ? {xPercent: -115} : side === 'right' ? {xPercent: 115} : {yPercent: 115};
+      gsap.fromTo(inner, from, {
+        xPercent: 0, yPercent: 0, ease: 'none',
+        scrollTrigger: {trigger: section, start: 'top 82%', end: 'center 58%', scrub: .6}
       });
     });
   }
-  document.addEventListener('DOMContentLoaded', initReveals);
+
+  /* ------------------------------------------------------------------ *
+   * Marquee: gira solo, y acelera y cambia de sentido con el scroll. Es el
+   * mismo movimiento horizontal del símbolo, convertido en navegación.
+   * ------------------------------------------------------------------ */
+  function initMarquee(){
+    var marquee = document.getElementById('tratamientos-marquee');
+    var track = marquee && marquee.querySelector('[data-marquee-track]');
+    if(!track || !window.gsap || !window.ScrollTrigger || REDUCE) return;
+
+    marquee.classList.add('is-js');
+    // El track lleva dos copias del listado, así que desplazarlo un 50% deja
+    // la segunda copia exactamente donde estaba la primera: el bucle no salta.
+    var loop = gsap.to(track, {xPercent: -50, duration: 38, ease: 'none', repeat: -1});
+
+    // Un único sitio decide la velocidad, y todo lo que se anima son números
+    // de este objeto — nunca loop.timeScale directamente. Antes había tweens
+    // sobre loop.timeScale peleándose con escrituras directas desde el scroll,
+    // y el resultado dependía de cuál escribiera el último.
+    //   impulso: el acelerón que da el scroll (1 = velocidad de crucero)
+    //   freno:   1 va, 0 parado al pasar el puntero por encima
+    var mando = {impulso: 1, freno: 1};
+    var sentido = 1, asentar, tweenAsentar;
+
+    function aplicar(){
+      loop.timeScale(sentido * mando.impulso * mando.freno);
+    }
+
+    ScrollTrigger.create({
+      trigger: document.body, start: 0, end: 'max',
+      onUpdate: function(self){
+        var v = self.getVelocity();
+        if(v) sentido = v < 0 ? -1 : 1;
+        if(tweenAsentar) tweenAsentar.kill();
+        // Tope 3,5x. Antes era 7x y a esa velocidad el texto se convierte en
+        // una mancha: parecía que el navegador no daba abasto.
+        mando.impulso = gsap.utils.clamp(1, 3.5, 1 + Math.abs(v) / 900);
+        aplicar();
+        clearTimeout(asentar);
+        asentar = setTimeout(function(){
+          tweenAsentar = gsap.to(mando, {impulso: 1, duration: .9, ease: 'power2.out', onUpdate: aplicar});
+        }, 160);
+      }
+    });
+
+    // Se para al pasar por encima para poder leer y pulsar los tratamientos.
+    function frenar(parar){
+      gsap.to(mando, {freno: parar ? 0 : 1, duration: .35, ease: 'power2.out',
+        onUpdate: aplicar, overwrite: 'auto'});
+    }
+    marquee.addEventListener('pointerenter', function(){ frenar(true); });
+    marquee.addEventListener('pointerleave', function(){ frenar(false); });
+    // Redes de seguridad: si el puntero sale por el borde de la ventana o se
+    // cambia de pestaña, pointerleave no siempre llega. Sin esto el marquee
+    // se quedaba parado para siempre, porque además el gate de pausa impedía
+    // que el scroll lo reactivara.
+    window.addEventListener('blur', function(){ frenar(false); });
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden) frenar(false);
+    });
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Señal de scroll del hero: desaparece en cuanto se empieza a bajar.
+   * ------------------------------------------------------------------ */
+  function initHeroCue(){
+    var cue = document.getElementById('hero-cue');
+    if(!cue) return;
+    window.addEventListener('scroll', function(){
+      cue.classList.toggle('is-gone', window.scrollY > 40);
+    }, {passive: true});
+  }
+
+  function init(){
+    initHeader();
+    initMobileNav();
+    initActionBar();
+    initReveals();
+    initPhrases();
+    initMarquee();
+    initHeroCue();
+  }
+  document.addEventListener('DOMContentLoaded', init);
 })();
 
 (function(){
@@ -137,16 +473,36 @@
     if(prevBtn) prevBtn.addEventListener('click', function(){ show(current - 1); });
     if(nextBtn) nextBtn.addEventListener('click', function(){ show(current + 1); });
     if(mobileCloseBtn) mobileCloseBtn.addEventListener('click', closeMobile);
+
+    // Los paneles están ocultos salvo el activo, así que un enlace del tipo
+    // servicios.html#osteopatia no llegaba a mostrar nada: hay que abrir el
+    // panel que pide el hash. Es lo que usan el marquee y el índice de
+    // tratamientos de la página de inicio.
+    function openFromHash(){
+      var id = window.location.hash.replace('#', '');
+      if(!id) return;
+      var target = document.getElementById(id);
+      if(!target) return;
+      var panel = target.closest ? target.closest('.showcase__panel') : null;
+      if(!panel) return;
+      var index = Array.prototype.indexOf.call(panels, panel);
+      if(index < 0) return;
+      show(index);
+      if(mobileQuery.matches) openMobile();
+      else root.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
   }
   document.addEventListener('DOMContentLoaded', initServiciosShowcase);
 })();
 
 (function(){
   'use strict';
-  // Símbolo de marca (torso, 6 trazos) dibujándose desde fuera del encuadre,
-  // igual que la animación de apertura del header en la rama desarrollo.
+  // Símbolo de marca (torso, 6 trazos) dibujándose desde fuera del encuadre.
   // En el hero de Inicio: aparece grande y centrado; al terminar de dibujarse
-  // se desliza a su columna final (derecha) mientras el texto del hero aparece.
+  // se desliza a su columna final (derecha) mientras el texto del hero entra
+  // línea a línea desde su propia ventanilla.
   function initHeroIntro(){
     var hero = document.getElementById('hero');
     var wrap = document.getElementById('hero-symbol');
@@ -252,6 +608,10 @@
 
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    // Las líneas del h1 vienen ya envueltas en .mask desde el HTML.
+    var titleLines = hero.querySelectorAll('.hero__title .mask > span');
+    var restEls = [hero.querySelector('.eyebrow'), hero.querySelector('.hero__lead'), hero.querySelector('.hero__actions')].filter(Boolean);
+
     if(reduce || !window.gsap){
       frame(END);
       if(textEl) textEl.style.opacity = 1;
@@ -264,7 +624,13 @@
     var narrow = window.innerWidth < 900;
 
     frame(0);
-    gsap.set(textEl, {opacity: 0, y: narrow ? -16 : 16});
+    gsap.set(textEl, {opacity: 1});
+    // El CSS solo oculta el titular con opacity (ver styles.css): el
+    // desplazamiento inicial lo pone GSAP aquí, para que sea el único dueño
+    // del transform y no herede un offset en píxeles que luego no sabría quitar.
+    gsap.set(titleLines, {yPercent: 115, y: 0});
+    gsap.set(hero.querySelector('.hero__title'), {opacity: 1});
+    gsap.set(restEls, {opacity: 0, y: 14});
 
     var heroRect = hero.getBoundingClientRect();
     var wrapRect = wrap.getBoundingClientRect();
@@ -276,24 +642,87 @@
     setVars[axisProp] = offset;
     gsap.set(wrap, setVars);
 
+    // El titular entra línea a línea desde su ventanilla, con el mismo gesto
+    // con el que acaban de dibujarse los trazos.
+    //
+    // IMPORTANTE: esto NO puede depender solo de que la cadena de
+    // requestAnimationFrame de abajo llegue al final. El CSS oculta el
+    // titular desde el primer pintado, así que si esa cadena se corta
+    // (pestaña en segundo plano al cargar, rAF ralentizado, un móvil que
+    // va justo) el hero se quedaría permanentemente sin texto. Por eso
+    // revelar es idempotente y tiene varias vías de entrada, incluida una
+    // de seguridad por tiempo.
+    var textStarted = false;
+    function revealHeroText(){
+      if(textStarted) return;
+      textStarted = true;
+      gsap.to(titleLines, {yPercent: 0, y: 0, duration: .9, ease: 'power3.out', stagger: .09});
+      gsap.to(restEls, {opacity: 1, y: 0, duration: .7, ease: 'power3.out', stagger: .09, delay: .18});
+    }
+    // Red de seguridad: pase lo que pase con la animación, a los 5 s hay texto.
+    // Por encima del momento normal de entrada (~3,4 s: los 2,9 s de dibujado
+    // de los trazos más parte del deslizamiento), para no robarle el turno.
+    var failsafe = setTimeout(revealHeroText, 5000);
+    // Si alguien empieza a bajar antes de que acabe la intro, el hero tiene
+    // que estar legible ya: no se le hace esperar a una animación.
+    window.addEventListener('scroll', function onFirstScroll(){
+      window.removeEventListener('scroll', onFirstScroll);
+      clearTimeout(failsafe);
+      revealHeroText();
+    }, {passive: true, once: true});
+
+    // Las dos partes se solapan en vez de ir una detrás de otra: el símbolo
+    // empieza a deslizarse hacia su columna cuando aún le quedan trazos por
+    // dibujar, y el titular entra cuando el símbolo ya va de salida. Antes
+    // todo iba en serie y el hero se quedaba sin texto ~3,4 s.
+    //
+    // El titular NO puede entrar antes de que el símbolo le deje el hueco:
+    // arranca centrado en el hero y se cruza con la caja del texto (en
+    // escritorio por la derecha del h1, en móvil por debajo del bloque).
+    //
+    // Ese momento NO se puede fijar a ojo: lo que recorre el símbolo y lo que
+    // ocupa el texto escalan distinto, así que un umbral fijo que va bien a
+    // 1440 px deja el símbolo encima del título a 900 y a 1100. Se despeja del
+    // propio recorrido. wrapRect es la posición YA ASENTADA (se midió antes de
+    // apartar el símbolo), y en progreso p el símbolo está en offset*(1-p),
+    // así que su borde vale wrapRect + offset*(1-p). Imponiendo que ese borde
+    // libre el del texto más un margen, sale p >= 1 - (hueco libre al final /
+    // recorrido total).
+    var SETTLE_AT = END * 0.62;
+    var MARGEN = 28;
+    // La referencia es el h1, no el bloque entero: es lo que hay que poder
+    // leer. En móvil el símbolo solo sube hasta el centro del hero y nunca
+    // llega al titular, así que el texto puede entrar mucho antes; medir
+    // contra el fondo de los botones retrasaba la entrada sin motivo.
+    var TEXT_AT = (function(){
+      if(!offset) return 0.2;
+      var titulo = hero.querySelector('.hero__title').getBoundingClientRect();
+      var holguraFinal = narrow
+        ? wrapRect.top - titulo.bottom - MARGEN
+        : wrapRect.left - titulo.right - MARGEN;
+      return clamp(1 - (holguraFinal / -offset), 0.2, 0.95);
+    })();
+    var settleStarted = false;
+
     var t0 = null;
     function tick(ts){
       if(t0 === null) t0 = ts;
       var t = (ts - t0) / 1000;
       frame(Math.min(t, END));
-      if(t < END){
-        requestAnimationFrame(tick);
-      } else {
-        var textStarted = false;
+
+      if(!settleStarted && t >= SETTLE_AT){
+        settleStarted = true;
         var toVars = {duration: 1.1, ease: 'power3.inOut', onUpdate: function(){
-          if(!textStarted && this.progress() >= 0.65){
-            textStarted = true;
-            gsap.to(textEl, {opacity: 1, y: 0, duration: 0.9, ease: 'power2.out'});
+          if(this.progress() >= TEXT_AT){
+            clearTimeout(failsafe);
+            revealHeroText();
           }
         }};
         toVars[axisProp] = 0;
         gsap.to(wrap, toVars);
       }
+
+      if(t < END) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
   }
