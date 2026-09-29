@@ -354,6 +354,23 @@ if(!window.gsap || !window.ScrollTrigger){
   /* ------------------------------------------------------------------ *
    * Señal de scroll del hero: desaparece en cuanto se empieza a bajar.
    * ------------------------------------------------------------------ */
+  /* ------------------------------------------------------------------ *
+   * Bloque del CTA final: en escritorio se abre al pasar el ratón, pero en
+   * táctil no hay hover, así que se abre al tocarlo. Antes la tapa se
+   * ocultaba en móvil y las dos tarjetas salían sueltas, sin el botón.
+   * ------------------------------------------------------------------ */
+  function initDuo(){
+    var duo = document.querySelector('.duo');
+    var tapa = duo && duo.querySelector('.duo__tapa');
+    if(!duo || !tapa) return;
+    tapa.addEventListener('click', function(){ duo.classList.add('is-open'); });
+    // Si se toca fuera, vuelve a cerrarse para que el bloque siga siendo un
+    // botón y no dos tarjetas permanentes.
+    document.addEventListener('click', function(e){
+      if(!duo.contains(e.target)) duo.classList.remove('is-open');
+    });
+  }
+
   function initHeroCue(){
     var cue = document.getElementById('hero-cue');
     if(!cue) return;
@@ -369,6 +386,7 @@ if(!window.gsap || !window.ScrollTrigger){
     initReveals();
     initPhrases();
     initMarquee();
+    initDuo();
     initHeroCue();
   }
   document.addEventListener('DOMContentLoaded', init);
@@ -441,11 +459,28 @@ if(!window.gsap || !window.ScrollTrigger){
     var total = items.length;
     var current = 0;
 
+    // Nombres de los tratamientos, para la navegacion de movil (anterior /
+    // siguiente). Se leen de la propia lista, asi no hay que repetirlos.
+    var nombres = Array.prototype.map.call(items, function(it){
+      var n = it.querySelector('.showcase__item-name');
+      return n ? n.textContent.trim() : '';
+    });
+    var prevName = root.querySelector('[data-showcase-prev-name]');
+    var nextName = root.querySelector('[data-showcase-next-name]');
+    // El total va en cada ficha para poder pintar "01 / 08" desde el CSS sin
+    // repetir el numero en el HTML.
+    panels.forEach(function(p){
+      var n = p.querySelector('.showcase__panel-num');
+      if(n) n.setAttribute('data-total', String(total).padStart(2, '0'));
+    });
+
     function show(index){
       current = (index + total) % total;
       items.forEach(function(it, i){ it.classList.toggle('is-active', i === current); });
       panels.forEach(function(p, i){ p.classList.toggle('is-active', i === current); });
       if(counter) counter.textContent = String(current + 1).padStart(2, '0');
+      if(prevName) prevName.textContent = nombres[(current - 1 + total) % total];
+      if(nextName) nextName.textContent = nombres[(current + 1) % total];
     }
     var contentParent = content.parentNode;
     var contentNextSibling = content.nextSibling;

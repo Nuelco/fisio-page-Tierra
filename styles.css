@@ -144,10 +144,6 @@ ol,ul{margin:0;padding:0;list-style:none}
   padding:2px;transform:translate(.4em,-.4em);transition:all .3s ease;
   background:linear-gradient(to bottom,var(--b-100) 0%,var(--b-400) 100%)}
 
-.btn__outline{position:absolute;inset:0;overflow:hidden;opacity:0;border-radius:inherit;transition:all .4s ease}
-.btn__outline::before{content:'';position:absolute;inset:2px;width:8em;height:22em;margin:auto;
-  background:linear-gradient(to right,transparent 0%,#fff 50%,transparent 100%);
-  animation:btn-spin 3s linear infinite;animation-play-state:paused}
 
 .btn__content{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;
   padding:1.35em 2.4em;border-radius:calc(var(--radius) * .85);
@@ -169,18 +165,13 @@ ol,ul{margin:0;padding:0;list-style:none}
 
 /* ---- estados ---- */
 .btn:hover .btn__wrap{transform:translate(.55em,-.55em)}
-.btn:hover .btn__outline{opacity:1}
-.btn:hover .btn__outline::before{animation-play-state:running}
 .btn:hover .btn__chars span::after{animation:btn-char .7s ease calc(var(--i) * .03s)}
 .btn:active .btn__wrap{transform:translate(.2em,-.2em)}
 .btn:active .btn__content{box-shadow:inset -1px 12px 8px -5px rgba(40,25,22,.4), inset 0 -3px 8px 0 var(--b-200)}
-.btn:active .btn__outline{opacity:0}
-.btn:active .btn__bg::before{opacity:.7;
-  box-shadow:var(--relieve-corto)}
+.btn:active .btn__bg::before{opacity:.7;box-shadow:var(--relieve-corto)}
 .btn:active .btn__splash{animation:btn-splash .8s cubic-bezier(.3,0,0,1) forwards .05s}
 .btn:focus-visible{outline:2px solid var(--marron);outline-offset:4px}
 
-@keyframes btn-spin{to{transform:rotate(360deg)}}
 @keyframes btn-splash{to{stroke-dasharray:60 60;stroke-dashoffset:-60}}
 @keyframes btn-char{
   0%{transform:translateY(50%);opacity:0;filter:blur(20px)}
@@ -188,13 +179,11 @@ ol,ul{margin:0;padding:0;list-style:none}
   50%{transform:translateY(-15%);opacity:1;filter:blur(0)}
   100%{transform:translateY(0);opacity:1}}
 
-/* Variante oscura: misma pieza con la gama del marrón, para los bloques de
-   fondo terracota donde la versión clara no despegaría del fondo. */
-.btn--dark{--b-luz:#f2ece0;--b-100:#8b746e;--b-200:#6f5a55;--b-300:#54403c;--b-400:#412f2b;--b-500:#201613}
+/* .btn--dark ya no cambia de gama: usa los mismos colores que el resto del
+   sitio. Se mantiene la clase por si hiciera falta diferenciarlo algun dia. */
 
 @media (prefers-reduced-motion: reduce){
-  .btn__outline::before{animation:none !important}
-  .btn:hover .btn__chars span::after{animation:none !important}
+    .btn:hover .btn__chars span::after{animation:none !important}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -424,7 +413,9 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
    ("Tu bienestar te espera." / "Empecemos hoy."). text-wrap:balance aqui
    parte por "te", que lee peor que el corte natural. */
 .cta-final h2{font-size:clamp(30px,4vw,52px);margin:0 auto 32px;max-width:24ch}
-.cta-final__actions{display:flex;justify-content:center;margin:.5em 0 1.6em}
+/* No es flex: siendo contenedor flex convertia el inline-block del .duo en
+   block, y entonces dejaba de ajustarse a su contenido y colapsaba a 0. */
+.cta-final__actions{text-align:center;margin:.5em 0 1.6em}
 
 /* Bloque que se abre en dos tarjetas (adaptado de uiverse.io/Praashoo7).
    En reposo es una sola pieza con gradiente y la etiqueta "Empecemos"; al
@@ -432,14 +423,29 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
    No se usa backdrop-filter como en el original: detrás solo hay terracota
    liso y las ondas, así que un blanco translúcido da el mismo aspecto sin
    el coste de repintado que estaba provocando tirones. */
-.duo{position:relative;display:inline-flex;border-radius:16px;transition:gap .4s var(--ease-asentar)}
+/* El bloque cerrado tiene que medir como un boton, no como las dos tarjetas
+   que esconde. Por eso las tarjetas viven en .duo__cards, que es lo que se
+   recorta: si el recorte fuera en .duo se llevaria por delante la sombra en
+   relieve de la tapa, que sobresale por fuera del elemento. */
+.duo{position:relative;display:inline-block;border-radius:16px}
+.duo__cards{display:flex;overflow:hidden;border-radius:inherit;
+  /* width:max-content explicito: con overflow:hidden el navegador no deduce
+     el ancho del contenido y la caja colapsaba a 0. Con el ancho declarado,
+     max-width lo recorta al tamano de boton. */
+  width:max-content;max-width:15em;
+  transition:max-width .45s var(--ease-asentar),max-height .45s var(--ease-asentar),gap .4s var(--ease-asentar)}
+.duo:hover .duo__cards,.duo:focus-within .duo__cards,.duo.is-open .duo__cards{max-width:64em;gap:.5em}
 .duo__card{display:flex;align-items:center;justify-content:center;gap:11px;padding:20px 30px;
   background:rgba(255,255,255,.2);border:1px solid transparent;color:var(--crema);
   font-family:var(--font-display);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
-  white-space:nowrap;transition:background .28s var(--ease-asentar),color .28s var(--ease-asentar),border-radius .4s var(--ease-asentar),border-color .4s var(--ease-asentar),box-shadow .4s var(--ease-asentar)}
+  white-space:nowrap;flex:0 0 auto;
+  transition:background .28s var(--ease-asentar),color .28s var(--ease-asentar),border-radius .4s var(--ease-asentar),border-color .4s var(--ease-asentar),box-shadow .4s var(--ease-asentar)}
 .duo__card:first-of-type{border-radius:16px 0 0 16px}
 .duo__card:last-of-type{border-radius:0 16px 16px 0}
-.duo__ico{width:22px;height:22px;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:1.7}
+.duo__ico{width:22px;height:22px;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+/* WhatsApp solo en movil: en escritorio el bloque se queda con las dos
+   acciones de siempre. */
+.duo__card--wa{display:none}
 /* Misma pieza que los .btn: un marco con degradado hace de bisel y la cara
    interior lleva el degradado y los brillos hundidos. No se le pone la
    animación de las letras porque la tapa se desvanece justo al pasar el
@@ -457,22 +463,26 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
   filter:brightness(1.3) blur(5px);border-radius:inherit}
 /* :focus-within además de :hover — si no, los dos enlaces quedan tapados e
    inalcanzables para quien navega con el teclado. */
-.duo:hover,.duo:focus-within{gap:.5em}
-.duo:hover .duo__tapa,.duo:focus-within .duo__tapa{opacity:0;pointer-events:none}
-.duo:hover .duo__card,.duo:focus-within .duo__card{border-radius:14px;border-color:rgba(255,255,255,.35);box-shadow:var(--relieve-corto)}
+.duo:hover .duo__tapa,.duo:focus-within .duo__tapa,.duo.is-open .duo__tapa{opacity:0;pointer-events:none}
+.duo:hover .duo__card,.duo:focus-within .duo__card,.duo.is-open .duo__card{border-radius:14px;border-color:rgba(255,255,255,.35);box-shadow:var(--relieve-corto)}
 .duo__card:hover,.duo__card:focus-visible{background:var(--crema);color:var(--terracota-dark)}
-/* En pantallas táctiles no hay hover: las tarjetas salen ya abiertas o las
-   dos acciones serían invisibles hasta tocar a ciegas. */
-@media (hover:none){
-  .duo{gap:.5em}
-  .duo__tapa{display:none}
-  .duo__card{border-radius:14px;border-color:rgba(255,255,255,.35);box-shadow:var(--relieve-corto)}
-}
+/* En tactil no hay hover, asi que el bloque se abre al tocarlo (lo pone el JS
+   con .is-open). En movil las tarjetas se apilan, asi que ahi lo que se
+   recorta es el alto y no el ancho. */
 @media (max-width:520px){
-  .duo{flex-direction:column;gap:.5em}
-  .duo__tapa{display:none}
-  .duo__card{border-radius:14px;border-color:rgba(255,255,255,.35);box-shadow:var(--relieve-corto)}
+  /* En movil son tres acciones en fila y solo el icono: escribir, llamar y
+     WhatsApp. Al ser cuadradas caben las tres de sobra en una pantalla
+     estrecha, y el recorte sigue siendo de ancho como en escritorio. */
+  .duo__card--wa{display:flex}
+  .duo__txt{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  /* Cuadradas y de tamano fijo: con flex:1 1 0 se encogian y el bloque cerrado
+     acababa siendo mas estrecho que su propio rotulo "Contactar". */
+  .duo__card{padding:0;width:4.9em;height:4.9em;flex:0 0 auto}
+  .duo__ico{width:24px;height:24px}
+  .duo__cards{max-width:16em}
+  .duo:hover .duo__cards,.duo:focus-within .duo__cards,.duo.is-open .duo__cards{max-width:64em}
 }
+
 .cta-final__meta{display:flex;flex-direction:column;gap:4px;margin-top:clamp(28px,4vw,44px);font-size:14.5px;color:rgba(237,231,218,.82)}
 
 /* ===== Servicios ===== */
@@ -536,6 +546,7 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 /* La decoración queda dentro de la foto (se recorta junto con ella). */
 .showcase__photo-deco{position:absolute;top:0;right:0;width:52%;height:42%;background-image:url('assets/ondas-1.png');background-size:180% 180%;background-position:65% 35%;opacity:.5;filter:invert(1);pointer-events:none}
 
+.showcase__navlabel,.showcase__navrole,.showcase__navname{display:none}
 .showcase__nav{display:flex;align-items:center;justify-content:flex-end;gap:16px;margin-top:clamp(14px,2vw,20px);font-family:var(--font-display);font-size:12px;letter-spacing:.12em;color:var(--marron)}
 .showcase__arrow{width:44px;height:44px;border-radius:50%;border:1px solid rgba(65,47,43,.28);display:inline-flex;align-items:center;justify-content:center;color:var(--marron);transition:background .2s ease,color .2s ease,border-color .2s ease}
 .showcase__arrow:hover{background:rgba(65,47,43,.06)}
@@ -544,44 +555,102 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 
 .showcase__mobile-close{display:none}
 
+/* El boton de pedir cita vive FUERA del panel de texto (es hermano suyo en el
+   HTML), asi que en escritorio hay que bajarlo por debajo de la foto flotante
+   con clear; si no, se metia en el hueco que deja el texto. */
+/* display:block + width:max-content porque clear NO se aplica a cajas
+   inline, y .btn es inline-block: con inline-block el boton se metia en
+   el hueco que deja la foto flotante en vez de bajar por debajo. */
+.showcase__panel > .btn{display:block;width:max-content;max-width:100%;clear:both;margin-top:clamp(18px,2.6vw,26px)}
+
+/* De 901px en adelante los paneles se apilan en la MISMA celda de rejilla en
+   vez de mostrarse y ocultarse con display. Asi el contenedor mide siempre lo
+   que el tratamiento mas largo y la pagina no pega un salto al cambiar de
+   ficha: ni la lista de la izquierda, ni el boton, ni las flechas se mueven. */
+@media (min-width:901px){
+  .showcase__panels{display:grid;align-items:start}
+  .showcase__panel{grid-area:1/1;display:block;visibility:hidden;opacity:0;transition:opacity .28s var(--ease-asentar)}
+  .showcase__panel.is-active{visibility:visible;opacity:1}
+  /* Las flechas son solo para movil: en escritorio se navega con la lista. */
+  .showcase__nav{display:none}
+}
+
 @media (max-width:900px){
   .showcase__inner{grid-template-columns:1fr;gap:28px;min-width:0}
   .showcase__list{position:static;min-width:0}
   .showcase__tagline{display:none}
-  /* En movil la foto no flota: se apila entera encima del texto, que pasa
-     a mostrarse completo sin limite de alto ni scroll interno. */
-  .showcase__photo-wrap{float:none;width:100%;max-width:320px;aspect-ratio:16/10;margin:0 auto 16px}
-  .showcase__panel-photo{clip-path:none;border-radius:24px}
+  .showcase__photo-wrap{float:none;width:100%;max-width:none;aspect-ratio:16/10;margin:0}
+  .showcase__panel-photo{clip-path:none;border-radius:18px}
   .showcase__photo-deco{display:none}
-  .showcase__tags{flex-wrap:wrap;row-gap:14px}
+
+  /* La ficha en movil sigue el orden de la maqueta: contador, titulo, primer
+     parrafo, foto, resto del texto, iconos y boton. Como el texto y la foto
+     son hermanos en niveles distintos del HTML, se usa display:contents en
+     .showcase__panel-text para que sus hijos pasen a ser hijos directos del
+     panel y se puedan ordenar todos juntos con flex. */
+  .showcase__panel.is-active{display:flex;flex-direction:column;gap:18px}
+  .showcase__panel-text{display:contents}
+  /* Ojo: el numero de ficha tambien es un <p>, asi que :first-of-type apunta
+     a el y no al parrafo de texto. El primer parrafo de verdad es el 2o <p>. */
+  .showcase__panel-text > p.showcase__panel-num{order:1;margin:0}
+  .showcase__panel h2{order:2;margin:0}
+  .showcase__panel-text > p,.showcase__subtreat{order:5;margin:0}
+  .showcase__panel-text > p:nth-of-type(2){order:3}
+  .showcase__photo-wrap{order:4}
+  .showcase__tags{order:6}
+  .showcase__panel > .btn{order:7;align-self:center;margin:6px 0 0}
+
+  /* "01 / 08": el total lo pone el JS en data-total de cada ficha. */
+  .showcase__panel-num{font-size:15px;letter-spacing:.12em;color:var(--tinta-suave)}
+  .showcase__panel-num::after{content:' / ' attr(data-total);flex:0 0 auto;height:auto;width:auto;background:none;margin:0}
+  .showcase__panel h2{font-size:clamp(34px,9vw,44px)}
+
+  /* Iconos en circulo, centrados y repartidos, con el filete encima. */
+  .showcase__tags{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 10px;
+    margin-top:8px;padding-top:26px;border-top:1px solid rgba(65,47,43,.16)}
+  .showcase__tag{flex-direction:column;align-items:center;text-align:center;gap:10px;max-width:none}
+  .showcase__tag svg{width:26px;height:26px;margin:0}
+  .showcase__tag::before{content:'';position:absolute}
+  .showcase__tag{position:relative;padding-top:64px}
+  .showcase__tag svg{position:absolute;top:0;left:50%;transform:translateX(-50%) translateY(13px)}
+  .showcase__tag::before{top:0;left:50%;transform:translateX(-50%);width:52px;height:52px;
+    border-radius:50%;background:rgba(165,104,83,.12)}
+  .showcase__tag span{font-size:13.5px;line-height:1.3}
 
   /* En movil no se muestra ningun contenido hasta que se elige un
      tratamiento: solo entonces el panel aparece a pantalla completa. */
   .showcase__content{display:none}
-  .showcase__content.is-mobile-open{display:grid;position:fixed;inset:0;z-index:200;background:var(--crema);overflow-y:auto;padding:20px var(--space-inline) 40px;
-    grid-template-columns:auto 1fr;grid-template-areas:"volver flechas" "paneles paneles";
-    align-content:start;column-gap:12px}
-  /* "Volver" a la izquierda y las flechas de tratamiento arriba a la derecha,
-     compartiendo fila. Se hace con areas de rejilla para no tocar el marcado:
-     en el HTML el bloque de flechas es el ultimo hijo, detras de los paneles. */
-  .showcase__content.is-mobile-open .showcase__mobile-close{grid-area:volver;align-self:center;margin-bottom:0;
-    min-width:0;text-align:left;line-height:1.35}
-  .showcase__content.is-mobile-open .showcase__nav{grid-area:flechas;justify-self:end;margin-top:0;gap:10px;
-    flex:0 0 auto;white-space:nowrap}
-  /* Sin esto el contador parte "04 / 8" en dos lineas y descuadra la fila. */
-  .showcase__content.is-mobile-open .showcase__counter{white-space:nowrap}
-  /* Las flechas mandan: ocupan lo que necesitan y el rotulo de volver se
-     adapta a lo que sobra. */
-  .showcase__content.is-mobile-open{grid-template-columns:minmax(0,1fr) auto}
-  .showcase__content.is-mobile-open .showcase__panels{grid-area:paneles;margin-top:22px}
+  .showcase__content.is-mobile-open{display:grid;position:fixed;inset:0;z-index:200;
+    background:var(--crema);overflow-y:auto;padding:20px var(--space-inline) 32px;
+    grid-template-columns:1fr;grid-template-areas:"volver" "paneles" "flechas";
+    align-content:start}
+  .showcase__content.is-mobile-open .showcase__mobile-close{grid-area:volver;display:inline-flex;
+    align-items:center;gap:8px;justify-self:start;margin-bottom:18px;
+    font-family:var(--font-display);font-size:12px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--terracota-dark)}
+  .showcase__content.is-mobile-open .showcase__panels{grid-area:paneles}
 
-  /* El boton de pedir cita pasa a ir DEBAJO de las etiquetas. En el HTML va
-     antes, asi que se reordena por flex en vez de duplicar marcado. */
-  .showcase__panel-text{display:flex;flex-direction:column}
-  .showcase__panel-text .showcase__tags{order:1}
-  .showcase__panel-text .btn{order:2;align-self:flex-start;margin-top:22px}
-  .showcase__content.is-mobile-open .showcase__mobile-close{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;font-family:var(--font-display);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--terracota-dark)}
+  /* Navegacion inferior: flechas a los lados con el nombre del tratamiento
+     anterior y el siguiente, y el contador en medio. */
+  .showcase__content.is-mobile-open .showcase__nav{grid-area:flechas;margin-top:26px;padding-top:20px;
+    border-top:1px solid rgba(65,47,43,.16);display:grid;align-items:center;gap:0 10px;
+    grid-template-columns:auto minmax(0,1fr) auto minmax(0,1fr) auto;justify-content:stretch}
+  .showcase__content.is-mobile-open .showcase__navlabel{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .showcase__content.is-mobile-open .showcase__navlabel--next{text-align:right}
+  .showcase__content.is-mobile-open .showcase__navrole{display:block;font-family:var(--font-display);
+    font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-suave);opacity:.8;line-height:1.3}
+  /* Los nombres se dejan partir en dos lineas: "Rehabilitacion funcional" no
+     entra de una en una pantalla estrecha y quedaba cortado con puntos. */
+  /* white-space:normal explicito: .showcase__nav pone nowrap y se heredaba,
+     asi que los nombres largos no partian y se montaban sobre la flecha.
+     Y la familia de texto, que el contenedor impone la monoespaciada. */
+  .showcase__content.is-mobile-open .showcase__navname{display:block;font-size:12.5px;line-height:1.25;
+    color:var(--marron);white-space:normal;font-family:var(--font-body);letter-spacing:0;text-transform:none}
+  .showcase__content.is-mobile-open .showcase__counter{white-space:nowrap;font-size:11px;padding:0 8px}
+  .showcase__arrow{flex:0 0 auto;width:40px;height:40px}
 }
+
+
 
 /* ===== Instalaciones ===== */
 .instalaciones-hero{position:relative;overflow:hidden;padding:var(--space-section) 0;text-align:center}
@@ -589,12 +658,22 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 .instalaciones-hero h1{font-size:clamp(36px,6vw,80px)}
 .instalaciones-block{position:relative;overflow:hidden;padding:clamp(40px,6vw,80px) 0;border-top:1px solid rgba(65,47,43,.16)}
 .instalaciones-block--dark{background:var(--marron);color:var(--crema)}
-.instalaciones-block__inner{position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--space-inline);display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(28px,4vw,56px)}
+/* Columnas con un corte explicito en vez de auto-fit: con auto-fit el numero
+   de columnas depende del ancho disponible, y entonces un order dentro de una
+   media query puede aplicarse cuando todavia hay dos columnas y desbaratar el
+   zigzag. Asi el punto de cambio es uno solo y controlado. */
+.instalaciones-block__inner{position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--space-inline);display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,56px);align-items:center}
+@media (min-width:760px){
+  .instalaciones-block__inner{grid-template-columns:1fr 1fr}
+  /* En escritorio las secciones alternan: aqui la foto vuelve a la izquierda. */
+  .instalaciones-block--dark .instalaciones-foto{order:-1}
+}
 .instalaciones-block h2{font-size:clamp(26px,3vw,40px);margin-bottom:16px}
 .instalaciones-block p{color:var(--tinta-suave)}
 .instalaciones-block--dark p{color:rgba(237,231,218,.8)}
-.instalaciones-photo-slot{position:relative;min-height:280px;border:1px dashed rgba(65,47,43,.3);border-radius:var(--radius);display:flex;align-items:center;justify-content:center}
-.instalaciones-photo-slot span{font-family:var(--font-display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-suave);opacity:.6}
+.instalaciones-foto{display:block;border-radius:18px;overflow:hidden;box-shadow:var(--relieve-corto)}
+.instalaciones-foto img{width:100%;height:auto;display:block}
+
 
 /* ===== Contacto ===== */
 .contacto-hero{padding:var(--space-section) 0 clamp(32px,5vw,56px)}
