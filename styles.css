@@ -34,14 +34,18 @@
   /* Sombra en escalera del botón en relieve. Va en em, así que escala con el
      font-size de quien la use; se comparte entre los botones y el bloque del
      CTA final para que sean de la misma familia. */
+  /* Tinta de la sombra, aparte para poder oscurecerla sobre fondos oscuros:
+     el marron de la sombra es el mismo color que el fondo de las secciones
+     oscuras, y alli el relieve desaparecia. */
+  --relieve-tinta:65 47 43;
   --relieve:
-    -.45em .4em 0 0 rgb(65 47 43/.40),
-    -.9em .8em 0 0 rgb(65 47 43/.30),
-    -1.35em 1.2em .25em 0 rgb(65 47 43/.25),
-    -1.8em 1.6em .5em 0 rgb(65 47 43/.15),
-    -2.25em 2em .75em 0 rgb(65 47 43/.12),
-    -2.7em 2.4em 1em 0 rgb(65 47 43/.08),
-    -3.6em 2.8em 1.25em 0 rgb(65 47 43/.05);
+    -.45em .4em 0 0 rgb(var(--relieve-tinta)/.40),
+    -.9em .8em 0 0 rgb(var(--relieve-tinta)/.30),
+    -1.35em 1.2em .25em 0 rgb(var(--relieve-tinta)/.25),
+    -1.8em 1.6em .5em 0 rgb(var(--relieve-tinta)/.15),
+    -2.25em 2em .75em 0 rgb(var(--relieve-tinta)/.12),
+    -2.7em 2.4em 1em 0 rgb(var(--relieve-tinta)/.08),
+    -3.6em 2.8em 1.25em 0 rgb(var(--relieve-tinta)/.05);
   /* Gama del botón en relieve. Vive en :root porque la comparten los .btn y
      la tapa del bloque del CTA final. */
   --b-luz:#f7f2e8;
@@ -51,10 +55,10 @@
   --b-400:#a56853;
   --b-500:#412f2b;
   --relieve-corto:
-    -.35em .3em 0 0 rgb(65 47 43/.34),
-    -.7em .6em 0 0 rgb(65 47 43/.24),
-    -1.05em .9em .25em 0 rgb(65 47 43/.16),
-    -1.4em 1.2em .5em 0 rgb(65 47 43/.10);
+    -.35em .3em 0 0 rgb(var(--relieve-tinta)/.34),
+    -.7em .6em 0 0 rgb(var(--relieve-tinta)/.24),
+    -1.05em .9em .25em 0 rgb(var(--relieve-tinta)/.16),
+    -1.4em 1.2em .5em 0 rgb(var(--relieve-tinta)/.10);
 }
 
 /* ===== Reset ===== */
@@ -251,32 +255,46 @@ body.no-scroll .site-header__progress{opacity:0}
 .mobile-nav[hidden]{display:none}
 .mobile-nav__panel{display:flex;flex-direction:column;justify-content:center;gap:clamp(24px,5vh,48px);width:100%;padding:calc(var(--header-h) + 24px) var(--space-inline) 40px}
 .mobile-nav nav{display:flex;flex-direction:column}
-.mobile-nav nav a{color:var(--crema);font-family:var(--font-display);font-size:clamp(26px,7vw,38px);letter-spacing:-.01em;line-height:1.1;padding:14px 0;border-bottom:1px solid rgba(237,231,218,.14);overflow:hidden}
+.mobile-nav nav a{color:var(--crema);font-family:var(--font-display);font-size:clamp(26px,7vw,38px);letter-spacing:-.01em;line-height:1.1;padding:14px 0;border-bottom:1px solid rgba(237,231,218,.14);overflow:hidden;text-align:right}
 .mobile-nav nav a>span{display:block}
 .mobile-nav nav a.is-active{color:var(--azul)}
-.mobile-nav__foot{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
-.mobile-nav__tel{color:var(--azul);font-family:var(--font-display);font-size:19px;letter-spacing:.06em}
-.mobile-nav__tel:hover{color:var(--crema)}
 
 @media (min-width:900px){
   .nav{display:flex}
   .nav-toggle,.mobile-nav{display:none !important}
 }
 
-/* ===== Barra de acción móvil ===== */
-/* visibility, no solo transform: escondida con transform los enlaces
-   seguirian siendo alcanzables con el tabulador. */
-.action-bar{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;gap:1px;background:rgba(65,47,43,.2);transform:translateY(110%);visibility:hidden;transition:transform .42s var(--ease-asentar),visibility 0s linear .42s;padding-bottom:env(safe-area-inset-bottom)}
-.action-bar.is-visible{transform:translateY(0);visibility:visible;transition:transform .42s var(--ease-asentar),visibility 0s}
-.action-bar a{flex:1;display:flex;align-items:center;justify-content:center;padding:17px 12px;font-family:var(--font-display);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
-.action-bar__call{background:var(--crema);color:var(--marron)}
-.action-bar__book{background:var(--terracota-dark);color:var(--crema)}
-.action-bar__book:hover{color:var(--crema)}
-@media (max-width:899px){
-  .action-bar{display:flex}
-  /* Que la barra no tape el final del pie. */
-  .site-footer__bottom{padding-bottom:64px}
-}
+/* ===== Botón flotante de contacto (móvil) =====
+   Sustituye a la barra inferior de dos botones. En reposo es una bolita con
+   el símbolo de la marca abajo a la derecha; al pulsarla despliega llamar y
+   WhatsApp hacia arriba. Solo existe en móvil: en escritorio el contacto está
+   en la barra de navegación y en el bloque del final. */
+.fab{position:fixed;right:16px;bottom:16px;z-index:120;display:none;
+  flex-direction:column;align-items:center;gap:12px;
+  padding-bottom:env(safe-area-inset-bottom)}
+@media (max-width:899px){.fab{display:flex}}
+
+.fab__btn{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:var(--terracota-dark);box-shadow:0 8px 22px rgb(var(--relieve-tinta)/.38);
+  transition:transform .35s var(--ease-asentar),background .25s ease}
+.fab__btn img{width:26px;height:auto}
+/* El simbolo no se gira: es la marca, no un icono de cerrar. Lo que
+   cambia al abrir es el fondo. */
+.fab.is-open .fab__btn{background:var(--marron)}
+
+/* Las opciones salen de detrás de la bolita y suben. Ocultas de verdad
+   (visibility + tabindex) para que no se puedan tabular estando cerradas. */
+.fab__op{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:var(--crema);color:var(--terracota-dark);
+  box-shadow:0 6px 16px rgb(var(--relieve-tinta)/.32);
+  opacity:0;visibility:hidden;transform:translateY(14px) scale(.7);
+  transition:opacity .28s var(--ease-asentar),transform .28s var(--ease-asentar),visibility 0s linear .28s}
+.fab__op svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.fab__op .fab__wa{fill:currentColor;stroke:none}
+.fab__op:hover,.fab__op:focus-visible{background:var(--marron);color:var(--crema)}
+.fab.is-open .fab__op{opacity:1;visibility:visible;transform:translateY(0) scale(1);transition-delay:0s}
+.fab.is-open .fab__op--tel{transition-delay:.04s}
+.fab.is-open .fab__op--wa{transition-delay:.09s}
 
 /* ===== Footer ===== */
 .site-footer{position:relative;overflow:hidden;background:var(--marron);color:var(--crema);padding:clamp(48px,7vw,80px) 0 28px}
@@ -434,7 +452,16 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
      max-width lo recorta al tamano de boton. */
   width:max-content;max-width:15em;
   transition:max-width .45s var(--ease-asentar),max-height .45s var(--ease-asentar),gap .4s var(--ease-asentar)}
-.duo:hover .duo__cards,.duo:focus-within .duo__cards,.duo.is-open .duo__cards{max-width:64em;gap:.5em}
+.duo.is-open .duo__cards,.duo:focus-within .duo__cards{max-width:64em;gap:.5em}
+/* El :hover va aparte y solo para punteros reales: en tactil el navegador
+   aplica :hover al tocar, la tapa se volvia transparente antes de que se
+   resolviera la pulsacion y el clic acababa en la tarjeta de debajo, que
+   navegaba sola sin dar tiempo a ver las opciones. */
+@media (hover:hover){
+  .duo:hover .duo__cards{max-width:64em;gap:.5em}
+  .duo:hover .duo__tapa{opacity:0;pointer-events:none}
+  .duo:hover .duo__card{border-radius:14px;border-color:rgba(255,255,255,.35);box-shadow:var(--relieve-corto)}
+}
 .duo__card{display:flex;align-items:center;justify-content:center;gap:11px;padding:20px 30px;
   background:rgba(255,255,255,.2);border:1px solid transparent;color:var(--crema);
   font-family:var(--font-display);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
@@ -442,7 +469,9 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
   transition:background .28s var(--ease-asentar),color .28s var(--ease-asentar),border-radius .4s var(--ease-asentar),border-color .4s var(--ease-asentar),box-shadow .4s var(--ease-asentar)}
 .duo__card:first-of-type{border-radius:16px 0 0 16px}
 .duo__card:last-of-type{border-radius:0 16px 16px 0}
-.duo__ico{width:22px;height:22px;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.duo__ico{width:22px;height:22px;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+/* El logo de WhatsApp es una marca de relleno, no un icono de trazo. */
+.duo__ico--wa{fill:currentColor;stroke:none}
 /* WhatsApp solo en movil: en escritorio el bloque se queda con las dos
    acciones de siempre. */
 .duo__card--wa{display:none}
@@ -463,8 +492,8 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
   filter:brightness(1.3) blur(5px);border-radius:inherit}
 /* :focus-within además de :hover — si no, los dos enlaces quedan tapados e
    inalcanzables para quien navega con el teclado. */
-.duo:hover .duo__tapa,.duo:focus-within .duo__tapa,.duo.is-open .duo__tapa{opacity:0;pointer-events:none}
-.duo:hover .duo__card,.duo:focus-within .duo__card,.duo.is-open .duo__card{border-radius:14px;border-color:rgba(255,255,255,.35);box-shadow:var(--relieve-corto)}
+.duo:focus-within .duo__tapa,.duo.is-open .duo__tapa{opacity:0;pointer-events:none}
+.duo:focus-within .duo__card,.duo.is-open .duo__card{border-radius:14px;border-color:rgba(255,255,255,.35);box-shadow:var(--relieve-corto)}
 .duo__card:hover,.duo__card:focus-visible{background:var(--crema);color:var(--terracota-dark)}
 /* En tactil no hay hover, asi que el bloque se abre al tocarlo (lo pone el JS
    con .is-open). En movil las tarjetas se apilan, asi que ahi lo que se
@@ -477,9 +506,17 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
   .duo__txt{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   /* Cuadradas y de tamano fijo: con flex:1 1 0 se encogian y el bloque cerrado
      acababa siendo mas estrecho que su propio rotulo "Contactar". */
-  .duo__card{padding:0;width:4.9em;height:4.9em;flex:0 0 auto}
-  .duo__ico{width:24px;height:24px}
+  /* Cara solida en vez de blanco al 20%: sobre la terracota y con las ondas
+     por detras, el translucido dejaba los iconos casi ilegibles. */
+  .duo__card{padding:0;width:4.9em;height:4.9em;flex:0 0 auto;
+    background:var(--crema);color:var(--terracota-dark);border-color:transparent}
+  .duo__ico{width:26px;height:26px}
   .duo__cards{max-width:16em}
+  /* Sombra corta y propia: la escalera larga de --relieve-corto caia sobre la
+     tarjeta de al lado y ensuciaba el conjunto. */
+  .duo.is-open .duo__card,.duo:focus-within .duo__card{box-shadow:0 5px 14px rgba(65,47,43,.28);border-color:transparent}
+  .duo.is-open .duo__cards,.duo:focus-within .duo__cards{gap:.7em}
+  .duo__card:hover,.duo__card:focus-visible{background:var(--marron);color:var(--crema)}
   .duo:hover .duo__cards,.duo:focus-within .duo__cards,.duo.is-open .duo__cards{max-width:64em}
 }
 
@@ -598,7 +635,9 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
   .showcase__panel-text > p:nth-of-type(2){order:3}
   .showcase__photo-wrap{order:4}
   .showcase__tags{order:6}
-  .showcase__panel > .btn{order:7;align-self:center;margin:6px 0 0}
+  /* En movil la ficha no lleva boton de pedir cita: se accede desde la
+     barra fija de abajo y desde el menu. */
+  .showcase__panel > .btn{display:none}
 
   /* "01 / 08": el total lo pone el JS en data-total de cada ficha. */
   .showcase__panel-num{font-size:15px;letter-spacing:.12em;color:var(--tinta-suave)}
@@ -657,7 +696,7 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 .instalaciones-hero .container{position:relative;z-index:1}
 .instalaciones-hero h1{font-size:clamp(36px,6vw,80px)}
 .instalaciones-block{position:relative;overflow:hidden;padding:clamp(40px,6vw,80px) 0;border-top:1px solid rgba(65,47,43,.16)}
-.instalaciones-block--dark{background:var(--marron);color:var(--crema)}
+.instalaciones-block--dark{background:var(--marron);color:var(--crema);--relieve-tinta:18 11 9}
 /* Columnas con un corte explicito en vez de auto-fit: con auto-fit el numero
    de columnas depende del ancho disponible, y entonces un order dentro de una
    media query puede aplicarse cuando todavia hay dos columnas y desbaratar el
@@ -671,7 +710,16 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 .instalaciones-block h2{font-size:clamp(26px,3vw,40px);margin-bottom:16px}
 .instalaciones-block p{color:var(--tinta-suave)}
 .instalaciones-block--dark p{color:rgba(237,231,218,.8)}
-.instalaciones-foto{display:block;border-radius:18px;overflow:hidden;box-shadow:var(--relieve-corto)}
+/* Sombra hacia abajo, no la escalera lateral de --relieve-corto: la seccion
+   lleva overflow:hidden y en movil solo quedan 20px a la izquierda de la foto,
+   asi que la escalera se recortaba entera. Una sombra vertical cabe siempre
+   dentro del padding de la seccion.
+   El filo claro es para el bloque oscuro: alli una sombra oscura sobre marron
+   no se distingue, y lo que separa la foto del fondo es el borde. */
+.instalaciones-foto{display:block;border-radius:18px;overflow:hidden;
+  box-shadow:0 16px 34px rgb(var(--relieve-tinta)/.30), 0 4px 10px rgb(var(--relieve-tinta)/.20)}
+.instalaciones-block--dark .instalaciones-foto{
+  box-shadow:0 16px 40px rgb(var(--relieve-tinta)/.55), 0 0 0 1px rgba(237,231,218,.16)}
 .instalaciones-foto img{width:100%;height:auto;display:block}
 
 

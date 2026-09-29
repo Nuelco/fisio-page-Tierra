@@ -162,9 +162,6 @@ if(!window.gsap || !window.ScrollTrigger){
         gsap.fromTo(menu.querySelectorAll('nav a > span'),
           {yPercent: 110},
           {yPercent: 0, duration: .6, ease: EASE, stagger: .06, delay: .06});
-        gsap.fromTo(menu.querySelector('.mobile-nav__foot'),
-          {opacity: 0, y: 12},
-          {opacity: 1, y: 0, duration: .5, ease: EASE, delay: .3});
       }
       if(links[0]) links[0].focus();
     }
@@ -200,31 +197,34 @@ if(!window.gsap || !window.ScrollTrigger){
   }
 
   /* ------------------------------------------------------------------ *
-   * Barra de acción móvil: aparece al dejar atrás el hero, se esconde con
-   * el menú abierto y al llegar al pie (donde el CTA ya está en pantalla).
+   * Botón flotante de contacto (móvil): bolita con el símbolo que despliega
+   * llamar y WhatsApp. Cierra al tocar fuera, con Escape y al elegir opción.
    * ------------------------------------------------------------------ */
-  function initActionBar(){
-    var bar = document.getElementById('action-bar');
-    var hero = document.getElementById('hero');
-    var cta = document.querySelector('.cta-final');
-    if(!bar || !hero) return;
+  function initFab(){
+    var fab = document.getElementById('fab');
+    var btn = document.getElementById('fab-btn');
+    if(!fab || !btn) return;
+    var ops = fab.querySelectorAll('.fab__op');
 
-    var hidden = false;
-    var ticking = false;
-
-    function update(){
-      var pastHero = window.scrollY > hero.offsetHeight * .7;
-      var atCta = cta && cta.getBoundingClientRect().top < window.innerHeight * .9;
-      bar.classList.toggle('is-visible', pastHero && !atCta && !hidden);
-      bar.setAttribute('aria-hidden', String(!(pastHero && !atCta && !hidden)));
-      ticking = false;
+    function set(open){
+      fab.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Cerrar opciones de contacto' : 'Abrir opciones de contacto');
+      // Sin esto los enlaces se pueden tabular con el menu cerrado.
+      ops.forEach(function(a){ a.setAttribute('tabindex', open ? '0' : '-1'); });
     }
 
-    window.addEventListener('scroll', function(){
-      if(!ticking){ ticking = true; requestAnimationFrame(update); }
-    }, {passive: true});
-    document.addEventListener('tierra:menu', function(e){ hidden = e.detail.open; update(); });
-    update();
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      set(!fab.classList.contains('is-open'));
+    });
+    ops.forEach(function(a){ a.addEventListener('click', function(){ set(false); }); });
+    document.addEventListener('click', function(e){
+      if(!fab.contains(e.target)) set(false);
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') set(false);
+    });
   }
 
   /* ------------------------------------------------------------------ *
@@ -382,7 +382,7 @@ if(!window.gsap || !window.ScrollTrigger){
   function init(){
     initHeader();
     initMobileNav();
-    initActionBar();
+    initFab();
     initReveals();
     initPhrases();
     initMarquee();
