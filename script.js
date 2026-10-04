@@ -214,6 +214,25 @@ if(!window.gsap || !window.ScrollTrigger){
       ops.forEach(function(a){ a.setAttribute('tabindex', open ? '0' : '-1'); });
     }
 
+    // De 900px en adelante la bolita no esta desde el principio: aparece al
+    // dejar atras la primera seccion. Por debajo esta siempre, asi que no
+    // hace falta vigilar el scroll.
+    var escritorio = window.matchMedia('(min-width: 900px)');
+    var primera = document.getElementById('hero') ||
+                  document.querySelector('#main > section, #main > div');
+    var ticking = false;
+    function revisar(){
+      if(!escritorio.matches){ fab.classList.add('is-ready'); ticking = false; return; }
+      var limite = primera ? primera.offsetTop + primera.offsetHeight - 120 : 420;
+      fab.classList.toggle('is-ready', window.scrollY > limite);
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){ ticking = true; requestAnimationFrame(revisar); }
+    }, {passive: true});
+    escritorio.addEventListener('change', revisar);
+    revisar();
+
     btn.addEventListener('click', function(e){
       e.stopPropagation();
       set(!fab.classList.contains('is-open'));
@@ -360,16 +379,45 @@ if(!window.gsap || !window.ScrollTrigger){
    * ocultaba en móvil y las dos tarjetas salían sueltas, sin el botón.
    * ------------------------------------------------------------------ */
   function initDuo(){
-    var duo = document.querySelector('.duo');
-    var tapa = duo && duo.querySelector('.duo__tapa');
-    if(!duo || !tapa) return;
-    tapa.addEventListener('click', function(){ duo.classList.add('is-open'); });
-    // Si se toca fuera, vuelve a cerrarse para que el bloque siga siendo un
-    // botón y no dos tarjetas permanentes.
+    // .duo es el bloque del CTA; .duo--mini son los botones de pedir cita,
+    // que llevan su propio marcado y no comparten la clase base.
+    var duos = Array.prototype.slice.call(document.querySelectorAll('.duo, .duo--mini'));
+    if(!duos.length) return;
+
+    function aplicar(duo, abrir){
+      duo.classList.toggle('is-open', abrir);
+      var t = duo.querySelector('.duo__btn');
+      if(t) t.setAttribute('aria-expanded', String(abrir));
+      // Sin esto las tres opciones se pueden tabular con el boton cerrado.
+      duo.querySelectorAll('.duo__card').forEach(function(a){
+        a.setAttribute('tabindex', abrir ? '0' : '-1');
+      });
+    }
+    function cerrarTodos(salvo){
+      duos.forEach(function(d){ if(d !== salvo) aplicar(d, false); });
+    }
+    duos.forEach(function(duo){
+      // La tapa es el bloque del CTA; en los botones de pedir cita el
+      // disparador es el propio boton, que conserva su marcado original.
+      var tapa = duo.querySelector('.duo__tapa') || duo.querySelector('.duo__btn');
+      if(!tapa) return;
+      tapa.addEventListener('click', function(e){
+        e.stopPropagation();
+        var abrir = !duo.classList.contains('is-open');
+        cerrarTodos(duo);
+        aplicar(duo, abrir);
+      });
+    });
+    // Si se toca fuera, vuelven a cerrarse: siguen siendo botones, no dos o
+    // tres tarjetas permanentes.
     document.addEventListener('click', function(e){
-      if(!duo.contains(e.target)) duo.classList.remove('is-open');
+      if(!e.target.closest('.duo, .duo--mini')) cerrarTodos(null);
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') cerrarTodos(null);
     });
   }
+
 
   function initHeroCue(){
     var cue = document.getElementById('hero-cue');

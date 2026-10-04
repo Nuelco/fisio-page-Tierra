@@ -38,6 +38,10 @@
      el marron de la sombra es el mismo color que el fondo de las secciones
      oscuras, y alli el relieve desaparecia. */
   --relieve-tinta:65 47 43;
+  /* Relieve interior del boton: luz arriba y sombra abajo. Estaba escrito a
+     mano dentro de .btn__content; ahora es un token para poder darselo al
+     resto de elementos con aspecto de boton. */
+  --relieve-interior:inset -2px 12px 11px -5px var(--b-200), inset 1px -3px 11px 0 rgb(0 0 0/.35);
   --relieve:
     -.45em .4em 0 0 rgb(var(--relieve-tinta)/.40),
     -.9em .8em 0 0 rgb(var(--relieve-tinta)/.30),
@@ -153,7 +157,7 @@ ol,ul{margin:0;padding:0;list-style:none}
   padding:1.35em 2.4em;border-radius:calc(var(--radius) * .85);
   transition:all .3s ease;
   background:linear-gradient(to bottom,var(--b-300) 0%,var(--b-400) 100%);
-  box-shadow:inset -2px 12px 11px -5px var(--b-200), inset 1px -3px 11px 0 rgb(0 0 0/.35)}
+  box-shadow:var(--relieve-interior)}
 .btn__content::before{content:'';position:absolute;inset:0;z-index:10;width:80%;top:45%;bottom:35%;
   opacity:.7;margin:auto;background:linear-gradient(to bottom,transparent,var(--b-400));
   filter:brightness(1.3) blur(5px)}
@@ -244,7 +248,7 @@ body.no-scroll .site-header__progress{opacity:0}
 .nav a:not(.btn):hover::after,.nav a.is-active:not(.btn)::after{transform:scaleX(1)}
 .nav a:hover,.nav a.is-active{color:#fff}
 .nav .btn{color:var(--crema)}
-.nav-toggle{display:inline-flex;flex-direction:column;justify-content:center;gap:4px;width:42px;height:42px;align-items:center;border:1px solid rgba(237,231,218,.4);border-radius:var(--radius)}
+.nav-toggle{display:inline-flex;flex-direction:column;justify-content:center;gap:4px;width:42px;height:42px;align-items:center;border:1px solid rgba(237,231,218,.4);border-radius:var(--radius);box-shadow:var(--relieve-interior)}
 .nav-toggle span{display:block;width:18px;height:1.5px;background:var(--crema);transition:transform .34s var(--ease-asentar),opacity .2s ease}
 .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
 .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
@@ -264,23 +268,77 @@ body.no-scroll .site-header__progress{opacity:0}
   .nav-toggle,.mobile-nav{display:none !important}
 }
 
+
+/* ---- Botones de "Pedir cita" con las tres vías de contacto ----
+   El boton se queda EXACTAMENTE como estaba: aqui solo se le anade la funcion.
+   Al pulsarlo se desvanece y las tres opciones aparecen en su hueco, asi que
+   no se mueve nada a su alrededor ni en el hero ni en las fichas.
+
+   Las tres tarjetas NO imitan el estilo del boton: son botones. Llevan sus
+   mismas clases y su misma estructura interna (btn__bg / btn__wrap /
+   btn__content), asi que heredan el relieve, el bisel, la sombra, el hover y
+   el estado pulsado sin duplicar una sola linea. Aqui solo se ajusta el
+   tamano para que las tres quepan en el hueco del boton. */
+.duo--mini{position:relative;display:inline-flex;margin:.45em .45em .1em 0}
+.duo--mini .duo__btn{margin:0;transition:opacity .25s var(--ease-asentar)}
+.duo--mini.is-open .duo__btn{opacity:0;pointer-events:none}
+
+.duo--mini .duo__cards{position:absolute;inset:0;width:auto;max-width:none;overflow:visible;
+  display:flex;align-items:stretch;justify-content:center;gap:9px;
+  opacity:0;visibility:hidden;transform:scale(.94);
+  transition:opacity .25s var(--ease-asentar),transform .25s var(--ease-asentar),visibility 0s linear .25s}
+.duo--mini.is-open .duo__cards{opacity:1;visibility:visible;transform:scale(1);transition-delay:0s}
+
+/* Solo tamano: el aspecto lo pone .btn.
+   .btn es inline-flex con align-items:center, asi que su .btn__wrap se ajusta
+   al contenido. En el boton grande da igual porque el texto lo llena; aqui,
+   con solo un icono, el wrap quedaba del tamano del icono y el fondo oscuro
+   del boton (btn__bg, que es lo que forma el canto en relieve) asomaba por
+   todo alrededor. Por eso el wrap tiene que estirarse hasta la tarjeta. */
+.duo--mini .duo__card{margin:0;flex:1 1 0;min-width:0;padding:0;align-items:stretch}
+/* .duo__card:first-of-type/:last-of-type (mas abajo) estan pensadas para la
+   pildora de dos mitades del boton grande y cuadran el lado interior de la
+   tarjeta; aqui las tres tarjetas son botones sueltos y deben ir redondeadas
+   por completo, como el boton principal. */
+.duo--mini .duo__card:first-of-type,.duo--mini .duo__card:last-of-type{border-radius:var(--radius)}
+.duo--mini .duo__card .btn__wrap{flex:1 1 auto;min-width:0;display:flex}
+.duo--mini .duo__card .btn__content{flex:1 1 auto;padding:0;min-width:0;gap:0}
+.duo--mini .duo__ico{width:24px;height:24px;flex:0 0 24px;min-width:24px;
+  stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.duo--mini .duo__ico--wa{fill:currentColor;stroke:none}
+/* La sombra se proyecta hacia la izquierda y cae sobre la tarjeta vecina.
+   Apilando al reves (la de la izquierda por encima) cada una tapa la sombra
+   de la siguiente y esta solo asoma en los huecos. */
+.duo--mini .duo__card:nth-child(1){z-index:3}
+.duo--mini .duo__card:nth-child(2){z-index:2}
+.duo--mini .duo__card:nth-child(3){z-index:1}
+
 /* ===== Botón flotante de contacto (móvil) =====
    Sustituye a la barra inferior de dos botones. En reposo es una bolita con
    el símbolo de la marca abajo a la derecha; al pulsarla despliega llamar y
    WhatsApp hacia arriba. Solo existe en móvil: en escritorio el contacto está
    en la barra de navegación y en el bloque del final. */
-.fab{position:fixed;right:16px;bottom:16px;z-index:120;display:none;
+.fab{position:fixed;right:16px;bottom:16px;z-index:120;display:flex;
   flex-direction:column;align-items:center;gap:12px;
   padding-bottom:env(safe-area-inset-bottom)}
-@media (max-width:899px){.fab{display:flex}}
+/* De 900px en adelante no esta desde el principio: aparece al dejar atras el
+   hero (el JS pone .is-ready), porque hasta ahi el boton de la propia pagina
+   ya esta a la vista y la bolita solo estorbaria. En movil sigue siempre. */
+@media (min-width:900px){
+  .fab{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(12px) scale(.9);
+    transition:opacity .3s var(--ease-asentar),transform .3s var(--ease-asentar),visibility 0s linear .3s}
+  .fab.is-ready{opacity:1;visibility:visible;pointer-events:auto;transform:none;transition-delay:0s}
+}
 
 .fab__btn{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;
   background:var(--terracota-dark);box-shadow:0 8px 22px rgb(var(--relieve-tinta)/.38);
   transition:transform .35s var(--ease-asentar),background .25s ease}
 .fab__btn img{width:26px;height:auto}
-/* El simbolo no se gira: es la marca, no un icono de cerrar. Lo que
-   cambia al abrir es el fondo. */
-.fab.is-open .fab__btn{background:var(--marron)}
+/* El simbolo no se gira: es la marca, no un icono de cerrar. Al abrir se le
+   anade un aro claro en lugar de cambiarle el fondo a marron: sobre las
+   secciones oscuras ese marron se fundia con el fondo y la bolita
+   desaparecia justo cuando mas tiene que verse. */
+.fab.is-open .fab__btn{box-shadow:0 8px 22px rgb(var(--relieve-tinta)/.38), 0 0 0 3px rgba(237,231,218,.28)}
 
 /* Las opciones salen de detrás de la bolita y suben. Ocultas de verdad
    (visibility + tabindex) para que no se puedan tabular estando cerradas. */
@@ -426,6 +484,18 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 
 /* ===== CTA final ===== */
 .cta-final{position:relative;overflow:hidden;background:var(--terracota);color:var(--crema);padding:var(--space-section) 0;text-align:center}
+/* Misma luz que los botones sobre crema: viene de la esquina superior
+   derecha, asi que la sombra se proyecta en diagonal hacia abajo y a la
+   izquierda. La diferencia con --relieve es que aqui son tres sombras muy
+   desenfocadas que se solapan, en vez de siete escalones con desenfoque casi
+   nulo: sobre el terracota aquellos saltos se leian como capas sueltas.
+   Tinta casi negra porque el marron apenas contrasta con este fondo. */
+.cta-final{
+  --relieve-tinta:20 12 10;
+  --relieve:
+    -.4em .35em .5em 0 rgb(var(--relieve-tinta)/.42),
+    -1.5em 1.3em 1.6em 0 rgb(var(--relieve-tinta)/.34),
+    -2.9em 2.4em 2.8em 0 rgb(var(--relieve-tinta)/.24)}
 .cta-final__inner{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 var(--space-inline)}
 /* 24ch: el ancho justo para que la linea rompa despues del punto
    ("Tu bienestar te espera." / "Empecemos hoy."). text-wrap:balance aqui
@@ -445,7 +515,9 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
    que esconde. Por eso las tarjetas viven en .duo__cards, que es lo que se
    recorta: si el recorte fuera en .duo se llevaria por delante la sombra en
    relieve de la tapa, que sobresale por fuera del elemento. */
-.duo{position:relative;display:inline-block;border-radius:16px}
+/* width:max-content para que no dependa del contenedor: dentro de un padre
+   flex el inline-block se convierte en block y la caja colapsaba a 0. */
+.duo{position:relative;display:inline-block;width:max-content;border-radius:16px}
 .duo__cards{display:flex;overflow:hidden;border-radius:inherit;
   /* width:max-content explicito: con overflow:hidden el navegador no deduce
      el ancho del contenido y la caja colapsaba a 0. Con el ancho declarado,
@@ -460,10 +532,10 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 @media (hover:hover){
   .duo:hover .duo__cards{max-width:64em;gap:.5em}
   .duo:hover .duo__tapa{opacity:0;pointer-events:none}
-  .duo:hover .duo__card{border-radius:14px;border-color:rgba(255,255,255,.35);box-shadow:var(--relieve-corto)}
+  .duo:hover .duo__card{border-radius:14px;border-color:rgba(255,255,255,.35);box-shadow:var(--relieve-interior),var(--relieve-corto)}
 }
 .duo__card{display:flex;align-items:center;justify-content:center;gap:11px;padding:20px 30px;
-  background:rgba(255,255,255,.2);border:1px solid transparent;color:var(--crema);
+  background:rgba(255,255,255,.2);border:1px solid transparent;color:var(--crema);box-shadow:var(--relieve-interior);
   font-family:var(--font-display);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
   white-space:nowrap;flex:0 0 auto;
   transition:background .28s var(--ease-asentar),color .28s var(--ease-asentar),border-radius .4s var(--ease-asentar),border-color .4s var(--ease-asentar),box-shadow .4s var(--ease-asentar)}
@@ -486,14 +558,14 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
   border-radius:14px;color:var(--b-luz);text-shadow:-1px 1px 2px var(--b-500);
   font-family:var(--font-display);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
   background:linear-gradient(to bottom,var(--b-300) 0%,var(--b-400) 100%);
-  box-shadow:inset -2px 12px 11px -5px var(--b-200), inset 1px -3px 11px 0 rgb(0 0 0/.35)}
+  box-shadow:var(--relieve-interior)}
 .duo__tapa-cara::before{content:'';position:absolute;inset:0;width:80%;top:45%;bottom:35%;margin:auto;
   opacity:.7;background:linear-gradient(to bottom,transparent,var(--b-400));
   filter:brightness(1.3) blur(5px);border-radius:inherit}
 /* :focus-within además de :hover — si no, los dos enlaces quedan tapados e
    inalcanzables para quien navega con el teclado. */
 .duo:focus-within .duo__tapa,.duo.is-open .duo__tapa{opacity:0;pointer-events:none}
-.duo:focus-within .duo__card,.duo.is-open .duo__card{border-radius:14px;border-color:rgba(255,255,255,.35);box-shadow:var(--relieve-corto)}
+.duo:focus-within .duo__card,.duo.is-open .duo__card{border-radius:14px;border-color:rgba(255,255,255,.35);box-shadow:var(--relieve-interior),var(--relieve-corto)}
 .duo__card:hover,.duo__card:focus-visible{background:var(--crema);color:var(--terracota-dark)}
 /* En tactil no hay hover, asi que el bloque se abre al tocarlo (lo pone el JS
    con .is-open). En movil las tarjetas se apilan, asi que ahi lo que se
@@ -514,7 +586,9 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
   .duo__cards{max-width:16em}
   /* Sombra corta y propia: la escalera larga de --relieve-corto caia sobre la
      tarjeta de al lado y ensuciaba el conjunto. */
-  .duo.is-open .duo__card,.duo:focus-within .duo__card{box-shadow:0 5px 14px rgba(65,47,43,.28);border-color:transparent}
+  /* El relieve interior va el primero: box-shadow es una sola propiedad y
+     si se declara sola la sombra exterior, el interior desaparece. */
+  .duo.is-open .duo__card,.duo:focus-within .duo__card{box-shadow:var(--relieve-interior),0 5px 14px rgb(var(--relieve-tinta)/.28);border-color:transparent}
   .duo.is-open .duo__cards,.duo:focus-within .duo__cards{gap:.7em}
   .duo__card:hover,.duo__card:focus-visible{background:var(--marron);color:var(--crema)}
   .duo:hover .duo__cards,.duo:focus-within .duo__cards,.duo.is-open .duo__cards{max-width:64em}
@@ -585,7 +659,7 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 
 .showcase__navlabel,.showcase__navrole,.showcase__navname{display:none}
 .showcase__nav{display:flex;align-items:center;justify-content:flex-end;gap:16px;margin-top:clamp(14px,2vw,20px);font-family:var(--font-display);font-size:12px;letter-spacing:.12em;color:var(--marron)}
-.showcase__arrow{width:44px;height:44px;border-radius:50%;border:1px solid rgba(65,47,43,.28);display:inline-flex;align-items:center;justify-content:center;color:var(--marron);transition:background .2s ease,color .2s ease,border-color .2s ease}
+.showcase__arrow{width:44px;height:44px;border-radius:50%;border:1px solid rgba(65,47,43,.28);display:inline-flex;align-items:center;justify-content:center;color:var(--marron);box-shadow:var(--relieve-interior);transition:background .2s ease,color .2s ease,border-color .2s ease}
 .showcase__arrow:hover{background:rgba(65,47,43,.06)}
 .showcase__arrow--next{background:var(--terracota-dark);border-color:var(--terracota-dark);color:var(--crema)}
 .showcase__arrow--next:hover{filter:brightness(.9)}
