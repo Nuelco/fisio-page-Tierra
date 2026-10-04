@@ -206,6 +206,45 @@ if(!window.gsap || !window.ScrollTrigger){
     if(!fab || !btn) return;
     var ops = fab.querySelectorAll('.fab__op');
 
+    // Punto de notificacion: a los pocos segundos la bolita se marca con un
+    // punto rojo, como un aviso pendiente. Se apaga al PULSAR una de las tres
+    // opciones de contacto, no al abrir el menu (ver mas abajo por que), y a
+    // partir de ahi no vuelve en lo que queda de sesion: si reapareciera en
+    // cada pagina dejaria de ser un aviso y pasaria a ser ruido. Ojo:
+    // sessionStorage sobrevive a las recargas, solo se borra al cerrar la
+    // pestana. Y puede lanzar (ventana privada, cookies bloqueadas), de ahi
+    // los try/catch.
+    // La marca es por pagina, no global: asi el aviso insiste cuando el visitante
+    // navega a una pagina nueva, pero no se repite al recargar la misma. Se
+    // normaliza el index.html porque la portada se sirve con y sin el.
+    var ALERTA_CLAVE = 'tierra-fab-alerta:' + location.pathname.replace(/index\.html$/, '');
+    var ALERTA_ESPERA = 8000;
+    var alertaVista = false;
+    try { alertaVista = sessionStorage.getItem(ALERTA_CLAVE) === '1'; } catch(e){}
+
+    function marcarVista(){
+      alertaVista = true;
+      try { sessionStorage.setItem(ALERTA_CLAVE, '1'); } catch(e){}
+    }
+
+    function apagarAlerta(){
+      fab.classList.remove('has-alerta');
+      marcarVista();
+    }
+
+    if(!alertaVista){
+      setTimeout(function(){
+        if(alertaVista || fab.classList.contains('is-open')) return;
+        fab.classList.add('has-alerta');
+        // Se marca al enseñarlo, no solo al contactar: ya ha cumplido su
+        // funcion en esta pagina y recargar no tiene que volver a sacarlo.
+        marcarVista();
+      }, ALERTA_ESPERA);
+    }
+
+    // Ojo: abrir el menu NO apaga el aviso. Si lo apagara, el punto rojo se
+    // esfumaria justo en el momento en que aparecen las opciones, que es
+    // cuando tiene que verse sobre la de WhatsApp. Se apaga al elegir una.
     function set(open){
       fab.classList.toggle('is-open', open);
       btn.setAttribute('aria-expanded', String(open));
@@ -214,30 +253,35 @@ if(!window.gsap || !window.ScrollTrigger){
       ops.forEach(function(a){ a.setAttribute('tabindex', open ? '0' : '-1'); });
     }
 
-    // De 900px en adelante la bolita no esta desde el principio: aparece al
-    // dejar atras la primera seccion. Por debajo esta siempre, asi que no
-    // hace falta vigilar el scroll.
-    var escritorio = window.matchMedia('(min-width: 900px)');
-    var primera = document.getElementById('hero') ||
-                  document.querySelector('#main > section, #main > div');
+    // El criterio es la pagina, no el ancho. Solo la portada tiene #hero, y
+    // solo alli la bolita se gana con scroll: hasta pasar el hero, su propio
+    // boton de contacto ya esta a la vista y la bolita estorbaria. En el resto
+    // de paginas no hay tal boton arriba, asi que esta desde el primer momento.
+    var hero = document.getElementById('hero');
     var ticking = false;
     function revisar(){
-      if(!escritorio.matches){ fab.classList.add('is-ready'); ticking = false; return; }
-      var limite = primera ? primera.offsetTop + primera.offsetHeight - 120 : 420;
+      if(!hero){ fab.classList.add('is-ready'); ticking = false; return; }
+      var limite = hero.offsetTop + hero.offsetHeight - 120;
       fab.classList.toggle('is-ready', window.scrollY > limite);
       ticking = false;
     }
     window.addEventListener('scroll', function(){
       if(!ticking){ ticking = true; requestAnimationFrame(revisar); }
     }, {passive: true});
-    escritorio.addEventListener('change', revisar);
+    window.addEventListener('resize', revisar);
+    // Tambien al cargar y al volver atras: el navegador puede restaurar una
+    // posicion de scroll (un ancla, una recarga a media pagina, el boton de
+    // atras) sin disparar ningun scroll, y entonces nadie volvia a mirar si la
+    // bolita tocaba estar visible.
+    window.addEventListener('load', revisar);
+    window.addEventListener('pageshow', revisar);
     revisar();
 
     btn.addEventListener('click', function(e){
       e.stopPropagation();
       set(!fab.classList.contains('is-open'));
     });
-    ops.forEach(function(a){ a.addEventListener('click', function(){ set(false); }); });
+    ops.forEach(function(a){ a.addEventListener('click', function(){ apagarAlerta(); set(false); }); });
     document.addEventListener('click', function(e){
       if(!fab.contains(e.target)) set(false);
     });

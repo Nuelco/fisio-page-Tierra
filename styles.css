@@ -248,7 +248,12 @@ body.no-scroll .site-header__progress{opacity:0}
 .nav a:not(.btn):hover::after,.nav a.is-active:not(.btn)::after{transform:scaleX(1)}
 .nav a:hover,.nav a.is-active{color:#fff}
 .nav .btn{color:var(--crema)}
-.nav-toggle{display:inline-flex;flex-direction:column;justify-content:center;gap:4px;width:42px;height:42px;align-items:center;border:1px solid rgba(237,231,218,.4);border-radius:var(--radius);box-shadow:var(--relieve-interior)}
+/* Aqui no se usa --relieve-interior entero: su primera sombra es un brillo
+   claro (--b-200) que entra 12px por arriba, y en un boton de 42px eso le
+   llena media cara y tapa las tres rayas. Se deja solo la sombra oscura de
+   abajo, que es la que le da el relieve. El resto de piezas que si usan la
+   variable completa son mas grandes y ahi el brillo si funciona. */
+.nav-toggle{display:inline-flex;flex-direction:column;justify-content:center;gap:4px;width:42px;height:42px;align-items:center;border:1px solid rgba(237,231,218,.4);border-radius:var(--radius);box-shadow:inset 1px -3px 11px 0 rgb(0 0 0/.35)}
 .nav-toggle span{display:block;width:18px;height:1.5px;background:var(--crema);transition:transform .34s var(--ease-asentar),opacity .2s ease}
 .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
 .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
@@ -321,19 +326,43 @@ body.no-scroll .site-header__progress{opacity:0}
 .fab{position:fixed;right:16px;bottom:16px;z-index:120;display:flex;
   flex-direction:column;align-items:center;gap:12px;
   padding-bottom:env(safe-area-inset-bottom)}
-/* De 900px en adelante no esta desde el principio: aparece al dejar atras el
-   hero (el JS pone .is-ready), porque hasta ahi el boton de la propia pagina
-   ya esta a la vista y la bolita solo estorbaria. En movil sigue siempre. */
-@media (min-width:900px){
-  .fab{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(12px) scale(.9);
-    transition:opacity .3s var(--ease-asentar),transform .3s var(--ease-asentar),visibility 0s linear .3s}
-  .fab.is-ready{opacity:1;visibility:visible;pointer-events:auto;transform:none;transition-delay:0s}
-}
+/* Oculta hasta que el JS pone .is-ready, en cualquier ancho. Quien decide es el
+   JS y no un media query, porque el criterio es la pagina, no la pantalla: en
+   la portada aparece al dejar atras el hero (alli el propio hero ya lleva un
+   boton de contacto a la vista y la bolita solo estorbaria) y en el resto de
+   paginas esta desde el primer momento. */
+.fab{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(12px) scale(.9);
+  transition:opacity .3s var(--ease-asentar),transform .3s var(--ease-asentar),visibility 0s linear .3s}
+.fab.is-ready{opacity:1;visibility:visible;pointer-events:auto;transform:none;transition-delay:0s}
 
-.fab__btn{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+.fab__btn{position:relative;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;
   background:var(--terracota-dark);box-shadow:0 8px 22px rgb(var(--relieve-tinta)/.38);
   transition:transform .35s var(--ease-asentar),background .25s ease}
 .fab__btn img{width:26px;height:auto}
+
+/* Punto de notificacion. Rojo de aviso a proposito, no terracota: con un color
+   de la paleta sobre el fondo terracota de la bolita no se leeria como un
+   aviso. El filete en crema lo despega del boton sobre cualquier seccion.
+   Lo pone el JS con .has-alerta a los pocos segundos; aqui solo esta el
+   aspecto. Decorativo (aria-hidden en el HTML): no anuncia nada real. */
+.fab__dot{position:absolute;top:3px;right:3px;width:12px;height:12px;border-radius:50%;
+  background:#e5484d;border:2px solid var(--crema);pointer-events:none;
+  opacity:0;transform:scale(.2);
+  transition:opacity .25s var(--ease-asentar),transform .4s var(--ease-asentar)}
+.fab.has-alerta .fab__dot{opacity:1;transform:scale(1)}
+/* El aro late tres veces y para: un pulso infinito en una esquina de la
+   pantalla cansa y compite con el resto de la pagina. */
+.fab.has-alerta .fab__dot::after{content:'';position:absolute;inset:-2px;border-radius:50%;
+  border:2px solid #e5484d;animation:fab-dot-pulso 1.9s var(--ease-asentar) 3}
+@keyframes fab-dot-pulso{
+  0%{opacity:.75;transform:scale(1)}
+  70%,100%{opacity:0;transform:scale(2.3)}
+}
+@media (prefers-reduced-motion: reduce){
+  .fab__dot{transition:opacity .25s linear}
+  .fab.has-alerta .fab__dot{transform:none}
+  .fab.has-alerta .fab__dot::after{animation:none}
+}
 /* El simbolo no se gira: es la marca, no un icono de cerrar. Al abrir se le
    anade un aro claro en lugar de cambiarle el fondo a marron: sobre las
    secciones oscuras ese marron se fundia con el fondo y la bolita
@@ -342,7 +371,7 @@ body.no-scroll .site-header__progress{opacity:0}
 
 /* Las opciones salen de detrás de la bolita y suben. Ocultas de verdad
    (visibility + tabindex) para que no se puedan tabular estando cerradas. */
-.fab__op{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+.fab__op{position:relative;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;
   background:var(--crema);color:var(--terracota-dark);
   box-shadow:0 6px 16px rgb(var(--relieve-tinta)/.32);
   opacity:0;visibility:hidden;transform:translateY(14px) scale(.7);
@@ -580,7 +609,12 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
      acababa siendo mas estrecho que su propio rotulo "Contactar". */
   /* Cara solida en vez de blanco al 20%: sobre la terracota y con las ondas
      por detras, el translucido dejaba los iconos casi ilegibles. */
-  .duo__card{padding:0;width:4.9em;height:4.9em;flex:0 0 auto;
+  /* Acotada a .duo: las tarjetas de .duo--mini NO son cuadradas de tamano
+     fijo, se reparten el ancho del boton al que sustituyen y toman su alto.
+     Sin este filtro les llegaba height:4.9em (63,7px) mientras el ancho
+     seguia siendo un tercio del boton, y salian altas y estrechas. El
+     width:4.9em si lo anulaba su flex:1 1 0, el height no lo anulaba nadie. */
+  .duo .duo__card{padding:0;width:4.9em;height:4.9em;flex:0 0 auto;
     background:var(--crema);color:var(--terracota-dark);border-color:transparent}
   .duo__ico{width:26px;height:26px}
   .duo__cards{max-width:16em}
@@ -599,6 +633,17 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 /* ===== Servicios ===== */
 .servicios-hero{position:relative;overflow:hidden;padding:clamp(28px,4vw,48px) 0 clamp(36px,5vw,56px)}
 .servicios-hero__inner{position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--space-inline)}
+/* El boton de pedir cita vive aqui, a la altura del titular, en vez de
+   repetirse en cada una de las ocho fichas. flex-wrap para que en pantallas
+   estrechas caiga debajo en lugar de estrujar el titulo. */
+.servicios-hero__head{display:flex;align-items:center;justify-content:space-between;
+  gap:clamp(18px,3vw,48px);flex-wrap:wrap}
+.servicios-hero__titulo{min-width:0}
+.servicios-hero__head .duo--mini{flex:0 0 auto;margin:0}
+/* Movil y tablet sin boton aqui: por debajo de 900px la cita se pide desde
+   la bolita flotante y desde el menu, y la ficha de servicio tampoco lo
+   lleva. Mismo corte que usa el resto del showcase. */
+@media (max-width:899px){.servicios-hero__head .duo--mini{display:none}}
 .servicios-hero h1{font-size:clamp(24px,2.8vw,36px);max-width:32ch}
 .servicios-hero__subtitle{margin-top:10px;font-family:var(--font-body);font-size:clamp(16px,1.4vw,19px);color:var(--tinta-suave);max-width:40ch}
 
@@ -651,11 +696,10 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 /* La foto se recorta recta por arriba y por la derecha (llega hasta el
    borde del hueco sin redondear) y solo curva de forma organica por la
    izquierda y por abajo, tal como marca la referencia. */
-.showcase__photo-wrap{position:relative;float:right;width:min(38%,420px);aspect-ratio:.88;margin:0 0 24px clamp(28px,3.5vw,48px)}
+.showcase__photo-wrap{position:relative;float:right;width:min(46%,520px);aspect-ratio:.88;margin:0 0 24px clamp(28px,3.5vw,48px)}
 .showcase__panel-photo{position:relative;overflow:hidden;width:100%;height:100%;clip-path:url(#showcase-blob)}
 .showcase__panel-photo img{width:100%;height:100%;object-fit:cover;display:block}
 /* La decoración queda dentro de la foto (se recorta junto con ella). */
-.showcase__photo-deco{position:absolute;top:0;right:0;width:52%;height:42%;background-image:url('assets/ondas-1.png');background-size:180% 180%;background-position:65% 35%;opacity:.5;filter:invert(1);pointer-events:none}
 
 .showcase__navlabel,.showcase__navrole,.showcase__navname{display:none}
 .showcase__nav{display:flex;align-items:center;justify-content:flex-end;gap:16px;margin-top:clamp(14px,2vw,20px);font-family:var(--font-display);font-size:12px;letter-spacing:.12em;color:var(--marron)}
@@ -690,12 +734,16 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
   .showcase__inner{grid-template-columns:1fr;gap:28px;min-width:0}
   .showcase__list{position:static;min-width:0}
   .showcase__tagline{display:none}
-  .showcase__photo-wrap{float:none;width:100%;max-width:none;aspect-ratio:16/10;margin:0}
+  /* min-height:0 es imprescindible: la ficha es un flex en columna y el
+     min-height:auto de los items deja que la altura natural de la imagen
+     mande sobre el aspect-ratio. Tres de las ocho fotos son verticales
+     (2:3), asi que sin esto esas tres se veian el doble de altas que el
+     resto. Con min-height:0 las ocho quedan en el mismo 16/10. */
+  .showcase__photo-wrap{float:none;width:100%;max-width:none;aspect-ratio:16/10;margin:0;min-height:0}
   .showcase__panel-photo{clip-path:none;border-radius:18px}
-  .showcase__photo-deco{display:none}
 
   /* La ficha en movil sigue el orden de la maqueta: contador, titulo, primer
-     parrafo, foto, resto del texto, iconos y boton. Como el texto y la foto
+     parrafo, foto y resto del texto. Como el texto y la foto
      son hermanos en niveles distintos del HTML, se usa display:contents en
      .showcase__panel-text para que sus hijos pasen a ser hijos directos del
      panel y se puedan ordenar todos juntos con flex. */
@@ -708,40 +756,37 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
   .showcase__panel-text > p,.showcase__subtreat{order:5;margin:0}
   .showcase__panel-text > p:nth-of-type(2){order:3}
   .showcase__photo-wrap{order:4}
-  .showcase__tags{order:6}
-  /* En movil la ficha no lleva boton de pedir cita: se accede desde la
-     barra fija de abajo y desde el menu. */
-  .showcase__panel > .btn{display:none}
+  /* En movil la ficha se queda en texto, imagen y flechas: ni la linea de
+     iconos ni el boton de pedir cita. A la cita se llega desde la barra fija
+     de abajo y desde el menu. El selector cubre tanto un .btn suelto como el
+     envoltorio .duo--mini, que es como se marca ahora ese boton. */
+  .showcase__panel > .btn,.showcase__panel > .duo--mini{display:none}
 
   /* "01 / 08": el total lo pone el JS en data-total de cada ficha. */
   .showcase__panel-num{font-size:15px;letter-spacing:.12em;color:var(--tinta-suave)}
   .showcase__panel-num::after{content:' / ' attr(data-total);flex:0 0 auto;height:auto;width:auto;background:none;margin:0}
   .showcase__panel h2{font-size:clamp(34px,9vw,44px)}
 
-  /* Iconos en circulo, centrados y repartidos, con el filete encima. */
-  .showcase__tags{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 10px;
-    margin-top:8px;padding-top:26px;border-top:1px solid rgba(65,47,43,.16)}
-  .showcase__tag{flex-direction:column;align-items:center;text-align:center;gap:10px;max-width:none}
-  .showcase__tag svg{width:26px;height:26px;margin:0}
-  .showcase__tag::before{content:'';position:absolute}
-  .showcase__tag{position:relative;padding-top:64px}
-  .showcase__tag svg{position:absolute;top:0;left:50%;transform:translateX(-50%) translateY(13px)}
-  .showcase__tag::before{top:0;left:50%;transform:translateX(-50%);width:52px;height:52px;
-    border-radius:50%;background:rgba(165,104,83,.12)}
-  .showcase__tag span{font-size:13.5px;line-height:1.3}
+  /* La linea de iconos no se muestra en la ficha de movil. */
+  .showcase__tags{display:none}
 
   /* En movil no se muestra ningun contenido hasta que se elige un
      tratamiento: solo entonces el panel aparece a pantalla completa. */
   .showcase__content{display:none}
+  /* El overlay ocupa la pantalla y no rueda: las filas son volver (auto),
+     paneles (lo que sobre) y flechas (auto), de modo que el "volver" y la
+     navegacion quedan siempre a la vista y el scroll vive dentro de
+     .showcase__panels. El minmax(0,1fr) evita que la fila de contenido se
+     niegue a encoger por debajo de su altura natural. */
   .showcase__content.is-mobile-open{display:grid;position:fixed;inset:0;z-index:200;
-    background:var(--crema);overflow-y:auto;padding:20px var(--space-inline) 32px;
-    grid-template-columns:1fr;grid-template-areas:"volver" "paneles" "flechas";
-    align-content:start}
+    background:var(--crema);overflow:hidden;padding:20px var(--space-inline) 32px;
+    grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr) auto;
+    grid-template-areas:"volver" "paneles" "flechas"}
   .showcase__content.is-mobile-open .showcase__mobile-close{grid-area:volver;display:inline-flex;
     align-items:center;gap:8px;justify-self:start;margin-bottom:18px;
     font-family:var(--font-display);font-size:12px;letter-spacing:.14em;
     text-transform:uppercase;color:var(--terracota-dark)}
-  .showcase__content.is-mobile-open .showcase__panels{grid-area:paneles}
+  .showcase__content.is-mobile-open .showcase__panels{grid-area:paneles;overflow-y:auto;min-height:0;overscroll-behavior:contain}
 
   /* Navegacion inferior: flechas a los lados con el nombre del tratamiento
      anterior y el siguiente, y el contador en medio. */
@@ -765,36 +810,81 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 
 
 
-/* ===== Instalaciones ===== */
-.instalaciones-hero{position:relative;overflow:hidden;padding:var(--space-section) 0;text-align:center}
-.instalaciones-hero .container{position:relative;z-index:1}
-.instalaciones-hero h1{font-size:clamp(36px,6vw,80px)}
-.instalaciones-block{position:relative;overflow:hidden;padding:clamp(40px,6vw,80px) 0;border-top:1px solid rgba(65,47,43,.16)}
-.instalaciones-block--dark{background:var(--marron);color:var(--crema);--relieve-tinta:18 11 9}
-/* Columnas con un corte explicito en vez de auto-fit: con auto-fit el numero
-   de columnas depende del ancho disponible, y entonces un order dentro de una
-   media query puede aplicarse cuando todavia hay dos columnas y desbaratar el
-   zigzag. Asi el punto de cambio es uno solo y controlado. */
-.instalaciones-block__inner{position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--space-inline);display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,56px);align-items:center}
-@media (min-width:760px){
-  .instalaciones-block__inner{grid-template-columns:1fr 1fr}
-  /* En escritorio las secciones alternan: aqui la foto vuelve a la izquierda. */
-  .instalaciones-block--dark .instalaciones-foto{order:-1}
+/* ===== Instalaciones =====
+   Mosaico en vez del zigzag de secciones: con cinco fotos, tres bloques
+   alternos de 50/50 repiten tres veces el mismo gesto y obligan a cada foto a
+   sostener media pantalla ella sola. Aqui la rejilla da tamanos y proporciones
+   distintas a cada pieza, que es lo que hace que pocas fotos parezcan
+   suficientes. Una de las piezas no lleva imagen: es tipografica, y ocupa el
+   hueco del area de rehabilitacion mientras no haya foto real de esa sala. */
+.insta-hero{position:relative;overflow:hidden;padding:var(--space-section) 0 clamp(28px,4vw,48px)}
+.insta-hero__inner{position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--space-inline)}
+.insta-hero h1{font-size:clamp(32px,5vw,68px);max-width:18ch;margin-top:6px}
+.insta-hero__entradilla{margin-top:18px;max-width:52ch;color:var(--tinta-suave);font-size:clamp(16px,1.4vw,19px)}
+
+/* Banda a sangre: se sale del contenedor a proposito, de borde a borde. El
+   tope de alto evita que en pantallas muy anchas se coma el viewport entero. */
+.insta-banda{display:block;margin:clamp(20px,3vw,40px) 0 0}
+.insta-banda img{display:block;width:100%;height:auto;max-height:52vh;object-fit:cover}
+
+.insta-mosaico-sec{padding:clamp(28px,4vw,56px) 0 var(--space-section)}
+.insta-mosaico{max-width:var(--container);margin:0 auto;padding:0 var(--space-inline);
+  display:grid;grid-template-columns:1fr;gap:clamp(14px,2vw,22px)}
+
+.insta-pieza{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+/* La foto ocupa lo que sobre de la celda y el pie se queda abajo: asi las
+   piezas de una misma fila casan de alto aunque sus pies tengan distinto
+   numero de lineas. */
+.insta-pieza__foto{flex:1 1 auto;min-height:0;position:relative;overflow:hidden;border-radius:18px;
+  box-shadow:0 16px 34px rgb(var(--relieve-tinta)/.26), 0 4px 10px rgb(var(--relieve-tinta)/.18)}
+.insta-pieza__foto picture{display:block;height:100%}
+.insta-pieza__foto img{display:block;width:100%;height:100%;object-fit:cover}
+.insta-pieza figcaption{font-size:14px;line-height:1.5;color:var(--tinta-suave)}
+.insta-pieza__rotulo{display:block;font-family:var(--font-display);font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--terracota-dark);margin-bottom:3px}
+
+/* Pieza sin foto, en terracota: rellena la rejilla y evita meter una imagen
+   generada entre fotos reales, que es lo que mas abarata una pagina asi. */
+.insta-pieza--texto{background:var(--terracota-dark);color:var(--crema);border-radius:18px;
+  padding:clamp(20px,2.4vw,30px);justify-content:center;gap:8px;
+  box-shadow:0 16px 34px rgb(var(--relieve-tinta)/.26)}
+.insta-pieza--texto .insta-pieza__rotulo{color:rgba(237,231,218,.78);margin-bottom:6px}
+.insta-pieza--texto p{margin:0;font-size:15px;line-height:1.55;color:rgba(237,231,218,.92)}
+
+/* Tres regimenes. El bento de seis columnas necesita sitio: por debajo de
+   900px se cae primero a dos columnas y luego a una, y ahi las fotos usan una
+   proporcion declarada en vez del alto de la celda. */
+@media (max-width:639px){
+  /* La panoramica a 2.4:1 se queda en una tira de 160px en un movil. Se recorta
+     a 16/9 por los lados, que es donde solo hay piedra: la entrada se mantiene. */
+  .insta-banda img{aspect-ratio:16/9;max-height:none}
+  .insta-pieza__foto{aspect-ratio:4/3}
+  .insta-pieza--escaparate .insta-pieza__foto,
+  .insta-pieza--pasillo-g .insta-pieza__foto,
+  .insta-pieza--pasillo-p .insta-pieza__foto{aspect-ratio:3/4}
 }
-.instalaciones-block h2{font-size:clamp(26px,3vw,40px);margin-bottom:16px}
-.instalaciones-block p{color:var(--tinta-suave)}
-.instalaciones-block--dark p{color:rgba(237,231,218,.8)}
-/* Sombra hacia abajo, no la escalera lateral de --relieve-corto: la seccion
-   lleva overflow:hidden y en movil solo quedan 20px a la izquierda de la foto,
-   asi que la escalera se recortaba entera. Una sombra vertical cabe siempre
-   dentro del padding de la seccion.
-   El filo claro es para el bloque oscuro: alli una sombra oscura sobre marron
-   no se distingue, y lo que separa la foto del fondo es el borde. */
-.instalaciones-foto{display:block;border-radius:18px;overflow:hidden;
-  box-shadow:0 16px 34px rgb(var(--relieve-tinta)/.30), 0 4px 10px rgb(var(--relieve-tinta)/.20)}
-.instalaciones-block--dark .instalaciones-foto{
-  box-shadow:0 16px 40px rgb(var(--relieve-tinta)/.55), 0 0 0 1px rgba(237,231,218,.16)}
-.instalaciones-foto img{width:100%;height:auto;display:block}
+
+@media (min-width:640px) and (max-width:899px){
+  .insta-mosaico{grid-template-columns:repeat(2,1fr)}
+  .insta-pieza__foto{aspect-ratio:3/4}
+  .insta-pieza--gabinete{grid-column:span 2}
+  .insta-pieza--gabinete .insta-pieza__foto{aspect-ratio:16/9}
+  .insta-pieza--texto{grid-column:span 2}
+}
+
+@media (min-width:900px){
+  /* Seis columnas y filas de alto pautado: cada pieza declara cuantas ocupa y
+     de ahi sale el escalonado del bento sin huecos. El minmax(...,auto) es lo
+     que evita que la pieza de texto desborde su celda: si su contenido no cabe
+     en las dos filas, las filas crecen y las vecinas se estiran con ellas. */
+  .insta-mosaico{grid-template-columns:repeat(6,1fr);
+    grid-auto-rows:minmax(clamp(84px,7.6vw,118px),auto)}
+  .insta-pieza--gabinete  {grid-column:span 4;grid-row:span 3}
+  .insta-pieza--escaparate{grid-column:span 2;grid-row:span 4}
+  .insta-pieza--pasillo-g {grid-column:span 2;grid-row:span 3}
+  .insta-pieza--pasillo-p {grid-column:span 2;grid-row:span 3}
+  .insta-pieza--texto     {grid-column:span 2;grid-row:span 2}
+}
 
 
 /* ===== Contacto ===== */
