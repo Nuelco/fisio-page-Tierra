@@ -471,6 +471,76 @@ if(!window.gsap || !window.ScrollTrigger){
     }, {passive: true});
   }
 
+
+  /* ------------------------------------------------------------------ *
+   * Carrusel de instalaciones (solo movil). El deslizamiento lo hace el
+   * CSS con scroll-snap; aqui solo van los puntos de posicion y el apanyo
+   * de accesibilidad. Si este JS no corre, la tira sigue deslizandose.
+   * ------------------------------------------------------------------ */
+  function initInstaCarrusel(){
+    var tira = document.querySelector('.insta-mosaico');
+    if(!tira) return;
+    var piezas = Array.prototype.slice.call(tira.querySelectorAll('.insta-pieza'));
+    if(piezas.length < 2) return;
+
+    var movil = window.matchMedia('(max-width: 639px)');
+    var base = piezas[0].offsetLeft;
+
+    var puntos = document.createElement('div');
+    puntos.className = 'insta-puntos';
+    var botones = piezas.map(function(pieza, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'insta-punto';
+      b.setAttribute('aria-label', 'Ir a la foto ' + (i + 1) + ' de ' + piezas.length);
+      b.addEventListener('click', function(){
+        tira.scrollTo({left: pieza.offsetLeft - piezas[0].offsetLeft,
+                       behavior: REDUCE ? 'auto' : 'smooth'});
+      });
+      puntos.appendChild(b);
+      return b;
+    });
+    tira.parentNode.insertBefore(puntos, tira.nextSibling);
+
+    function marcar(){
+      var x = tira.scrollLeft, activo = 0, dist = Infinity;
+      piezas.forEach(function(p, i){
+        var d = Math.abs((p.offsetLeft - base) - x);
+        if(d < dist){ dist = d; activo = i; }
+      });
+      botones.forEach(function(b, i){
+        b.classList.toggle('is-activo', i === activo);
+        if(i === activo){ b.setAttribute('aria-current', 'true'); }
+        else { b.removeAttribute('aria-current'); }
+      });
+    }
+
+    var ticking = false;
+    tira.addEventListener('scroll', function(){
+      if(!ticking){ ticking = true; requestAnimationFrame(function(){ marcar(); ticking = false; }); }
+    }, {passive: true});
+
+    // Un contenedor con scroll al que no se llega con el tabulador incumple
+    // la WCAG 2.1.1: hay que poder recorrerlo con las flechas. Solo en movil,
+    // porque en escritorio es una rejilla y un tabstop de mas solo estorba.
+    function modo(){
+      if(movil.matches){
+        tira.setAttribute('tabindex', '0');
+        tira.setAttribute('role', 'group');
+        tira.setAttribute('aria-label', 'Fotos de las instalaciones, desliza para ver el resto');
+      } else {
+        tira.removeAttribute('tabindex');
+        tira.removeAttribute('role');
+        tira.removeAttribute('aria-label');
+      }
+      base = piezas[0].offsetLeft;
+      marcar();
+    }
+    movil.addEventListener('change', modo);
+    window.addEventListener('resize', modo);
+    modo();
+  }
+
   function init(){
     initHeader();
     initMobileNav();
@@ -490,6 +560,7 @@ if(!window.gsap || !window.ScrollTrigger){
     initMarquee();
     initDuo();
     initHeroCue();
+    initInstaCarrusel();
   }
   document.addEventListener('DOMContentLoaded', init);
 })();

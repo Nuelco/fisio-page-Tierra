@@ -838,14 +838,55 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 /* Tres regimenes. El bento de seis columnas necesita sitio: por debajo de
    900px se cae primero a dos columnas y luego a una, y ahi las fotos usan una
    proporcion declarada en vez del alto de la celda. */
+/* Los puntos del carrusel solo existen en movil; aqui fuera no hay nada que
+   senalar y ademas conviene que desaparezcan del arbol de accesibilidad. */
+.insta-puntos{display:none}
+
 @media (max-width:639px){
   /* La panoramica a 2.4:1 se queda en una tira de 160px en un movil. Se recorta
      a 16/9 por los lados, que es donde solo hay piedra: la entrada se mantiene. */
   .insta-banda img{aspect-ratio:16/9;max-height:none}
-  .insta-pieza__foto{aspect-ratio:4/3}
+
+  /* Carrusel en vez de pila. Apiladas, las cuatro fotos dejaban la pagina en
+     3300px, cuatro pantallas de movil para cuatro imagenes. Se hace con
+     scroll-snap del navegador y no con una libreria: la inercia nativa de iOS
+     se siente mejor que cualquier simulada, y si el JS falla sigue
+     deslizandose igual. */
+  .insta-mosaico{display:flex;grid-template-columns:none;gap:12px;
+    overflow-x:auto;scroll-snap-type:x mandatory;
+    /* Sin esto, al topar con el final el gesto se propaga y el navegador lo
+       lee como "volver atras". Es lo que hace que un carrusel se sienta roto
+       en iOS. */
+    overscroll-behavior-inline:contain;
+    -webkit-overflow-scrolling:touch;
+    /* Para que la primera foto arranque en la misma vertical que el titular
+       y no pegada al canto de la pantalla. */
+    scroll-padding-left:var(--space-inline);
+    scrollbar-width:none}
+  .insta-mosaico::-webkit-scrollbar{display:none}
+  .insta-mosaico:focus-visible{outline:2px solid var(--terracota-dark);outline-offset:5px}
+
+  /* 82% y no 100%: la siguiente foto asoma por el borde, que es lo unico que
+     de verdad comunica que aquello se arrastra. A pantalla completa parece
+     una imagen fija y nadie la toca. */
+  .insta-pieza{flex:0 0 82%;scroll-snap-align:start}
+  /* Una sola proporcion para las cuatro: con alturas distintas la tira queda
+     descuidada al deslizar. */
+  .insta-pieza__foto,
   .insta-pieza--escaparate .insta-pieza__foto,
   .insta-pieza--pasillo-g .insta-pieza__foto,
-  .insta-pieza--pasillo-p .insta-pieza__foto{aspect-ratio:3/4}
+  .insta-pieza--pasillo-p .insta-pieza__foto,
+  .insta-pieza--gabinete .insta-pieza__foto{aspect-ratio:4/5}
+
+  /* El boton mide 24px aunque el punto se vea de 7: por debajo de eso el
+     blanco de tiro es demasiado pequeno para un dedo. */
+  .insta-puntos{display:flex;justify-content:center;gap:2px;margin-top:14px}
+  .insta-punto{width:24px;height:24px;padding:0;border:0;background:none;
+    display:grid;place-items:center;cursor:pointer}
+  .insta-punto::before{content:'';width:7px;height:7px;border-radius:50%;
+    background:rgba(65,47,43,.28);
+    transition:background .25s var(--ease-asentar),transform .25s var(--ease-asentar)}
+  .insta-punto.is-activo::before{background:var(--terracota-dark);transform:scale(1.45)}
 }
 
 @media (min-width:640px) and (max-width:899px){
