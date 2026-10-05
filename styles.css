@@ -820,7 +820,6 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 .insta-hero{position:relative;overflow:hidden;padding:var(--space-section) 0 clamp(28px,4vw,48px)}
 .insta-hero__inner{position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--space-inline)}
 .insta-hero h1{font-size:clamp(32px,5vw,68px);max-width:18ch;margin-top:6px}
-.insta-hero__entradilla{margin-top:18px;max-width:52ch;color:var(--tinta-suave);font-size:clamp(16px,1.4vw,19px)}
 
 /* Banda a sangre: se sale del contenedor a proposito, de borde a borde. El
    tope de alto evita que en pantallas muy anchas se coma el viewport entero. */
@@ -831,26 +830,11 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 .insta-mosaico{max-width:var(--container);margin:0 auto;padding:0 var(--space-inline);
   display:grid;grid-template-columns:1fr;gap:clamp(14px,2vw,22px)}
 
-.insta-pieza{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
-/* La foto ocupa lo que sobre de la celda y el pie se queda abajo: asi las
-   piezas de una misma fila casan de alto aunque sus pies tengan distinto
-   numero de lineas. */
+.insta-pieza{margin:0;display:flex;min-width:0}
 .insta-pieza__foto{flex:1 1 auto;min-height:0;position:relative;overflow:hidden;border-radius:18px;
   box-shadow:0 16px 34px rgb(var(--relieve-tinta)/.26), 0 4px 10px rgb(var(--relieve-tinta)/.18)}
 .insta-pieza__foto picture{display:block;height:100%}
 .insta-pieza__foto img{display:block;width:100%;height:100%;object-fit:cover}
-.insta-pieza figcaption{font-size:14px;line-height:1.5;color:var(--tinta-suave)}
-.insta-pieza__rotulo{display:block;font-family:var(--font-display);font-size:11px;
-  letter-spacing:.16em;text-transform:uppercase;color:var(--terracota-dark);margin-bottom:3px}
-
-/* Pieza sin foto, en terracota: rellena la rejilla y evita meter una imagen
-   generada entre fotos reales, que es lo que mas abarata una pagina asi. */
-.insta-pieza--texto{background:var(--terracota-dark);color:var(--crema);border-radius:18px;
-  padding:clamp(20px,2.4vw,30px);justify-content:center;gap:8px;
-  box-shadow:0 16px 34px rgb(var(--relieve-tinta)/.26)}
-.insta-pieza--texto .insta-pieza__rotulo{color:rgba(237,231,218,.78);margin-bottom:6px}
-.insta-pieza--texto p{margin:0;font-size:15px;line-height:1.55;color:rgba(237,231,218,.92)}
-
 /* Tres regimenes. El bento de seis columnas necesita sitio: por debajo de
    900px se cae primero a dos columnas y luego a una, y ahi las fotos usan una
    proporcion declarada en vez del alto de la celda. */
@@ -867,23 +851,28 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 @media (min-width:640px) and (max-width:899px){
   .insta-mosaico{grid-template-columns:repeat(2,1fr)}
   .insta-pieza__foto{aspect-ratio:3/4}
-  .insta-pieza--gabinete{grid-column:span 2}
+  /* Son tres verticales y una apaisada: en dos columnas la tercera vertical
+     quedaria sola dejando un hueco, asi que a partir de ella van a todo lo
+     ancho. Se mantiene el orden pedido. */
+  .insta-pieza--pasillo-p,.insta-pieza--gabinete{grid-column:span 2}
+  .insta-pieza--pasillo-p .insta-pieza__foto{aspect-ratio:16/10}
   .insta-pieza--gabinete .insta-pieza__foto{aspect-ratio:16/9}
-  .insta-pieza--texto{grid-column:span 2}
 }
 
 @media (min-width:900px){
-  /* Seis columnas y filas de alto pautado: cada pieza declara cuantas ocupa y
-     de ahi sale el escalonado del bento sin huecos. El minmax(...,auto) es lo
-     que evita que la pieza de texto desborde su celda: si su contenido no cabe
-     en las dos filas, las filas crecen y las vecinas se estiran con ellas. */
+  /* Seis columnas y filas de alto fijo: cada pieza declara cuantas ocupa y de
+     ahi sale el escalonado sin huecos. Fijo y no minmax(...,auto): con solo
+     fotos dentro, el auto dejaba que la imagen impusiera su alto natural y la
+     banda de la camilla se desmadraba. Asi el recorte lo decide el diseno. */
   .insta-mosaico{grid-template-columns:repeat(6,1fr);
-    grid-auto-rows:minmax(clamp(84px,7.6vw,118px),auto)}
-  .insta-pieza--gabinete  {grid-column:span 4;grid-row:span 3}
+    grid-auto-rows:clamp(84px,7.6vw,118px)}
+  /* Dos bandas sin huecos, en el orden pedido: arriba las tres verticales en
+     tercios, que es la proporcion que les va; abajo la camilla a todo lo
+     ancho, en apaisado, cerrando el recorrido. */
   .insta-pieza--escaparate{grid-column:span 2;grid-row:span 4}
-  .insta-pieza--pasillo-g {grid-column:span 2;grid-row:span 3}
-  .insta-pieza--pasillo-p {grid-column:span 2;grid-row:span 3}
-  .insta-pieza--texto     {grid-column:span 2;grid-row:span 2}
+  .insta-pieza--pasillo-g {grid-column:span 2;grid-row:span 4}
+  .insta-pieza--pasillo-p {grid-column:span 2;grid-row:span 4}
+  .insta-pieza--gabinete  {grid-column:span 6;grid-row:span 4}
 }
 
 

@@ -475,7 +475,17 @@ if(!window.gsap || !window.ScrollTrigger){
     initHeader();
     initMobileNav();
     initFab();
-    initReveals();
+    // Los revelados esperan a las tipografias. data-reveal="lines" mide el
+    // texto para hornear una .mask por linea, y si mide con la fuente de
+    // reserva, que tiene otras metricas, las lineas horneadas no caben con la
+    // definitiva: cada una suelta su cola a la siguiente y aparecen huerfanas
+    // de una palabra ("...de manera honesta" / "y"). Se corre una carrera con
+    // un tope de 1,5s para que una fuente lenta no deje la pagina en blanco,
+    // y el catch cubre que la promesa falle.
+    var listas = (document.fonts && document.fonts.ready)
+      ? Promise.race([document.fonts.ready, new Promise(function(r){ setTimeout(r, 1500); })])
+      : Promise.resolve();
+    listas.then(initReveals, initReveals);
     initPhrases();
     initMarquee();
     initDuo();
