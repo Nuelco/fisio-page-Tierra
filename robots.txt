@@ -1,3 +1,7 @@
 User-agent: *
 Allow: /
+# Respaldo del diseno de servicios con fotos. No es una pagina del sitio:
+# se conserva para recuperar ese diseno cuando haya fotos reales.
+Disallow: /servicios-con-fotos.html
+
 Sitemap: https://www.fisioterapiatierra.es/sitemap.xml

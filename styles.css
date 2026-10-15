@@ -385,10 +385,38 @@ body.no-scroll .site-header__progress{opacity:0}
 
 /* ===== Footer ===== */
 .site-footer{position:relative;overflow:hidden;background:var(--marron);color:var(--crema);padding:clamp(48px,7vw,80px) 0 28px}
-.site-footer__inner{position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--space-inline);display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:clamp(28px,4vw,56px)}
-.site-footer__brand{min-width:260px}
-.site-footer__brand img{width:clamp(168px,26vw,215px);height:auto;margin-bottom:24px}
-.site-footer__desc{max-width:34ch;color:rgba(237,231,218,.72)}
+/* Tres estados y ninguno intermedio. Con auto-fit aparecia un reparto feo:
+   en cuanto dejaban de caber tres columnas, Consulta bajaba sola y la marca se
+   quedaba arriba emparejada con Paginas. Aqui los cortes son explicitos, asi
+   que o van las tres en fila, o la marca se pone arriba centrada y las dos
+   listas bajan juntas, o se apila todo. */
+.site-footer__inner{position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--space-inline);display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,56px)}
+
+/* El logo vertical es una composicion centrada: el simbolo va sobre la palabra
+   y su eje esta en el medio. Con el subtitulo a la izquierda los dos ejes no
+   coincidian y el bloque se veia torcido, y eso no se arregla con margenes
+   porque son criterios de alineacion incompatibles. Se centra el bloque entero
+   y se acota, para que el centrado no se disperse en una columna ancha. */
+.site-footer__brand{min-width:0;max-width:340px;margin-inline:auto;text-align:center}
+.site-footer__brand img{width:clamp(168px,26vw,215px);height:auto;display:block;margin:0 auto 24px}
+.site-footer__desc{max-width:none;color:rgba(237,231,218,.72)}
+
+/* Estado intermedio: la marca arriba, centrada a todo el ancho, y Paginas y
+   Consulta en pareja debajo. */
+@media (min-width:560px) and (max-width:1023px){
+  .site-footer__inner{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .site-footer__brand{grid-column:1 / -1}
+}
+
+/* Las tres en fila. Carriles desiguales: mas para la marca, que al ir centrada
+   empuja su tinta hacia la derecha del carril, y algo mas para contacto, que
+   es el de lineas mas largas. El padding derecho acaba de apartar la tinta de
+   Paginas sin romper el eje, porque logo y subtitulo se centran juntos dentro
+   de la caja de contenido. */
+@media (min-width:1024px){
+  .site-footer__inner{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1.3fr)}
+  .site-footer__brand{margin-inline:0;padding-right:clamp(0px,3.5vw,48px);box-sizing:content-box}
+}
 .site-footer__heading{font-family:var(--font-display);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--azul);margin-bottom:16px}
 .site-footer__col nav,.site-footer__contact{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
 .site-footer nav a{color:rgba(237,231,218,.8)}
@@ -670,15 +698,11 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 .showcase__panels{position:relative}
 .showcase__panel{display:none}
 .showcase__panel.is-active{display:block}
-/* La foto flota a la derecha y el texto fluye a su alrededor (en vez de
-   dos columnas de grid de alto independiente): así se ve siempre el
-   contenido completo, sin recortarlo ni meterlo en una caja con scroll
-   interno. Cuando el texto es mas largo que la foto, sigue de corrido
-   ocupando todo el ancho por debajo. El :after hace de clearfix para que
-   el alto del panel (el que cuenta para la fila compartida de abajo)
-   incluya la foto flotante entera, no solo el texto. */
-.showcase__panel::after{content:'';display:table;clear:both}
-.showcase__panel-text{min-width:0}
+/* Sin foto, la ficha es una rejilla de dos columnas: el texto a la izquierda
+   con la medida acotada, y las tres etiquetas a la derecha ocupando el sitio
+   que dejo la imagen. Sin esto el parrafo se iria a los mil pixeles de ancho,
+   unos 110 caracteres por linea, que no hay quien lo lea. */
+.showcase__panel-text{min-width:0;max-width:62ch}
 .showcase__panel-num{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-size:13px;letter-spacing:.14em;color:var(--terracota-dark);margin-bottom:12px}
 .showcase__panel-num::after{content:'';flex:0 0 56px;height:1px;background:rgba(65,47,43,.25)}
 .showcase__panel h2{font-size:clamp(26px,3.2vw,38px);margin-bottom:12px}
@@ -688,17 +712,23 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 .showcase__subtreat h3{font-family:var(--font-body);font-size:17px;font-weight:700;color:var(--marron);margin-bottom:6px}
 .showcase__panel .btn{margin-top:8px}
 
-.showcase__tags{display:flex;gap:clamp(18px,2.6vw,32px);margin-top:clamp(14px,2vw,22px);padding-top:14px;border-top:1px solid rgba(65,47,43,.14)}
-.showcase__tag{display:flex;align-items:flex-start;gap:9px;max-width:110px}
-.showcase__tag svg{flex:0 0 auto;color:var(--terracota-dark);margin-top:1px}
-.showcase__tag span{font-size:12.5px;line-height:1.35;color:var(--marron)}
+/* Columna derecha. El icono va en un disco terracota para que la pieza tenga
+   peso: a pelo, tres iconos de linea sobre el fondo crema no sostienen la
+   mitad de la ficha. El contenido es el mismo de siempre, solo cambia de
+   sitio y de tamano, asi que no hay texto nuevo que aprobar. */
+.showcase__tags{display:flex;flex-direction:column;gap:6px;max-width:none}
+.showcase__tag{display:flex;align-items:center;gap:14px;max-width:none;
+  padding:14px 16px;border-radius:14px;background:rgba(165,104,83,.07)}
+/* El icono en disco: a pelo, tres iconos de linea sobre el crema no sostienen
+   media ficha. El disco les da masa sin meter una imagen. */
+.showcase__tag svg{flex:0 0 42px;width:42px;height:42px;margin:0;padding:10px;
+  border-radius:50%;background:var(--crema);color:var(--terracota-dark);
+  box-shadow:0 2px 6px rgb(var(--relieve-tinta)/.10)}
+.showcase__tag span{font-size:14px;line-height:1.3;color:var(--marron);font-weight:600}
 
 /* La foto se recorta recta por arriba y por la derecha (llega hasta el
    borde del hueco sin redondear) y solo curva de forma organica por la
    izquierda y por abajo, tal como marca la referencia. */
-.showcase__photo-wrap{position:relative;float:right;width:min(46%,520px);aspect-ratio:.88;margin:0 0 24px clamp(28px,3.5vw,48px)}
-.showcase__panel-photo{position:relative;overflow:hidden;width:100%;height:100%;clip-path:url(#showcase-blob)}
-.showcase__panel-photo img{width:100%;height:100%;object-fit:cover;display:block}
 /* La decoración queda dentro de la foto (se recorta junto con ella). */
 
 .showcase__navlabel,.showcase__navrole,.showcase__navname{display:none}
@@ -724,10 +754,25 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
    ficha: ni la lista de la izquierda, ni el boton, ni las flechas se mueven. */
 @media (min-width:901px){
   .showcase__panels{display:grid;align-items:start}
-  .showcase__panel{grid-area:1/1;display:block;visibility:hidden;opacity:0;transition:opacity .28s var(--ease-asentar)}
+  /* El display va tambien en .is-active: la regla base .showcase__panel.is-active
+     de mas arriba lleva display:block y, con mas especificidad, se comia la
+     rejilla si solo se declaraba en .showcase__panel. */
+  .showcase__panel,.showcase__panel.is-active{
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,290px);
+    gap:clamp(28px,3.5vw,56px);align-items:start}
+  .showcase__panel{grid-area:1/1;visibility:hidden;opacity:0;transition:opacity .28s var(--ease-asentar)}
   .showcase__panel.is-active{visibility:visible;opacity:1}
   /* Las flechas son solo para movil: en escritorio se navega con la lista. */
   .showcase__nav{display:none}
+}
+
+/* Franja intermedia: con la lista de 280px a la izquierda y la columna de
+   etiquetas a la derecha, al texto le quedaban unos 30 caracteres por linea.
+   Aqui las etiquetas bajan y se reparten en fila bajo el texto. */
+@media (min-width:901px) and (max-width:1150px){
+  .showcase__panel,.showcase__panel.is-active{grid-template-columns:minmax(0,1fr)}
+  .showcase__tags{flex-direction:row;gap:10px;margin-top:10px}
+  .showcase__tag{flex:1 1 0}
 }
 
 @media (max-width:900px){
@@ -739,23 +784,12 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
      mande sobre el aspect-ratio. Tres de las ocho fotos son verticales
      (2:3), asi que sin esto esas tres se veian el doble de altas que el
      resto. Con min-height:0 las ocho quedan en el mismo 16/10. */
-  .showcase__photo-wrap{float:none;width:100%;max-width:none;aspect-ratio:16/10;margin:0;min-height:0}
-  .showcase__panel-photo{clip-path:none;border-radius:18px}
 
-  /* La ficha en movil sigue el orden de la maqueta: contador, titulo, primer
-     parrafo, foto y resto del texto. Como el texto y la foto
-     son hermanos en niveles distintos del HTML, se usa display:contents en
-     .showcase__panel-text para que sus hijos pasen a ser hijos directos del
-     panel y se puedan ordenar todos juntos con flex. */
-  .showcase__panel.is-active{display:flex;flex-direction:column;gap:18px}
-  .showcase__panel-text{display:contents}
-  /* Ojo: el numero de ficha tambien es un <p>, asi que :first-of-type apunta
-     a el y no al parrafo de texto. El primer parrafo de verdad es el 2o <p>. */
-  .showcase__panel-text > p.showcase__panel-num{order:1;margin:0}
-  .showcase__panel h2{order:2;margin:0}
-  .showcase__panel-text > p,.showcase__subtreat{order:5;margin:0}
-  .showcase__panel-text > p:nth-of-type(2){order:3}
-  .showcase__photo-wrap{order:4}
+  /* Sin foto que intercalar, la ficha es el orden natural del HTML: ya no hace
+     falta el display:contents ni los order que la metian entre el primer y el
+     segundo parrafo. */
+  .showcase__panel.is-active{display:block}
+  .showcase__panel-text{max-width:none}
   /* En movil la ficha se queda en texto, imagen y flechas: ni la linea de
      iconos ni el boton de pedir cita. A la cita se llega desde la barra fija
      de abajo y desde el menu. El selector cubre tanto un .btn suelto como el
