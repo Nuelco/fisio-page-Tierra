@@ -54,6 +54,13 @@ if ($nombre === '' || $mensaje === '' || $motivo === '') {
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     respond(false, 'Email no válido');
 }
+// La casilla de la política de privacidad es "required" en el HTML, pero
+// eso solo frena a un navegador real: alguien enviando el POST a mano (o un
+// bot) podría saltárselo. Se repite la comprobación aquí, igual que ya se
+// repite la validación de email.
+if (empty($_POST['acepta_privacidad'])) {
+    respond(false, 'Debes aceptar la Política de Privacidad');
+}
 
 $asunto = mb_encode_mimeheader('Nuevo contacto web — ' . $motivo, 'UTF-8');
 

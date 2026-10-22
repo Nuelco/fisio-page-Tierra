@@ -936,3 +936,140 @@ if(!window.gsap || !window.ScrollTrigger){
   }
   document.addEventListener('DOMContentLoaded', initHeroIntro);
 })();
+
+(function(){
+  'use strict';
+  /* Consentimiento de cookies. El único elemento de todo el sitio que puede
+     dejar una cookie de terceros es el mapa de Google de Contacto: nada se
+     pide a Google hasta que hay una decisión explícita — ni el banner
+     inserta el iframe por su cuenta, ni "rechazar" deja nada a medias que
+     limpiar. La decisión se guarda en localStorage, que es almacenamiento
+     estrictamente técnico (nunca sale del navegador) — mismo criterio de
+     "no identifica a nadie" que ya aplica sessionStorage en initFab, solo
+     que este sobrevive a cerrar la pestaña porque la decisión debe
+     recordarse entre visitas. */
+  var CLAVE = 'tierra-cookies';
+
+  function leerPreferencias(){
+    try {
+      var guardado = localStorage.getItem(CLAVE);
+      return guardado ? JSON.parse(guardado) : null;
+    } catch(e){ return null; }
+  }
+
+  function guardarPreferencias(prefs){
+    try { localStorage.setItem(CLAVE, JSON.stringify(prefs)); } catch(e){}
+  }
+
+  /* Mapa de Google en Contacto: solo se pide el iframe a Google cuando hay
+     consentimiento — del banner, o de un clic directo en "Cargar mapa" en
+     esta misma página (útil para quien rechazó el banner pero cambia de
+     idea solo para esta visita; también guarda la preferencia, así no
+     vuelve a preguntar). Se registra ANTES que initCookieBanner a propósito:
+     si ya hay una decisión guardada de una visita anterior, initCookieBanner
+     dispara el evento "tierra:cookies" de forma síncrona al arrancar, y este
+     listener tiene que existir ya para no perderse ese aviso. */
+  function initMapaConsentido(){
+    var mapa = document.querySelector('.contacto-map');
+    var iframe = mapa && mapa.querySelector('iframe[data-src]');
+    var puerta = mapa && mapa.querySelector('.contacto-map__gate');
+    if(!mapa || !iframe) return;
+
+    function cargar(){
+      if(iframe.getAttribute('src')) return;
+      iframe.setAttribute('src', iframe.getAttribute('data-src'));
+      if(puerta) puerta.hidden = true;
+    }
+
+    document.addEventListener('tierra:cookies', function(e){
+      if(e.detail && e.detail.mapa) cargar();
+    });
+
+    var boton = puerta && puerta.querySelector('button');
+    if(boton){
+      boton.addEventListener('click', function(){
+        cargar();
+        guardarPreferencias({mapa: true});
+      });
+    }
+  }
+
+  function initCookieBanner(){
+    var banner = document.getElementById('cookie-banner');
+    if(!banner) return;
+    var config = document.getElementById('cookie-banner-config');
+    var checkMapa = document.getElementById('cookie-check-mapa');
+    var btnAceptar = document.getElementById('cookie-aceptar');
+    var btnRechazar = document.getElementById('cookie-rechazar');
+    var btnConfigurar = document.getElementById('cookie-configurar');
+    var btnGuardar = document.getElementById('cookie-guardar');
+    var prefsLinks = document.querySelectorAll('.cookie-prefs-link');
+
+    function avisar(prefs){
+      document.dispatchEvent(new CustomEvent('tierra:cookies', {detail: prefs}));
+    }
+
+    // La bolita flotante de contacto (.fab) también vive fija abajo a la
+    // derecha; sin esto queda tapada por el banner. offsetHeight fuerza el
+    // reflow que hace falta para medir justo después de mostrar/ocultar o de
+    // abrir "configurar" (cambia la altura del banner).
+    function sincronizarAltura(){
+      var alto = banner.hidden ? 0 : banner.offsetHeight;
+      document.documentElement.style.setProperty('--cookie-banner-offset', alto + 'px');
+    }
+
+    function ocultar(){
+      banner.hidden = true;
+      if(config) config.hidden = true;
+      sincronizarAltura();
+    }
+
+    function mostrar(){
+      banner.hidden = false;
+      if(checkMapa){
+        var actuales = leerPreferencias();
+        checkMapa.checked = !!(actuales && actuales.mapa);
+      }
+      sincronizarAltura();
+    }
+
+    function decidir(prefs){
+      guardarPreferencias(prefs);
+      avisar(prefs);
+      ocultar();
+    }
+
+    if(btnAceptar) btnAceptar.addEventListener('click', function(){ decidir({mapa: true}); });
+    if(btnRechazar) btnRechazar.addEventListener('click', function(){ decidir({mapa: false}); });
+    if(btnConfigurar){
+      btnConfigurar.addEventListener('click', function(){
+        if(config) config.hidden = !config.hidden;
+        sincronizarAltura();
+      });
+    }
+    // El texto del aviso envuelve distinto según el ancho, así que el alto
+    // del banner cambia con la ventana mientras está abierto.
+    window.addEventListener('resize', function(){
+      if(!banner.hidden) sincronizarAltura();
+    });
+    if(btnGuardar){
+      btnGuardar.addEventListener('click', function(){
+        decidir({mapa: !!(checkMapa && checkMapa.checked)});
+      });
+    }
+    // Reabre el banner desde el enlace del pie: retirar o cambiar el
+    // consentimiento debe ser tan fácil como darlo.
+    prefsLinks.forEach(function(a){
+      a.addEventListener('click', function(e){ e.preventDefault(); mostrar(); });
+    });
+
+    var guardadas = leerPreferencias();
+    if(guardadas) avisar(guardadas);
+    else mostrar();
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    initMapaConsentido();
+    initCookieBanner();
+  });
+})();

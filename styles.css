@@ -323,7 +323,13 @@ body.no-scroll .site-header__progress{opacity:0}
    el símbolo de la marca abajo a la derecha; al pulsarla despliega llamar y
    WhatsApp hacia arriba. Solo existe en móvil: en escritorio el contacto está
    en la barra de navegación y en el bloque del final. */
-.fab{position:fixed;right:16px;bottom:16px;z-index:120;display:flex;
+/* --cookie-banner-offset: alto real del banner de cookies mientras está
+   visible (lo mide script.js, porque su alto cambia con el ancho de
+   pantalla y con el panel de "configurar" abierto) — 0px el resto del
+   tiempo. Sin esto la bolita flotante de contacto, que también vive fija
+   abajo a la derecha, queda tapada por el banner. */
+.fab{position:fixed;right:16px;bottom:calc(16px + var(--cookie-banner-offset, 0px));z-index:120;display:flex;
+  transition:bottom .2s ease;
   flex-direction:column;align-items:center;gap:12px;
   padding-bottom:env(safe-area-inset-bottom)}
 /* Oculta hasta que el JS pone .is-ready, en cualquier ancho. Quien decide es el
@@ -976,6 +982,83 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 .form-status--ok{background:rgba(165,104,83,.12);color:var(--terracota-dark)}
 .form-status--error{background:rgba(65,47,43,.1);color:var(--marron)}
 @media (max-width:800px){.contacto-grid{grid-template-columns:1fr}}
+
+/* ===== Formulario de contacto: casilla de privacidad ===== */
+/* Primera capa informativa del RGPD, justo encima del botón de enviar: quién
+   trata los datos, para qué y con qué base, con enlace a la política
+   completa. La casilla nunca va premarcada (checked lo pondría un script, no
+   el HTML) y el formulario no envía si no está marcada — ver script.js. */
+.contacto-form__rgpd{font-size:13px;line-height:1.5;color:var(--tinta-suave);
+  background:rgba(65,47,43,.04);border-radius:var(--radius);padding:14px 16px}
+.contacto-form__rgpd a{color:var(--terracota-dark);text-decoration:underline}
+.contacto-form__check{display:flex !important;flex-direction:row !important;align-items:flex-start;gap:10px;
+  font-family:var(--font-body) !important;font-size:14px !important;letter-spacing:normal !important;
+  text-transform:none !important;color:var(--marron) !important}
+.contacto-form__check input{width:18px;height:18px;flex:0 0 18px;margin-top:2px;accent-color:var(--terracota-dark)}
+
+/* ===== Página legal (Aviso legal / Privacidad / Cookies) ===== */
+.legal-toc{display:flex;flex-wrap:wrap;gap:10px 24px;max-width:var(--container);margin:0 auto;padding:0 var(--space-inline) clamp(24px,4vw,40px);
+  font-family:var(--font-display);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.legal-toc a{color:var(--terracota-dark)}
+.legal-section{max-width:var(--container);margin:0 auto;padding:clamp(32px,5vw,56px) var(--space-inline);border-top:1px solid rgba(65,47,43,.14)}
+.legal-section:first-of-type{border-top:0}
+.legal-section h2{font-size:clamp(24px,3vw,34px);margin-bottom:18px}
+.legal-section h3{font-family:var(--font-display);font-size:14px;letter-spacing:.06em;color:var(--terracota-dark);margin:22px 0 8px}
+.legal-section p,.legal-section li{max-width:70ch;color:var(--tinta-suave);margin-bottom:10px}
+.legal-section ul{padding-left:20px;margin-bottom:14px}
+.legal-section strong{color:var(--marron)}
+.legal-section__update{font-family:var(--font-display);font-size:12px;color:var(--tinta-suave);margin-top:-4px}
+
+/* ===== Banner de cookies ===== */
+/* Solo el mapa de Contacto deja cookies de terceros (Google). Nada se carga
+   hasta que el visitante decide: ni el banner inserta el iframe, ni hay
+   ninguna petición a Google de por medio mientras tanto — ver script.js. */
+.cookie-banner{position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--marron);color:var(--crema);
+  box-shadow:0 -6px 24px rgb(0 0 0/.25)}
+.cookie-banner[hidden]{display:none}
+.cookie-banner__inner{max-width:var(--container);margin:0 auto;padding:18px var(--space-inline);
+  display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px}
+.cookie-banner__text{flex:1 1 320px;font-size:13.5px;line-height:1.5}
+.cookie-banner__text a{color:var(--azul);text-decoration:underline}
+.cookie-banner__actions{display:flex;flex-wrap:wrap;gap:10px;flex:0 0 auto}
+.cookie-banner__btn{font-family:var(--font-display);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+  padding:11px 18px;border-radius:var(--radius);cursor:pointer;border:1px solid rgba(237,231,218,.4);
+  background:transparent;color:var(--crema);transition:background .2s ease,color .2s ease}
+.cookie-banner__btn:hover{background:rgba(237,231,218,.1)}
+.cookie-banner__btn--accept{background:var(--terracota-dark);border-color:var(--terracota-dark);color:var(--crema)}
+.cookie-banner__btn--accept:hover{filter:brightness(1.08)}
+.cookie-banner__config{flex:1 1 100%;display:flex;flex-direction:column;gap:10px;padding-top:14px;
+  margin-top:4px;border-top:1px solid rgba(237,231,218,.18)}
+.cookie-banner__config[hidden]{display:none}
+.cookie-banner__option{display:flex;align-items:flex-start;gap:10px;font-size:13.5px}
+.cookie-banner__option input{width:18px;height:18px;flex:0 0 18px;margin-top:2px;accent-color:var(--terracota-dark)}
+.cookie-banner__option strong{display:block;font-size:13.5px}
+.cookie-banner__option span{display:block;color:rgba(237,231,218,.72);font-size:12.5px;margin-top:2px}
+
+/* Enlace del pie para reabrir el banner y cambiar de opinión en cualquier
+   momento (obligatorio: retirar el consentimiento debe ser tan fácil como
+   darlo). Sin borde ni fondo propio: vive junto al resto de enlaces legales
+   de site-footer__bottom. */
+.cookie-prefs-link{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer}
+.site-footer__legal a{color:inherit}
+.site-footer__legal a:hover,.cookie-prefs-link:hover{color:var(--crema)}
+
+/* ===== Mapa de contacto a la espera de consentimiento ===== */
+.contacto-map{position:relative}
+.contacto-map__gate{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;text-align:center;padding:20px;background:rgba(237,231,218,.94)}
+/* Fijar `display` en la propia clase (arriba) pisa la regla por defecto del
+   navegador para [hidden] (misma especificidad, pero la hoja del autor
+   siempre gana a la del user-agent) — sin esto, poner gate.hidden=true por
+   JS no lo oculta de verdad: el mapa carga debajo pero la puerta se queda
+   encima, tapándolo. Mismo motivo por el que .cookie-banner ya lleva su
+   propio [hidden] explícito más abajo. */
+.contacto-map__gate[hidden]{display:none}
+.contacto-map__gate p{max-width:32ch;font-size:13.5px;color:var(--tinta-suave);margin:0}
+.contacto-map__gate button{font-family:var(--font-display);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+  padding:10px 16px;border-radius:var(--radius);border:1px solid rgba(65,47,43,.3);background:var(--crema);
+  color:var(--marron);cursor:pointer}
+.contacto-map__gate button:hover{background:rgba(65,47,43,.06)}
 
 /* ===== Accesibilidad: anclas bajo header fijo ===== */
 [id]{scroll-margin-top:calc(var(--header-h) + 16px)}

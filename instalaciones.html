@@ -137,8 +137,32 @@
   <div class="site-footer__bottom">
     <span>© <span data-year></span> Fisioterapia Tierra</span>
     <span>Andrea Legido Andrés · Zamora</span>
+    <span class="site-footer__legal"><a href="legal.html#aviso-legal">Aviso legal</a> · <a href="legal.html#privacidad">Privacidad</a> · <a href="legal.html#cookies">Cookies</a> · <button type="button" class="cookie-prefs-link">Preferencias de cookies</button></span>
   </div>
 </footer>
+<div class="cookie-banner" id="cookie-banner" hidden>
+  <div class="cookie-banner__inner">
+    <p class="cookie-banner__text">Usamos únicamente lo necesario para que la web funcione. El mapa de Google en la página de Contacto es el único elemento que puede dejar cookies de terceros, y no se carga hasta que lo aceptes. Más información en la <a href="legal.html#cookies">política de cookies</a>.</p>
+    <div class="cookie-banner__actions">
+      <button type="button" class="cookie-banner__btn" id="cookie-rechazar">Rechazar</button>
+      <button type="button" class="cookie-banner__btn" id="cookie-configurar">Configurar</button>
+      <button type="button" class="cookie-banner__btn cookie-banner__btn--accept" id="cookie-aceptar">Aceptar todo</button>
+    </div>
+    <div class="cookie-banner__config" id="cookie-banner-config" hidden>
+      <label class="cookie-banner__option">
+        <input type="checkbox" disabled checked>
+        <span><strong>Necesarias</strong><span>Imprescindibles para que la web funcione. Siempre activas.</span></span>
+      </label>
+      <label class="cookie-banner__option">
+        <input type="checkbox" id="cookie-check-mapa">
+        <span><strong>Mapa de Google</strong><span>Carga el mapa interactivo de Contacto. Google puede instalar sus propias cookies al mostrarlo.</span></span>
+      </label>
+      <div class="cookie-banner__actions">
+        <button type="button" class="cookie-banner__btn cookie-banner__btn--accept" id="cookie-guardar">Guardar preferencias</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
 <script src="script.js" defer></script>
