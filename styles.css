@@ -420,13 +420,19 @@ body.no-scroll .site-header__progress{opacity:0}
    Paginas sin romper el eje, porque logo y subtitulo se centran juntos dentro
    de la caja de contenido. */
 @media (min-width:1024px){
-  .site-footer__inner{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1.3fr)}
+  .site-footer__inner{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1.3fr)}
   .site-footer__brand{margin-inline:0;padding-right:clamp(0px,3.5vw,48px);box-sizing:content-box}
 }
 .site-footer__heading{font-family:var(--font-display);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--azul);margin-bottom:16px}
 .site-footer__col nav,.site-footer__contact{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
 .site-footer nav a{color:rgba(237,231,218,.8)}
 .site-footer nav a:hover{color:var(--crema)}
+/* El botón "Preferencias de cookies" vive dentro del nav de la columna
+   Legal, junto a enlaces <a> normales: mismo color y mismo hover, para que
+   no se note que es un <button> (hace falta serlo: reabre el banner con JS,
+   no navega a ningún sitio). */
+.site-footer nav .cookie-prefs-link{color:rgba(237,231,218,.8)}
+.site-footer nav .cookie-prefs-link:hover{color:var(--crema)}
 .site-footer__contact a,.site-footer__contact span{color:rgba(237,231,218,.8)}
 .site-footer__contact a:hover{color:var(--crema)}
 .site-footer__bottom{position:relative;z-index:1;max-width:var(--container);margin:clamp(32px,5vw,56px) auto 0;padding:20px var(--space-inline) 0;border-top:1px solid rgba(237,231,218,.16);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-family:var(--font-display);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,231,218,.45)}
@@ -1035,13 +1041,12 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 .cookie-banner__option strong{display:block;font-size:13.5px}
 .cookie-banner__option span{display:block;color:rgba(237,231,218,.72);font-size:12.5px;margin-top:2px}
 
-/* Enlace del pie para reabrir el banner y cambiar de opinión en cualquier
+/* Botón del pie para reabrir el banner y cambiar de opinión en cualquier
    momento (obligatorio: retirar el consentimiento debe ser tan fácil como
-   darlo). Sin borde ni fondo propio: vive junto al resto de enlaces legales
-   de site-footer__bottom. */
-.cookie-prefs-link{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer}
-.site-footer__legal a{color:inherit}
-.site-footer__legal a:hover,.cookie-prefs-link:hover{color:var(--crema)}
+   darlo). Sin borde ni fondo propio: vive en la columna Legal, entre enlaces
+   <a> normales, y debe verse exactamente igual que ellos aunque sea un
+   <button> (hace falta serlo: no navega, reabre el banner con JS). */
+.cookie-prefs-link{background:none;border:0;padding:0;margin:0;font:inherit;text-align:left;color:inherit;cursor:pointer}
 
 /* ===== Mapa de contacto a la espera de consentimiento ===== */
 .contacto-map{position:relative}
