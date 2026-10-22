@@ -407,10 +407,10 @@ body.no-scroll .site-header__progress{opacity:0}
 .site-footer__brand img{width:clamp(168px,26vw,215px);height:auto;display:block;margin:0 auto 24px}
 .site-footer__desc{max-width:none;color:rgba(237,231,218,.72)}
 
-/* Estado intermedio: la marca arriba, centrada a todo el ancho, y Paginas y
-   Consulta en pareja debajo. */
+/* Estado intermedio: la marca arriba, centrada a todo el ancho, y las tres
+   columnas de enlaces (Paginas, Legal, Consulta) en fila debajo. */
 @media (min-width:560px) and (max-width:1023px){
-  .site-footer__inner{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .site-footer__inner{grid-template-columns:repeat(3,minmax(0,1fr))}
   .site-footer__brand{grid-column:1 / -1}
 }
 
