@@ -1049,12 +1049,16 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
 .cookie-banner__text{flex:1 1 320px;font-size:13.5px;line-height:1.5}
 .cookie-banner__text a{color:var(--azul);text-decoration:underline}
 .cookie-banner__actions{display:flex;flex-wrap:wrap;gap:10px;flex:0 0 auto}
+/* Las tres acciones (rechazar/configurar/aceptar) llevan el MISMO peso
+   visual a propósito — ni "aceptar" relleno en el color de marca frente a
+   "rechazar" en gris, ni nada que empuje hacia una opción más que a otra.
+   Es justo lo que la guía de cookies de la AEPD prohíbe explícitamente como
+   patrón oscuro: rechazar tiene que ser tan fácil y tan visible como
+   aceptar. */
 .cookie-banner__btn{font-family:var(--font-display);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
   padding:11px 18px;border-radius:var(--radius);cursor:pointer;border:1px solid rgba(237,231,218,.4);
   background:transparent;color:var(--crema);transition:background .2s ease,color .2s ease}
 .cookie-banner__btn:hover{background:rgba(237,231,218,.1)}
-.cookie-banner__btn--accept{background:var(--terracota-dark);border-color:var(--terracota-dark);color:var(--crema)}
-.cookie-banner__btn--accept:hover{filter:brightness(1.08)}
 .cookie-banner__config{flex:1 1 100%;display:flex;flex-direction:column;gap:10px;padding-top:14px;
   margin-top:4px;border-top:1px solid rgba(237,231,218,.18)}
 .cookie-banner__config[hidden]{display:none}
