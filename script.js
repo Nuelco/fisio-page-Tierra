@@ -949,16 +949,28 @@ if(!window.gsap || !window.ScrollTrigger){
      que este sobrevive a cerrar la pestaña porque la decisión debe
      recordarse entre visitas. */
   var CLAVE = 'tierra-cookies';
+  // 12 meses, tal como dice legal.html#cookies ("Tu decisión") — pasado este
+  // plazo la preferencia caduca y se vuelve a preguntar, igual que hacen los
+  // bloqueos de cookies reales. Si el texto legal cambia este número, que
+  // cambie también aquí.
+  var DURACION_MS = 365 * 24 * 60 * 60 * 1000;
 
   function leerPreferencias(){
     try {
       var guardado = localStorage.getItem(CLAVE);
-      return guardado ? JSON.parse(guardado) : null;
+      if(!guardado) return null;
+      var datos = JSON.parse(guardado);
+      if(!datos || typeof datos.guardado !== 'number' || (Date.now() - datos.guardado) > DURACION_MS){
+        return null; // caducada: se trata igual que si nunca se hubiera decidido
+      }
+      return datos;
     } catch(e){ return null; }
   }
 
   function guardarPreferencias(prefs){
-    try { localStorage.setItem(CLAVE, JSON.stringify(prefs)); } catch(e){}
+    try {
+      localStorage.setItem(CLAVE, JSON.stringify({mapa: !!prefs.mapa, guardado: Date.now()}));
+    } catch(e){}
   }
 
   /* Mapa de Google en Contacto: solo se pide el iframe a Google cuando hay
