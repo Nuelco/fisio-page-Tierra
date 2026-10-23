@@ -143,9 +143,25 @@ ol,ul{margin:0;padding:0;list-style:none}
   margin:.45em .45em .1em 0}
 .btn--sm{font-size:11.5px}
 
-.btn__bg{position:absolute;inset:0;border-radius:inherit;filter:blur(1px)}
+/* Safari/iOS (visto en iPhone 16 Pro Max, pantalla ProMotion a 120Hz —
+   otros móviles probados, a 60Hz, no lo muestran): un filter:blur() sobre
+   un box-shadow en relieve necesita su propia capa de GPU, y si esa capa se
+   crea DESPUÉS del primer pintado (en vez de desde el principio) el relieve
+   parpadea al cargar la página. translateZ(0) fuerza la capa desde el
+   primer fotograma, sin tocar nada de cómo se ve el botón en reposo. */
+.btn__bg{position:absolute;inset:0;border-radius:inherit;filter:blur(1px);transform:translateZ(0)}
+/* Fix 2 del mismo bug: --relieve (7 sombras) y --relieve-corto (4 sombras,
+   usada al pulsar, más abajo) tienen distinto número de capas. CSS solo
+   puede interpolar un box-shadow entre dos valores con el MISMO número de
+   sombras — con números distintos, Safari (de nuevo, más visible a 120Hz)
+   intenta igualmente una transición a medias y el relieve se ve mal un
+   instante al pulsar. `transition:all` intentaba animar el box-shadow
+   también; se deja solo `opacity` (lo único que de verdad cambia de forma
+   continua) y el cambio de sombra pasa a ser instantáneo — mismo aspecto
+   en reposo y al pulsar, solo que el salto entre uno y otro ya no es un
+   intento de interpolación rota. */
 .btn__bg::before{content:'';position:absolute;inset:0;border-radius:calc(var(--radius) * 1.1);
-  background:var(--b-500);filter:blur(4px);transition:all .3s ease;
+  background:var(--b-500);filter:blur(4px);transition:opacity .3s ease;transform:translateZ(0);
   box-shadow:var(--relieve)}
 
 .btn__wrap{display:block;position:relative;border-radius:inherit;overflow:hidden;
@@ -603,11 +619,17 @@ html:not(.js) .metodo__step::before{transform:scaleX(1)}
   .duo:hover .duo__tapa{opacity:0;pointer-events:none}
   .duo:hover .duo__card{border-radius:14px;border-color:rgba(255,255,255,.35);box-shadow:var(--relieve-interior),var(--relieve-corto)}
 }
+/* Mismo motivo que .btn__bg::before, arriba: la base va con 2 sombras
+   (--relieve-interior) y al abrir/pasar el ratón pasa a 6 (se le suma
+   --relieve-corto, de 4) — un número de sombras distinto no se puede
+   interpolar, así que animar box-shadow aquí producía el mismo relieve mal
+   dibujado durante la transición (más visible en Safari/iOS a 120Hz). El
+   cambio de sombra pasa a ser instantáneo; el resto sigue animado igual. */
 .duo__card{display:flex;align-items:center;justify-content:center;gap:11px;padding:20px 30px;
   background:rgba(255,255,255,.2);border:1px solid transparent;color:var(--crema);box-shadow:var(--relieve-interior);
   font-family:var(--font-display);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
   white-space:nowrap;flex:0 0 auto;
-  transition:background .28s var(--ease-asentar),color .28s var(--ease-asentar),border-radius .4s var(--ease-asentar),border-color .4s var(--ease-asentar),box-shadow .4s var(--ease-asentar)}
+  transition:background .28s var(--ease-asentar),color .28s var(--ease-asentar),border-radius .4s var(--ease-asentar),border-color .4s var(--ease-asentar)}
 .duo__card:first-of-type{border-radius:16px 0 0 16px}
 .duo__card:last-of-type{border-radius:0 16px 16px 0}
 .duo__ico{width:22px;height:22px;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
