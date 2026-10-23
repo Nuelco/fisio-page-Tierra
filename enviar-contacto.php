@@ -48,11 +48,34 @@ $telefono = sanitize((string) ($_POST['telefono'] ?? ''));
 $motivo   = sanitize((string) ($_POST['motivo'] ?? ''));
 $mensaje  = trim((string) ($_POST['mensaje'] ?? '')); // el mensaje va en el cuerpo, no en cabeceras: no hace falta quitar saltos de línea
 
-if ($nombre === '' || $mensaje === '' || $motivo === '') {
-    respond(false, 'Faltan campos obligatorios');
+// Lista cerrada de motivos (son las opciones reales de <select name="motivo">
+// en contacto.html): comprobarla aquí impide que alguien que envíe el POST a
+// mano (saltándose el desplegable) cuele un texto arbitrario de cualquier
+// tamaño en este campo.
+$MOTIVOS_VALIDOS = [
+    'Fisioterapia', 'Osteopatía', 'Fisioterapia deportiva', 'Fisioterapia invasiva',
+    'Punción seca', 'Electrólisis percutánea', 'Ecografía', 'Rehabilitación funcional',
+    'Pilates terapéutico', 'Diatermia', 'Otro',
+];
+
+// Límites de longitud y, si se indica, formato del teléfono: sin esto,
+// alguien podría mandar un "mensaje" de varios megabytes, o un "nombre" que
+// en realidad es un bloque de texto de spam. Mismo criterio que ya aplicamos
+// en el formulario de Seila Zarzoso.
+if ($nombre === '' || mb_strlen($nombre) > 160) {
+    respond(false, 'Nombre no válido');
 }
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+if (!filter_var($email, FILTER_VALIDATE_EMAIL) || mb_strlen($email) > 200) {
     respond(false, 'Email no válido');
+}
+if ($telefono !== '' && (mb_strlen($telefono) > 40 || !preg_match('/^[0-9+\s().-]{6,}$/', $telefono))) {
+    respond(false, 'Teléfono no válido');
+}
+if (!in_array($motivo, $MOTIVOS_VALIDOS, true)) {
+    respond(false, 'Motivo de consulta no válido');
+}
+if ($mensaje === '' || mb_strlen($mensaje) > 4000) {
+    respond(false, 'Mensaje no válido');
 }
 // La casilla de la política de privacidad es "required" en el HTML, pero
 // eso solo frena a un navegador real: alguien enviando el POST a mano (o un
